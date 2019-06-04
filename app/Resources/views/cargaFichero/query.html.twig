@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% block titulo %} 
+    <div id='dtitulo' class="container"> 
+        CARGA DE FICHEROS PLANOS **CONSULTA**
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            <hr/>
+        {% endfor %}
+        {{ sg_datatables_render(datatable) }}
+    </div>
+{% endblock %}

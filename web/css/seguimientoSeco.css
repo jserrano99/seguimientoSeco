@@ -1,0 +1,59 @@
+.cabecera {
+    display: table-header-group;
+    vertical-align: middle;
+    align-items:  center;
+    font-size: 18px;
+    border-color: inherit;
+    background-color: background;
+    font-style: oblique;
+    font-family: serif;
+}
+.btn-t {
+    margin-top: 15px;
+}
+.btn-b {
+    margin-bottom: 25px;
+}
+.btn-l {
+    margin-left: 25px;
+}
+.btn-r {
+    margin-right: 250px;
+}
+
+.btn-group {
+    margin-bottom: 15px;
+}
+.centro-nav {
+    margin-right:  15px;
+    margin-top: 15px;
+}
+.formIdent {
+    margin-top: 15px;
+    margin-left: 15px;
+    padding: 15px;
+}
+.muycorto {
+    width: 125px;
+}
+.corto {
+    width: 300px;
+}
+.ident {
+    width: 50px;
+}
+.medio {
+    width: 400px;
+}
+.largo {
+    width: 550px;
+}
+.centrado {
+    align-content: center;
+}
+.mismalinea {
+    display: inline-block;
+}
+.sino {
+    width: 80px;
+}

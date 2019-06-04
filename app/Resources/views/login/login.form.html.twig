@@ -1,0 +1,21 @@
+{%if app.user == null %}
+<div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <h2>Identificación</h2><hr/>
+        <form class="col-xs-4" action="{{path("login_check")}}" method="post">
+            <label>Usuario</label>
+            <input type="text" id="username" name="_username" value="" class="form-control">
+            <br/>
+            <label>Contraseña</label>
+            <input type="password" id="password" name="_password" class="form-control" />
+            <br/>
+            <input type="submit" value="Entrar" class="btn btn-success"/>
+            <input type="hidden" name="_target_path" value="/login" />
+            <br/>
+        </form>
+    </div>
+{% endif %}

@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block titulo %} 
+    <div id='dtitulo' class="container"> CERTIFICACIONES DE SERVICIO **CONSULTA**
+    <a href="{{path("addCertificadoServicios")}}"
+       class="btn btn-success">
+        <span class="glyphicon glyphicon-new-window"></span> Generar Certificado </a>
+    <hr/>
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            <hr/>
+        {% endfor %}
+        {{ sg_datatables_render(datatable) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html.twig" %}
+{% block login %}
+    <div class ="container">
+        <img src= "{{asset('img/logoMagma.jpg')}}" width="100" height="100"></img>
+        <h3><span>SEGUIMIENTO PROYECTO MAGMA</span></h3>
+    </div>
+    {% if app.session.get('usuario_nombre') == null %}
+       {% include 'login/login.form.html.twig' %}
+    {% endif %}
+{% endblock %}

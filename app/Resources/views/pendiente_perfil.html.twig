@@ -1,0 +1,18 @@
+<div class="container jumbotron text-center">
+    <img src= "{{asset('img/saludMadrid.png')}}"></img>
+    <h3><span>{{app.session.get('usuario_nombre')}}</span>
+        <br/>
+        <span>PENDIENTE DE ASIGNAR PERFIL </span>
+    </h3>
+    <div class="btn-group">
+        <button type="button" 
+                class="btn btn-default btn-danger"
+                onclick="cerrarSesion()"
+                data-toggle="tooltip" 
+                data-placement="bottom" 
+                title="Cerrar Sesión">Cerrar
+            <span class="glyphicon glyphicon-off"></span>
+        </button>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{% block titulo %} CERTIFICACIONES DE SERVICIO  **{{accion}}**
+    <a href="{{path("queryCertificadoServicios")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+            $("#certificado_servicios_Generar").click(function () {
+                $("#procesando").modal('show');
+                // var recurso = Routing.generate("", true);
+                // window.location = recurso;
+            });
+        });
+    </script>
+
+    {% for message in app.session.flashbag().get('status') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+        <hr/>
+    {% endfor %}
+
+    {% include 'certificadoServicios/form.html.twig' %}
+{% endblock %}

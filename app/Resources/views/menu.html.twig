@@ -1,0 +1,50 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group">
+        <a class="btn btn-default btn-primary dropdown-toggle" href="{{path("app_homepage")}}">Inicio
+            <span class="glyphicon glyphicon-home"></span></a>
+    </div>
+    {% if app.user.perfil == 'ROLE_ADMIN' %}
+        {% include 'menu.admin.html.twig' %}
+    {% endif %}
+    <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle btn-success"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Gestión
+            <span class="glyphicon glyphicon-search"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{path("queryProyecto")}}">Proyectos</a></li>
+            <li><a href="{{path("queryAgrupacion")}}">Agrupaciones</a></li>
+            <li><a href="{{path("queryEncargo")}}">Encargos</a></li>
+            <li><a href="{{path("queryCertificadoServicios")}}" target="_blank">Certificado de Servicios</a></li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <button type="button"
+                class="btn btn-default dropdown-toggle btn-warning"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Informes
+            <span class="glyphicon glyphicon-print"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{path("seguimientoLineaBase")}}" target="_blank">Seguimiento Linea Base</a></li>
+            <li><a href="{{path("seguimientoNPL")}}" target="_blank">Seguimiento NPL </a></li>
+            <li><a href="{{path("NPLFueraANS")}}" target="_blank">NPL Fuera de ANS</a></li>
+
+
+        </ul>
+    </div>
+    <div class="btn-group">
+        <button type="button"
+                class="btn btn-default dropdown-toggle btn-info"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sesión
+            <span class="glyphicon glyphicon-user"></span>
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="{{path("cambioPassword",{"id":app.user.id})}}">Cambio Password</a></li>
+            <li><a href="{{path("logout")}}">Salir</a></li>
+        </ul>
+    </div>
+
+</div>

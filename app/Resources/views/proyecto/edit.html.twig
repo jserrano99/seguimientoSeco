@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block titulo %} PROYECTOS **{{accion}}**
+    <a href="{{path("queryProyecto")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    {% include 'proyecto/form.html.twig' %}
+{% endblock %}

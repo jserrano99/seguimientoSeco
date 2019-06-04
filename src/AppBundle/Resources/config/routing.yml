@@ -1,0 +1,230 @@
+#
+# home
+#
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Login:login }
+#
+# login
+#
+login:
+    path: /login
+    defaults: { _controller: AppBundle:Login:login }
+login_check:
+    path: /login_check
+logout:
+    path: /logout
+#
+# cargaFicheros
+#
+descargaLog:
+    path: /cargaFichero/descargaLog/{id}
+    defaults: { _controller: AppBundle:CargaFichero:descargaLog}
+    options:
+       expose: true
+cargaFichero:
+    path: /cargaFichero/carga
+    defaults: { _controller: AppBundle:CargaFichero:carga}
+    options:
+        expose: true
+recargaFichero:
+    path: /cargaFichero/recarga/{id}
+    defaults: { _controller: AppBundle:CargaFichero:recarga}
+    options:
+        expose: true
+
+queryFichero:
+    path: /cargaFicheros/query
+    defaults: { _controller: AppBundle:CargaFichero:query}
+    options:
+        expose: true
+#
+# CERTIFICADOS DE SERVICIO
+#
+generarImportes:
+    path: /certificadoServicios/importes/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:importes}
+    options:
+        expose: true
+
+queryCertificadoServicios:
+    path: /certificadoServicios/query
+    defaults: { _controller: AppBundle:CertificadoServicios:query}
+    options:
+        expose: true
+editCertificadoServicios:
+    path: /certificadoServicios/edit/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:edit}
+    options:
+        expose: true
+addCertificadoServicios:
+    path: /certificadoServicios/add
+    defaults: { _controller: AppBundle:CertificadoServicios:add}
+    options:
+        expose: true
+deleteCertificadoServicios:
+    path: /certificadoServicios/delete/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:delete}
+    options:
+        expose: true
+imprimirCertificadoServicios:
+    path: /report/certificadoServicios/{id}
+    defaults: { _controller: AppBundle:Report:imprimirCertificadoServicios}
+    options:
+        expose: true
+
+
+#
+# AGRUPACION
+#
+queryAgrupacion:
+    path: /agrupacion/query
+    defaults: { _controller: AppBundle:Agrupacion:query}
+    options:
+        expose: true
+editAgrupacion:
+    path: /agrupacion/edit/{id}
+    defaults: { _controller: AppBundle:Agrupacion:edit}
+    options:
+        expose: true
+addAgrupacion:
+    path: /agrupacion/add
+    defaults: { _controller: AppBundle:Agrupacion:add}
+    options:
+        expose: true
+deleteAgrupacion:
+    path: /agrupacion/delete/{id}
+    defaults: { _controller: AppBundle:Agrupacion:edit}
+    options:
+        expose: true
+#
+# PROYECCTO
+#
+queryProyecto:
+    path: /proyecto/query
+    defaults: { _controller: AppBundle:Proyecto:query}
+    options:
+        expose: true
+editProyecto:
+    path: /proyecto/edit/{id}
+    defaults: { _controller: AppBundle:Proyecto:edit}
+    options:
+        expose: true
+addProyecto:
+    path: /proyecto/add
+    defaults: { _controller: AppBundle:Proyecto:add}
+    options:
+        expose: true
+addProyectoAgrupacion:
+    path: /proyecto/addAgrupacion
+    defaults: { _controller: AppBundle:Proyecto:addAgrupacion}
+    options:
+        expose: true
+queryProyectoAgrupacion:
+    path: /proyecto/queryAgrupacion/{id}
+    defaults: { _controller: AppBundle:Proyecto:queryAgrupacion}
+    options:
+        expose: true
+#
+# ENCARGOS
+#
+queryEncargosAgrupacion:
+    path: /encargo/queryByAgrupacion/{idAgrupacion}
+    defaults: { _controller: AppBundle:Encargo:queryByAgrupacion}
+    options:
+        expose: true
+queryEncargo:
+    path: /encargo/query
+    defaults: { _controller: AppBundle:Encargo:query}
+    options:
+        expose: true
+editEncargo:
+    path: /encargo/edit/{id}
+    defaults: { _controller: AppBundle:Encargo:edit}
+    options:
+        expose: true
+deleteEncargo:
+    path: /encargo/delete/{id}
+    defaults: { _controller: AppBundle:Encargo:delete}
+    options:
+        expose: true
+
+
+#
+# REPORTS
+#
+certificadoActividad:
+    path: /report/certificadoActividad/{id}
+    defaults: { _controller: AppBundle:Report:certificadoActividad}
+    options:
+        expose: true
+
+NPLFueraANS:
+    path: /report/NPLFueraANS
+    defaults: { _controller: AppBundle:Report:NPLFueraANS}
+    options:
+        expose: true
+
+seguimientoNPL:
+    path: /report/seguimientoNPL
+    defaults: { _controller: AppBundle:Report:seguimientoNPL}
+    options:
+        expose: true
+filtroInformes:
+    path: /report/filtroInformes
+    defaults: { _controller: AppBundle:Report:filtro}
+    options:
+        expose: true
+plasByAgrupacion:
+    path: /report/plasByAgrupacion
+    defaults: { _controller: AppBundle:Report:plasByAgrupacion}
+    options:
+        expose: true
+plasByAgrupacion2:
+    path: /report/plasByAgrupacion2/{pAgrupacion}
+    defaults: { _controller: AppBundle:Report:plasByAgrupacion2}
+    options:
+        expose: true
+planificacion:
+    path: /report/planificacion/{pAgrupacion}
+    defaults: { _controller: AppBundle:Report:planificacion}
+    options:
+        expose: true
+planificacionProyecto:
+    path: /report/planificacionProyecto/{pProyecto}
+    defaults: { _controller: AppBundle:Report:planificacionProyecto}
+    options:
+        expose: true
+seguimientoLineaBase:
+    path: /report/seguimientoLineaBase
+    defaults: { _controller: AppBundle:Report:seguimientoLineaBase}
+    options:
+        expose: true
+#
+# GESTION DE USUARIOS
+#
+cambioPassword:
+    path:   /usuario/cambioPassword/{id}
+    defaults: { _controller: AppBundle:Usuario:CambioPassword}
+    options:
+        expose: true
+queryUsuario:
+    path:   /usuario/query
+    defaults: { _controller: AppBundle:Usuario:query}
+    options:
+        expose: true
+addUsuario:
+    path:   /usuario/add
+    defaults: { _controller: AppBundle:Usuario:add}
+    options:
+        expose: true
+editUsuario:
+    path:   /usuario/edit/{id}
+    defaults: { _controller: AppBundle:Usuario:edit}
+    options:
+        expose: true
+deleteUsuario:
+    path:   /usuario/delete/{id} 
+    defaults: { _controller: AppBundle:Usuario:delete}
+    options:
+        expose: true

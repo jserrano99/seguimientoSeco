@@ -1,0 +1,13 @@
+// row_callback.js.twig
+
+function rowCallback(nRow, aData, index) {
+    var $nRow = $(nRow);
+
+    if (aData.amortizada == 'S') {
+        $nRow.css({'color': 'red'});
+    } else {
+        $nRow.css({'color': 'black'});
+    }
+
+    return nRow;
+}

@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+{% block contenido %}
+    {% if app.session.get('usuario_perfil') != 'ROLE_USER'%}
+        <div class="container jumbotron text-center">
+            <img src= "{{asset('img/saludMadrid.png')}}"></img>
+            <h3><span>{{app.session.get('usuario_nombre')}}</span>
+                <br/>
+                {% if app.session.get('usuario_nombre') is defined %}
+                    <span>Fecha último acceso: {{app.session.get('ultimo_acceso')|date('d-m-Y H:i:s')}}</span>
+                {% endif %}
+            </h3>
+        </div>
+    {% endif %}
+{% endblock %}

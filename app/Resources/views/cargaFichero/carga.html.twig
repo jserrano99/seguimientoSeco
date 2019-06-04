@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block titulo %} CARGA FICHERO PLANO DE ENCARGOS {% endblock %}
+
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+            $("#importar_Guardar").click(function () {
+                $("#procesando").modal('show');
+                // var recurso = Routing.generate("", true);
+                // window.location = recurso;
+            });
+        });
+    </script> 
+
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        <br/>
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+        <br/>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block titulo %} GESTIÓN DE USUARIOS-NUEVO USUARIO
+<a href="{{path("queryUsuario")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+    
+{% block contenido %}
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+        {% endfor %}
+        
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+    </div>
+{% endblock %}
