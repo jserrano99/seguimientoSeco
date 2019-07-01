@@ -46,6 +46,15 @@ class Filtro
 	private $mes;
 
 	/**
+	 * @var \AppBundle\Entity\Centro
+	 * @ORM\ManyToOne(targetEntity="Centro")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="centro_id", referencedColumnName="id")
+	 * })
+	 */
+	private $centro;
+
+	/**
 	 * @var boolean
 	 * @ORM\Column(name="aplicar_penalizaciones", type="boolean", nullable=true)*
 	 */
@@ -131,5 +140,29 @@ class Filtro
     public function getAplicarPenalizaciones()
     {
         return $this->aplicarPenalizaciones;
+    }
+
+    /**
+     * Set centro.
+     *
+     * @param \AppBundle\Entity\Centro|null $centro
+     *
+     * @return Filtro
+     */
+    public function setCentro(\AppBundle\Entity\Centro $centro = null)
+    {
+        $this->centro = $centro;
+
+        return $this;
+    }
+
+    /**
+     * Get centro.
+     *
+     * @return \AppBundle\Entity\Centro|null
+     */
+    public function getCentro()
+    {
+        return $this->centro;
     }
 }

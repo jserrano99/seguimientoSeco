@@ -50,6 +50,16 @@ class ImportesCertificado
 	private $certificadoServicios;
 
 	/**
+	 * @var TipoCuota\null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TipoCuota")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="tipo_cuota_id", referencedColumnName="id")
+	 * })
+	 */
+	private $tipoCuota;
+
+	/**
 	 * @var float
 	 * @ORM\Column(name="horas_certificadas", type="float",nullable=true)
 	 *
@@ -283,5 +293,29 @@ class ImportesCertificado
     public function getCertificadoServicios()
     {
         return $this->certificadoServicios;
+    }
+
+    /**
+     * Set tipoCuota.
+     *
+     * @param \AppBundle\Entity\TipoCuota|null $tipoCuota
+     *
+     * @return ImportesCertificado
+     */
+    public function setTipoCuota(\AppBundle\Entity\TipoCuota $tipoCuota = null)
+    {
+        $this->tipoCuota = $tipoCuota;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoCuota.
+     *
+     * @return \AppBundle\Entity\TipoCuota|null
+     */
+    public function getTipoCuota()
+    {
+        return $this->tipoCuota;
     }
 }

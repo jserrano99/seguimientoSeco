@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of CargaFicheroLog
+ * Description of FicheroLog
  *
  * @author jluis
  */
@@ -11,13 +11,13 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * CargaFicheroLog
+ * FicheroLog
  *
- * @ORM\Table(name="carga_fichero_log")
+ * @ORM\Table(name="fichero_log")
  * 
  * @ORM\Entity()
  */
-class CargaFicheroLog {
+class FicheroLog {
 
     /**
      * @var integer
@@ -41,7 +41,7 @@ class CargaFicheroLog {
      *
      * @ORM\Column(name="fichero_log", type="string", length= 255, nullable=true)
      */
-    private $ficheroLog;
+    private $fichero;
 
 
     /**
@@ -59,7 +59,7 @@ class CargaFicheroLog {
      *
      * @param \DateTime $fechaProceso
      *
-     * @return CargaFicheroLog
+     * @return FicheroLog
      */
     public function setFechaProceso($fechaProceso)
     {
@@ -79,26 +79,26 @@ class CargaFicheroLog {
     }
 
     /**
-     * Set ficheroLog.
+     * Set fichero.
      *
-     * @param string|null $ficheroLog
+     * @param string|null $fichero
      *
-     * @return CargaFicheroLog
+     * @return FicheroLog
      */
-    public function setFicheroLog($ficheroLog = null)
+    public function setFichero($fichero = null)
     {
-        $this->ficheroLog = $ficheroLog;
+        $this->fichero = $fichero;
 
         return $this;
     }
 
     /**
-     * Get ficheroLog.
+     * Get fichero.
      *
      * @return string|null
      */
-    public function getFicheroLog()
+    public function getFichero()
     {
-        return $this->ficheroLog;
+        return $this->fichero;
     }
 }

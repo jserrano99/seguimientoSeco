@@ -6,7 +6,7 @@
  * Time: 11:05
  */
 
-namespace AppBundle\Form\eventListener;
+namespace AppBundle\Form\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvents;

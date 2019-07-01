@@ -2,9 +2,12 @@
 
 namespace AppBundle\Datatables;
 
+use NumberFormatter;
 use Sg\DatatablesBundle\Datatable\AbstractDatatable;
 use Sg\DatatablesBundle\Datatable\Column\ActionColumn;
 use Sg\DatatablesBundle\Datatable\Column\Column;
+use Sg\DatatablesBundle\Datatable\Column\NumberColumn;
+
 use Sg\DatatablesBundle\Datatable\Style;
 
 /**
@@ -53,66 +56,34 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 			'length_change' => true
 		]);
 
+		$formatter = new NumberFormatter("es_ES", NumberFormatter::CURRENCY);
+
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
 			->add('descripcion', Column::class, ['title' => 'Descripcion', 'width' => '400px', 'searchable' => true])
 			->add('mes.anyo.descripcion', Column::class, ['title' => 'Año', 'width' => '40px', 'searchable' => true])
 			->add('mes.descripcion', Column::class, ['title' => 'Mes', 'width' => '40px', 'searchable' => true])
-			->add('totalFacturaConIva', Column::class, ['title' => 'Total Factura', 'width' => '40px', 'searchable' => true])
+			->add('totalFacturaConIva', NumberColumn::class, ['title' => 'Total Factura',
+															  'width' => '40px',
+															  'formatter' =>$formatter,
+															  'use_format_currency' => true,
+															  'currency' => 'EUR',
+															  'searchable' => true])
 			->add('estadoCertificado.descripcion', Column::class, ['title' => 'Estado Certificado', 'width' => '100px', 'searchable' => true])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'actions' => [
-					['route' => 'generarImportes',
+					['route' => 'editCertificadoServicios',
 						'route_parameters' => [
 							'id' => 'id'],
-						'label' => 'Generar Importes',
+						'label' => 'Editar Certificado',
 						'icon' => 'glyphicon glyphicon-edit',
 						'attributes' => [
 							'rel' => 'tooltip',
 							'title' => 'Editar',
 							'class' => 'btn btn-success btn-xs',
 							'role' => 'button'],
-						'confirm' => true,
-						'confirm_message' => 'Confirmar la Generación  de Certificado Servicios'],
-					['route' => 'imprimirCertificadoServicios',
-						'route_parameters' => [
-							'id' => 'id'],
-						'label' => 'Imprimir',
-						'icon' => 'glyphicon glyphicon-print',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Imprimir',
-							'class' => 'btn btn-primary btn-xs',
-							'role' => 'button']
-					],
-					['route' => 'certificadoActividad',
-						'route_parameters' => [
-							'id' => 'id'],
-						'label' => 'Certificado de Actividad',
-						'icon' => 'glyphicon glyphicon-print',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Imprimir',
-							'class' => 'btn btn-primary btn-xs',
-							'role' => 'button']
-					],
-					['route' => 'deleteCertificadoServicios',
-						'route_parameters' => [
-							'id' => 'id'],
-						'label' => 'Eliminar',
-						'icon' => 'glyphicon glyphicon-trash',
-						'render_if' => function ($row) {
-							if ($row['estadoCertificado'] != 'FACTURADO')
-								return true;
-						},
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Eliminar',
-							'class' => 'btn btn-danger btn-xs',
-							'role' => 'button'],
-						'confirm' => true,
-						'confirm_message' => 'Confirmar la Eliminación de Certificado Servicios'],
+					]
 				]]);
 
 	}
@@ -130,7 +101,7 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 	 */
 	public function getName()
 	{
-		return 'usuario_datatable';
+		return 'certificadoServicios_datatable';
 	}
 
 }

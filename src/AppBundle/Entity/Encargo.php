@@ -43,6 +43,15 @@ class Encargo
 	private $contrato;
 
 	/**
+	 * @var \AppBundle\Entity\Remedy|null
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Remedy")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="remedy_id", referencedColumnName="id")
+	 * })
+	 */
+	private $remedy;
+
+	/**
 	 * @var \AppBundle\Entity\ObjetoEncargo|null
 	 * @ORM\ManyToOne(targetEntity="ObjetoEncargo")
 	 * * @ORM\JoinColumns({
@@ -1317,5 +1326,29 @@ class Encargo
     public function getPenaliza()
     {
         return $this->penaliza;
+    }
+
+    /**
+     * Set remedy.
+     *
+     * @param \AppBundle\Entity\Remedy|null $remedy
+     *
+     * @return Encargo
+     */
+    public function setRemedy(\AppBundle\Entity\Remedy $remedy = null)
+    {
+        $this->remedy = $remedy;
+
+        return $this;
+    }
+
+    /**
+     * Get remedy.
+     *
+     * @return \AppBundle\Entity\Remedy|null
+     */
+    public function getRemedy()
+    {
+        return $this->remedy;
     }
 }

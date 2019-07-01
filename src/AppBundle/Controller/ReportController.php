@@ -42,6 +42,80 @@ class ReportController extends Controller
 
 	}
 
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 */
+	public function esfuerzoPLAExtAction(Request $request)
+	{
+		$Filtro = new Filtro();
+		$filtroForm = $this->createForm(FiltroType::class, $Filtro);
+		$filtroForm->handleRequest($request);
+		if ($filtroForm->isSubmitted()) {
+			$format = "pdf";
+			$parametros = ["FC_INICIO" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y H:i:s'),
+				"FC_FIN" => $Filtro->getMes()->getFechaFin()->format('d/m/Y H:i:s')];
+			$reportUnit = "/reports/esfuerzoPLAExtDetalle";
+			return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
+		}
+		return $this->render("informe/edit.html.twig", array(
+			"form" => $filtroForm->createView()
+		));
+
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 *
+	 */
+	public function esfuerzoPLAAction(Request $request)
+	{
+		$Filtro = new Filtro();
+		$filtroForm = $this->createForm(FiltroType::class, $Filtro);
+		$filtroForm->handleRequest($request);
+		if ($filtroForm->isSubmitted()) {
+			$format = "pdf";
+			$parametros = ["FC_INICIO" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y H:i:s'),
+				"FC_FIN" => $Filtro->getMes()->getFechaFin()->format('d/m/Y H:i:s')];
+			$reportUnit = "/reports/esfuerzoEnPLADetalle";
+			return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
+		}
+		return $this->render("informe/edit.html.twig", array(
+			"form" => $filtroForm->createView()
+		));
+
+	}
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function incidentesPorCentroAction(Request $request)
+	{
+		$Filtro = new Filtro();
+		$filtroForm = $this->createForm(FiltroType::class, $Filtro);
+		$filtroForm->handleRequest($request);
+		if ($filtroForm->isSubmitted()) {
+			$format = "pdf";
+			$parametros = ["fechaInicio" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y H:i:s'),
+				"fechaFin" => $Filtro->getMes()->getFechaFin()->format('d/m/Y H:i:s'),
+				"centroId" => $Filtro->getCentro()->getId()];
+			$reportUnit = "/reports/incidentesPorCentro";
+			return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
+		}
+		return $this->render("informe/edit.html.twig", array(
+			"form" => $filtroForm->createView()
+		));
+
+	}
+
+
+	/**
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function seguimientoNPLAction(Request $request)
 	{
 		$Filtro = new Filtro();
@@ -49,8 +123,8 @@ class ReportController extends Controller
 		$filtroForm->handleRequest($request);
 		if ($filtroForm->isSubmitted()) {
 			$format = "pdf";
-			$parametros = ["fechaInicio" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y'),
-				"fechaFin" => $Filtro->getMes()->getFechaFin()->format('d/m/Y')];
+			$parametros = ["fechaInicio" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y H:i:s'),
+				"fechaFin" => $Filtro->getMes()->getFechaFin()->format('d/m/Y H:i:s')];
 			$reportUnit = "/reports/seguimientoNPL";
 //			dump($parametros);
 //			die();
@@ -62,6 +136,7 @@ class ReportController extends Controller
 
 	}
 
+
 	public function NPLFueraANSAction(Request $request)
 	{
 		$Filtro = new Filtro();
@@ -69,9 +144,9 @@ class ReportController extends Controller
 		$filtroForm->handleRequest($request);
 		if ($filtroForm->isSubmitted()) {
 			$format = "pdf";
-			$parametros = ["FC_INICIO" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y'),
-				"FC_FIN" => $Filtro->getMes()->getFechaFin()->format('d/m/Y')];
-			$reportUnit = "/reports/tiempoResolucionFueraANS";
+			$parametros = ["FC_INICIO" => $Filtro->getMes()->getFechaInicio()->format('d/m/Y H:i:s'),
+				"FC_FIN" => $Filtro->getMes()->getFechaFin()->format('d/m/Y H:i:s')];
+			$reportUnit = "/reports/tiempoResolucionFueraANS2";
 			return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
 		}
 		return $this->render("informe/edit.html.twig", array(
@@ -87,17 +162,13 @@ class ReportController extends Controller
 	{
 		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
 
-		IF ($CertificadoServicios->getEstadoCertificado()->getId() == 3) { //FACTURADO
-			$format = "pdf";
-			$parametros = ["certificadoId" => $CertificadoServicios->getId()];
-			$reportUnit = "/reports/certificadoServicios";
-			return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
+		IF ($CertificadoServicios->getEstadoCertificado()->getId() != 3) { // ESTADO CERRADO
+			$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(2);
+			$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
+			$this->getDoctrine()->getManager()->persist($CertificadoServicios);
+			$this->getDoctrine()->getManager()->flush();
 		}
-		$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(2);
 
-		$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
-		$this->getDoctrine()->getManager()->persist($CertificadoServicios);
-		$this->getDoctrine()->getManager()->flush();
 		$format = "pdf";
 		$parametros = ["certificadoServiciosId" => $CertificadoServicios->getId()];
 		$reportUnit = "/reports/certificadoServicios";
@@ -125,7 +196,26 @@ class ReportController extends Controller
 	public function seguimientoLineaBaseAction()
 	{
 		$format = "pdf";
-		$reportUnit = "/reports/segLineaBase";
+		$reportUnit = "/reports/seguimientoLB";
+		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
+	}
+
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function seguimientoPLAAction()
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/seguimientoPLA";
+		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
+	}
+	/**
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function esfuerzoPLACompromisoAction()
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/seguimientoPLACompromiso";
 		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
 	}
 

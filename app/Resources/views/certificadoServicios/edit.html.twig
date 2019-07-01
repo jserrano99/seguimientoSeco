@@ -1,21 +1,84 @@
 {% extends "base.html.twig" %}
-{% block titulo %} CERTIFICACIONES DE SERVICIO  **{{accion}}**
-    <a href="{{path("queryCertificadoServicios")}}" class="btn btn-success">Volver</a>
+{% block titulo %} CERTIFICACIONES DE SERVICIO  **{{ accion }}**
+    <a href="{{ path("queryCertificadoServicios") }}" class="btn btn-success">Volver</a>
 {% endblock %}
 {% block contenido %}
     <script>
         $(document).ready(function () {
-            $("#certificado_servicios_Generar").click(function () {
-                $("#procesando").modal('show');
-                // var recurso = Routing.generate("", true);
-                // window.location = recurso;
+
+            $("#formCertificadoServicios_eliminarCertificado").click(function () {
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("deleteCertificadoServicios", {"id": id}, true);
+                window.location = recurso;
             });
+
+            $("#formCertificadoServicios_generarCertificado").click(function () {
+                $("#procesando").show();
+                let recurso;
+                recurso = Routing.generate("addCertificadoServicios", true);
+                window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_queryEncargos").click(function () {
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("queryEncargos", {"id": id}, true);
+                window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_generarImportes").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("generarImportes", {"id": id}, true);
+                window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_incluirEncargo").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("incluirEncargo", {"id": id}, true);
+                window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_imprimirCertificado").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("imprimirCertificadoServicios", {"id": id}, true);
+                window.location = recurso;
+               });
+            $("#formCertificadoServicios_imprimirCertificadoActividad").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("certificadoActividad", {"id": id}, true);
+                window.location = recurso;
+            });
+            $("#formCertificadoServicios_cerrarCertificado").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("cerrarCertificado", {"id": id}, true);
+                window.location = recurso;
+            });
+
+
         });
     </script>
 
     {% for message in app.session.flashbag().get('status') %}
         <div class="alert alert-success">
-            {{message}}
+            {{ message }}
         </div>
         <hr/>
     {% endfor %}

@@ -38,6 +38,12 @@ queryFichero:
     defaults: { _controller: AppBundle:CargaFichero:query}
     options:
         expose: true
+
+cargaFicheroRemedy:
+    path: /cargaFicheros/remedy
+    defaults: { _controller: AppBundle:CargaFichero:cargaFicheroRemedy}
+    options:
+        expose: true
 #
 # CERTIFICADOS DE SERVICIO
 #
@@ -46,7 +52,6 @@ generarImportes:
     defaults: { _controller: AppBundle:CertificadoServicios:importes}
     options:
         expose: true
-
 queryCertificadoServicios:
     path: /certificadoServicios/query
     defaults: { _controller: AppBundle:CertificadoServicios:query}
@@ -55,6 +60,11 @@ queryCertificadoServicios:
 editCertificadoServicios:
     path: /certificadoServicios/edit/{id}
     defaults: { _controller: AppBundle:CertificadoServicios:edit}
+    options:
+        expose: true
+cerrarCertificado:
+    path: /certificadoServicios/cerrar/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:cerrar}
     options:
         expose: true
 addCertificadoServicios:
@@ -72,7 +82,21 @@ imprimirCertificadoServicios:
     defaults: { _controller: AppBundle:Report:imprimirCertificadoServicios}
     options:
         expose: true
-
+queryEncargos:
+    path: /certificadoServicios/queryEncargos/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:queryEncargos}
+    options:
+        expose: true
+excluirEncargo:
+    path: /certificadoServicios/excluirEncargo/{lineaCertificado_id}
+    defaults: { _controller: AppBundle:CertificadoServicios:excluirEncargo}
+    options:
+        expose: true
+incluirEncargo:
+    path: /certificadoServicios/incluirEncargo/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:incluirEncargo}
+    options:
+        expose: true
 
 #
 # AGRUPACION
@@ -200,6 +224,32 @@ seguimientoLineaBase:
     defaults: { _controller: AppBundle:Report:seguimientoLineaBase}
     options:
         expose: true
+seguimentoPLA:
+    path: /report/seguimientoPLA
+    defaults: { _controller: AppBundle:Report:seguimientoPLA}
+    options:
+        expose: true
+esfuerzoPLA:
+    path: /report/esfuerzoPLA
+    defaults: { _controller: AppBundle:Report:esfuerzoPLA}
+    options:
+        expose: true
+esfuerzoPLAExt:
+    path: /report/esfuerzoPLAExt
+    defaults: { _controller: AppBundle:Report:esfuerzoPLAExt}
+    options:
+        expose: true
+esfuerzoPLACompromiso:
+    path: /report/esfuerzoPLACompromiso
+    defaults: { _controller: AppBundle:Report:esfuerzoPLACompromiso}
+    options:
+        expose: true
+incidentesPorCentro:
+    path: /report/incidentesPorCentro
+    defaults: { _controller: AppBundle:Report:incidentesPorCentro}
+    options:
+        expose: true
+
 #
 # GESTION DE USUARIOS
 #

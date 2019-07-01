@@ -41,7 +41,6 @@ class CargaFichero {
      */
     private $descripcion;
 
-
     /**
      * @var Usuario
      *
@@ -53,14 +52,13 @@ class CargaFichero {
     private $usuario;
 
 	/**
-	 * @var \AppBundle\Entity\CargaFicheroLog
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CargaFicheroLog", cascade={"persist"})
+	 * @var \AppBundle\Entity\FicheroLog
+	 * @ORM\ManyToOne(targetEntity="FicheroLog", cascade={"persist"})
 	 * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="carga_fichero_log_id", referencedColumnName="id")
+	 *   @ORM\JoinColumn(name="fichero_log_id", referencedColumnName="id")
 	 * })
 	 */
-	private $cargaFicheroLog;
+	private $ficheroLog;
 
 	/**
 	 * @var integer
@@ -77,7 +75,8 @@ class CargaFichero {
 	private $numeroRegistrosCargados;
 
 
-	/**
+
+    /**
      * Get id.
      *
      * @return int
@@ -160,54 +159,6 @@ class CargaFichero {
     }
 
     /**
-     * Set usuario.
-     *
-     * @param \AppBundle\Entity\Usuario|null $usuario
-     *
-     * @return CargaFichero
-     */
-    public function setUsuario(\AppBundle\Entity\Usuario $usuario = null)
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Get usuario.
-     *
-     * @return \AppBundle\Entity\Usuario|null
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
-    }
-
-    /**
-     * Set cargaFicheroLog.
-     *
-     * @param \AppBundle\Entity\CargaFicheroLog|null $cargaFicheroLog
-     *
-     * @return CargaFichero
-     */
-    public function setCargaFicheroLog(\AppBundle\Entity\CargaFicheroLog $cargaFicheroLog = null)
-    {
-        $this->cargaFicheroLog = $cargaFicheroLog;
-
-        return $this;
-    }
-
-    /**
-     * Get cargaFicheroLog.
-     *
-     * @return \AppBundle\Entity\CargaFicheroLog|null
-     */
-    public function getCargaFicheroLog()
-    {
-        return $this->cargaFicheroLog;
-    }
-
-    /**
      * Set numeroRegistros.
      *
      * @param int|null $numeroRegistros
@@ -253,5 +204,53 @@ class CargaFichero {
     public function getNumeroRegistrosCargados()
     {
         return $this->numeroRegistrosCargados;
+    }
+
+    /**
+     * Set usuario.
+     *
+     * @param \AppBundle\Entity\Usuario|null $usuario
+     *
+     * @return CargaFichero
+     */
+    public function setUsuario(\AppBundle\Entity\Usuario $usuario = null)
+    {
+        $this->usuario = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get usuario.
+     *
+     * @return \AppBundle\Entity\Usuario|null
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * Set ficheroLog.
+     *
+     * @param \AppBundle\Entity\FicheroLog|null $ficheroLog
+     *
+     * @return CargaFichero
+     */
+    public function setFicheroLog(\AppBundle\Entity\FicheroLog $ficheroLog = null)
+    {
+        $this->FicheroLog = $ficheroLog;
+
+        return $this;
+    }
+
+    /**
+     * Get ficheroLog.
+     *
+     * @return \AppBundle\Entity\FicheroLog|null
+     */
+    public function getFicheroLog()
+    {
+        return $this->FicheroLog;
     }
 }

@@ -48,6 +48,16 @@ class LineaCertificado
 	private $encargo;
 
 	/**
+	 * @var TipoCuota\null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TipoCuota")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="tipo_cuota_id", referencedColumnName="id")
+	 * })
+	 */
+	private $tipoCuota;
+
+	/**
 	 * @var float
 	 *
 	 * @ORM\Column(name="penalizacion", type="float", nullable=true)
@@ -137,5 +147,29 @@ class LineaCertificado
     public function getEncargo()
     {
         return $this->encargo;
+    }
+
+    /**
+     * Set tipoCuota.
+     *
+     * @param \AppBundle\Entity\TipoCuota|null $tipoCuota
+     *
+     * @return LineaCertificado
+     */
+    public function setTipoCuota(\AppBundle\Entity\TipoCuota $tipoCuota = null)
+    {
+        $this->tipoCuota = $tipoCuota;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoCuota.
+     *
+     * @return \AppBundle\Entity\TipoCuota|null
+     */
+    public function getTipoCuota()
+    {
+        return $this->tipoCuota;
     }
 }

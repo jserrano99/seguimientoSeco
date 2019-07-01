@@ -226,6 +226,13 @@ class Fichero {
 	 */
 	private $contrato;
 
+	/**
+	 * @var string
+	 *
+	 * @ORM\Column(name="criticidad", type="integer", nullable=true)
+	 */
+	private $criticidad;
+
 
 
 	/**
@@ -1252,5 +1259,29 @@ class Fichero {
     public function getContrato()
     {
         return $this->contrato;
+    }
+
+    /**
+     * Set criticidad.
+     *
+     * @param int|null $criticidad
+     *
+     * @return Fichero
+     */
+    public function setCriticidad($criticidad = null)
+    {
+        $this->criticidad = $criticidad;
+
+        return $this;
+    }
+
+    /**
+     * Get criticidad.
+     *
+     * @return int|null
+     */
+    public function getCriticidad()
+    {
+        return $this->criticidad;
     }
 }

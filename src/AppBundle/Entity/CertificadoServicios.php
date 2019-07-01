@@ -66,6 +66,16 @@ class CertificadoServicios
 
 
 	/**
+	 * @var FicheroLog \null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FicheroLog")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="fichero_log_id", referencedColumnName="id")
+	 * })
+	 */
+	private $ficheroLog;
+
+	/**
 	 * @var float
 	 *
 	 * @ORM\Column(name="total_factura", type="float", nullable=true)
@@ -113,9 +123,41 @@ class CertificadoServicios
 
 	private $totalFacturaConIva;
 
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="importe_cuota_fija_mensual", type="float", nullable=true)
+	 */
+
+	private $importeCuotaFijaMensual;
 
 
-    /**
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="contador_NPL", type="integer", nullable=true)
+	 */
+
+	private $contadorNPL;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="contador_ADM", type="integer", nullable=true)
+	 */
+
+	private $contadorADM;
+
+	/**
+	 * @var boolean
+	 *
+	 * @ORM\Column(name="aplica_penalizacion", type="boolean", nullable=true)
+	 */
+
+	private $aplicaPenalizacion;
+
+
+	/**
      * Get id.
      *
      * @return int
@@ -363,5 +405,125 @@ class CertificadoServicios
     public function getMes()
     {
         return $this->mes;
+    }
+
+    /**
+     * Set ficheroLog.
+     *
+     * @param \AppBundle\Entity\FicheroLog|null $ficheroLog
+     *
+     * @return CertificadoServicios
+     */
+    public function setFicheroLog(\AppBundle\Entity\FicheroLog $ficheroLog = null)
+    {
+        $this->ficheroLog = $ficheroLog;
+
+        return $this;
+    }
+
+    /**
+     * Get ficheroLog.
+     *
+     * @return \AppBundle\Entity\FicheroLog|null
+     */
+    public function getFicheroLog()
+    {
+        return $this->ficheroLog;
+    }
+
+    /**
+     * Set contadorNPL.
+     *
+     * @param int|null $contadorNPL
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorNPL($contadorNPL = null)
+    {
+        $this->contadorNPL = $contadorNPL;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorNPL.
+     *
+     * @return int|null
+     */
+    public function getContadorNPL()
+    {
+        return $this->contadorNPL;
+    }
+
+    /**
+     * Set contadorADM.
+     *
+     * @param int|null $contadorADM
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorADM($contadorADM = null)
+    {
+        $this->contadorADM = $contadorADM;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorADM.
+     *
+     * @return int|null
+     */
+    public function getContadorADM()
+    {
+        return $this->contadorADM;
+    }
+
+    /**
+     * Set importeCuotaFijaMensual.
+     *
+     * @param float|null $importeCuotaFijaMensual
+     *
+     * @return CertificadoServicios
+     */
+    public function setImporteCuotaFijaMensual($importeCuotaFijaMensual = null)
+    {
+        $this->importeCuotaFijaMensual = $importeCuotaFijaMensual;
+
+        return $this;
+    }
+
+    /**
+     * Get importeCuotaFijaMensual.
+     *
+     * @return float|null
+     */
+    public function getImporteCuotaFijaMensual()
+    {
+        return $this->importeCuotaFijaMensual;
+    }
+
+    /**
+     * Set aplicaPenalizacion.
+     *
+     * @param bool|null $aplicaPenalizacion
+     *
+     * @return CertificadoServicios
+     */
+    public function setAplicaPenalizacion($aplicaPenalizacion = null)
+    {
+        $this->aplicaPenalizacion = $aplicaPenalizacion;
+
+        return $this;
+    }
+
+    /**
+     * Get aplicaPenalizacion.
+     *
+     * @return bool|null
+     */
+    public function getAplicaPenalizacion()
+    {
+        return $this->aplicaPenalizacion;
     }
 }

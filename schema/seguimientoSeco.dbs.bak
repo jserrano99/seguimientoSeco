@@ -54,32 +54,24 @@
 			<column name="fecha_carga" type="datetime" length="19" decimal="0" jt="93" />
 			<column name="fichero" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
 			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="carga_fichero_log_id" type="int" length="10" decimal="0" jt="4" />
 			<column name="numero_registros" type="int" length="10" decimal="0" jt="4" />
 			<column name="numero_registros_cargados" type="int" length="10" decimal="0" jt="4" />
+			<column name="fichero_log_id" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_carga_fichero" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="IDX_3454CB89DB38439E" unique="NORMAL" >
 				<column name="usuario_id" />
 			</index>
-			<index name="IDX_3454CB89C72FFDAE" unique="NORMAL" >
-				<column name="carga_fichero_log_id" />
+			<index name="IDX_3454CB89F7715760" unique="NORMAL" >
+				<column name="fichero_log_id" />
 			</index>
 			<fk name="FK_3454CB89DB38439E" to_schema="seguimientoseco" to_table="usuario" >
 				<fk_column name="usuario_id" pk="id" />
 			</fk>
-			<fk name="FK_3454CB89C72FFDAE" to_schema="seguimientoseco" to_table="carga_fichero_log" >
-				<fk_column name="carga_fichero_log_id" pk="id" />
+			<fk name="FK_3454CB89F7715760" to_schema="seguimientoseco" to_table="fichero_log" >
+				<fk_column name="fichero_log_id" pk="id" />
 			</fk>
-		</table>
-		<table name="carga_fichero_log" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="fecha_proceso" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="fichero_log" type="varchar" length="255" decimal="0" jt="12" />
-			<index name="pk_carga_fichero_log" unique="PRIMARY_KEY" >
-				<column name="id" />
-			</index>
 		</table>
 		<table name="certificado_servicios" >
 			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
@@ -93,6 +85,11 @@
 			<column name="cuota_iva" type="double" length="22" decimal="0" jt="8" />
 			<column name="total_factura_con_iva" type="double" length="22" decimal="0" jt="8" />
 			<column name="penalizacion_aplicable" type="double" length="22" decimal="0" jt="8" />
+			<column name="fichero_log_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="contador_NPL" type="int" length="10" decimal="0" jt="4" />
+			<column name="contador_ADM" type="int" length="10" decimal="0" jt="4" />
+			<column name="importe_cuota_fija_mensual" type="double" length="22" decimal="0" jt="8" />
+			<column name="aplica_penalizacion" type="boolean" decimal="0" jt="-7" />
 			<index name="pk_certificado_servicios" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -105,6 +102,9 @@
 			<index name="IDX_7A015B12CBAC9D43" unique="NORMAL" >
 				<column name="meses_id" />
 			</index>
+			<index name="IDX_7A015B12F7715760" unique="NORMAL" >
+				<column name="fichero_log_id" />
+			</index>
 			<fk name="FK_7A015B1270AE7BF1" to_schema="seguimientoseco" to_table="contrato" >
 				<fk_column name="contrato_id" pk="id" />
 			</fk>
@@ -113,6 +113,9 @@
 			</fk>
 			<fk name="FK_7A015B12CBAC9D43" to_schema="seguimientoseco" to_table="meses" >
 				<fk_column name="meses_id" pk="id" />
+			</fk>
+			<fk name="FK_7A015B12F7715760" to_schema="seguimientoseco" to_table="fichero_log" delete_action="setNull" >
+				<fk_column name="fichero_log_id" pk="id" />
 			</fk>
 		</table>
 		<table name="contrato" >
@@ -178,6 +181,7 @@
 			<column name="criticidad" type="varchar" length="1" decimal="0" jt="12" />
 			<column name="bloqueado" type="boolean" decimal="0" jt="-7" />
 			<column name="penaliza" type="boolean" decimal="0" jt="-7" />
+			<column name="remedy_id" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_encargo" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -217,6 +221,9 @@
 			<index name="IDX_8BD0727A9D5B09FF" unique="NORMAL" >
 				<column name="operacional3_id" />
 			</index>
+			<index name="remedy_id" unique="NORMAL" >
+				<column name="remedy_id" />
+			</index>
 			<fk name="FK_8BD0727A162972A4" to_schema="seguimientoseco" to_table="agrupacion" >
 				<fk_column name="agrupacion_id" pk="id" />
 			</fk>
@@ -249,6 +256,36 @@
 			</fk>
 			<fk name="FK_8BD0727A8B566D3B" to_schema="seguimientoseco" to_table="tipo_solucion" >
 				<fk_column name="tipo_solucion_id" pk="id" />
+			</fk>
+			<fk name="encargo_ibfk_1" to_schema="seguimientoseco" to_table="remedy" >
+				<fk_column name="remedy_id" pk="id" />
+			</fk>
+		</table>
+		<table name="encargo_penalizado" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="indicador_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="encargo_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_encargo_penalizado" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="IDX_6A4425A47D487D1" unique="NORMAL" >
+				<column name="indicador_id" />
+			</index>
+			<index name="IDX_6A4425AA4FDE19D" unique="NORMAL" >
+				<column name="encargo_id" />
+			</index>
+			<index name="IDX_6A4425A57AB065D" unique="NORMAL" >
+				<column name="certificado_servicios_id" />
+			</index>
+			<fk name="FK_6A4425AA4FDE19D" to_schema="seguimientoseco" to_table="encargo" >
+				<fk_column name="encargo_id" pk="id" />
+			</fk>
+			<fk name="FK_6A4425A47D487D1" to_schema="seguimientoseco" to_table="indicadores" >
+				<fk_column name="indicador_id" pk="id" />
+			</fk>
+			<fk name="FK_6A4425A57AB065D" to_schema="seguimientoseco" to_table="certificado_servicios" delete_action="cascade" >
+				<fk_column name="certificado_servicios_id" pk="id" />
 			</fk>
 		</table>
 		<table name="estado_certificado" >
@@ -330,15 +367,25 @@
 			<column name="operacional3" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="motivo_cancelacion" type="varchar" length="255" decimal="0" jt="12" />
 			<column name="numero_remedy" type="varchar" length="30" decimal="0" jt="12" mandatory="y" />
+			<column name="contrato" type="varchar" length="40" decimal="0" jt="12" />
+			<column name="criticidad" type="varchar" length="1" decimal="0" jt="12" />
 			<index name="pk_fichero" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="IDX_F4E94434CCAD7E63" unique="NORMAL" >
 				<column name="carga_fichero_id" />
 			</index>
-			<fk name="FK_F4E94434CCAD7E63" to_schema="seguimientoseco" to_table="carga_fichero" delete_action="cascade" >
+			<fk name="FK_F4E94434CCAD7E63" to_schema="seguimientoseco" to_table="carga_fichero" >
 				<fk_column name="carga_fichero_id" pk="id" />
 			</fk>
+		</table>
+		<table name="fichero_log" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fecha_proceso" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
+			<column name="fichero_log" type="varchar" length="255" decimal="0" jt="12" />
+			<index name="pk_fichero_log" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
 		</table>
 		<table name="filtro" >
 			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
@@ -371,14 +418,21 @@
 			<column name="importe" type="double" length="22" decimal="0" jt="8" />
 			<column name="penalizacion" type="double" length="22" decimal="0" jt="8" />
 			<column name="total" type="double" length="22" decimal="0" jt="8" />
+			<column name="tipo_cuota_id" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_importes_certificado_servicios" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="IDX_11648CBD57AB065D" unique="NORMAL" >
 				<column name="certificado_servicios_id" />
 			</index>
-			<fk name="FK_11648CBD57AB065D" to_schema="seguimientoseco" to_table="certificado_servicios" >
+			<index name="IDX_11648CBDBCB9AAB0" unique="NORMAL" >
+				<column name="tipo_cuota_id" />
+			</index>
+			<fk name="FK_11648CBD57AB065D" to_schema="seguimientoseco" to_table="certificado_servicios" delete_action="cascade" >
 				<fk_column name="certificado_servicios_id" pk="id" />
+			</fk>
+			<fk name="FK_11648CBDBCB9AAB0" to_schema="seguimientoseco" to_table="tipo_cuota" >
+				<fk_column name="tipo_cuota_id" pk="id" />
 			</fk>
 		</table>
 		<table name="importes_contrato" >
@@ -422,6 +476,7 @@
 			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
 			<column name="encargo_id" type="int" length="10" decimal="0" jt="4" />
 			<column name="penalizacion" type="double" length="22" decimal="0" jt="8" />
+			<column name="tipo_cuota_id" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_linea_certificado" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -431,11 +486,17 @@
 			<index name="IDX_119DA726A4FDE19D" unique="NORMAL" >
 				<column name="encargo_id" />
 			</index>
-			<fk name="FK_119DA72657AB065D" to_schema="seguimientoseco" to_table="certificado_servicios" >
-				<fk_column name="certificado_servicios_id" pk="id" />
-			</fk>
+			<index name="IDX_119DA726BCB9AAB0" unique="NORMAL" >
+				<column name="tipo_cuota_id" />
+			</index>
 			<fk name="FK_119DA726A4FDE19D" to_schema="seguimientoseco" to_table="encargo" >
 				<fk_column name="encargo_id" pk="id" />
+			</fk>
+			<fk name="FK_119DA72657AB065D" to_schema="seguimientoseco" to_table="certificado_servicios" delete_action="cascade" >
+				<fk_column name="certificado_servicios_id" pk="id" />
+			</fk>
+			<fk name="FK_119DA726BCB9AAB0" to_schema="seguimientoseco" to_table="tipo_cuota" >
+				<fk_column name="tipo_cuota_id" pk="id" />
 			</fk>
 		</table>
 		<table name="meses" >
@@ -564,6 +625,27 @@
 				<fk_column name="proyecto_id" pk="id" />
 			</fk>
 		</table>
+		<table name="remedy" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="tipo" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
+			<column name="numero" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
+			<column name="estado" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_entrada" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="criticidad" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
+			<column name="area" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="centro" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="apellidos" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="nombre" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="producto_nivel3" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="producto_nivel4" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="login" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<index name="pk_remedy" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="uk_numero" unique="UNIQUE" >
+				<column name="numero" />
+			</index>
+		</table>
 		<table name="tipo_agrupacion" >
 			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
 			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
@@ -630,15 +712,13 @@
 	</schema>
 	<connector name="localhost" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.46-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="seguimientoseco" user="root" />
 	<layout name="Default Layout" id="Layout_412bd68" show_relation="columns" >
-		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="592" y="48" />
-		<entity schema="seguimientoseco" name="modulo_funcional" color="3986C1" x="544" y="720" />
-		<entity schema="seguimientoseco" name="aplicacion" color="3986C1" x="400" y="800" />
-		<entity schema="seguimientoseco" name="usuario" color="BED3F4" x="416" y="128" />
-		<entity schema="seguimientoseco" name="tipo_cuota" color="3986C1" x="928" y="208" />
-		<entity schema="seguimientoseco" name="estado_usuario" color="BED3F4" x="608" y="208" />
-		<entity schema="seguimientoseco" name="agrupacion" color="3986C1" x="1120" y="624" />
-		<entity schema="seguimientoseco" name="modulo_tecnico" color="3986C1" x="544" y="896" />
-		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="848" y="672" >
+		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="608" y="48" />
+		<entity schema="seguimientoseco" name="modulo_funcional" color="3986C1" x="560" y="720" />
+		<entity schema="seguimientoseco" name="aplicacion" color="3986C1" x="416" y="800" />
+		<entity schema="seguimientoseco" name="usuario" color="BED3F4" x="432" y="128" />
+		<entity schema="seguimientoseco" name="estado_usuario" color="BED3F4" x="624" y="208" />
+		<entity schema="seguimientoseco" name="modulo_tecnico" color="3986C1" x="560" y="896" />
+		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="864" y="672" >
 			<column name="id" />
 			<column name="objeto_encargo_id" />
 			<column name="numero" />
@@ -664,37 +744,44 @@
 			<column name="criticidad" />
 			<column name="bloqueado" />
 			<column name="penaliza" />
+			<column name="remedy_id" />
 		</entity>
-		<entity schema="seguimientoseco" name="tipo_agrupacion" color="3986C1" x="1328" y="464" />
-		<entity schema="seguimientoseco" name="proyecto_agrupacion" color="3986C1" x="1520" y="400" />
-		<entity schema="seguimientoseco" name="certificado_servicios" color="3986C1" x="1488" y="944" />
-		<entity schema="seguimientoseco" name="penalizaciones" color="3986C1" x="1568" y="1376" />
-		<entity schema="seguimientoseco" name="indicadores" color="3986C1" x="1360" y="1424" />
-		<entity schema="seguimientoseco" name="anyos" color="3986C1" x="1824" y="1088" />
-		<entity schema="seguimientoseco" name="filtro" color="3986C1" x="1904" y="1280" />
-		<entity schema="seguimientoseco" name="meses" color="3986C1" x="1760" y="1248" />
-		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="1328" y="1152" />
-		<entity schema="seguimientoseco" name="estado_certificado" color="3986C1" x="1520" y="768" />
-		<entity schema="seguimientoseco" name="proyecto" color="3986C1" x="1520" y="224" />
-		<entity schema="seguimientoseco" name="tipo_solucion" color="3986C1" x="336" y="528" />
-		<entity schema="seguimientoseco" name="operacional" color="3986C1" x="320" y="640" />
-		<entity schema="seguimientoseco" name="tipo_indicador" color="3986C1" x="1136" y="1424" />
-		<entity schema="seguimientoseco" name="factores" color="3986C1" x="1504" y="1600" />
-		<entity schema="seguimientoseco" name="linea_certificado" color="3986C1" x="1168" y="848" />
-		<entity schema="seguimientoseco" name="importes_certificado_servicios" color="3986C1" x="1728" y="832" />
-		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="1072" y="1120" />
-		<entity schema="seguimientoseco" name="estado_encargo" color="3986C1" x="1072" y="448" />
-		<entity schema="seguimientoseco" name="objetos_encargo" color="3986C1" x="896" y="400" />
-		<entity schema="seguimientoseco" name="npl_cerrado_periodo" color="3986C1" x="1712" y="240" />
-		<entity schema="seguimientoseco" name="tipo_objeto" color="3986C1" x="704" y="320" />
-		<entity schema="seguimientoseco" name="fichero" color="3986C1" x="48" y="224" >
+		<entity schema="seguimientoseco" name="tipo_solucion" color="3986C1" x="352" y="528" />
+		<entity schema="seguimientoseco" name="operacional" color="3986C1" x="336" y="640" />
+		<entity schema="seguimientoseco" name="estado_encargo" color="3986C1" x="1088" y="448" />
+		<entity schema="seguimientoseco" name="carga_fichero" color="3986C1" x="256" y="336" />
+		<entity schema="seguimientoseco" name="npl_cerrado_periodo" color="3986C1" x="1888" y="112" />
+		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="448" y="1216" />
+		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="816" y="1552" />
+		<entity schema="seguimientoseco" name="indicadores" color="3986C1" x="1120" y="1216" />
+		<entity schema="seguimientoseco" name="penalizaciones" color="3986C1" x="1344" y="1296" />
+		<entity schema="seguimientoseco" name="factores" color="3986C1" x="1152" y="1408" />
+		<entity schema="seguimientoseco" name="tipo_indicador" color="3986C1" x="928" y="1232" />
+		<entity schema="seguimientoseco" name="meses" color="3986C1" x="1552" y="1280" />
+		<entity schema="seguimientoseco" name="filtro" color="3986C1" x="1472" y="1056" />
+		<entity schema="seguimientoseco" name="anyos" color="3986C1" x="1360" y="1184" />
+		<entity schema="seguimientoseco" name="fichero" color="3986C1" x="48" y="256" >
 			<column name="id" />
 			<column name="carga_fichero_id" />
 			<column name="numero_encargo" />
 			<column name="numero_remedy" />
+			<column name="contrato" />
+			<column name="criticidad" />
 		</entity>
-		<entity schema="seguimientoseco" name="carga_fichero_log" color="3986C1" x="560" y="416" />
-		<entity schema="seguimientoseco" name="carga_fichero" color="3986C1" x="240" y="336" />
+		<entity schema="seguimientoseco" name="fichero_log" color="3986C1" x="48" y="864" />
+		<entity schema="seguimientoseco" name="importes_certificado_servicios" color="3986C1" x="1888" y="640" />
+		<entity schema="seguimientoseco" name="tipo_agrupacion" color="3986C1" x="1472" y="192" />
+		<entity schema="seguimientoseco" name="proyecto" color="3986C1" x="1920" y="240" />
+		<entity schema="seguimientoseco" name="proyecto_agrupacion" color="3986C1" x="1696" y="240" />
+		<entity schema="seguimientoseco" name="agrupacion" color="3986C1" x="1312" y="336" />
+		<entity schema="seguimientoseco" name="tipo_objeto" color="3986C1" x="1504" y="480" />
+		<entity schema="seguimientoseco" name="objetos_encargo" color="3986C1" x="1248" y="592" />
+		<entity schema="seguimientoseco" name="linea_certificado" color="3986C1" x="1248" y="800" />
+		<entity schema="seguimientoseco" name="tipo_cuota" color="3986C1" x="1568" y="624" />
+		<entity schema="seguimientoseco" name="estado_certificado" color="3986C1" x="1952" y="976" />
+		<entity schema="seguimientoseco" name="encargo_penalizado" color="3986C1" x="1184" y="1024" />
+		<entity schema="seguimientoseco" name="certificado_servicios" color="3986C1" x="1680" y="816" />
+		<entity schema="seguimientoseco" name="remedy" color="3986C1" x="848" y="240" />
 	</layout>
 	<layout name="Sample Layout with Tools" id="Layout_33bbbfc" show_column_type="y" show_relation="columns" >
 		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="272" y="144" />

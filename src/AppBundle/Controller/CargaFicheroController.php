@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\CargaFichero;
-use AppBundle\Entity\CargaFicheroLog;
+use AppBundle\Entity\Centro;
+use AppBundle\Entity\FicheroLog;
 use AppBundle\Entity\Encargo;
 use AppBundle\Entity\Fichero;
+use AppBundle\Entity\Remedy;
 use AppBundle\Form\ImportarType;
 use DateTime;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -91,13 +93,13 @@ class CargaFicheroController extends Controller
 					$entityManager->persist($CargaFichero);
 					$entityManager->flush();
 
-					$CargaFicheroLog = new CargaFicheroLog();
+					$FicheroLog = new FicheroLog();
 					$fechaProceso = new \DateTime();
-					$CargaFicheroLog->setFechaProceso($fechaProceso);
+					$FicheroLog->setFechaProceso($fechaProceso);
 
 					$ServicioLog = $this->get('app.escribelog');
 					$ServicioLog->setLogger('CARGA FICHERO : ID= ' . $CargaFichero->getId());
-					$ficheroLog = 'cargaFicheroLog-' . $CargaFichero->getId();
+					$ficheroLog = 'FicheroLog-' . $CargaFichero->getId();
 
 					$ServicioLog->setMensaje("Comienza carga fichero: " . $file);
 					$ServicioLog->escribeLog($ficheroLog);
@@ -110,7 +112,7 @@ class CargaFicheroController extends Controller
 					$ServicioLog->setMensaje("Finaliza carga encargos: " . $file . " Registros Cargados :" . $CargaFichero->getNumeroRegistrosCargados());
 					$ServicioLog->escribeLog($ficheroLog);
 
-					$CargaFichero->setCargaFicheroLog($CargaFicheroLog);
+					$CargaFichero->setFicheroLog($FicheroLog);
 					$entityManager->persist($CargaFichero);
 					$entityManager->flush();
 					return $this->redirectToRoute("queryFichero");
@@ -155,6 +157,7 @@ class CargaFicheroController extends Controller
 			$Fichero->setTitulo($headingsArray['L']);
 			$Fichero->setDescripcion($headingsArray['J']);
 			$Fichero->setObjetoEncargo($headingsArray["N"]);
+			$Fichero->setCriticidad($headingsArray["Q"]);
 			$Fichero->setEstadoActual($headingsArray["U"]);
 			$Fichero->setFechaEstadoActual(new DateTime($headingsArray["V"]));
 			$Fichero->setFechaRegistro(new DateTime($headingsArray["W"]));
@@ -210,6 +213,12 @@ class CargaFicheroController extends Controller
 		return true;
 	}
 
+	/**
+	 * @param $CargaFichero
+	 * @param $ServicioLog
+	 * @param $ficheroLog
+	 * @return bool
+	 */
 	public function cargaEncargos($CargaFichero, $ServicioLog, $ficheroLog)
 	{
 		$entityManager = $this->getDoctrine()->getManager();
@@ -251,6 +260,7 @@ class CargaFicheroController extends Controller
 			$Encargo->setFcEstadoActual($Fichero->getFechaEstadoActual());
 			$Encargo->setFcRegistro($Fichero->getFechaRegistro());
 			$Encargo->setFcAsignacion($Fichero->getFechaAsignacion());
+			$Encargo->setCriticidad($Fichero->getCriticidad());
 			$Encargo->setFcEstimadaSolucion($Fichero->getFechaEstimadaSolucion());
 			$Encargo->setFcRequeridaValoracion($Fichero->getFechaRequeridaValoracion());
 			$Encargo->setFcRequeridaEntrega($Fichero->getFechaRequeridaEntrega());
@@ -301,4 +311,141 @@ class CargaFicheroController extends Controller
 
 		return true;
 	}
+
+
+	public function cargaFicheroRemedyAction(Request $request)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$ImportarForm = $this->createForm(ImportarType::class);
+		$ImportarForm->handleRequest($request);
+
+
+		if ($ImportarForm->isSubmitted()) {
+			$fichero = $ImportarForm["fichero"]->getData();
+			if (!empty($fichero) && $fichero != null) {
+				$file_name = $fichero->getClientOriginalName();
+				$fichero->move("upload", $file_name);
+				try {
+
+					$file = "upload/" . $fichero->getClientOriginalName();
+					$PHPExcel = IOFactory::load($file);
+					$CargaFichero = new CargaFichero();
+					$fecha = new DateTime();
+					$CargaFichero->setFechaCarga($fecha);
+					$CargaFichero->setDescripcion($ImportarForm["descripcion"]->getdata());
+					$CargaFichero->setFichero($file_name);
+					$Usuario = $this->getUser();
+					$CargaFichero->setUsuario($Usuario);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+
+					$FicheroLog = new FicheroLog();
+					$fechaProceso = new \DateTime();
+					$FicheroLog->setFechaProceso($fechaProceso);
+
+					$ServicioLog = $this->get('app.escribelog');
+					$ServicioLog->setLogger('CARGA FICHERO Remedy: ID= ' . $CargaFichero->getId());
+					$ficheroLog = 'FicheroLog-' . $CargaFichero->getId();
+
+					$ServicioLog->setMensaje("Comienza carga fichero remedy: " . $file);
+					$ServicioLog->escribeLog($ficheroLog);
+
+					$this->cargaRemedy($CargaFichero, $PHPExcel);
+					$ServicioLog->setMensaje("Finaliza carga fichero remedy: " . $file . " Registros Totales :" . $CargaFichero->getNumeroRegistros());
+					$ServicioLog->escribeLog($ficheroLog);
+
+					$CargaFichero->setFicheroLog($FicheroLog);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+					return $this->redirectToRoute("queryFichero");
+				} catch (Exception $e) {
+					$status = "***ERROR EN CARGA DE FICHERO **: " . $file_name;
+					$this->sesion->getFlashBag()->add("status", $status);
+					$params = "";
+					return $this->render("cargaFichero/query.html.twig", $params);
+				}
+			}
+		}
+		$params = ["form" => $ImportarForm->createView()];
+		return $this->render("cargaFichero/carga.html.twig", $params);
+	}
+
+	/**
+	 * @param CargaFichero CargaFichero
+	 * @param  $PHPExcel
+	 * @return bool
+	 * @throws \Exception
+	 */
+	public function cargaRemedy($CargaFichero, $PHPExcel)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+
+		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
+		$highestRow = $objWorksheet->getHighestRow();
+
+		$ct = 0;
+		for ($i = 2; $i <= $highestRow; $i++) {
+			if (!$entityManager->isOpen()) {
+				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			}
+			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':O' . $i, null, true, true, true);
+			$headingsArray = $headingsArray[$i];
+
+			$Remedy = $entityManager->getRepository("AppBundle:Remedy")->findOneBy(["numero"=>$headingsArray["B"]]);
+
+			if (is_null($Remedy)) {
+				$Remedy = new Remedy();
+			}
+
+			$Aplicacion = $entityManager->getRepository("AppBundle:Aplicacion")->findOneBy(["codigo"=>$headingsArray["J"]]);
+
+			if (is_null($Aplicacion)) continue;
+
+			$Remedy->setAplicacion($Aplicacion);
+			$Remedy->setTipo($headingsArray["A"]);
+			$Remedy->setNumero($headingsArray["B"]);
+			$Remedy->setEstado($headingsArray["C"]);
+
+
+
+			$Remedy->setCriticidad($headingsArray["E"]);
+			$Remedy->setArea($headingsArray["F"]);
+
+			$Centro = $entityManager->getRepository("AppBundle:Centro")->findOneBy(["descripcion" =>$headingsArray["G"]]);
+			if (is_null($Centro)) {
+					$Centro = new Centro();
+					$Centro->setDescripcion($headingsArray["G"]);
+					$entityManager->persist($Centro);
+					$entityManager->flush();
+			}
+			$Remedy->setCentro($Centro);
+			$Remedy->setApellidos($headingsArray["H"]);
+			$Remedy->setNombre($headingsArray["I"]);
+			$Remedy->setProductoNivel3($headingsArray["J"]);
+			$Remedy->setProductoNivel4($headingsArray["K"]);
+			$Remedy->setLogin($headingsArray["N"]);
+			$Remedy->setDescripcionProblema($headingsArray["O"]);
+
+			$entityManager->persist($Remedy);
+			$entityManager->flush();
+
+			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findOneBy(["nmRemedy" => $Remedy->getNumero()]);
+
+			if ($Encargo) {
+				$Encargo->setRemedy($Remedy);
+				$entityManager->persist($Encargo);
+				$entityManager->flush();
+			}
+
+			$ct++;
+
+		}
+
+		$CargaFichero->setNumeroRegistros($ct);
+		$entityManager->persist($CargaFichero);
+		$entityManager->flush();
+
+		return true;
+	}
+
 }

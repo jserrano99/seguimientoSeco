@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+{% block titulo %} 
+    <div id='dtitulo' class="container"> AÑADIR ENCARGOS DEL CERTIFICADO DE SERVICIOS {{ certificado.descripcion }}
+    <a href="{{path("queryCertificadoServicios")}}"
+       class="btn btn-success">
+        <span class="glyphicon glyphicon-new-window"></span>Volver </a>
+    <hr/>
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            <hr/>
+        {% endfor %}
+        <div class="container">
+            {{ form_start (form,{'action':'','method':'POST'}) }}
+            {{ form_end (form) }}
+        </div>
+    </div>
+{% endblock %}

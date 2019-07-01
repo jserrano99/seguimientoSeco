@@ -78,7 +78,7 @@ class CargaFicheroDatatable extends AbstractDatatable
 			->add('numeroRegistrosCargados', Column::class, array(
 				'title' => 'Registros Cargados'
 			))
-			->add('cargaFicheroLog.ficheroLog', Column::class, array(
+			->add('ficheroLog.fichero', Column::class, array(
 				'title' => 'Fichero',
 				'default_content' => ''
 			))
@@ -90,7 +90,7 @@ class CargaFicheroDatatable extends AbstractDatatable
 						'label' => 'Log',
 						'icon' => 'glyphicon glyphicon-download',
 						'render_if' => function ($row) {
-							if ($row["cargaFicheroLog"] != null)
+							if ($row["ficheroLog"] != null)
 								return true;
 						},
 						'attributes' => [
