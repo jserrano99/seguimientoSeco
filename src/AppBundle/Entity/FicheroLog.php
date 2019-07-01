@@ -39,9 +39,10 @@ class FicheroLog {
     /**
      * @var string
      *
-     * @ORM\Column(name="fichero_log", type="string", length= 255, nullable=true)
+     * @ORM\Column(name="nombre_fichero", type="string", length= 255, nullable=true)
      */
-    private $fichero;
+    private $nombreFichero;
+
 
 
     /**
@@ -79,26 +80,26 @@ class FicheroLog {
     }
 
     /**
-     * Set fichero.
+     * Set nombreFichero.
      *
-     * @param string|null $fichero
+     * @param string|null $nombreFichero
      *
      * @return FicheroLog
      */
-    public function setFichero($fichero = null)
+    public function setNombreFichero($nombreFichero = null)
     {
-        $this->fichero = $fichero;
+        $this->nombreFichero = $nombreFichero;
 
         return $this;
     }
 
     /**
-     * Get fichero.
+     * Get nombreFichero.
      *
      * @return string|null
      */
-    public function getFichero()
+    public function getNombreFichero()
     {
-        return $this->fichero;
+        return $this->nombreFichero;
     }
 }
