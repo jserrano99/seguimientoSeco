@@ -35,7 +35,7 @@ class AgrupacionDatatable extends AbstractDatatable
 		$this->options->set([
 			'classes' => Style::BOOTSTRAP_4_STYLE,
 			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
-			'individual_filtering' => false,
+			'individual_filtering' => true,
 			'individual_filtering_position' => 'head',
 			'order' => [[0, 'asc']],
 			'order_cells_top' => true,
@@ -65,7 +65,7 @@ class AgrupacionDatatable extends AbstractDatatable
 			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '850px', 'searchable' => true])
 			->add('tipoAgrupacion.descripcion', Column::class, array(
 				'title' => 'Tipo Agrupación',
-				'width' => '40px',
+				'width' => '400px',
 				'filter' => array(SelectFilter::class,
 					array(
 						'multiple' => false,
@@ -101,42 +101,42 @@ class AgrupacionDatatable extends AbstractDatatable
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button'
 						]],
-					['route' => 'deleteAgrupacion',
-						'route_parameters' => [
-							'id' => 'id'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-trash',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Eliminar Agrupación',
-							'class' => 'btn btn-danger btn-xs',
-							'role' => 'button'],
-						'confirm' => true,
-						'confirm_message' => 'Confirmar la Eliminación de Agrupacion'],
-					['route' => 'plasByAgrupacion2',
-						'route_parameters' => [
-							'pAgrupacion' => 'codigo'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-print',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Report de Encargos de la Agrupación',
-							'class' => 'btn btn-success btn-xs',
-							'target' => 'blank',
-							'role' => 'button']
-					],
-					['route' => 'planificacion',
-						'route_parameters' => [
-							'pAgrupacion' => 'codigo'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-tasks',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Report de Planificación de Encargos' ,
-							'class' => 'btn btn-success btn-xs',
-							'target' => 'blank',
-							'role' => 'button']
-					],
+//					['route' => 'deleteAgrupacion',
+//						'route_parameters' => [
+//							'id' => 'id'],
+//						'label' => '',
+//						'icon' => 'glyphicon glyphicon-trash',
+//						'attributes' => [
+//							'rel' => 'tooltip',
+//							'title' => 'Eliminar Agrupación',
+//							'class' => 'btn btn-danger btn-xs',
+//							'role' => 'button'],
+//						'confirm' => true,
+//						'confirm_message' => 'Confirmar la Eliminación de Agrupacion'],
+//					['route' => 'plasByAgrupacion2',
+//						'route_parameters' => [
+//							'pAgrupacion' => 'codigo'],
+//						'label' => '',
+//						'icon' => 'glyphicon glyphicon-print',
+//						'attributes' => [
+//							'rel' => 'tooltip',
+//							'title' => 'Report de Encargos de la Agrupación',
+//							'class' => 'btn btn-success btn-xs',
+//							'target' => 'blank',
+//							'role' => 'button']
+//					],
+//					['route' => 'planificacion',
+//						'route_parameters' => [
+//							'pAgrupacion' => 'codigo'],
+//						'label' => '',
+//						'icon' => 'glyphicon glyphicon-tasks',
+//						'attributes' => [
+//							'rel' => 'tooltip',
+//							'title' => 'Report de Planificación de Encargos' ,
+//							'class' => 'btn btn-success btn-xs',
+//							'target' => 'blank',
+//							'role' => 'button']
+//					],
 					['route' => 'queryEncargosAgrupacion',
 						'route_parameters' => ['idAgrupacion' => 'id'],
 						'label' => '',

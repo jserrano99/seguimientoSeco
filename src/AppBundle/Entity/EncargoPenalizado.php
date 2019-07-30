@@ -58,6 +58,29 @@ class EncargoPenalizado
 	 */
 	private $encargo;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="eliminada", type="boolean", nullable=true)*
+     */
+
+    private $eliminada;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_retraso_valoracion", type="integer", nullable=true)*
+     */
+
+    private $diasRetrasoValoracion;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_retraso_entrega", type="integer", nullable=true)*
+     */
+
+    private $diasRetrasoEntrega;
 
     /**
      * Get id.
@@ -140,4 +163,54 @@ class EncargoPenalizado
     {
         return $this->encargo;
     }
+
+    /**
+     * @return bool
+     */
+    public function isEliminada()
+    {
+        return $this->eliminada;
+    }
+
+    /**
+     * @param bool $eliminada
+     */
+    public function setEliminada($eliminada)
+    {
+        $this->eliminada = $eliminada;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDiasRetrasoValoracion()
+    {
+        return $this->diasRetrasoValoracion;
+    }
+
+    /**
+     * @param int $diasRetrasoValoracion
+     */
+    public function setDiasRetrasoValoracion($diasRetrasoValoracion)
+    {
+        $this->diasRetrasoValoracion = $diasRetrasoValoracion;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDiasRetrasoEntrega()
+    {
+        return $this->diasRetrasoEntrega;
+    }
+
+    /**
+     * @param int $diasRetrasoEntrega
+     */
+    public function setDiasRetrasoEntrega($diasRetrasoEntrega)
+    {
+        $this->diasRetrasoEntrega = $diasRetrasoEntrega;
+    }
+
+
 }

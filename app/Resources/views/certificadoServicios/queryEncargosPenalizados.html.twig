@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+{% block titulo %} 
+    <div id='dtitulo' class="container"> ENCARGOS CON PENALIZACIÓN DEL CERTIFICADO DE SERVICIOS <br/><br/> {{ certificado.descripcion }}
+        <a href="{{ path("editCertificadoServicios",{"id":certificado.id}) }}" class="btn btn-success">Volver</a>
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            <hr/>
+        {% endfor %}
+        {{ sg_datatables_render(datatable) }}
+    </div>
+{% endblock %}

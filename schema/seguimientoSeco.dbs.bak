@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="localhost" id="Project_3dfc7cc" template="Default" database="MySql" >
+<project name="Magma Control" id="Project_3dfc7cc" template="Default" database="MySql2" >
 	<schema name="seguimientoseco" catalogname="seguimientoseco" >
 		<table name="accesos" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="usuario_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="fecha" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="ip" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="usuario_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fecha" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="ip" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_accesos" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -17,12 +17,12 @@
 			</fk>
 		</table>
 		<table name="agrupacion" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="tipo_agrupacion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="fc_inicio" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_fin" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="tipo_agrupacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fc_inicio" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_fin" type="datetime" length="0" decimal="0" jt="93" />
 			<index name="pk_agrupacion" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -34,29 +34,32 @@
 			</fk>
 		</table>
 		<table name="anyos" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="descripcion" type="varchar" length="4" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_inicio" type="datetime" jt="93" />
+			<column name="fecha_fin" type="datetime" jt="93" />
 			<index name="pk_anyos" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="aplicacion" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="valido" type="bit" length="0" decimal="0" jt="-7" mandatory="y" />
 			<index name="pk_aplicacion" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="carga_fichero" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="usuario_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="fecha_carga" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fichero" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="numero_registros" type="int" length="10" decimal="0" jt="4" />
-			<column name="numero_registros_cargados" type="int" length="10" decimal="0" jt="4" />
-			<column name="fichero_log_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="usuario_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fecha_carga" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fichero" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="numero_registros" type="int" length="0" decimal="0" jt="4" />
+			<column name="numero_registros_cargados" type="int" length="0" decimal="0" jt="4" />
+			<column name="fichero_log_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_carga_fichero" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -73,23 +76,45 @@
 				<fk_column name="fichero_log_id" pk="id" />
 			</fk>
 		</table>
+		<table name="centro" >
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="centro_unif_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="valido" type="bit" length="0" decimal="0" jt="-7" />
+			<index name="pk_centro" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="idx_centro_centro_unif_id" unique="NORMAL" >
+				<column name="centro_unif_id" />
+			</index>
+			<fk name="fk_centro_centro" to_schema="seguimientoseco" to_table="centro" >
+				<fk_column name="centro_unif_id" pk="id" />
+			</fk>
+		</table>
 		<table name="certificado_servicios" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="contrato_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="estado_certificado_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="meses_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="total_factura" type="double" length="22" decimal="0" jt="8" />
-			<column name="total_penalizaciones" type="double" length="22" decimal="0" jt="8" />
-			<column name="maximo_penalizaciones" type="double" length="22" decimal="0" jt="8" />
-			<column name="cuota_iva" type="double" length="22" decimal="0" jt="8" />
-			<column name="total_factura_con_iva" type="double" length="22" decimal="0" jt="8" />
-			<column name="penalizacion_aplicable" type="double" length="22" decimal="0" jt="8" />
-			<column name="fichero_log_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="contador_NPL" type="int" length="10" decimal="0" jt="4" />
-			<column name="contador_ADM" type="int" length="10" decimal="0" jt="4" />
-			<column name="importe_cuota_fija_mensual" type="double" length="22" decimal="0" jt="8" />
-			<column name="aplica_penalizacion" type="boolean" decimal="0" jt="-7" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="contrato_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="estado_certificado_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="meses_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="total_factura" type="double" length="0" decimal="0" jt="8" />
+			<column name="total_penalizaciones" type="double" length="0" decimal="0" jt="8" />
+			<column name="maximo_penalizaciones" type="double" length="0" decimal="0" jt="8" />
+			<column name="cuota_iva" type="double" length="0" decimal="0" jt="8" />
+			<column name="total_factura_con_iva" type="double" length="0" decimal="0" jt="8" />
+			<column name="penalizacion_aplicable" type="double" length="0" decimal="0" jt="8" />
+			<column name="fichero_log_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="contador_NPL" type="int" length="0" decimal="0" jt="4" />
+			<column name="contador_ADM" type="int" length="0" decimal="0" jt="4" />
+			<column name="importe_cuota_fija_mensual" type="double" length="0" decimal="0" jt="8" />
+			<column name="aplica_penalizacion" type="bit" length="0" decimal="0" jt="-7" />
+			<column name="contador_CAN" type="int" length="0" decimal="0" jt="4" />
+			<column name="penalizados_CRI" type="int" length="0" decimal="0" jt="4" />
+			<column name="penalizados_NOR" type="int" length="0" decimal="0" jt="4" />
+			<column name="contador_NPL_CRI" type="int" length="0" decimal="0" jt="4" />
+			<column name="contador_NPL_NOR" type="int" length="0" decimal="0" jt="4" />
+			<column name="penalizados_ADM" type="int" jt="4" />
 			<index name="pk_certificado_servicios" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -119,69 +144,83 @@
 			</fk>
 		</table>
 		<table name="contrato" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="fc_inicio" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="fc_fin" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="centro_coste_cd" type="int" length="10" decimal="0" jt="4" />
-			<column name="centro_coste_ds" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="expediente" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="adjudicatario" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="importe_contrato" type="double" length="22" decimal="0" jt="8" />
-			<column name="importe_adjudicacion" type="double" length="22" decimal="0" jt="8" />
-			<column name="porcentaje_baja" type="double" length="22" decimal="0" jt="8" />
-			<column name="numero_pedido" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fc_inicio" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="fc_fin" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="centro_coste_cd" type="int" length="0" decimal="0" jt="4" />
+			<column name="centro_coste_ds" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="expediente" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="adjudicatario" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="importe_contrato" type="double" length="0" decimal="0" jt="8" />
+			<column name="importe_adjudicacion" type="double" length="0" decimal="0" jt="8" />
+			<column name="porcentaje_baja" type="double" length="0" decimal="0" jt="8" />
+			<column name="numero_pedido" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_contrato" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
+		<table name="contrato_actual" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="contrato_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_contrato_actual" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="contrato_id" unique="NORMAL" >
+				<column name="contrato_id" />
+			</index>
+			<fk name="contrato_actual_ibfk_1" to_schema="seguimientoseco" to_table="contrato" >
+				<fk_column name="contrato_id" pk="id" />
+			</fk>
+		</table>
 		<table name="encargo" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="objeto_encargo_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="numero" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="contrato_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="agrupacion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="estado_actual_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="modulo_funcional_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="modulo_tecnico_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="titulo" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="nm_remedy" type="varchar" length="15" decimal="0" jt="12" />
-			<column name="fc_estado_actual" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="fc_registro" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_asignacion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_estimada_solucion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_requerida_solucion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_requerida_valoracion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_entrega_valoracion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_requerida_entrega" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_compromiso" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_fin_prevista" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_comienzo_ejecucion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_entrega" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_resolucion_icm" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_aceptacion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_cierre" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="tiempo_total" type="double" length="10" decimal="5" jt="8" />
-			<column name="tiempo_resolucion" type="double" length="22" decimal="0" jt="8" />
-			<column name="descripcion" type="longtext" length="2147483647" decimal="0" jt="-1" />
-			<column name="horas_valoradas" type="float" length="12" decimal="0" jt="7" />
-			<column name="horas_comprometidas" type="double" length="22" decimal="0" jt="8" />
-			<column name="horas_realizadas" type="double" length="22" decimal="0" jt="8" />
-			<column name="coste" type="double" length="22" decimal="0" jt="8" />
-			<column name="operacional1_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="operacional2_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="operacional3_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="fc_exportacion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="aplicacion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="tipo_solucion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="solucion_usuario" type="text" length="65535" decimal="0" jt="-1" />
-			<column name="solucion_tecnica" type="text" length="65535" decimal="0" jt="-1" />
-			<column name="motivo_cancelacion" type="varchar" length="3" decimal="0" jt="12" />
-			<column name="criticidad" type="varchar" length="1" decimal="0" jt="12" />
-			<column name="bloqueado" type="boolean" decimal="0" jt="-7" />
-			<column name="penaliza" type="boolean" decimal="0" jt="-7" />
-			<column name="remedy_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="objeto_encargo_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="numero" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="contrato_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="agrupacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="estado_actual_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="modulo_funcional_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="modulo_tecnico_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="titulo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="nm_remedy" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="fc_estado_actual" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="fc_registro" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_asignacion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_estimada_solucion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_requerida_solucion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_requerida_valoracion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_entrega_valoracion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_requerida_entrega" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_compromiso" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_fin_prevista" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_comienzo_ejecucion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_entrega" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_resolucion_icm" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_aceptacion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_cierre" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="tiempo_total" type="double" length="0" decimal="0" jt="8" />
+			<column name="tiempo_resolucion" type="double" length="0" decimal="0" jt="8" />
+			<column name="descripcion" type="longtext" length="0" decimal="0" jt="-1" />
+			<column name="horas_valoradas" type="float" length="0" decimal="0" jt="7" />
+			<column name="horas_comprometidas" type="double" length="0" decimal="0" jt="8" />
+			<column name="horas_realizadas" type="double" length="0" decimal="0" jt="8" />
+			<column name="coste" type="double" length="0" decimal="0" jt="8" />
+			<column name="operacional1_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="operacional2_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="operacional3_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fc_exportacion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="aplicacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="tipo_solucion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="solucion_usuario" type="text" length="0" decimal="0" jt="-1" />
+			<column name="solucion_tecnica" type="text" length="0" decimal="0" jt="-1" />
+			<column name="motivo_cancelacion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="criticidad" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="bloqueado" type="bit" length="0" decimal="0" jt="-7" />
+			<column name="penaliza" type="bit" length="0" decimal="0" jt="-7" />
+			<column name="remedy_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="reapertura" type="bit" length="0" decimal="0" jt="-7" />
 			<index name="pk_encargo" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -221,7 +260,7 @@
 			<index name="IDX_8BD0727A9D5B09FF" unique="NORMAL" >
 				<column name="operacional3_id" />
 			</index>
-			<index name="remedy_id" unique="NORMAL" >
+			<index name="encargo_ibfk_1" unique="NORMAL" >
 				<column name="remedy_id" />
 			</index>
 			<fk name="FK_8BD0727A162972A4" to_schema="seguimientoseco" to_table="agrupacion" >
@@ -257,15 +296,15 @@
 			<fk name="FK_8BD0727A8B566D3B" to_schema="seguimientoseco" to_table="tipo_solucion" >
 				<fk_column name="tipo_solucion_id" pk="id" />
 			</fk>
-			<fk name="encargo_ibfk_1" to_schema="seguimientoseco" to_table="remedy" >
+			<fk name="encargo_ibfk_1" to_schema="seguimientoseco" to_table="remedy" delete_action="setNull" >
 				<fk_column name="remedy_id" pk="id" />
 			</fk>
 		</table>
 		<table name="encargo_penalizado" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="indicador_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="encargo_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="indicador_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="encargo_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="certificado_servicios_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_encargo_penalizado" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -288,35 +327,55 @@
 				<fk_column name="certificado_servicios_id" pk="id" />
 			</fk>
 		</table>
+		<table name="encargo_remedy" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="encargo_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="remedy_id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<index name="pk_encargo_remedy" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="encargo_id" unique="NORMAL" >
+				<column name="encargo_id" />
+			</index>
+			<index name="remedy_id" unique="NORMAL" >
+				<column name="remedy_id" />
+			</index>
+			<fk name="encargo_remedy_ibfk_1" to_schema="seguimientoseco" to_table="encargo" delete_action="cascade" >
+				<fk_column name="encargo_id" pk="id" />
+			</fk>
+			<fk name="encargo_remedy_ibfk_2" to_schema="seguimientoseco" to_table="remedy" delete_action="cascade" >
+				<fk_column name="remedy_id" pk="id" />
+			</fk>
+		</table>
 		<table name="estado_certificado" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_estado_certificado" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="estado_encargo" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_estado_encargo" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="estado_usuario" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" />
 			<index name="pk_estado_usuario" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="factores" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="indicador_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="corrector" type="double" length="22" decimal="0" jt="8" />
-			<column name="valor_inicial" type="double" length="22" decimal="0" jt="8" />
-			<column name="valor_final" type="double" length="22" decimal="0" jt="8" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="indicador_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="corrector" type="double" length="0" decimal="0" jt="8" />
+			<column name="valor_inicial" type="double" length="0" decimal="0" jt="8" />
+			<column name="valor_final" type="double" length="0" decimal="0" jt="8" />
 			<index name="pk_factores" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -328,70 +387,72 @@
 			</fk>
 		</table>
 		<table name="fichero" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="carga_fichero_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="numero_encargo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="numero_agrupacion" type="varchar" length="20" decimal="0" jt="12" />
-			<column name="titulo" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="objeto_encargo" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="estado_actual" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="fecha_estado_actual" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_registro" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_asignacion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_estimada_solucion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_requerida_valoracion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_requierida_entrega" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_entrega_valoracion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_compromiso" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_fin_prevista" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_comienzo_ejecucion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_entrega" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_resolucion_icm" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_aceptacion" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fecha_cierre" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="tiempo_total" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="tiempo_resolucion" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="aplicacion" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="modulo_funcional" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="modulo_tecnico" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="horas_valoradas" type="double" length="22" decimal="0" jt="8" />
-			<column name="horas_comprometidas" type="double" length="22" decimal="0" jt="8" />
-			<column name="horas_realizadas" type="double" length="22" decimal="0" jt="8" />
-			<column name="coste" type="double" length="22" decimal="0" jt="8" />
-			<column name="tipo_solucion" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="solucion_usuario" type="longtext" length="2147483647" decimal="0" jt="-1" />
-			<column name="solucion_tecnica" type="longtext" length="2147483647" decimal="0" jt="-1" />
-			<column name="operacional1" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="operacional2" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="operacional3" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="motivo_cancelacion" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="numero_remedy" type="varchar" length="30" decimal="0" jt="12" mandatory="y" />
-			<column name="contrato" type="varchar" length="40" decimal="0" jt="12" />
-			<column name="criticidad" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="carga_fichero_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="numero_encargo" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="numero_agrupacion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="titulo" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="objeto_encargo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="estado_actual" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_estado_actual" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_registro" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_asignacion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_estimada_solucion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_requerida_valoracion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_requierida_entrega" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_entrega_valoracion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_compromiso" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_fin_prevista" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_comienzo_ejecucion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_entrega" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_resolucion_icm" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_aceptacion" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fecha_cierre" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="tiempo_total" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="tiempo_resolucion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="aplicacion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="modulo_funcional" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="modulo_tecnico" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="horas_valoradas" type="double" length="0" decimal="0" jt="8" />
+			<column name="horas_comprometidas" type="double" length="0" decimal="0" jt="8" />
+			<column name="horas_realizadas" type="double" length="0" decimal="0" jt="8" />
+			<column name="coste" type="double" length="0" decimal="0" jt="8" />
+			<column name="tipo_solucion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="solucion_usuario" type="longtext" length="0" decimal="0" jt="-1" />
+			<column name="solucion_tecnica" type="longtext" length="0" decimal="0" jt="-1" />
+			<column name="operacional1" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="operacional2" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="operacional3" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="motivo_cancelacion" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="numero_remedy" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="contrato" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="criticidad" type="varchar" length="0" decimal="0" jt="12" />
 			<index name="pk_fichero" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="IDX_F4E94434CCAD7E63" unique="NORMAL" >
 				<column name="carga_fichero_id" />
 			</index>
-			<fk name="FK_F4E94434CCAD7E63" to_schema="seguimientoseco" to_table="carga_fichero" >
+			<fk name="FK_F4E94434CCAD7E63" to_schema="seguimientoseco" to_table="carga_fichero" delete_action="cascade" >
 				<fk_column name="carga_fichero_id" pk="id" />
 			</fk>
 		</table>
 		<table name="fichero_log" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="fecha_proceso" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="fichero_log" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="fecha_proceso" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="nombre_fichero" type="varchar" length="255" decimal="0" jt="12" />
 			<index name="pk_fichero_log" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="filtro" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="anyo_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="mes_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="aplicar_penalizaciones" type="boolean" decimal="0" jt="-7" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="anyo_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="mes_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="trimestre_id" type="int" jt="4" />
+			<column name="semestre_id" type="int" jt="4" />
+			<column name="aplicar_penalizaciones" type="bit" length="0" decimal="0" jt="-7" />
 			<index name="pk_filtro" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -401,6 +462,12 @@
 			<index name="IDX_1941B752B4F0564A" unique="NORMAL" >
 				<column name="mes_id" />
 			</index>
+			<index name="fk_filtro_semestre" unique="NORMAL" >
+				<column name="semestre_id" />
+			</index>
+			<index name="fk_filtro_trimestre" unique="NORMAL" >
+				<column name="trimestre_id" />
+			</index>
 			<fk name="FK_1941B7528CD48FCC" to_schema="seguimientoseco" to_table="anyos" >
 				<fk_column name="anyo_id" pk="id" />
 			</fk>
@@ -409,16 +476,16 @@
 			</fk>
 		</table>
 		<table name="importes_certificado_servicios" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="horas_certificadas" type="double" length="22" decimal="0" jt="8" />
-			<column name="tarifa" type="double" length="22" decimal="0" jt="8" />
-			<column name="importe" type="double" length="22" decimal="0" jt="8" />
-			<column name="penalizacion" type="double" length="22" decimal="0" jt="8" />
-			<column name="total" type="double" length="22" decimal="0" jt="8" />
-			<column name="tipo_cuota_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="certificado_servicios_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="horas_certificadas" type="double" length="0" decimal="0" jt="8" />
+			<column name="tarifa" type="double" length="0" decimal="0" jt="8" />
+			<column name="importe" type="double" length="0" decimal="0" jt="8" />
+			<column name="penalizacion" type="double" length="0" decimal="0" jt="8" />
+			<column name="total" type="double" length="0" decimal="0" jt="8" />
+			<column name="tipo_cuota_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_importes_certificado_servicios" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -436,15 +503,15 @@
 			</fk>
 		</table>
 		<table name="importes_contrato" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="contrato_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="fc_inicio" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_fin" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="cuota_fija" type="double" length="22" decimal="0" jt="8" />
-			<column name="cuota_variable" type="double" length="22" decimal="0" jt="8" />
-			<column name="cuota_tasada" type="double" length="22" decimal="0" jt="8" />
-			<column name="tarifa_hora" type="double" length="22" decimal="0" jt="8" />
-			<column name="cuota_fija_mensual" type="double" length="22" decimal="0" jt="8" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="contrato_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fc_inicio" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_fin" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="cuota_fija" type="double" length="0" decimal="0" jt="8" />
+			<column name="cuota_variable" type="double" length="0" decimal="0" jt="8" />
+			<column name="cuota_tasada" type="double" length="0" decimal="0" jt="8" />
+			<column name="tarifa_hora" type="double" length="0" decimal="0" jt="8" />
+			<column name="cuota_fija_mensual" type="double" length="0" decimal="0" jt="8" />
 			<index name="pk_importes_contrato" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -456,11 +523,11 @@
 			</fk>
 		</table>
 		<table name="indicadores" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="tipo_indicador_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="varchar" length="20" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="peso" type="double" length="22" decimal="0" jt="8" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="tipo_indicador_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="peso" type="double" length="0" decimal="0" jt="8" mandatory="y" />
 			<index name="pk_indicadores" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -472,11 +539,11 @@
 			</fk>
 		</table>
 		<table name="linea_certificado" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="encargo_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="penalizacion" type="double" length="22" decimal="0" jt="8" />
-			<column name="tipo_cuota_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="certificado_servicios_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="encargo_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="penalizacion" type="double" length="0" decimal="0" jt="8" />
+			<column name="tipo_cuota_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_linea_certificado" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -500,26 +567,33 @@
 			</fk>
 		</table>
 		<table name="meses" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="anyo_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="fecha_inicio" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="fecha_fin" type="datetime" length="19" decimal="0" jt="93" mandatory="y" />
-			<column name="descripcion" type="varchar" length="25" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="anyo_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fecha_inicio" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="fecha_fin" type="datetime" length="0" decimal="0" jt="93" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="trimestre_id" type="int" jt="4" />
 			<index name="pk_meses" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="IDX_2C492ABD8CD48FCC" unique="NORMAL" >
 				<column name="anyo_id" />
 			</index>
+			<index name="trimestre_id" unique="NORMAL" >
+				<column name="trimestre_id" />
+			</index>
 			<fk name="FK_2C492ABD8CD48FCC" to_schema="seguimientoseco" to_table="anyos" >
 				<fk_column name="anyo_id" pk="id" />
 			</fk>
+			<fk name="meses_ibfk_1" to_schema="seguimientoseco" to_table="trimestre" >
+				<fk_column name="trimestre_id" pk="id" />
+			</fk>
 		</table>
 		<table name="modulo_funcional" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="aplicacion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="varchar" length="25" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="aplicacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_modulo_funcional" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -531,10 +605,10 @@
 			</fk>
 		</table>
 		<table name="modulo_tecnico" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="aplicacion_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="varchar" length="15" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="aplicacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_modulo_tecnico" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -546,11 +620,11 @@
 			</fk>
 		</table>
 		<table name="objetos_encargo" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="tipo_objeto_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="tipo_cuota_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="tipo_objeto_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="tipo_cuota_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_objetos_encargo" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -568,17 +642,23 @@
 			</fk>
 		</table>
 		<table name="operacional" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_operacional" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="penalizaciones" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="indicador_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="meses_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="importe" type="double" length="22" decimal="0" jt="8" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="indicador_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="certificado_servicios_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="total_encargos" type="int" length="10" decimal="0" jt="4" />
+			<column name="total_encargos_penalizados" type="int" jt="4" />
+			<column name="total_cumplen" type="int" jt="4" />
+			<column name="porcentaje" type="float" jt="7" />
+			<column name="factor" type="float" jt="7" />
+			<column name="peso" type="float" jt="7" />
+			<column name="importe" type="double" length="0" decimal="0" jt="8" />
 			<index name="pk_penalizaciones" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -586,29 +666,29 @@
 				<column name="indicador_id" />
 			</index>
 			<index name="IDX_B9B39AFACBAC9D43" unique="NORMAL" >
-				<column name="meses_id" />
+				<column name="certificado_servicios_id" />
 			</index>
 			<fk name="FK_B9B39AFA47D487D1" to_schema="seguimientoseco" to_table="indicadores" >
 				<fk_column name="indicador_id" pk="id" />
 			</fk>
-			<fk name="FK_B9B39AFACBAC9D43" to_schema="seguimientoseco" to_table="meses" >
-				<fk_column name="meses_id" pk="id" />
+			<fk name="fk_penalizaciones" to_schema="seguimientoseco" to_table="certificado_servicios" delete_action="cascade" >
+				<fk_column name="certificado_servicios_id" pk="id" />
 			</fk>
 		</table>
 		<table name="proyecto" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="fc_inicio" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="fc_fin" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fc_inicio" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="fc_fin" type="datetime" length="0" decimal="0" jt="93" />
 			<index name="pk_proyecto" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="proyecto_agrupacion" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="proyecto_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="agrupacion_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="proyecto_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="agrupacion_id" type="int" length="0" decimal="0" jt="4" />
 			<index name="pk_proyecto_agrupacion" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -626,73 +706,135 @@
 			</fk>
 		</table>
 		<table name="remedy" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="tipo" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
-			<column name="numero" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
-			<column name="estado" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
-			<column name="fecha_entrada" type="datetime" length="19" decimal="0" jt="93" />
-			<column name="criticidad" type="varchar" length="40" decimal="0" jt="12" mandatory="y" />
-			<column name="area" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="centro" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="apellidos" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="nombre" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="producto_nivel3" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="producto_nivel4" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
-			<column name="login" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="tipo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="numero" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="estado" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="fecha_entrada" type="datetime" length="0" decimal="0" jt="93" />
+			<column name="criticidad" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="area" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="apellidos" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="nombre" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="producto_nivel3" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="producto_nivel4" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="login" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="centro_id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion_problema" type="text" length="0" decimal="0" jt="-1" />
+			<column name="aplicacion_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="fecha_modificacion" type="datetime" jt="93" />
+			<column name="fecha_cierre" type="datetime" jt="93" />
+			<column name="usuario_remedy_id" type="int" jt="4" />
+			<column name="mes_id" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_remedy" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 			<index name="uk_numero" unique="UNIQUE" >
 				<column name="numero" />
 			</index>
+			<index name="idx_remedy_centro_id" unique="NORMAL" >
+				<column name="centro_id" />
+			</index>
+			<index name="idx_remedy_aplicacion_id" unique="NORMAL" >
+				<column name="aplicacion_id" />
+			</index>
+			<index name="fk_remedy_usuario_remedy" unique="NORMAL" >
+				<column name="usuario_remedy_id" />
+			</index>
+			<index name="mes_id" unique="NORMAL" >
+				<column name="mes_id" />
+			</index>
+			<fk name="fk_remedy_centro" to_schema="seguimientoseco" to_table="centro" >
+				<fk_column name="centro_id" pk="id" />
+			</fk>
+			<fk name="fk_remedy_aplicacion" to_schema="seguimientoseco" to_table="aplicacion" >
+				<fk_column name="aplicacion_id" pk="id" />
+			</fk>
+			<fk name="fk_remedy_usuario_remedy" to_schema="seguimientoseco" to_table="usuario_remedy" >
+				<fk_column name="usuario_remedy_id" pk="id" />
+			</fk>
+			<fk name="remedy_ibfk_1" to_schema="seguimientoseco" to_table="meses" >
+				<fk_column name="mes_id" pk="id" />
+			</fk>
+		</table>
+		<table name="semestre" >
+			<column name="id" type="int" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="anyo_id" type="int" jt="4" />
+			<column name="fecha_inicio" type="datetime" jt="93" />
+			<column name="fecha_fin" type="datetime" jt="93" />
+			<index name="pk_semestre" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="semestre_ibfk_1" unique="NORMAL" >
+				<column name="anyo_id" />
+			</index>
+			<fk name="semestre_ibfk_1" to_schema="seguimientoseco" to_table="anyos" delete_action="cascade" >
+				<fk_column name="anyo_id" pk="id" />
+			</fk>
 		</table>
 		<table name="tipo_agrupacion" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_tipo_agrupacion" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="tipo_cuota" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_tipo_cuota" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="tipo_indicador" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_tipo_indicador" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="tipo_objeto" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="codigo" type="varchar" length="3" decimal="0" jt="12" mandatory="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_tipo_objeto" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
 		<table name="tipo_solucion" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" mandatory="y" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<index name="pk_tipo_solucion" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
 		</table>
+		<table name="trimestre" >
+			<column name="id" type="int" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="semestre_id" type="int" jt="4" />
+			<column name="fecha_inicio" type="datetime" jt="93" />
+			<column name="fecha_fin" type="datetime" jt="93" />
+			<index name="pk_trimestre" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="fk_semestre_anyos_0" unique="NORMAL" >
+				<column name="semestre_id" />
+			</index>
+			<fk name="trimestre_ibfk_1" to_schema="seguimientoseco" to_table="semestre" delete_action="cascade" >
+				<fk_column name="semestre_id" pk="id" />
+			</fk>
+		</table>
 		<table name="usuario" >
-			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
-			<column name="estado_usuario_id" type="int" length="10" decimal="0" jt="4" />
-			<column name="codigo" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="nombre" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="perfil" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="email" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="password" type="varchar" length="255" decimal="0" jt="12" />
-			<column name="fc_alta" type="date" length="10" decimal="0" jt="91" />
+			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
+			<column name="estado_usuario_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="codigo" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="nombre" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="perfil" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="email" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="password" type="varchar" length="0" decimal="0" jt="12" />
+			<column name="fc_alta" type="date" length="0" decimal="0" jt="91" />
 			<index name="pk_usuario" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -703,22 +845,136 @@
 				<fk_column name="estado_usuario_id" pk="id" />
 			</fk>
 		</table>
-		<view name="npl_cerrado_periodo" >
-			<view_script><![CDATA[(select `t1`.`id` AS `id`,`t1`.`numero` AS `numero`,`t1`.`fc_estado_actual` AS `fc_estado_actual` from ((`seguimientoseco`.`encargo` `t1` join `seguimientoseco`.`objetos_encargo` `t2` on((`t2`.`id` = `t1`.`objeto_encargo_id`))) join `seguimientoseco`.`estado_encargo` `t3` on((`t3`.`id` = `t1`.`estado_actual_id`))) where ((`t2`.`tipo_objeto_id` = 1) and (`t3`.`id` in (2,12))))]]></view_script>
-			<column name="id" type="int" />
-			<column name="numero" type="int" />
-			<column name="fc_estado_actual" type="datetime" />
+		<table name="usuario_remedy" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="login" type="varchar" length="25" decimal="0" jt="12" />
+			<column name="apellidos" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="nombre" type="varchar" length="255" decimal="0" jt="12" />
+			<column name="centro_id" type="int" length="10" decimal="0" jt="4" />
+			<index name="pk_usuario_remedy" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="fk_usuario_remedy_centro" unique="NORMAL" >
+				<column name="centro_id" />
+			</index>
+			<fk name="fk_usuario_remedy_centro" to_schema="seguimientoseco" to_table="centro" >
+				<fk_column name="centro_id" pk="id" />
+			</fk>
+		</table>
+		<view name="view_encargos_CF_en_ejecucion" >
+			<column name="nmEncargo" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="estadoActualId" type="int" />
+			<column name="fechaCompromiso" type="datetime" />
+			<column name="fechaComienzoEjecucion" type="datetime" />
+			<column name="asnmHorasComprometidas" type="double" />
+			<column name="nmHorasRealizadas" type="double" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="tipoCuotaId" type="int" />
+			<column name="tipoCuotaDs" type="varchar" />
+			<column name="estadoEncargoCd" type="varchar" />
+			<column name="estadoEncargoDs" type="varchar" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+		</view>
+		<view name="view_encargos_penalizados" >
+			<column name="contratoDs" type="varchar" />
+			<column name="certificadoServiciosId" type="int" />
+			<column name="mesId" type="int" />
+			<column name="periodo" type="varchar" />
+			<column name="indicadorId" type="int" />
+			<column name="indicadorCd" type="varchar" />
+			<column name="indicadorDs" type="varchar" />
+			<column name="encargoId" type="int" />
+			<column name="encargoNumero" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="numeroRemedy" type="varchar" />
+		</view>
+		<view name="view_encargos_remedy" >
+			<column name="objeto_encargo_id" type="int" />
+			<column name="titulo" type="varchar" />
+			<column name="numeroEncargo" type="int" />
+			<column name="encargoDs" type="longtext" />
+			<column name="tiempo_resolucion" type="double" />
+			<column name="horas_realizadas" type="double" />
+			<column name="solucion_usuario" type="text" />
+			<column name="solucion_tecnica" type="text" />
+			<column name="motivo_cancelacion" type="varchar" />
+			<column name="criticidad" type="varchar" />
+			<column name="numeroRemedy" type="varchar" />
+			<column name="estado" type="varchar" />
+			<column name="centro_id" type="int" />
+			<column name="centroDs" type="varchar" />
+			<column name="operacional1" type="varchar" />
+			<column name="operacional2" type="varchar" />
+			<column name="operacional3" type="varchar" />
+			<column name="aplicacion" type="varchar" />
+			<column name="fcRegistro" type="datetime" />
+			<column name="fcEstadoActual" type="datetime" />
+			<column name="fcEntrega" type="datetime" />
+			<column name="fcCierre" type="datetime" />
+			<column name="descripcionProblema" type="text" />
+		</view>
+		<view name="view_penalizaciones" >
+			<column name="certificadoServiciosId" type="int" />
+			<column name="indicadorId" type="int" />
+			<column name="indicadorCd" type="varchar" />
+			<column name="indicadorDs" type="varchar" />
+			<column name="encargosPenalizados" type="int" />
+			<column name="totalEncargos" type="int" />
+			<column name="totalCumplen" type="int" />
+			<column name="porcentaje" type="float" />
+			<column name="importe" type="double" />
+			<column name="periodo" type="varchar" />
+			<column name="contratoDs" type="varchar" />
 		</view>
 	</schema>
-	<connector name="localhost" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.46-bin.jar" driver_desc="Standard" host="localhost" port="3306" instance="seguimientoseco" user="root" />
-	<layout name="Default Layout" id="Layout_412bd68" show_relation="columns" >
-		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="608" y="48" />
-		<entity schema="seguimientoseco" name="modulo_funcional" color="3986C1" x="560" y="720" />
-		<entity schema="seguimientoseco" name="aplicacion" color="3986C1" x="416" y="800" />
-		<entity schema="seguimientoseco" name="usuario" color="BED3F4" x="432" y="128" />
-		<entity schema="seguimientoseco" name="estado_usuario" color="BED3F4" x="624" y="208" />
-		<entity schema="seguimientoseco" name="modulo_tecnico" color="3986C1" x="560" y="896" />
-		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="864" y="672" >
+	<connector name="EquipoLocal" database="MySql2" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.44-bin.jar" host="10.127.240.149" port="3306" instance="seguimientoseco" user="root" />
+	<layout name="General" id="Layout_412bd68" show_relation="columns" >
+		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="640" y="80" />
+		<entity schema="seguimientoseco" name="modulo_funcional" color="3986C1" x="592" y="752" />
+		<entity schema="seguimientoseco" name="usuario" color="BED3F4" x="464" y="160" />
+		<entity schema="seguimientoseco" name="estado_usuario" color="BED3F4" x="656" y="240" />
+		<entity schema="seguimientoseco" name="modulo_tecnico" color="3986C1" x="592" y="928" />
+		<entity schema="seguimientoseco" name="tipo_solucion" color="3986C1" x="384" y="560" />
+		<entity schema="seguimientoseco" name="operacional" color="3986C1" x="368" y="672" />
+		<entity schema="seguimientoseco" name="factores" color="3986C1" x="1184" y="1440" />
+		<entity schema="seguimientoseco" name="tipo_indicador" color="3986C1" x="960" y="1264" />
+		<entity schema="seguimientoseco" name="fichero" color="3986C1" x="80" y="288" >
+			<column name="id" />
+			<column name="carga_fichero_id" />
+			<column name="numero_encargo" />
+			<column name="numero_remedy" />
+			<column name="contrato" />
+			<column name="criticidad" />
+		</entity>
+		<entity schema="seguimientoseco" name="tipo_agrupacion" color="3986C1" x="1504" y="224" />
+		<entity schema="seguimientoseco" name="proyecto" color="3986C1" x="1952" y="272" />
+		<entity schema="seguimientoseco" name="proyecto_agrupacion" color="3986C1" x="1728" y="272" />
+		<entity schema="seguimientoseco" name="agrupacion" color="3986C1" x="1344" y="368" />
+		<entity schema="seguimientoseco" name="tipo_objeto" color="3986C1" x="1536" y="512" />
+		<entity schema="seguimientoseco" name="linea_certificado" color="3986C1" x="1280" y="832" />
+		<entity schema="seguimientoseco" name="tipo_cuota" color="3986C1" x="1600" y="656" />
+		<entity schema="seguimientoseco" name="estado_certificado" color="3986C1" x="1984" y="1008" />
+		<entity schema="seguimientoseco" name="indicadores" color="3986C1" x="1152" y="1248" />
+		<entity schema="seguimientoseco" name="encargo_penalizado" color="3986C1" x="1216" y="1056" />
+		<entity schema="seguimientoseco" name="importes_certificado_servicios" color="3986C1" x="1920" y="672" />
+		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="592" y="1600" />
+		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="848" y="1584" />
+		<entity schema="seguimientoseco" name="penalizaciones" color="3986C1" x="1376" y="1328" />
+		<entity schema="seguimientoseco" name="certificado_servicios" color="3986C1" x="1712" y="848" />
+		<entity schema="seguimientoseco" name="fichero_log" color="3986C1" x="48" y="640" />
+		<entity schema="seguimientoseco" name="carga_fichero" color="3986C1" x="288" y="368" />
+		<entity schema="seguimientoseco" name="meses" color="3986C1" x="1936" y="1232" />
+		<entity schema="seguimientoseco" name="filtro" color="3986C1" x="1616" y="1376" />
+		<entity schema="seguimientoseco" name="semestre" color="C1D8EE" x="1968" y="1632" />
+		<entity schema="seguimientoseco" name="trimestre" color="3986C1" x="1680" y="1632" />
+		<entity schema="seguimientoseco" name="anyos" color="3986C1" x="2032" y="1456" />
+		<entity schema="seguimientoseco" name="objetos_encargo" color="3986C1" x="1280" y="624" />
+		<entity schema="seguimientoseco" name="estado_encargo" color="3986C1" x="1120" y="480" />
+		<entity schema="seguimientoseco" name="aplicacion" color="3986C1" x="448" y="832" />
+		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="896" y="704" >
 			<column name="id" />
 			<column name="objeto_encargo_id" />
 			<column name="numero" />
@@ -745,43 +1001,33 @@
 			<column name="bloqueado" />
 			<column name="penaliza" />
 			<column name="remedy_id" />
+			<column name="reapertura" />
 		</entity>
-		<entity schema="seguimientoseco" name="tipo_solucion" color="3986C1" x="352" y="528" />
-		<entity schema="seguimientoseco" name="operacional" color="3986C1" x="336" y="640" />
-		<entity schema="seguimientoseco" name="estado_encargo" color="3986C1" x="1088" y="448" />
-		<entity schema="seguimientoseco" name="carga_fichero" color="3986C1" x="256" y="336" />
-		<entity schema="seguimientoseco" name="npl_cerrado_periodo" color="3986C1" x="1888" y="112" />
-		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="448" y="1216" />
-		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="816" y="1552" />
-		<entity schema="seguimientoseco" name="indicadores" color="3986C1" x="1120" y="1216" />
-		<entity schema="seguimientoseco" name="penalizaciones" color="3986C1" x="1344" y="1296" />
-		<entity schema="seguimientoseco" name="factores" color="3986C1" x="1152" y="1408" />
-		<entity schema="seguimientoseco" name="tipo_indicador" color="3986C1" x="928" y="1232" />
-		<entity schema="seguimientoseco" name="meses" color="3986C1" x="1552" y="1280" />
-		<entity schema="seguimientoseco" name="filtro" color="3986C1" x="1472" y="1056" />
-		<entity schema="seguimientoseco" name="anyos" color="3986C1" x="1360" y="1184" />
-		<entity schema="seguimientoseco" name="fichero" color="3986C1" x="48" y="256" >
-			<column name="id" />
-			<column name="carga_fichero_id" />
-			<column name="numero_encargo" />
-			<column name="numero_remedy" />
-			<column name="contrato" />
-			<column name="criticidad" />
-		</entity>
-		<entity schema="seguimientoseco" name="fichero_log" color="3986C1" x="48" y="864" />
-		<entity schema="seguimientoseco" name="importes_certificado_servicios" color="3986C1" x="1888" y="640" />
-		<entity schema="seguimientoseco" name="tipo_agrupacion" color="3986C1" x="1472" y="192" />
-		<entity schema="seguimientoseco" name="proyecto" color="3986C1" x="1920" y="240" />
-		<entity schema="seguimientoseco" name="proyecto_agrupacion" color="3986C1" x="1696" y="240" />
-		<entity schema="seguimientoseco" name="agrupacion" color="3986C1" x="1312" y="336" />
-		<entity schema="seguimientoseco" name="tipo_objeto" color="3986C1" x="1504" y="480" />
-		<entity schema="seguimientoseco" name="objetos_encargo" color="3986C1" x="1248" y="592" />
-		<entity schema="seguimientoseco" name="linea_certificado" color="3986C1" x="1248" y="800" />
-		<entity schema="seguimientoseco" name="tipo_cuota" color="3986C1" x="1568" y="624" />
-		<entity schema="seguimientoseco" name="estado_certificado" color="3986C1" x="1952" y="976" />
-		<entity schema="seguimientoseco" name="encargo_penalizado" color="3986C1" x="1184" y="1024" />
-		<entity schema="seguimientoseco" name="certificado_servicios" color="3986C1" x="1680" y="816" />
-		<entity schema="seguimientoseco" name="remedy" color="3986C1" x="848" y="240" />
+		<entity schema="seguimientoseco" name="centro" color="3986C1" x="1104" y="112" />
+		<entity schema="seguimientoseco" name="contrato_actual" color="3986C1" x="672" y="1440" />
+		<entity schema="seguimientoseco" name="usuario_remedy" color="C1D8EE" x="1328" y="48" />
+		<entity schema="seguimientoseco" name="remedy" color="3986C1" x="816" y="256" />
+		<entity schema="seguimientoseco" name="encargo_remedy" color="3986C1" x="560" y="432" />
+		<script name="SQL_Editor_001" id="Editor_1e8123" language="SQL" >
+			<string><![CDATA[select  t1.nm_remedy, count(*) from encargo as t1 
+where t1.fc_estado_actual between '2019-06-01' and '2019-06-30'
+group by t1.nm_remedy 
+having count(*) >2 
+]]></string>
+		</script>
+		<script name="SQL_Editor_002" id="Editor_5700c31" language="SQL" >
+			<string><![CDATA[select * from view_encargos_CF_en_ejecucion as t1 
+where t1.fechaComienzoEjecucion < ( select t3.fecha_fin from certificado_servicios as t2  inner join meses as t3 on t3.id = t2.meses_id where t2.id = 68 )]]></string>
+		</script>
+		<script name="SQL_Editor_003" id="Editor_2b7d7d2" language="SQL" >
+			<string><![CDATA[select aplicacion_id, count(*) from encargo group by aplicacion_id]]></string>
+		</script>
+		<script name="Sql_Editor" id="Editor_3000ca7" language="SQL" >
+			<string><![CDATA[delete from remedy]]></string>
+		</script>
+		<browser id="Browse_9f368c" name="remedy" confirm_updates="y" >
+			<browse_table schema="seguimientoseco" entity="remedy" x="20" y="20" width="400" height="300" />
+		</browser>
 	</layout>
 	<layout name="Sample Layout with Tools" id="Layout_33bbbfc" show_column_type="y" show_relation="columns" >
 		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="272" y="144" />
@@ -822,6 +1068,87 @@ FROM
 					<column name="usuario_id" />
 					<column name="fecha" />
 					<column name="ip" />
+				</query_table>
+			</query_table>
+		</query>
+	</layout>
+	<layout name="Vistas" id="Layout_26136b9" show_relation="columns" >
+		<entity schema="seguimientoseco" name="view_encargos_remedy" color="3986C1" x="320" y="64" />
+		<entity schema="seguimientoseco" name="view_encargos_CF_en_ejecucion" color="3986C1" x="48" y="80" />
+		<entity schema="seguimientoseco" name="view_encargos_penalizados" color="3986C1" x="720" y="48" />
+		<entity schema="seguimientoseco" name="view_penalizaciones" color="3986C1" x="528" y="64" />
+		<script name="Sql_Editor" id="Editor_23efac2" language="SQL" >
+			<string><![CDATA[ CREATE TABLE centro (id INT AUTO_INCREMENT NOT NULL, codigo VARCHAR(15) NOT NULL, descripcion VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB;
+     ALTER TABLE remedy ADD centro_id INT DEFAULT NULL, DROP centro, CHANGE fecha_entrada fecha_entrada DATETIME NOT NULL;
+     ALTER TABLE remedy ADD CONSTRAINT FK_9E2B47A298137A7 FOREIGN KEY (centro_id) REFERENCES centro (id);
+     CREATE INDEX IDX_9E2B47A298137A7 ON remedy (centro_id);
+]]></string>
+		</script>
+		<script name="Sql_Editor_001" id="Editor_3619ce8" language="SQL" >
+			<string><![CDATA[CREATE VIEW seguimientoseco.view_encargos_remedy AS select e.objeto_encargo_id AS objeto_encargo_id,
+e.titulo AS titulo,
+e.numero AS numeroEncargo,
+e.descripcion AS encargoDs,
+e.tiempo_resolucion AS tiempo_resolucion,
+e.horas_realizadas AS horas_realizadas,
+e.solucion_usuario AS solucion_usuario,
+e.solucion_tecnica AS solucion_tecnica,
+e.motivo_cancelacion AS motivo_cancelacion,
+e.criticidad AS criticidad,
+r.numero AS numeroRemedy,
+r.estado AS estado,
+r.centro_id AS centro_id,
+c.descripcion AS centroDs,
+o.descripcion AS operacional1,
+o1.descripcion AS operacional2,
+o2.descripcion AS operacional3,
+a.descripcion AS aplicacion,
+e.fc_registro as fcRegistro,
+e.fc_estado_actual as fcEstadoActual,
+e.fc_entrega as fcEntrega,
+e.fc_cierre as fcCierre,
+r.descripcion_problema AS descripcionProblema 
+from seguimientoseco.encargo e 
+ inner join seguimientoseco.remedy r on e.remedy_id = r.id
+ left join seguimientoseco.operacional o on e.operacional1_id = o.id
+ left join seguimientoseco.operacional o1 on e.operacional2_id = o1.id
+ left join seguimientoseco.operacional o2 on e.operacional3_id = o2.id
+ inner join seguimientoseco.aplicacion a on e.aplicacion_id = a.id
+ inner join seguimientoseco.centro c on r.centro_id = c.id;
+]]></string>
+		</script>
+		<script name="encargos_remedy" id="Editor_1e05c2f" language="SQL" >
+			<string><![CDATA[SELECT * 
+FROM
+	seguimientoseco.encargos_remedy y;]]></string>
+		</script>
+		<query id="Query_14dd43e" name="Builder" confirmed="y" >
+			<query_table schema="seguimientoseco" name="encargo" alias="e" x="48" y="48" >
+				<column name="objeto_encargo_id" />
+				<column name="numero" />
+				<column name="titulo" />
+				<column name="tiempo_resolucion" />
+				<column name="descripcion" />
+				<column name="horas_realizadas" />
+				<column name="solucion_usuario" />
+				<column name="solucion_tecnica" />
+				<column name="motivo_cancelacion" />
+				<column name="criticidad" />
+				<query_table schema="seguimientoseco" name="remedy" alias="r" x="448" y="48" fk="encargo_ibfk_1" type="Inner Join" >
+					<column name="numero" />
+					<column name="estado" />
+				</query_table>
+				<query_table schema="seguimientoseco" name="operacional" alias="o" x="672" y="64" fk="FK_8BD0727A25E76E9A" type="Inner Join" >
+					<column name="descripcion" />
+				</query_table>
+				<query_table schema="seguimientoseco" name="aplicacion" alias="a" x="912" y="112" fk="FK_8BD0727A3AF686C8" type="Inner Join" >
+					<column name="descripcion" />
+				</query_table>
+				<query_table schema="seguimientoseco" name="operacional" alias="o1" x="784" y="496" fk="FK_8BD0727A25E76E9A" type="Inner Join" >
+					<column name="descripcion" />
+				</query_table>
+				<query_table schema="seguimientoseco" name="operacional" alias="o2" x="272" y="576" fk="FK_8BD0727A25E76E9A" type="Inner Join" >
+					<column name="descripcion" />
 				</query_table>
 			</query_table>
 		</query>

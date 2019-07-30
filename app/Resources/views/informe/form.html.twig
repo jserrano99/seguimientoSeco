@@ -4,6 +4,13 @@
 </script>
 
 <div class="container">
+    {% for message in app.session.flashbag().get('status') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    <br/>
+
     {{ form_start (form,{'action':'','method':'POST'}) }}
     {{ form_end (form) }}
 </div>

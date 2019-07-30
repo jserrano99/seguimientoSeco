@@ -56,8 +56,22 @@ class Remedy
 	 */
 	private $fechaEntrada;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_modificacion", type="datetime",nullable=false)
+     */
+    private $fechaModificacion;
 
-	/**
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_cierre", type="datetime",nullable=false)
+     */
+    private $fechaCierre;
+
+
+    /**
 	 * @var string
 	 *
 	 * @ORM\Column(name="criticidad", type="string",length=40,nullable=false)
@@ -130,6 +144,24 @@ class Remedy
 	 * })
 	 */
 	private $aplicacion;
+
+    /**
+     * @var \AppBundle\Entity\UsuarioRemedy|null
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\UsuarioRemedy")
+     * * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_remedy_id", referencedColumnName="id")
+     * })
+     */
+    private $usuarioRemedy;
+
+    /**
+     * @var \AppBundle\Entity\Mes|null
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mes")
+     * * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="mes_id", referencedColumnName="id")
+     * })
+     */
+    private $mes;
 
 
     /**
@@ -476,5 +508,101 @@ class Remedy
     public function getAplicacion()
     {
         return $this->aplicacion;
+    }
+
+    /**
+     * Set fechaModificacion.
+     *
+     * @param \DateTime $fechaModificacion
+     *
+     * @return Remedy
+     */
+    public function setFechaModificacion($fechaModificacion)
+    {
+        $this->fechaModificacion = $fechaModificacion;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaModificacion.
+     *
+     * @return \DateTime
+     */
+    public function getFechaModificacion()
+    {
+        return $this->fechaModificacion;
+    }
+
+    /**
+     * Set fechaCierre.
+     *
+     * @param \DateTime $fechaCierre
+     *
+     * @return Remedy
+     */
+    public function setFechaCierre($fechaCierre)
+    {
+        $this->fechaCierre = $fechaCierre;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaCierre.
+     *
+     * @return \DateTime
+     */
+    public function getFechaCierre()
+    {
+        return $this->fechaCierre;
+    }
+
+    /**
+     * Set usuarioRemedy.
+     *
+     * @param \AppBundle\Entity\UsuarioRemedy|null $usuarioRemedy
+     *
+     * @return Remedy
+     */
+    public function setUsuarioRemedy(\AppBundle\Entity\UsuarioRemedy $usuarioRemedy = null)
+    {
+        $this->usuarioRemedy = $usuarioRemedy;
+
+        return $this;
+    }
+
+    /**
+     * Get usuarioRemedy.
+     *
+     * @return \AppBundle\Entity\UsuarioRemedy|null
+     */
+    public function getUsuarioRemedy()
+    {
+        return $this->usuarioRemedy;
+    }
+
+    /**
+     * Set mes.
+     *
+     * @param \AppBundle\Entity\Mes|null $mes
+     *
+     * @return Remedy
+     */
+    public function setMes(\AppBundle\Entity\Mes $mes = null)
+    {
+        $this->mes = $mes;
+
+        return $this;
+    }
+
+    /**
+     * Get mes.
+     *
+     * @return \AppBundle\Entity\Mes|null
+     */
+    public function getMes()
+    {
+        return $this->mes;
     }
 }

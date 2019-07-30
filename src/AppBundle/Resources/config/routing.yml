@@ -82,6 +82,32 @@ imprimirCertificadoServicios:
     defaults: { _controller: AppBundle:Report:imprimirCertificadoServicios}
     options:
         expose: true
+penalizaciones:
+    path: /report/penalizaciones/{id}
+    defaults: { _controller: AppBundle:Report:penalizaciones}
+    options:
+        expose: true
+revisionPenalizaciones:
+    path: /certificadoServicios/revisionpenalizaciones/{id}
+    defaults: { _controller: AppBundle:CertificadoServicios:revisionPenalizaciones}
+    options:
+        expose: true
+quitarPenalizacion:
+  path: /certificadoServicios/quitarPenalizacion/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:quitarPenalizacion}
+  options:
+    expose: true
+activarPenalizacion:
+  path: /certificadoServicios/activarPenalizacion/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:activarPenalizacion}
+  options:
+    expose: true
+
+penalizacionesDetalle:
+    path: /report/penalizacioneDetalle/{id}
+    defaults: { _controller: AppBundle:Report:penalizacionesDetalle}
+    options:
+        expose: true
 queryEncargos:
     path: /certificadoServicios/queryEncargos/{id}
     defaults: { _controller: AppBundle:CertificadoServicios:queryEncargos}
@@ -234,6 +260,12 @@ esfuerzoPLA:
     defaults: { _controller: AppBundle:Report:esfuerzoPLA}
     options:
         expose: true
+esfuerzoNplAplicacion:
+    path: /report/esfuerzoNplAplicacion
+    defaults: { _controller: AppBundle:Report:esfuerzoNplAplicacion}
+    options:
+        expose: true
+
 esfuerzoPLAExt:
     path: /report/esfuerzoPLAExt
     defaults: { _controller: AppBundle:Report:esfuerzoPLAExt}
@@ -247,6 +279,11 @@ esfuerzoPLACompromiso:
 incidentesPorCentro:
     path: /report/incidentesPorCentro
     defaults: { _controller: AppBundle:Report:incidentesPorCentro}
+    options:
+        expose: true
+planificacionEB:
+    path: /report/planificacionEB
+    defaults: { _controller: AppBundle:Report:planificacionEB}
     options:
         expose: true
 

@@ -1,10 +1,50 @@
-<script>
-    $(document).ready(function () {
-    });
-</script>
-
 <div class="container">
     {{ form_start (form,{'action':'','method':'POST'}) }}
-    {{ form_end (form) }}
+    <div class="panel panel-default">
+        <div class="panel-heading">Datos Generales</div>
+        <div class="panel-body">
+            {% if estado == 'PENDIENTE' %}
+                <div class="form_row mismalinea">{{ form_row(form.anyo) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.mes) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.aplicaPenalizacion) }}</div>
+                <div class="clearfix"></div>
+                <br/>
+            {% endif %}
+            {% if  estado == 'GENERADO' or estado  == 'IMPRESO' %}
+                <div class="form_row mismalinea">{{ form_row(form.id) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.estadoCertificado) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.cerrarCertificado) }}</div>
+                <div class="clearfix"></div>
+                <br/>
+                <div class="form_row mismalinea">{{ form_row(form.totalFactura) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.cuotaIva) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.totalFactura) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.totalPenalizaciones) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.penalizacionAplicable) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.totalFacturaConIva) }}</div>
+            {% endif %}
+
+        </div>
+        <div class="panel-heading">Acciones</div>
+        <div class="panel-body">
+            {% if  estado == 'GENERADO' or estado  == 'IMPRESO' %}
+                <div class="form_row mismalinea">{{ form_row(form.generarImportes) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.incluirEncargo) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.revisionPenalizaciones) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.eliminarCertificado) }}</div>
+                <div class="clearfix"></div>
+                <div class="form_row mismalinea">{{ form_row(form.imprimirCertificado) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.imprimirCertificadoActividad) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.penalizaciones) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.penalizacionesDetalle) }}</div>
+            {% endif %}
+            {% if estado == 'PENDIENTE' %}
+                <div class="form_row mismalinea">{{ form_row(form.generarCertificado) }}</div>
+            {% endif %}
+
+
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
 </div>
-<div class="clearfix"></div>

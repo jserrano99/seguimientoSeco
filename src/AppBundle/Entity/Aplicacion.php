@@ -32,9 +32,16 @@ class Aplicacion
 	private $codigo;
 	/**
 	 * @var string
-	 * @ORM\Column(name="descripcion", type="string", length=255, nullable=false)
+	 * @ORM\Column(name="descripcion", type="string", nullable=true)
 	 */
 	private $descripcion;
+
+    /**
+     * @var boolean
+     * @ORM\Column(name="valido", type="boolean",nullable=true)
+     */
+    private $valido;
+
 
     /**
      * Get id.
@@ -92,5 +99,29 @@ class Aplicacion
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Set valido.
+     *
+     * @param bool|null $valido
+     *
+     * @return Aplicacion
+     */
+    public function setValido($valido = null)
+    {
+        $this->valido = $valido;
+
+        return $this;
+    }
+
+    /**
+     * Get valido.
+     *
+     * @return bool|null
+     */
+    public function getValido()
+    {
+        return $this->valido;
     }
 }

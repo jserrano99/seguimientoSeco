@@ -140,7 +140,24 @@ class CertificadoServicios
 
 	private $contadorNPL;
 
-	/**
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contador_NPL_CRI", type="integer", nullable=true)
+     */
+
+    private $contadorNPLCRI;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contador_NPL_NOR", type="integer", nullable=true)
+     */
+
+    private $contadorNPLNOR;
+
+    /**
 	 * @var integer
 	 *
 	 * @ORM\Column(name="contador_ADM", type="integer", nullable=true)
@@ -148,7 +165,41 @@ class CertificadoServicios
 
 	private $contadorADM;
 
-	/**
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contador_CAN", type="integer", nullable=true)
+     */
+
+    private $contadorCAN;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_CRI", type="integer", nullable=true)
+     */
+
+    private $penalizadosCRI;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_NOR", type="integer", nullable=true)
+     */
+
+    private $penalizadosNOR;
+
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_ADM", type="integer", nullable=true)
+     */
+
+    private $penalizadosADM;
+
+
+    /**
 	 * @var boolean
 	 *
 	 * @ORM\Column(name="aplica_penalizacion", type="boolean", nullable=true)
@@ -157,7 +208,8 @@ class CertificadoServicios
 	private $aplicaPenalizacion;
 
 
-	/**
+
+    /**
      * Get id.
      *
      * @return int
@@ -336,6 +388,246 @@ class CertificadoServicios
     }
 
     /**
+     * Set importeCuotaFijaMensual.
+     *
+     * @param float|null $importeCuotaFijaMensual
+     *
+     * @return CertificadoServicios
+     */
+    public function setImporteCuotaFijaMensual($importeCuotaFijaMensual = null)
+    {
+        $this->importeCuotaFijaMensual = $importeCuotaFijaMensual;
+
+        return $this;
+    }
+
+    /**
+     * Get importeCuotaFijaMensual.
+     *
+     * @return float|null
+     */
+    public function getImporteCuotaFijaMensual()
+    {
+        return $this->importeCuotaFijaMensual;
+    }
+
+    /**
+     * Set contadorNPL.
+     *
+     * @param int|null $contadorNPL
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorNPL($contadorNPL = null)
+    {
+        $this->contadorNPL = $contadorNPL;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorNPL.
+     *
+     * @return int|null
+     */
+    public function getContadorNPL()
+    {
+        return $this->contadorNPL;
+    }
+
+    /**
+     * Set contadorNPLCRI.
+     *
+     * @param int|null $contadorNPLCRI
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorNPLCRI($contadorNPLCRI = null)
+    {
+        $this->contadorNPLCRI = $contadorNPLCRI;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorNPLCRI.
+     *
+     * @return int|null
+     */
+    public function getContadorNPLCRI()
+    {
+        return $this->contadorNPLCRI;
+    }
+
+    /**
+     * Set contadorNPLNOR.
+     *
+     * @param int|null $contadorNPLNOR
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorNPLNOR($contadorNPLNOR = null)
+    {
+        $this->contadorNPLNOR = $contadorNPLNOR;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorNPLNOR.
+     *
+     * @return int|null
+     */
+    public function getContadorNPLNOR()
+    {
+        return $this->contadorNPLNOR;
+    }
+
+    /**
+     * Set contadorADM.
+     *
+     * @param int|null $contadorADM
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorADM($contadorADM = null)
+    {
+        $this->contadorADM = $contadorADM;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorADM.
+     *
+     * @return int|null
+     */
+    public function getContadorADM()
+    {
+        return $this->contadorADM;
+    }
+
+    /**
+     * Set contadorCAN.
+     *
+     * @param int|null $contadorCAN
+     *
+     * @return CertificadoServicios
+     */
+    public function setContadorCAN($contadorCAN = null)
+    {
+        $this->contadorCAN = $contadorCAN;
+
+        return $this;
+    }
+
+    /**
+     * Get contadorCAN.
+     *
+     * @return int|null
+     */
+    public function getContadorCAN()
+    {
+        return $this->contadorCAN;
+    }
+
+    /**
+     * Set penalizadosCRI.
+     *
+     * @param int|null $penalizadosCRI
+     *
+     * @return CertificadoServicios
+     */
+    public function setPenalizadosCRI($penalizadosCRI = null)
+    {
+        $this->penalizadosCRI = $penalizadosCRI;
+
+        return $this;
+    }
+
+    /**
+     * Get penalizadosCRI.
+     *
+     * @return int|null
+     */
+    public function getPenalizadosCRI()
+    {
+        return $this->penalizadosCRI;
+    }
+
+    /**
+     * Set penalizadosNOR.
+     *
+     * @param int|null $penalizadosNOR
+     *
+     * @return CertificadoServicios
+     */
+    public function setPenalizadosNOR($penalizadosNOR = null)
+    {
+        $this->penalizadosNOR = $penalizadosNOR;
+
+        return $this;
+    }
+
+    /**
+     * Get penalizadosNOR.
+     *
+     * @return int|null
+     */
+    public function getPenalizadosNOR()
+    {
+        return $this->penalizadosNOR;
+    }
+
+    /**
+     * Set penalizadosADM.
+     *
+     * @param int|null $penalizadosADM
+     *
+     * @return CertificadoServicios
+     */
+    public function setPenalizadosADM($penalizadosADM = null)
+    {
+        $this->penalizadosADM = $penalizadosADM;
+
+        return $this;
+    }
+
+    /**
+     * Get penalizadosADM.
+     *
+     * @return int|null
+     */
+    public function getPenalizadosADM()
+    {
+        return $this->penalizadosADM;
+    }
+
+    /**
+     * Set aplicaPenalizacion.
+     *
+     * @param bool|null $aplicaPenalizacion
+     *
+     * @return CertificadoServicios
+     */
+    public function setAplicaPenalizacion($aplicaPenalizacion = null)
+    {
+        $this->aplicaPenalizacion = $aplicaPenalizacion;
+
+        return $this;
+    }
+
+    /**
+     * Get aplicaPenalizacion.
+     *
+     * @return bool|null
+     */
+    public function getAplicaPenalizacion()
+    {
+        return $this->aplicaPenalizacion;
+    }
+
+    /**
      * Set contrato.
      *
      * @param \AppBundle\Entity\Contrato|null $contrato
@@ -431,99 +723,9 @@ class CertificadoServicios
         return $this->ficheroLog;
     }
 
-    /**
-     * Set contadorNPL.
-     *
-     * @param int|null $contadorNPL
-     *
-     * @return CertificadoServicios
-     */
-    public function setContadorNPL($contadorNPL = null)
+
+    public function  __toString()
     {
-        $this->contadorNPL = $contadorNPL;
-
-        return $this;
-    }
-
-    /**
-     * Get contadorNPL.
-     *
-     * @return int|null
-     */
-    public function getContadorNPL()
-    {
-        return $this->contadorNPL;
-    }
-
-    /**
-     * Set contadorADM.
-     *
-     * @param int|null $contadorADM
-     *
-     * @return CertificadoServicios
-     */
-    public function setContadorADM($contadorADM = null)
-    {
-        $this->contadorADM = $contadorADM;
-
-        return $this;
-    }
-
-    /**
-     * Get contadorADM.
-     *
-     * @return int|null
-     */
-    public function getContadorADM()
-    {
-        return $this->contadorADM;
-    }
-
-    /**
-     * Set importeCuotaFijaMensual.
-     *
-     * @param float|null $importeCuotaFijaMensual
-     *
-     * @return CertificadoServicios
-     */
-    public function setImporteCuotaFijaMensual($importeCuotaFijaMensual = null)
-    {
-        $this->importeCuotaFijaMensual = $importeCuotaFijaMensual;
-
-        return $this;
-    }
-
-    /**
-     * Get importeCuotaFijaMensual.
-     *
-     * @return float|null
-     */
-    public function getImporteCuotaFijaMensual()
-    {
-        return $this->importeCuotaFijaMensual;
-    }
-
-    /**
-     * Set aplicaPenalizacion.
-     *
-     * @param bool|null $aplicaPenalizacion
-     *
-     * @return CertificadoServicios
-     */
-    public function setAplicaPenalizacion($aplicaPenalizacion = null)
-    {
-        $this->aplicaPenalizacion = $aplicaPenalizacion;
-
-        return $this;
-    }
-
-    /**
-     * Get aplicaPenalizacion.
-     *
-     * @return bool|null
-     */
-    public function getAplicaPenalizacion()
-    {
-        return $this->aplicaPenalizacion;
+     return $this->descripcion;
     }
 }

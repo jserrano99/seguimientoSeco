@@ -78,8 +78,8 @@ class CargaFicheroDatatable extends AbstractDatatable
 			->add('numeroRegistrosCargados', Column::class, array(
 				'title' => 'Registros Cargados'
 			))
-			->add('ficheroLog.fichero', Column::class, array(
-				'title' => 'Fichero',
+			->add('ficheroLog.nombreFichero', Column::class, array(
+				'title' => 'Fichero Log',
 				'default_content' => ''
 			))
 			->add(null, ActionColumn::class, [

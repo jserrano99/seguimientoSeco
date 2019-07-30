@@ -76,6 +76,7 @@ class CargaFichero {
 
 
 
+
     /**
      * Get id.
      *
@@ -239,7 +240,7 @@ class CargaFichero {
      */
     public function setFicheroLog(\AppBundle\Entity\FicheroLog $ficheroLog = null)
     {
-        $this->FicheroLog = $ficheroLog;
+        $this->ficheroLog = $ficheroLog;
 
         return $this;
     }
@@ -251,6 +252,6 @@ class CargaFichero {
      */
     public function getFicheroLog()
     {
-        return $this->FicheroLog;
+        return $this->ficheroLog;
     }
 }

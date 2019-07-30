@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block contenido %}
+    <div id="fin" class="container" text-align="center" >
+        <span><h3>FINALIZADA CARGA FICHERO</h3></span>
+        <hr/>
+        <img src="{{ asset('img/txt.jpg') }}" witdh="200px" height="200px"/>
+        <h2><span>Fichero Log Generado  pulse para descargar</span></h2>
+        <a href="{{path("descargaLog",{'id':CargaFichero.id})}}"
+           class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-download"></span> Descargar </a>
+        <a href="{{path("queryFichero")}}"
+           class="btn btn-success btn-lg">
+            <span class="glyphicon glyphicon-th-list"></span> Volver </a>
+    </div>
+{% endblock %}

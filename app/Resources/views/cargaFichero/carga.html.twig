@@ -6,8 +6,20 @@
         $(document).ready(function () {
             $("#importar_Guardar").click(function () {
                 $("#procesando").modal('show');
-                // var recurso = Routing.generate("", true);
-                // window.location = recurso;
+                let recurso;
+                recurso = Routing.generate("cargaFichero", true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $('.modal-backdrop').remove();
+                        $('#procesando').hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('#procesando').hide();
+                        alert(xhr.status);
+                    }
+                });
             });
         });
     </script> 
@@ -22,6 +34,5 @@
         {{form_start (form,{'action':'','method':'POST'})}}
         {{form_end (form)}}
         <br/>
-
     </div>
 {% endblock %}
