@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="tiempoMedRes2" pageWidth="595" pageHeight="842" columnWidth="591" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="FC_INICIO" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA INICIO]]></parameterDescription>
+	</parameter>
+	<parameter name="FC_FIN" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA DE FIN]]></parameterDescription>
+	</parameter>
+	<parameter name="aplicacion" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Aplicación]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT objetos_encargo.codigo, 
+objetos_encargo.descripcion,
+encargo.numero, 
+encargo.tiempo_resolucion,
+aplicacion.descripcion  as aplicacionDs
+FROM ENCARGO 
+INNER JOIN OBJETOS_ENCARGO ON OBJETOS_ENCARGO.ID = encargo.objeto_encargo_id
+inner join aplicacion on aplicacion.id = encargo.aplicacion_id
+WHERE objetos_encargo.tipo_objeto_id = 1 
+AND encargo.fc_entrega between str_to_date($P{FC_INICIO},'%d/%m/%Y')  and str_to_date($P{FC_FIN},'%d/%m/%Y') 
+and (encargo.aplicacion_id = $P{aplicacion} OR $P{aplicacion}=0 )
+and encargo.objeto_encargo_id  <> 5
+order by aplicacion.descripcion, objetos_encargo.codigo]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="tiempo_resolucion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="tiempo_resolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="aplicacionDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="aplicacionDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="aplicacion"/>
+	</field>
+	<variable name="totalEncargos" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="totalTiempoResolucion" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Sum">
+		<variableExpression><![CDATA[$F{tiempo_resolucion}]]></variableExpression>
+	</variable>
+	<variable name="tiempoMedio" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Average">
+		<variableExpression><![CDATA[$V{totalTiempoResolucion}/$V{totalEncargos}]]></variableExpression>
+	</variable>
+	<variable name="tiempoMedioHoras" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo">
+		<variableExpression><![CDATA[$V{tiempoMedio}/3600000]]></variableExpression>
+	</variable>
+	<variable name="totalEncargos_1" class="java.lang.Double" resetType="Group" resetGroup="Aplicacion" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="tiempoMedio_1" class="java.lang.Double" resetType="Group" resetGroup="Aplicacion" calculation="Average">
+		<variableExpression><![CDATA[$V{totalTiempoResolucion}/$V{totalEncargos}]]></variableExpression>
+	</variable>
+	<variable name="tiempoMedioHoras_1" class="java.lang.Double" resetType="Group" resetGroup="Aplicacion">
+		<variableExpression><![CDATA[$V{tiempoMedio_1}/3600000]]></variableExpression>
+	</variable>
+	<group name="Aplicacion" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{aplicacionDs}]]></groupExpression>
+		<groupHeader>
+			<band height="70">
+				<textField>
+					<reportElement x="8" y="20" width="470" height="30" uuid="45d4f52c-0fa2-465e-9170-dee21b349347"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{aplicacionDs}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="7" y="50" width="270" height="20" uuid="8c3a14a0-4a7f-4d1a-8341-6b82244763a4">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="96728f61-6a65-46a1-9346-cbaeb014cf72"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Objeto	]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="380" y="50" width="100" height="20" uuid="51b51c04-fe03-4280-9f59-aef2f98182d9">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f68d54e8-7af9-47b8-9518-dfebf4770358"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tiempo Medio Resolución]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="290" y="50" width="80" height="20" uuid="946f39bb-536b-414e-bf5d-4b92cd8b9c74">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4fb0c73d-7662-41d5-992e-13df92e24361"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Encargos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="7" y="0" width="473" height="30" uuid="20f5c7b0-13fb-4e1c-afd2-d44f46fb50c9"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TIEMPO MEDIO DE RESOLUCIÓN POR APLICACION]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36">
+				<textField pattern="#,##0.00">
+					<reportElement x="380" y="3" width="100" height="17" uuid="7a81328e-3067-4775-b38e-7a6163688b8a"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{tiempoMedioHoras_1}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="290" y="3" width="80" height="17" uuid="abd0693d-b222-48cf-9f4e-487504706d15"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{totalEncargos_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="3" width="270" height="17" uuid="94859599-f2e5-467d-b6b8-0e67e242fc86">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f7bdc08-d04b-4736-ad80-73f6a5e21b5a"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Encargo]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="ObjetoEncargo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+		<groupFooter>
+			<band/>
+			<band height="20">
+				<textField>
+					<reportElement x="10" y="4" width="60" height="16" uuid="b9742445-cd7f-45ba-bf70-49069a5f0aa6">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4fb0c73d-7662-41d5-992e-13df92e24361"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="290" y="4" width="80" height="16" uuid="351117f8-2225-468b-92ae-59131e52f72c"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{totalEncargos}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00">
+					<reportElement x="380" y="2" width="100" height="16" uuid="3ad290d4-b552-4c46-b760-a39f197654d9"/>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{tiempoMedioHoras}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="80" y="4" width="200" height="16" uuid="200ddad2-fb68-4ad4-9a99-906fb3a37094"/>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{descripcion}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+</jasperReport>

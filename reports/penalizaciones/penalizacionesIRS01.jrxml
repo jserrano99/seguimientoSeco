@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="penalizacionesIRS01" pageWidth="595" pageHeight="842" columnWidth="591" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/esfuerzoMedioNPL_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/esfuerzoMedioNPL"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="net.sf.jasperreports.print.create.bookmarks" value="true"/>
+	<parameter name="FC_INICIO" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA INICIO]]></parameterDescription>
+	</parameter>
+	<parameter name="FC_FIN" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA DE FIN]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+objetos_encargo.codigo as objetoEncargoCD, 
+objetos_encargo.descripcion as objetoEncargoDS,
+encargo.numero,
+ encargo.tiempo_resolucion
+FROM ENCARGO 
+INNER JOIN OBJETOS_ENCARGO ON OBJETOS_ENCARGO.ID = encargo.objeto_encargo_id
+INNER JOIN aplicacion on aplicacion.id = encargo.aplicacion_id
+WHERE objetos_encargo.tipo_objeto_id = 1 
+AND encargo.criticidad = 1
+AND encargo.fc_entrega BETWEEN 
+str_to_date($P{FC_INICIO},'%d/%m/%Y')  and str_to_date($P{FC_FIN},'%d/%m/%Y') 
+and encargo.objeto_encargo_id <> 5
+order by objetos_encargo.codigo]]>
+	</queryString>
+	<field name="objetoEncargoCD" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="objetoEncargoCD"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="objetoEncargoDS" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="objetoEncargoDS"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="tiempo_resolucion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="tiempo_resolucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<variable name="totalEncargos" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="totalEncargos_1" class="java.lang.Double" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="encargosIncumplidos" class="java.lang.Integer" resetType="Group" resetGroup="ObjetoEncargo" calculation="Sum">
+		<variableExpression><![CDATA[IF($F{tiempo_resolucion} > 36000000,1,0)]]></variableExpression>
+	</variable>
+	<variable name="encargosIncumplidos_1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[IF($F{tiempo_resolucion} > 36000000,1,0)]]></variableExpression>
+	</variable>
+	<variable name="encargosCumplidos" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[IF($F{tiempo_resolucion} > 36000000,0,1)]]></variableExpression>
+	</variable>
+	<variable name="porcentaje" class="java.lang.Float" resetType="None" calculation="Average">
+		<variableExpression><![CDATA[$V{encargosCumplidos}/$V{totalEncargos_1}]]></variableExpression>
+	</variable>
+	<group name="ObjetoEncargo">
+		<groupExpression><![CDATA[$F{objetoEncargoCD}]]></groupExpression>
+		<groupFooter>
+			<band height="22">
+				<textField>
+					<reportElement x="30" y="0" width="240" height="22" uuid="412b46e8-31aa-4869-9637-962889231fbb"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{objetoEncargoDS}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###;(#,##0.###-)">
+					<reportElement x="290" y="0" width="100" height="22" uuid="42968cc6-6711-4c3f-80a9-4555c3534e70"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{totalEncargos}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###;(#,##0.###-)">
+					<reportElement x="410" y="0" width="100" height="22" uuid="83dd99d7-e3a8-4d76-bb2f-0fce7e6d98e5"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{encargosIncumplidos}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64">
+			<staticText>
+				<reportElement x="10" y="0" width="500" height="30" forecolor="#F70A1A" uuid="5a56e3be-99f3-4791-a3c9-e3f7f2ba0876"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PENALIZACIONES SOBRE NO PLANIFICABLE IRS01]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="30" width="230" height="34" uuid="8f96d7c9-d259-45e4-871e-50416a32fee7"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objeto Encargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="30" width="100" height="34" uuid="2fcb963d-fa63-43fd-827b-a1d64cc13414"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Encargos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="30" width="100" height="34" uuid="51dde266-fe58-4a64-ba17-e933a6abd493"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Con Incumplimiento]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="121">
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="290" y="0" width="100" height="25" uuid="3876e0dc-a04e-4af1-8567-3f7784a18580"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalEncargos_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="410" y="0" width="100" height="25" uuid="115fc8fa-731a-4a1f-bb09-7eb15fd49bbc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{encargosIncumplidos_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="0" width="240" height="25" uuid="a363260e-4d3b-4176-b00f-1582b1f84d61"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Encargos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="40" width="100" height="30" uuid="912cdf06-d8bc-4492-acd0-7c42e445548a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Encargos que cumplen el criterio]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="30" y="35" width="240" height="75" uuid="f17abeb4-9a1d-46e9-b65c-0cd6784f99ff"/>
+				<imageExpression><![CDATA["JasperReportsServerLocalhost/images/irs01.JPG"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="390" y="40" width="50" height="30" uuid="48a8c399-3302-462c-ae85-52c0d01c6cdc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{encargosCumplidos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00%;(#,##0.00">
+				<reportElement x="440" y="40" width="70" height="30" uuid="6edfc935-748f-475c-b83f-4c753d7234b6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{porcentaje}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

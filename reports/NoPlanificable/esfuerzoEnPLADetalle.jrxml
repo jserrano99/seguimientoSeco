@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="esfuerzoEnPLADetalle" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="FC_INICIO" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA INICIO]]></parameterDescription>
+	</parameter>
+	<parameter name="FC_FIN" class="java.lang.String">
+		<parameterDescription><![CDATA[FECHA DE FIN]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT  objetos_encargo.codigo, objetos_encargo.descripcion,
+encargo.numero , encargo.titulo, encargo.horas_realizadas,
+t1.certificado_servicios_id as certificadoID,
+encargo.fc_entrega,
+encargo.fc_aceptacion
+ FROM ENCARGO 
+INNER JOIN OBJETOS_ENCARGO ON OBJETOS_ENCARGO.ID = encargo.objeto_encargo_id
+LEFT JOIN linea_certificado as t1 on t1.encargo_id = encargo.id
+WHERE objetos_encargo.tipo_objeto_id = 4  and 
+encargo.estado_actual_id  in ('2','12' ) and
+encargo.fc_entrega between str_to_date($P{FC_INICIO},'%d/%m/%Y %H:%i:%s')  and str_to_date($P{FC_FIN},'%d/%m/%Y  %H:%i:%s') 
+order by objetos_encargo.descripcion, encargo.numero]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="codigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="objetos_encargo"/>
+	</field>
+	<field name="numero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="numero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="horas_realizadas" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="horas_realizadas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="certificadoID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="linea_certificado"/>
+	</field>
+	<field name="fc_entrega" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fc_entrega"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<field name="fc_aceptacion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fc_aceptacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="encargo"/>
+	</field>
+	<variable name="totalEncargos" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="totalHoras" class="java.lang.Double" resetType="Group" resetGroup="ObjetoEncargo" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_realizadas}]]></variableExpression>
+	</variable>
+	<variable name="GlobalEncargos" class="java.lang.Double" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="globalHoras" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{horas_realizadas}]]></variableExpression>
+	</variable>
+	<group name="ObjetoEncargo">
+		<groupExpression><![CDATA[$F{codigo}]]></groupExpression>
+		<groupHeader>
+			<band height="47">
+				<textField>
+					<reportElement x="170" y="4" width="340" height="18" uuid="916728b3-4448-45d8-97f7-114cfd741d69">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f7bdc08-d04b-4736-ad80-73f6a5e21b5a"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="130" y="4" width="40" height="18" uuid="75ebd09e-a575-45c7-bc95-9e6d7b4ac5dd">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="941b473b-da18-4544-9936-a53282ce128e"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="8" y="24" width="602" height="19" uuid="bd0308a4-9a91-4f24-b3bf-52329d15b01c">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5e187eec-848e-4cdd-a5e6-ba6539e190c9"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Encargo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="750" y="12" width="54" height="30" uuid="6b641d87-cf3b-4c87-b088-6504395975c0">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62c3b619-07e9-4178-99db-7749dc6b2325"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Esfuerzo (horas)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="30" y="4" width="100" height="18" uuid="ec9df81a-66a9-4c59-923c-362f01934492"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[OBJETO ENCARGO]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="624" y="12" width="54" height="30" uuid="71022e8c-44f6-486e-8b2d-d6313c961645">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62c3b619-07e9-4178-99db-7749dc6b2325"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Entrega]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="684" y="12" width="60" height="30" uuid="b0869621-8dfa-4714-bcc9-96682f8cfce8">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62c3b619-07e9-4178-99db-7749dc6b2325"/>
+					</reportElement>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Aceptación]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<staticText>
+					<reportElement x="190" y="0" width="460" height="26" uuid="0edbda60-420a-4e36-bc7e-f3c55ebf9273">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f7bdc08-d04b-4736-ad80-73f6a5e21b5a"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0"/>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total Encargos   ]]></text>
+				</staticText>
+				<textField pattern="#,##0.00#;(#,##0.00#-)">
+					<reportElement x="650" y="0" width="90" height="26" uuid="1471f155-1ef8-4387-9962-3e69c9be89f1"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{totalEncargos}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00#;(#,##0.00#-)">
+					<reportElement x="750" y="2" width="54" height="22" uuid="93803ab7-9838-4ddf-8e38-6198ac9c6182"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{totalHoras}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52">
+			<staticText>
+				<reportElement x="30" y="2" width="809" height="30" forecolor="#2F14FA" uuid="1c254ac2-dfaa-4340-9f29-fd259fa61166"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESFUERZO EQUIPO BASE EN PLANIFICABLES DE CORTO ALCANCE]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss" isBlankWhenNull="true">
+				<reportElement x="380" y="32" width="70" height="20" uuid="fe5e1132-4021-4454-b7cf-5bf5877f446d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FC_INICIO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="450" y="32" width="70" height="20" uuid="e1070ce0-1907-4592-91da-142abbf9f508"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FC_FIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="268" y="32" width="112" height="20" uuid="5fee4f1e-7a83-4e41-a75c-7d16c6085a74"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo de Cierre:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="52" y="1" width="46" height="20" uuid="c4ffe832-7ed9-43db-b686-e2c6e1a23240">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="537ff068-5311-4393-a520-13bf92bae3d1"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="1" width="510" height="20" uuid="6b2cecf4-298a-4519-83dc-b7a68350d3e8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a75afb69-7242-46cb-8ef9-5c6d13a1ec5a"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="1" width="54" height="20" uuid="09dc2791-5229-4e8a-a700-48357ed84458">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b347a730-67bd-493b-abfc-d65ef8791452"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{horas_realizadas}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="20" y="1" width="30" height="20" uuid="93b118e6-9e6d-42b4-a539-b7cfbc13ecf2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{certificadoID}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="624" y="1" width="54" height="20" uuid="89e1fdb3-cfed-4f86-8837-9db52ef04738"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fc_entrega}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="684" y="1" width="60" height="20" uuid="02c5dcfe-fc04-47d1-ad71-424b911d7f05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fc_aceptacion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="52">
+			<textField pattern="#,##0.###;(#,##0.###-)" isBlankWhenNull="true">
+				<reportElement x="670" y="10" width="56" height="26" uuid="5bc16108-7479-4fb9-9e76-09c5bb087341"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{GlobalEncargos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="204" y="10" width="460" height="26" uuid="51e207ca-4f25-4529-af02-5097042fed11">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0f7bdc08-d04b-4736-ad80-73f6a5e21b5a"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total General   ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00#;(#,##0.00#-)">
+				<reportElement x="732" y="10" width="58" height="26" uuid="9ea9013d-2d2d-41ad-9b35-738e0c771283"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{globalHoras}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

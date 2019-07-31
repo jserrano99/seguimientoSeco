@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Plantilla" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6cd7990-3279-40a7-9d30-7608ae7fc496">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="com.jaspersoft.studio.report.description" value="Plantilla de Reporte"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
+	<parameter name="certificadoServiciosId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Identificador de Periodo]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="contratoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCodigo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCodigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaInicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaInicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaFin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaFin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCentroCosteCd" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCentroCosteCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCentroCosteDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCentroCosteDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoExpediente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoExpediente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoAdjudicatario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoAdjudicatario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoImporteContrato" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoImporteContrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoImporteAdjudicacion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoImporteAdjudicacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoPorcentajeBaja" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoPorcentajeBaja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoNumeroPedido" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoNumeroPedido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="certificadoServiciosId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="certificadoServiciosContratoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosContratoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="certificadoSserviciosDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoSserviciosDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="importesContratoFechaInicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoFechaInicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoGechaFin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoGechaFin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaFija" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaFija"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaTasada" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaTasada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoTarifaHora" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoTarifaHora"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaFijaMensual" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaFijaMensual"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="mesesDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mesesDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="meses"/>
+	</field>
+	<field name="anyosDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anyosDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anyos"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+	</field>
+	<field name="totalFactura" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="totalPenalizaciones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalPenalizaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="maximoPenalizaciones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="maximoPenalizaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="cuotaIva" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cuotaIva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="totalFacturaConIva" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalFacturaConIva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="penalizacionAplicable" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="penalizacionAplicable"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<variable name="base" class="java.lang.String"/>
+	<group name="CuotaFija"/>
+	<group name="CuotaVariable"/>
+	<group name="CuotaTasada"/>
+	<group name="Group1"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="92" splitType="Stretch">
+			<image scaleImage="FillFrame">
+				<reportElement x="8" y="10" width="181" height="50" uuid="9c6517cc-7826-45ad-b59c-e715789359aa"/>
+				<imageExpression><![CDATA["imagenes/logo_horizontal.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="126" splitType="Stretch"/>
+	</columnHeader>
+</jasperReport>
