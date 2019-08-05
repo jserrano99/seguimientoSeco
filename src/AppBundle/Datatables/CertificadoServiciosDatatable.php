@@ -53,7 +53,8 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 		$this->features->set([
 			'auto_width' => false,
 			'ordering' => true,
-			'length_change' => true
+			'length_change' => true,
+            'state_save' => true
 		]);
 
 		$formatter = new NumberFormatter("es_ES", NumberFormatter::CURRENCY);

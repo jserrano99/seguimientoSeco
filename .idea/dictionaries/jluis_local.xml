@@ -8,11 +8,14 @@
       <w>agrupacion</w>
       <w>agrupaciones</w>
       <w>agrupación</w>
+      <w>alcance</w>
+      <w>amplio</w>
       <w>aperturas</w>
       <w>aplica</w>
       <w>aplicable</w>
       <w>aplicacion</w>
       <w>aplicación</w>
+      <w>atención</w>
       <w>añadir</w>
       <w>calcula</w>
       <w>cambio</w>
@@ -32,6 +35,7 @@
       <w>conexion</w>
       <w>consulta</w>
       <w>contrato</w>
+      <w>corto</w>
       <w>cumplen</w>
       <w>cuota</w>
       <w>datatables</w>
@@ -50,6 +54,7 @@
       <w>esfuerzo</w>
       <w>estado</w>
       <w>este</w>
+      <w>evolución</w>
       <w>evolutivos</w>
       <w>excluir</w>
       <w>existe</w>
@@ -75,17 +80,23 @@
       <w>impreso</w>
       <w>imprimir</w>
       <w>incidentes</w>
+      <w>incluido</w>
       <w>incluidos</w>
       <w>incluir</w>
       <w>indicador</w>
+      <w>indicadores</w>
       <w>inexistente</w>
       <w>informe</w>
       <w>informes</w>
       <w>inicializa</w>
       <w>inicio</w>
+      <w>mantenimiento</w>
+      <w>mensual</w>
       <w>mismalinea</w>
       <w>modificacion</w>
       <w>nombre</w>
+      <w>nplcri</w>
+      <w>nplnor</w>
       <w>numero</w>
       <w>número</w>
       <w>objeto</w>
@@ -118,6 +129,7 @@
       <w>servicio</w>
       <w>servicios</w>
       <w>solucion</w>
+      <w>soporte</w>
       <w>tasada</w>
       <w>tecnico</w>
       <w>tipo</w>

@@ -388,14 +388,10 @@ class CertificadoServiciosController extends Controller
 
         $importe = 0;
         $horas = 0;
-        $penalizacion = 0;
         foreach ($LineaCertificadoAll as $LineaCertificado) {
             $horas = $horas + $LineaCertificado->getEncargo()->getHorasComprometidas();
-            $importe = $importe + ($horas * $tarifa);
-            $penalizacion = 0;
+            $importe = $importe + ($LineaCertificado->getEncargo()->getHorasComprometidas() * $tarifa);
         }
-
-        $total = $importe - $penalizacion;
 
         $ImportesCertificado = new ImportesCertificado();
         $ImportesCertificado->setCertificadoServicios($CertificadoServicios);
@@ -405,12 +401,11 @@ class CertificadoServiciosController extends Controller
         $ImportesCertificado->setHorasCertificadas($horas);
         $ImportesCertificado->setTarifa($tarifa);
         $ImportesCertificado->setImporte($importe);
-        $ImportesCertificado->setPenalizacion($penalizacion);
-        $ImportesCertificado->setTotal($total);
+        $ImportesCertificado->setPenalizacion(0);
+        $ImportesCertificado->setTotal(0);
         $EntityManager->persist($ImportesCertificado);
         $EntityManager->flush();
         return $ImportesCertificado;
-
     }
 
     /**
@@ -496,7 +491,9 @@ class CertificadoServiciosController extends Controller
 
         $IndicadorIRIi = $entityManager->getRepository("AppBundle:Indicador")->find(6);
 
-        $EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRIi]);
+        $EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRIi,
+            "certificadoServicios" => $CertificadoServicios,
+            "eliminada" => null ]);
 
         $totalEncargos = $CertificadoServicios->getContadorNPLCRI() + $CertificadoServicios->getContadorNPLNOR();
         $encargosPenalizados = count($EncargosPenalizadosALL);
@@ -1194,9 +1191,8 @@ class CertificadoServiciosController extends Controller
             $ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO EN CUOTA VARIABLE");
             $ServicioLog->escribeLog($ficheroLog);
 
-            $fechaInicio = $Encargo->getFcEntregaValoracion();
-            $fechaFin = $Encargo->getFcRequeridaValoracion();
-
+            $fechaInicio = $Encargo->getFcRequeridaValoracion();
+            $fechaFin = $Encargo->getFcEntregaValoracion();
             $diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
             if ($diasRetrasoValoracion > 0) {
@@ -1211,8 +1207,8 @@ class CertificadoServiciosController extends Controller
                 $ServicioLog->escribeLog($ficheroLog);
             }
 
-            $fechaInicio = $Encargo->getFcEntrega();
-            $fechaFin = $Encargo->getFcRequeridaEntrega();
+            $fechaInicio = $Encargo->getFcRequeridaEntrega();
+            $fechaFin = $Encargo->getFcEntrega();
             $diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
             if ($diasRetrasoEntrega > 0) {
@@ -1226,7 +1222,6 @@ class CertificadoServiciosController extends Controller
                 $ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC02*** ");
                 $ServicioLog->escribeLog($ficheroLog);
             }
-
 
             $Encargo->setBloqueado(true);
             $this->getDoctrine()->getManager()->persist($Encargo);
@@ -1291,8 +1286,8 @@ class CertificadoServiciosController extends Controller
             $ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO EN CUOTA TASADA");
             $ServicioLog->escribeLog($ficheroLog);
 
-            $fechaInicio = $Encargo->getFcEntregaValoracion();
-            $fechaFin = $Encargo->getFcRequeridaValoracion();
+            $fechaInicio = $Encargo->getFcRequeridaValoracion();
+            $fechaFin = $Encargo->getFcEntregaValoracion();
             $diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
             if ($diasRetrasoValoracion > 0) {
@@ -1307,8 +1302,8 @@ class CertificadoServiciosController extends Controller
                 $ServicioLog->escribeLog($ficheroLog);
             }
 
-            $fechaInicio = $Encargo->getFcEntrega();
-            $fechaFin = $Encargo->getFcRequeridaEntrega();
+            $fechaInicio = $Encargo->getFcRequeridaEntrega();
+            $fechaFin = $Encargo->getFcEntrega();
             $diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
             if ($diasRetrasoEntrega > 0) {
@@ -1402,7 +1397,7 @@ class CertificadoServiciosController extends Controller
         $EntityManager = $this->getDoctrine()->getManager();
 
         $CertificadoServicios = $EntityManager->getRepository("AppBundle:CertificadoServicios")->find($id);
-        $EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(4);
+        $EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
 
         $CertificadoServicios->setEstadoCertificado($EstadoCertificado);
         $CertificadoServicios->setTotalFactura(0);

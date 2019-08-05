@@ -42,7 +42,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
             'order' => [[0, 'asc']],
             'order_cells_top' => true,
             'search_in_non_visible_columns' => true,
-            'dom' => 'lBtrip'
+            'dom' => 'lBftrip'
         ]);
 //		$this->events->set([
 //			'xhr' => ['template' => 'fin.js.twig'],
@@ -55,12 +55,9 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
         $this->features->set([
             'auto_width' => false,
             'ordering' => true,
-            'length_change' => true
+            'length_change' => true,
+            'state_save' => true
         ]);
-
-
-        $formatter = new NumberFormatter("es_ES", NumberFormatter::CURRENCY);
-
         $Indicadores = $this->em->getRepository("AppBundle:Indicador")->findAll();
 
         $this->columnBuilder
@@ -71,25 +68,24 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
                 'visible' => false])
             ->add('indicador.codigo', Column::class,
                 ['title' => 'Indicador',
-                    'width' => '40px',
+                    'width' => '70px',
                     'searchable' => true,
                     'filter' => [SelectFilter::class, [
                         'multiple' => false,
                         'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Indicadores, 'codigo', 'codigo'),
                         'search_type' => 'eq']]])
-            ->add('encargo.numero', Column::class, ['title' => 'Número', 'width' => '40px', 'searchable' => true])
-            ->add('encargo.nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '40px', 'searchable' => true])
-            ->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '800px', 'searchable' => true])
+            ->add('encargo.numero', Column::class, ['title' => 'Número', 'width' => '60px', 'searchable' => true])
+            ->add('encargo.nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '60px', 'searchable' => true])
+            ->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '1200px', 'searchable' => true])
             ->add('eliminada', Column::class,
                 ['title' => 'Eliminada',
-                    'width' => '20px',
+                    'width' => '40px',
                     'searchable' => true,
                     'filter' => [SelectFilter::class, ['search_type' => 'eq',
                         'multiple' => false,
                         'select_options' => [
                             '' => 'Todo',
-                            true => 'Si',
-                            null => 'No'],
+                            true => 'Si'],
                         'cancel_button' => false],
                     ]])
             ->add(null, ActionColumn::class, [
