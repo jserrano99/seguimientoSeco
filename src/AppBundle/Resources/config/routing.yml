@@ -193,6 +193,11 @@ editEncargo:
     defaults: { _controller: AppBundle:Encargo:edit}
     options:
         expose: true
+viewEncargoSeco:
+  path: /encargo/viewSeco/{id}
+  defaults: { _controller: AppBundle:Encargo:viewSeco}
+  options:
+    expose: true
 deleteEncargo:
     path: /encargo/delete/{id}
     defaults: { _controller: AppBundle:Encargo:delete}

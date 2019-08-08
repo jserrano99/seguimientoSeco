@@ -46,7 +46,10 @@
     width: 400px;
 }
 .largo {
-    width: 550px;
+    width: 400px;
+}
+.muylargo {
+    width: 850px;
 }
 .centrado {
     align-content: center;

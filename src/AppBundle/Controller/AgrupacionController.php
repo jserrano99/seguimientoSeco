@@ -69,6 +69,9 @@ class AgrupacionController extends Controller
 			try {
 				$this->getDoctrine()->getManager()->persist($Agrupacion);
 				$this->getDoctrine()->getManager()->flush();
+				$status = "AGRUPACIÓN " . $Agrupacion->getCodigo(). " MODIFICADA CORRECTAMENTE";
+				$this->sesion->getFlashBag()->add("status", $status);
+				return $this->redirectToRoute("queryAgrupacion");
 			} catch (UniqueConstraintViolationException $ex) {
 				$status = " YA EXISTE UNA AGRUPACIÓN CON ESTE CÓDIGO: " . $Agrupacion->getCodigo();
 				$this->sesion->getFlashBag()->add("status", $status);

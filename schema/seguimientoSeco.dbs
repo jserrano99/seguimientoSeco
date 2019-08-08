@@ -98,7 +98,6 @@
 			<column name="estado_certificado_id" type="int" length="0" decimal="0" jt="4" />
 			<column name="descripcion" type="varchar" length="0" decimal="0" jt="12" mandatory="y" />
 			<column name="meses_id" type="int" length="0" decimal="0" jt="4" />
-			<column name="total_factura" type="double" length="0" decimal="0" jt="8" />
 			<column name="total_penalizaciones" type="double" length="0" decimal="0" jt="8" />
 			<column name="maximo_penalizaciones" type="double" length="0" decimal="0" jt="8" />
 			<column name="cuota_iva" type="double" length="0" decimal="0" jt="8" />
@@ -115,6 +114,8 @@
 			<column name="contador_NPL_CRI" type="int" length="0" decimal="0" jt="4" />
 			<column name="contador_NPL_NOR" type="int" length="0" decimal="0" jt="4" />
 			<column name="penalizados_ADM" type="int" jt="4" />
+			<column name="total_cuota" type="double" length="22" decimal="0" jt="8" />
+			<column name="base_imponible" type="double" length="22" decimal="0" jt="8" />
 			<index name="pk_certificado_servicios" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -174,6 +175,17 @@
 				<fk_column name="contrato_id" pk="id" />
 			</fk>
 		</table>
+		<table name="criticidad" >
+			<column name="id" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="codigo" type="int" length="10" decimal="0" jt="4" mandatory="y" />
+			<column name="descripcion" type="varchar" length="45" decimal="0" jt="12" />
+			<index name="pk_criticidad" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<index name="codigo_UNIQUE" unique="UNIQUE" >
+				<column name="codigo" />
+			</index>
+		</table>
 		<table name="encargo" >
 			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
 			<column name="objeto_encargo_id" type="int" length="0" decimal="0" jt="4" />
@@ -221,6 +233,8 @@
 			<column name="penaliza" type="bit" length="0" decimal="0" jt="-7" />
 			<column name="remedy_id" type="int" length="0" decimal="0" jt="4" />
 			<column name="reapertura" type="bit" length="0" decimal="0" jt="-7" />
+			<column name="criticidad_id" type="int" length="10" decimal="0" jt="4" />
+			<column name="observaciones" type="longtext" length="2147483647" decimal="0" jt="-1" />
 			<index name="pk_encargo" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -263,6 +277,9 @@
 			<index name="encargo_ibfk_1" unique="NORMAL" >
 				<column name="remedy_id" />
 			</index>
+			<index name="encargo_ibfk_2_idx" unique="NORMAL" >
+				<column name="criticidad_id" />
+			</index>
 			<fk name="FK_8BD0727A162972A4" to_schema="seguimientoseco" to_table="agrupacion" >
 				<fk_column name="agrupacion_id" pk="id" />
 			</fk>
@@ -299,12 +316,18 @@
 			<fk name="encargo_ibfk_1" to_schema="seguimientoseco" to_table="remedy" delete_action="setNull" >
 				<fk_column name="remedy_id" pk="id" />
 			</fk>
+			<fk name="fk_encargo_criticidad" to_schema="seguimientoseco" to_table="criticidad" >
+				<fk_column name="criticidad_id" pk="id" />
+			</fk>
 		</table>
 		<table name="encargo_penalizado" >
 			<column name="id" type="int" length="0" decimal="0" jt="4" mandatory="y" />
 			<column name="indicador_id" type="int" length="0" decimal="0" jt="4" />
 			<column name="encargo_id" type="int" length="0" decimal="0" jt="4" />
 			<column name="certificado_servicios_id" type="int" length="0" decimal="0" jt="4" />
+			<column name="eliminada" type="tinyint" length="3" decimal="0" jt="-6" />
+			<column name="dias_retraso_valoracion" type="int" length="10" decimal="0" jt="4" />
+			<column name="dias_retraso_entrega" type="int" length="10" decimal="0" jt="4" />
 			<index name="pk_encargo_penalizado" unique="PRIMARY_KEY" >
 				<column name="id" />
 			</index>
@@ -317,7 +340,7 @@
 			<index name="IDX_6A4425A57AB065D" unique="NORMAL" >
 				<column name="certificado_servicios_id" />
 			</index>
-			<fk name="FK_6A4425AA4FDE19D" to_schema="seguimientoseco" to_table="encargo" >
+			<fk name="FK_6A4425AA4FDE19D" to_schema="seguimientoseco" to_table="encargo" delete_action="cascade" >
 				<fk_column name="encargo_id" pk="id" />
 			</fk>
 			<fk name="FK_6A4425A47D487D1" to_schema="seguimientoseco" to_table="indicadores" >
@@ -861,6 +884,63 @@
 				<fk_column name="centro_id" pk="id" />
 			</fk>
 		</table>
+		<view name="view_actividad_tasada" >
+			<column name="certificadoServiciosId" type="int" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="encargoNumero" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="encargoCoste" type="double" />
+		</view>
+		<view name="view_adaptaciones_menores" >
+			<column name="lineaCertificadoId" type="int" />
+			<column name="certificadoServiciosId" type="int" />
+			<column name="encargoId" type="int" />
+			<column name="encargoNumero" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="horasRealizadas" type="double" />
+			<column name="objeetoEncargoId" type="int" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="agrupacionId" type="int" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+		</view>
+		<view name="view_certificado_servicios" >
+			<column name="contratoId" type="int" />
+			<column name="contratoCodigo" type="varchar" />
+			<column name="contratoDescripcion" type="varchar" />
+			<column name="contratoFechaInicio" type="datetime" />
+			<column name="contratoFechaFin" type="datetime" />
+			<column name="contratoCentroCosteCd" type="int" />
+			<column name="contratoCentroCosteDs" type="varchar" />
+			<column name="contratoExpediente" type="varchar" />
+			<column name="contratoAdjudicatario" type="varchar" />
+			<column name="contratoImporteContrato" type="double" />
+			<column name="contratoImporteAdjudicacion" type="double" />
+			<column name="contratoPorcentajeBaja" type="double" />
+			<column name="contratoNumeroPedido" type="int" />
+			<column name="certificadoServiciosId" type="int" />
+			<column name="certificadoServiciosContratoId" type="int" />
+			<column name="certificadoSserviciosDescripcion" type="varchar" />
+			<column name="importesContratoFechaInicio" type="datetime" />
+			<column name="importesContratoGechaFin" type="datetime" />
+			<column name="importesContratoCuotaFija" type="double" />
+			<column name="importesContratoCuotaTasada" type="double" />
+			<column name="importesContratoTarifaHora" type="double" />
+			<column name="importesContratoCuotaFijaMensual" type="double" />
+			<column name="mesesDescripcion" type="varchar" />
+			<column name="anyosDescripcion" type="varchar" />
+			<column name="periodo" type="varchar" />
+			<column name="totalCuota" type="double" />
+			<column name="baseImponible" type="double" />
+			<column name="totalPenalizaciones" type="double" />
+			<column name="maximoPenalizaciones" type="double" />
+			<column name="cuotaIva" type="double" />
+			<column name="totalFacturaConIva" type="double" />
+			<column name="penalizacionAplicable" type="double" />
+		</view>
 		<view name="view_encargos_CF_en_ejecucion" >
 			<column name="nmEncargo" type="int" />
 			<column name="encargoTitulo" type="varchar" />
@@ -877,6 +957,32 @@
 			<column name="estadoEncargoDs" type="varchar" />
 			<column name="agrupacionCd" type="int" />
 			<column name="agrupacionDs" type="varchar" />
+		</view>
+		<view name="view_encargos_cf_cerrados" >
+			<column name="nmEncargo" type="int" />
+			<column name="aplicacionId" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="estadoActualId" type="int" />
+			<column name="fechaEstadoActual" type="datetime" />
+			<column name="estadoDs" type="varchar" />
+			<column name="estadoCd" type="varchar" />
+			<column name="fechaCompromiso" type="datetime" />
+			<column name="fechaComienzoEjecucion" type="datetime" />
+			<column name="asnmHorasComprometidas" type="double" />
+			<column name="nmHorasRealizadas" type="double" />
+			<column name="fechaEntregaValoracion" type="datetime" />
+			<column name="fechaRequeridaValoracion" type="datetime" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="tipoCuotaId" type="int" />
+			<column name="tipoCuotaDs" type="varchar" />
+			<column name="estadoEncargoCd" type="varchar" />
+			<column name="estadoEncargoDs" type="varchar" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+			<column name="tipoObjetoId" type="int" />
+			<column name="tipoObjetoCd" type="varchar" />
+			<column name="tipoObjetoDs" type="varchar" />
 		</view>
 		<view name="view_encargos_penalizados" >
 			<column name="contratoDs" type="varchar" />
@@ -915,6 +1021,69 @@
 			<column name="fcEntrega" type="datetime" />
 			<column name="fcCierre" type="datetime" />
 			<column name="descripcionProblema" type="text" />
+		</view>
+		<view name="view_implantaciones" >
+			<column name="encargoId" type="int" />
+			<column name="numeroEncargo" type="int" />
+			<column name="fechaEstadoActual" type="datetime" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="objetoEncargoId" type="int" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="estadoEncargoId" type="int" />
+			<column name="estadoEncargoCd" type="varchar" />
+			<column name="estadoEncargoDs" type="varchar" />
+			<column name="agrupacionId" type="int" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+			<column name="tipoAgrupacionId" type="int" />
+			<column name="tipoAgrupacionDs" type="varchar" />
+		</view>
+		<view name="view_lineas_certificado" >
+			<column name="certificadoServiciosId" type="int" />
+			<column name="certificadoServiciosDs" type="varchar" />
+			<column name="periodo" type="varchar" />
+			<column name="lineaCertificadoId" type="int" />
+			<column name="encargoId" type="int" />
+			<column name="encargoNumero" type="int" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="encargoCoste" type="double" />
+			<column name="horasComprometidas" type="double" />
+			<column name="costeVariable" type="double" />
+			<column name="agrupacionId" type="int" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+			<column name="tipoAgrupacionId" type="int" />
+			<column name="tipoAgrupacionDs" type="varchar" />
+			<column name="objetoEncargoId" type="int" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="tipoObjetoId" type="int" />
+			<column name="tipoObejtoCd" type="varchar" />
+			<column name="tipoObjetoDs" type="varchar" />
+			<column name="tipoCuotaId" type="int" />
+			<column name="tipoCuotaCd" type="varchar" />
+			<column name="tipoCuotaDs" type="varchar" />
+			<column name="estadoEncargoId" type="int" />
+			<column name="estadoEncargoCd" type="varchar" />
+			<column name="estadoEncargoDs" type="varchar" />
+		</view>
+		<view name="view_nuevos_desarrollos" >
+			<column name="encargoId" type="int" />
+			<column name="numeroEncargo" type="int" />
+			<column name="fechaEstadoActual" type="datetime" />
+			<column name="encargoTitulo" type="varchar" />
+			<column name="objetoEncargoId" type="int" />
+			<column name="objetoEncargoCd" type="varchar" />
+			<column name="objetoEncargoDs" type="varchar" />
+			<column name="estadoEncargoId" type="int" />
+			<column name="estadoEncargoCd" type="varchar" />
+			<column name="estadoEncargoDs" type="varchar" />
+			<column name="agrupacionId" type="int" />
+			<column name="agrupacionCd" type="int" />
+			<column name="agrupacionDs" type="varchar" />
+			<column name="tipoAgrupacionId" type="int" />
+			<column name="tipoAgrupacionDs" type="varchar" />
 		</view>
 		<view name="view_penalizaciones" >
 			<column name="certificadoServiciosId" type="int" />
@@ -972,6 +1141,13 @@
 		<entity schema="seguimientoseco" name="objetos_encargo" color="3986C1" x="1280" y="624" />
 		<entity schema="seguimientoseco" name="estado_encargo" color="3986C1" x="1120" y="480" />
 		<entity schema="seguimientoseco" name="aplicacion" color="3986C1" x="448" y="832" />
+		<entity schema="seguimientoseco" name="centro" color="3986C1" x="1104" y="112" />
+		<entity schema="seguimientoseco" name="usuario_remedy" color="C1D8EE" x="1328" y="48" />
+		<entity schema="seguimientoseco" name="remedy" color="3986C1" x="816" y="256" />
+		<entity schema="seguimientoseco" name="encargo_remedy" color="3986C1" x="560" y="432" />
+		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="576" y="1360" />
+		<entity schema="seguimientoseco" name="contrato_actual" color="3986C1" x="496" y="1232" />
+		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="224" y="1376" />
 		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="896" y="704" >
 			<column name="id" />
 			<column name="objeto_encargo_id" />
@@ -1000,14 +1176,10 @@
 			<column name="penaliza" />
 			<column name="remedy_id" />
 			<column name="reapertura" />
+			<column name="criticidad_id" />
+			<column name="observaciones" />
 		</entity>
-		<entity schema="seguimientoseco" name="centro" color="3986C1" x="1104" y="112" />
-		<entity schema="seguimientoseco" name="usuario_remedy" color="C1D8EE" x="1328" y="48" />
-		<entity schema="seguimientoseco" name="remedy" color="3986C1" x="816" y="256" />
-		<entity schema="seguimientoseco" name="encargo_remedy" color="3986C1" x="560" y="432" />
-		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="576" y="1360" />
-		<entity schema="seguimientoseco" name="contrato_actual" color="3986C1" x="496" y="1232" />
-		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="224" y="1376" />
+		<entity schema="seguimientoseco" name="criticidad" color="3986C1" x="640" y="1120" />
 		<script name="SQL_Editor_001" id="Editor_1e8123" language="SQL" >
 			<string><![CDATA[select  t1.nm_remedy, count(*) from encargo as t1 
 where t1.fc_estado_actual between '2019-06-01' and '2019-06-30'
@@ -1072,11 +1244,18 @@ FROM
 			</query_table>
 		</query>
 	</layout>
-	<layout name="Vistas" id="Layout_26136b9" show_relation="columns" >
-		<entity schema="seguimientoseco" name="view_encargos_remedy" color="3986C1" x="320" y="64" />
-		<entity schema="seguimientoseco" name="view_encargos_CF_en_ejecucion" color="3986C1" x="48" y="80" />
-		<entity schema="seguimientoseco" name="view_encargos_penalizados" color="3986C1" x="720" y="48" />
-		<entity schema="seguimientoseco" name="view_penalizaciones" color="3986C1" x="528" y="64" />
+	<layout name="Vistas" id="Layout_26136b9" show_column_type="y" show_relation="columns" >
+		<entity schema="seguimientoseco" name="view_encargos_penalizados" color="3986C1" x="720" y="112" />
+		<entity schema="seguimientoseco" name="view_penalizaciones" color="3986C1" x="528" y="128" />
+		<entity schema="seguimientoseco" name="view_encargos_remedy" color="3986C1" x="320" y="128" />
+		<entity schema="seguimientoseco" name="view_encargos_CF_en_ejecucion" color="3986C1" x="48" y="144" />
+		<entity schema="seguimientoseco" name="view_implantaciones" color="3986C1" x="1872" y="320" />
+		<entity schema="seguimientoseco" name="view_lineas_certificado" color="3986C1" x="1984" y="320" />
+		<entity schema="seguimientoseco" name="view_nuevos_desarrollos" color="3986C1" x="2112" y="320" />
+		<entity schema="seguimientoseco" name="view_actividad_tasada" color="3986C1" x="960" y="64" />
+		<entity schema="seguimientoseco" name="view_adaptaciones_menores" color="3986C1" x="944" y="256" />
+		<entity schema="seguimientoseco" name="view_certificado_servicios" color="3986C1" x="1152" y="64" />
+		<entity schema="seguimientoseco" name="view_encargos_cf_cerrados" color="3986C1" x="1440" y="48" />
 		<script name="Sql_Editor" id="Editor_23efac2" language="SQL" >
 			<string><![CDATA[ CREATE TABLE centro (id INT AUTO_INCREMENT NOT NULL, codigo VARCHAR(15) NOT NULL, descripcion VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB;
      ALTER TABLE remedy ADD centro_id INT DEFAULT NULL, DROP centro, CHANGE fecha_entrada fecha_entrada DATETIME NOT NULL;

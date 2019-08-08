@@ -166,4 +166,9 @@ class ObjetoEncargo
     {
         return $this->tipoCuota;
     }
+
+	public function __toString()
+	{
+	return $this->descripcion;
+	}
 }

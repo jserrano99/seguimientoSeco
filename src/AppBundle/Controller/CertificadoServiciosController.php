@@ -301,20 +301,23 @@ class CertificadoServiciosController extends Controller
         $ImporteCuotaVariable = $this->importesCuotaVariable($CertificadoServicios);
         $ImporteCuotaTasada = $this->importesCuotaTasada($CertificadoServicios);
 
-        $totalFactura = $ImporteCuotaFija->getImporte() + $ImporteCuotaVariable->getImporte() + $ImporteCuotaTasada->getImporte();
-        $maximoPenalizaciones = $totalFactura * 0.20;
-        $importePenalizacion = $this->aplicaPenalizacion($CertificadoServicios);
+        $total = $ImporteCuotaFija->getImporte() + $ImporteCuotaVariable->getImporte() + $ImporteCuotaTasada->getImporte();
+        $total = round($total,2);
+        $maximoPenalizaciones = round($total * 0.20,2);
+        $importePenalizacion = round($this->aplicaPenalizacion($CertificadoServicios),2);
 
-
-        IF ($importePenalizacion > $maximoPenalizaciones) {
+        if ($importePenalizacion > $maximoPenalizaciones) {
             $penalizacionAplicable = $maximoPenalizaciones;
         } else {
             $penalizacionAplicable = $importePenalizacion;
         }
-        $cuotaIVA = $totalFactura * 0.21;
-        $totalFacturaIVA = $totalFactura + $cuotaIVA - $penalizacionAplicable;
 
-        $CertificadoServicios->setTotalFactura($totalFactura);
+		$baseImponible = $total - $penalizacionAplicable;
+        $cuotaIVA = round($baseImponible * 0.21,2);
+        $totalFacturaIVA = $baseImponible + $cuotaIVA ;
+
+        $CertificadoServicios->setTotalCuota($total);
+        $CertificadoServicios->setBaseImponible($baseImponible);
         $CertificadoServicios->setCuotaIva($cuotaIVA);
         $CertificadoServicios->setTotalFacturaConIva($totalFacturaIVA);
         $EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
@@ -354,6 +357,7 @@ class CertificadoServiciosController extends Controller
         $penalizacion = 0;
         $total = 0;
 
+        $importe = round($importe,2);
         $ImportesCertificado = new ImportesCertificado();
         $ImportesCertificado->setCertificadoServicios($CertificadoServicios);
         $ImportesCertificado->setCodigo(2);
@@ -392,6 +396,8 @@ class CertificadoServiciosController extends Controller
             $horas = $horas + $LineaCertificado->getEncargo()->getHorasComprometidas();
             $importe = $importe + ($LineaCertificado->getEncargo()->getHorasComprometidas() * $tarifa);
         }
+
+        $importe = round($importe,2);
 
         $ImportesCertificado = new ImportesCertificado();
         $ImportesCertificado->setCertificadoServicios($CertificadoServicios);
@@ -1074,7 +1080,6 @@ class CertificadoServiciosController extends Controller
         $EncargoRepository = $EntityManager->getRepository("AppBundle:Encargo");
         $EstadoEncargoCRR = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(2);
         $EstadoEncargoFIN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(12);
-        $EstadoEncargoCAN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(10);
 
         //$IndicadorIRS03 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(3);
 
@@ -1087,11 +1092,10 @@ class CertificadoServiciosController extends Controller
             //CERRADOS, FINALIZADOS y CANCELADOS
             $Encargos = $EncargoRepository->createQueryBuilder('u')
                 ->where('u.objetoEncargo =  :objetoEncargo')
-                ->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2, :estadoEncargo3)')
+                ->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2)')
                 ->andWhere('u.fcEstadoActual >= :fcini and u.fcEstadoActual <= :fcfin')
                 ->setParameter('estadoEncargo1', $EstadoEncargoCRR)
                 ->setParameter('estadoEncargo2', $EstadoEncargoFIN)
-                ->setParameter('estadoEncargo3', $EstadoEncargoCAN)
                 ->setParameter('objetoEncargo', $ObjetosEncargo)
                 ->setParameter('fcini', $CertificadoServicios->getMes()->getFechaInicio())
                 ->setParameter('fcfin', $CertificadoServicios->getMes()->getFechaFin())
@@ -1113,20 +1117,6 @@ class CertificadoServiciosController extends Controller
                 $this->getDoctrine()->getManager()->flush();
                 $ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO ");
                 $ServicioLog->escribeLog($ficheroLog);
-
-//				if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {
-//					if ($Encargo->getFcEntrega() > $Encargo->getFcRequeridaEntrega()->add(new \DateInterval(('P1D')))) {
-//						//$fecha = $Encargo->getFcRequeridaEntrega()->diff($Encargo->getFcEntrega());
-//						$EncargoPenalizado = new EncargoPenalizado();
-//						$EncargoPenalizado->setMes($CertificadoServicios->getMes());
-//						$EncargoPenalizado->setIndicador($IndicadorIRS03);
-//						$EncargoPenalizado->setEncargo($Encargo);
-//						$EntityManager->persist($EncargoPenalizado);
-//						$EntityManager->flush();
-//      				$ServicioLog->setMensaje("+Encargo: ". $Encargo->getNumero(). " *** PENALIZADO *** ");
-//		        		$ServicioLog->escribeLog($ficheroLog);
-//					}
-//				}
 
                 $Encargo->setBloqueado(true);
                 $this->getDoctrine()->getManager()->persist($Encargo);
@@ -1182,7 +1172,11 @@ class CertificadoServiciosController extends Controller
                 continue;
             }
 
-            $LineaCertificado = new LineaCertificado();
+//			$fechaInicio = $Encargo->getfe
+//			$fechaFin = $Encargo->get;
+//			$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+
+			$LineaCertificado = new LineaCertificado();
             $LineaCertificado->setCertificadoServicios($CertificadoServicios);
             $LineaCertificado->setTipoCuota($tipoCuotaVariable);
             $LineaCertificado->setEncargo($Encargo);

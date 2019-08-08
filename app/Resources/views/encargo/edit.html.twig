@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 {% block titulo %} ENCARGOS **{{accion}}**
-    <a href="{{path("queryAgrupacion")}}" class="btn btn-success">Volver</a>
+    <a href="{{path("queryEncargo")}}" class="btn btn-success"> Consulta Encargos </a>
 {% endblock %}
 {% block contenido %}
     {% include 'encargo/form.html.twig' %}

@@ -115,6 +115,15 @@ class Encargo
 	private $tipoSolucion;
 
 	/**
+	 * @var \AppBundle\Entity\Criticidad|null
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Criticidad")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="criticidad_id", referencedColumnName="id")
+	 * })
+	 */
+	private $criticidad2;
+
+	/**
 	 * @var \AppBundle\Entity\Operacional|null
 	 * @ORM\ManyToOne(targetEntity="Operacional")
 	 * * @ORM\JoinColumns({
@@ -324,10 +333,12 @@ class Encargo
 	 */
 	private $penaliza;
 
+	public function __toString()
+	{
+		return $this->numero . ' ' . $this->titulo;
+	}
 
 	/**
-	 * Get id.
-	 *
 	 * @return int
 	 */
 	public function getId()
@@ -336,21 +347,14 @@ class Encargo
 	}
 
 	/**
-	 * Set numero.
-	 *
-	 * @param int $numero
-	 * @return Encargo
+	 * @param int $id
 	 */
-	public function setNumero($numero)
+	public function setId($id)
 	{
-		$this->numero = $numero;
-
-		return $this;
+		$this->id = $id;
 	}
 
 	/**
-	 * Get numero.
-	 *
 	 * @return int
 	 */
 	public function getNumero()
@@ -359,21 +363,206 @@ class Encargo
 	}
 
 	/**
-	 * Set titulo.
-	 *
-	 * @param string $titulo
-	 * @return Encargo
+	 * @param int $numero
 	 */
-	public function setTitulo($titulo)
+	public function setNumero($numero)
 	{
-		$this->titulo = $titulo;
-
-		return $this;
+		$this->numero = $numero;
 	}
 
 	/**
-	 * Get titulo.
-	 *
+	 * @return Contrato|null
+	 */
+	public function getContrato()
+	{
+		return $this->contrato;
+	}
+
+	/**
+	 * @param Contrato|null $contrato
+	 */
+	public function setContrato($contrato)
+	{
+		$this->contrato = $contrato;
+	}
+
+	/**
+	 * @return Remedy|null
+	 */
+	public function getRemedy()
+	{
+		return $this->remedy;
+	}
+
+	/**
+	 * @param Remedy|null $remedy
+	 */
+	public function setRemedy($remedy)
+	{
+		$this->remedy = $remedy;
+	}
+
+	/**
+	 * @return ObjetoEncargo|null
+	 */
+	public function getObjetoEncargo()
+	{
+		return $this->objetoEncargo;
+	}
+
+	/**
+	 * @param ObjetoEncargo|null $objetoEncargo
+	 */
+	public function setObjetoEncargo($objetoEncargo)
+	{
+		$this->objetoEncargo = $objetoEncargo;
+	}
+
+	/**
+	 * @return Agrupacion|null
+	 */
+	public function getAgrupacion()
+	{
+		return $this->agrupacion;
+	}
+
+	/**
+	 * @param Agrupacion|null $agrupacion
+	 */
+	public function setAgrupacion($agrupacion)
+	{
+		$this->agrupacion = $agrupacion;
+	}
+
+	/**
+	 * @return EstadoEncargo|null
+	 */
+	public function getEstadoActual()
+	{
+		return $this->estadoActual;
+	}
+
+	/**
+	 * @param EstadoEncargo|null $estadoActual
+	 */
+	public function setEstadoActual($estadoActual)
+	{
+		$this->estadoActual = $estadoActual;
+	}
+
+	/**
+	 * @return Aplicacion|null
+	 */
+	public function getAplicacion()
+	{
+		return $this->aplicacion;
+	}
+
+	/**
+	 * @param Aplicacion|null $aplicacion
+	 */
+	public function setAplicacion($aplicacion)
+	{
+		$this->aplicacion = $aplicacion;
+	}
+
+	/**
+	 * @return ModuloFuncional|null
+	 */
+	public function getModuloFuncional()
+	{
+		return $this->moduloFuncional;
+	}
+
+	/**
+	 * @param ModuloFuncional|null $moduloFuncional
+	 */
+	public function setModuloFuncional($moduloFuncional)
+	{
+		$this->moduloFuncional = $moduloFuncional;
+	}
+
+	/**
+	 * @return ModuloTecnico|null
+	 */
+	public function getModuloTecnico()
+	{
+		return $this->moduloTecnico;
+	}
+
+	/**
+	 * @param ModuloTecnico|null $moduloTecnico
+	 */
+	public function setModuloTecnico($moduloTecnico)
+	{
+		$this->moduloTecnico = $moduloTecnico;
+	}
+
+	/**
+	 * @return TipoSolucion|null
+	 */
+	public function getTipoSolucion()
+	{
+		return $this->tipoSolucion;
+	}
+
+	/**
+	 * @param TipoSolucion|null $tipoSolucion
+	 */
+	public function setTipoSolucion($tipoSolucion)
+	{
+		$this->tipoSolucion = $tipoSolucion;
+	}
+
+	/**
+	 * @return Operacional|null
+	 */
+	public function getOperacional1()
+	{
+		return $this->operacional1;
+	}
+
+	/**
+	 * @param Operacional|null $operacional1
+	 */
+	public function setOperacional1($operacional1)
+	{
+		$this->operacional1 = $operacional1;
+	}
+
+	/**
+	 * @return Operacional|null
+	 */
+	public function getOperacional2()
+	{
+		return $this->operacional2;
+	}
+
+	/**
+	 * @param Operacional|null $operacional2
+	 */
+	public function setOperacional2($operacional2)
+	{
+		$this->operacional2 = $operacional2;
+	}
+
+	/**
+	 * @return Operacional|null
+	 */
+	public function getOperacional3()
+	{
+		return $this->operacional3;
+	}
+
+	/**
+	 * @param Operacional|null $operacional3
+	 */
+	public function setOperacional3($operacional3)
+	{
+		$this->operacional3 = $operacional3;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getTitulo()
@@ -382,21 +571,30 @@ class Encargo
 	}
 
 	/**
-	 * Set nmRemedy.
-	 *
-	 * @param string $nmRemedy
-	 * @return Encargo
+	 * @param string $titulo
 	 */
-	public function setNmRemedy($nmRemedy)
+	public function setTitulo($titulo)
 	{
-		$this->nmRemedy = $nmRemedy;
-
-		return $this;
+		$this->titulo = $titulo;
 	}
 
 	/**
-	 * Get nmRemedy.
-	 *
+	 * @return text
+	 */
+	public function getDescripcion()
+	{
+		return $this->descripcion;
+	}
+
+	/**
+	 * @param text $descripcion
+	 */
+	public function setDescripcion($descripcion)
+	{
+		$this->descripcion = $descripcion;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getNmRemedy()
@@ -405,22 +603,15 @@ class Encargo
 	}
 
 	/**
-	 * Set fcEstadoActual.
-	 *
-	 * @param \DateTime $fcEstadoActual
-	 * @return Encargo
+	 * @param string $nmRemedy
 	 */
-	public function setFcEstadoActual($fcEstadoActual)
+	public function setNmRemedy($nmRemedy)
 	{
-		$this->fcEstadoActual = $fcEstadoActual;
-
-		return $this;
+		$this->nmRemedy = $nmRemedy;
 	}
 
 	/**
-	 * Get fcEstadoActual.
-	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getFcEstadoActual()
 	{
@@ -428,643 +619,15 @@ class Encargo
 	}
 
 	/**
-	 * Set fcRegistro.
-	 *
-	 * @param \DateTime $fcRegistro
-	 * @return Encargo
+	 * @param DateTime $fcEstadoActual
 	 */
-	public function setFcRegistro($fcRegistro)
+	public function setFcEstadoActual($fcEstadoActual)
 	{
-		$this->fcRegistro = $fcRegistro;
-
-		return $this;
+		$this->fcEstadoActual = $fcEstadoActual;
 	}
 
 	/**
-	 * Get fcRegistro.
-	 *
-	 * @return \DateTime
-	 */
-	public function getFcRegistro()
-	{
-		return $this->fcRegistro;
-	}
-
-	/**
-	 * Set fcAsignacion.
-	 *
-	 * @param \DateTime|null $fcAsignacion
-	 * @return Encargo
-	 */
-	public function setFcAsignacion($fcAsignacion = null)
-	{
-		$this->fcAsignacion = $fcAsignacion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcAsignacion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcAsignacion()
-	{
-		return $this->fcAsignacion;
-	}
-
-	/**
-	 * Set fcEstimadaSolucion.
-	 *
-	 * @param \DateTime|null $fcEstimadaSolucion
-	 * @return Encargo
-	 */
-	public function setFcEstimadaSolucion($fcEstimadaSolucion = null)
-	{
-		$this->fcEstimadaSolucion = $fcEstimadaSolucion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcEstimadaSolucion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcEstimadaSolucion()
-	{
-		return $this->fcEstimadaSolucion;
-	}
-
-	/**
-	 * Set fcRequeridaSolucion.
-	 *
-	 * @param \DateTime|null $fcRequeridaSolucion
-	 * @return Encargo
-	 */
-	public function setFcRequeridaSolucion($fcRequeridaSolucion = null)
-	{
-		$this->fcRequeridaSolucion = $fcRequeridaSolucion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcRequeridaSolucion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcRequeridaSolucion()
-	{
-		return $this->fcRequeridaSolucion;
-	}
-
-	/**
-	 * Set fcRequeridaValoracion.
-	 *
-	 * @param \DateTime|null $fcRequeridaValoracion
-	 * @return Encargo
-	 */
-	public function setFcRequeridaValoracion($fcRequeridaValoracion = null)
-	{
-		$this->fcRequeridaValoracion = $fcRequeridaValoracion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcRequeridaValoracion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcRequeridaValoracion()
-	{
-		return $this->fcRequeridaValoracion;
-	}
-
-	/**
-	 * Set fcEntregaValoracion.
-	 *
-	 * @param \DateTime|null $fcEntregaValoracion
-	 * @return Encargo
-	 */
-	public function setFcEntregaValoracion($fcEntregaValoracion = null)
-	{
-		$this->fcEntregaValoracion = $fcEntregaValoracion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcEntregaValoracion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcEntregaValoracion()
-	{
-		return $this->fcEntregaValoracion;
-	}
-
-	/**
-	 * Set fcRequeridaEntrega.
-	 *
-	 * @param \DateTime|null $fcRequeridaEntrega
-	 * @return Encargo
-	 */
-	public function setFcRequeridaEntrega($fcRequeridaEntrega = null)
-	{
-		$this->fcRequeridaEntrega = $fcRequeridaEntrega;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcRequeridaEntrega.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcRequeridaEntrega()
-	{
-		return $this->fcRequeridaEntrega;
-	}
-
-	/**
-	 * Set fcCompromiso.
-	 *
-	 * @param \DateTime|null $fcCompromiso
-	 * @return Encargo
-	 */
-	public function setFcCompromiso($fcCompromiso = null)
-	{
-		$this->fcCompromiso = $fcCompromiso;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcCompromiso.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcCompromiso()
-	{
-		return $this->fcCompromiso;
-	}
-
-	/**
-	 * Set fcFinPrevista.
-	 *
-	 * @param \DateTime|null $fcFinPrevista
-	 * @return Encargo
-	 */
-	public function setFcFinPrevista($fcFinPrevista = null)
-	{
-		$this->fcFinPrevista = $fcFinPrevista;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcFinPrevista.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcFinPrevista()
-	{
-		return $this->fcFinPrevista;
-	}
-
-	/**
-	 * Set fcComienzoEjecucion.
-	 *
-	 * @param \DateTime|null $fcComienzoEjecucion
-	 * @return Encargo
-	 */
-	public function setFcComienzoEjecucion($fcComienzoEjecucion = null)
-	{
-		$this->fcComienzoEjecucion = $fcComienzoEjecucion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcComienzoEjecucion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcComienzoEjecucion()
-	{
-		return $this->fcComienzoEjecucion;
-	}
-
-	/**
-	 * Set fcEntrega.
-	 *
-	 * @param \DateTime|null $fcEntrega
-	 * @return Encargo
-	 */
-	public function setFcEntrega($fcEntrega = null)
-	{
-		$this->fcEntrega = $fcEntrega;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcEntrega.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcEntrega()
-	{
-		return $this->fcEntrega;
-	}
-
-	/**
-	 * Set fcResolucionIcm.
-	 *
-	 * @param \DateTime|null $fcResolucionIcm
-	 * @return Encargo
-	 */
-	public function setFcResolucionIcm($fcResolucionIcm = null)
-	{
-		$this->fcResolucionIcm = $fcResolucionIcm;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcResolucionIcm.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcResolucionIcm()
-	{
-		return $this->fcResolucionIcm;
-	}
-
-	/**
-	 * Set fcAceptacion.
-	 *
-	 * @param \DateTime|null $fcAceptacion
-	 * @return Encargo
-	 */
-	public function setFcAceptacion($fcAceptacion = null)
-	{
-		$this->fcAceptacion = $fcAceptacion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcAceptacion.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcAceptacion()
-	{
-		return $this->fcAceptacion;
-	}
-
-	/**
-	 * Set fcCierre.
-	 *
-	 * @param \DateTime|null $fcCierre
-	 * @return Encargo
-	 */
-	public function setFcCierre($fcCierre = null)
-	{
-		$this->fcCierre = $fcCierre;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcCierre.
-	 *
-	 * @return \DateTime|null
-	 */
-	public function getFcCierre()
-	{
-		return $this->fcCierre;
-	}
-
-	/**
-	 * Set tiempoTotal.
-	 *
-	 * @param string|null $tiempoTotal
-	 * @return Encargo
-	 */
-	public function setTiempoTotal($tiempoTotal = null)
-	{
-		$this->tiempoTotal = $tiempoTotal;
-
-		return $this;
-	}
-
-	/**
-	 * Get tiempoTotal.
-	 *
-	 * @return string|null
-	 */
-	public function getTiempoTotal()
-	{
-		return $this->tiempoTotal;
-	}
-
-	/**
-	 * Set tiempoResolucion.
-	 *
-	 * @param string|null $tiempoResolucion
-	 * @return Encargo
-	 */
-	public function setTiempoResolucion($tiempoResolucion = null)
-	{
-		$this->tiempoResolucion = $tiempoResolucion;
-
-		return $this;
-	}
-
-	/**
-	 * Get tiempoResolucion.
-	 *
-	 * @return string|null
-	 */
-	public function getTiempoResolucion()
-	{
-		return $this->tiempoResolucion;
-	}
-
-	/**
-	 * Set contrato.
-	 *
-	 * @param \AppBundle\Entity\Contrato|null $contrato
-	 * @return Encargo
-	 */
-	public function setContrato(Contrato $contrato = null)
-	{
-		$this->contrato = $contrato;
-
-		return $this;
-	}
-
-	/**
-	 * Get contrato.
-	 *
-	 * @return \AppBundle\Entity\Contrato|null
-	 */
-	public function getContrato()
-	{
-		return $this->contrato;
-	}
-
-	/**
-	 * Set objetoEncargo.
-	 *
-	 * @param \AppBundle\Entity\ObjetoEncargo|null $objetoEncargo
-	 * @return Encargo
-	 */
-	public function setObjetoEncargo(ObjetoEncargo $objetoEncargo = null)
-	{
-		$this->objetoEncargo = $objetoEncargo;
-
-		return $this;
-	}
-
-	/**
-	 * Get objetoEncargo.
-	 *
-	 * @return \AppBundle\Entity\ObjetoEncargo|null
-	 */
-	public function getObjetoEncargo()
-	{
-		return $this->objetoEncargo;
-	}
-
-	/**
-	 * Set agrupacion.
-	 *
-	 * @param \AppBundle\Entity\Agrupacion|null $agrupacion
-	 * @return Encargo
-	 */
-	public function setAgrupacion(\AppBundle\Entity\Agrupacion $agrupacion = null)
-	{
-		$this->agrupacion = $agrupacion;
-
-		return $this;
-	}
-
-	/**
-	 * Get agrupacion.
-	 *
-	 * @return \AppBundle\Entity\Agrupacion|null
-	 */
-	public function getAgrupacion()
-	{
-		return $this->agrupacion;
-	}
-
-	/**
-	 * Set estadoActual.
-	 *
-	 * @param \AppBundle\Entity\EstadoEncargo|null $estadoActual
-	 * @return Encargo
-	 */
-	public function setEstadoActual(\AppBundle\Entity\EstadoEncargo $estadoActual = null)
-	{
-		$this->estadoActual = $estadoActual;
-
-		return $this;
-	}
-
-	/**
-	 * Get estadoActual.
-	 *
-	 * @return \AppBundle\Entity\EstadoEncargo|null
-	 */
-	public function getEstadoActual()
-	{
-		return $this->estadoActual;
-	}
-
-	/**
-	 * Set moduloFuncional.
-	 *
-	 * @param \AppBundle\Entity\ModuloFuncional|null $moduloFuncional
-	 * @return Encargo
-	 */
-	public function setModuloFuncional(\AppBundle\Entity\ModuloFuncional $moduloFuncional = null)
-	{
-		$this->moduloFuncional = $moduloFuncional;
-
-		return $this;
-	}
-
-	/**
-	 * Get moduloFuncional.
-	 *
-	 * @return \AppBundle\Entity\ModuloFuncional|null
-	 */
-	public function getModuloFuncional()
-	{
-		return $this->moduloFuncional;
-	}
-
-	/**
-	 * Set moduloTecnico.
-	 *
-	 * @param \AppBundle\Entity\ModuloTecnico|null $moduloTecnico
-	 * @return Encargo
-	 */
-	public function setModuloTecnico(\AppBundle\Entity\ModuloTecnico $moduloTecnico = null)
-	{
-		$this->moduloTecnico = $moduloTecnico;
-
-		return $this;
-	}
-
-	/**
-	 * Get moduloTecnico.
-	 *
-	 * @return \AppBundle\Entity\ModuloTecnico|null
-	 */
-	public function getModuloTecnico()
-	{
-		return $this->moduloTecnico;
-	}
-
-	/**
-	 * Set descripcion.
-	 *
-	 * @param string $descripcion
-	 * @return Encargo
-	 */
-	public function setDescripcion($descripcion)
-	{
-		$this->descripcion = $descripcion;
-
-		return $this;
-	}
-
-	/**
-	 * Get descripcion.
-	 *
-	 * @return string
-	 */
-	public function getDescripcion()
-	{
-		return $this->descripcion;
-	}
-
-	/**
-	 * Set horasValoradas.
-	 *
-	 * @param string|null $horasValoradas
-	 * @return Encargo
-	 */
-	public function setHorasValoradas($horasValoradas = null)
-	{
-		$this->horasValoradas = $horasValoradas;
-
-		return $this;
-	}
-
-	/**
-	 * Get horasValoradas.
-	 *
-	 * @return string|null
-	 */
-	public function getHorasValoradas()
-	{
-		return $this->horasValoradas;
-	}
-
-	/**
-	 * Set horasComprometidas.
-	 *
-	 * @param string|null $horasComprometidas
-	 * @return Encargo
-	 */
-	public function setHorasComprometidas($horasComprometidas = null)
-	{
-		$this->horasComprometidas = $horasComprometidas;
-
-		return $this;
-	}
-
-	/**
-	 * Get horasComprometidas.
-	 *
-	 * @return string|null
-	 */
-	public function getHorasComprometidas()
-	{
-		return $this->horasComprometidas;
-	}
-
-	/**
-	 * Set horasRealizadas.
-	 *
-	 * @param string|null $horasRealizadas
-	 * @return Encargo
-	 */
-	public function setHorasRealizadas($horasRealizadas = null)
-	{
-		$this->horasRealizadas = $horasRealizadas;
-
-		return $this;
-	}
-
-	/**
-	 * Get horasRealizadas.
-	 *
-	 * @return string|null
-	 */
-	public function getHorasRealizadas()
-	{
-		return $this->horasRealizadas;
-	}
-
-	/**
-	 * Set coste.
-	 *
-	 * @param string|null $coste
-	 * @return Encargo
-	 */
-	public function setCoste($coste = null)
-	{
-		$this->coste = $coste;
-
-		return $this;
-	}
-
-	/**
-	 * Get coste.
-	 *
-	 * @return string|null
-	 */
-	public function getCoste()
-	{
-		return $this->coste;
-	}
-
-	/**
-	 * Set fcExportacion.
-	 *
-	 * @param \DateTime $fcExportacion
-	 * @return Encargo
-	 */
-	public function setFcExportacion($fcExportacion)
-	{
-		$this->fcExportacion = $fcExportacion;
-
-		return $this;
-	}
-
-	/**
-	 * Get fcExportacion.
-	 *
-	 * @return \DateTime
+	 * @return DateTime
 	 */
 	public function getFcExportacion()
 	{
@@ -1072,137 +635,335 @@ class Encargo
 	}
 
 	/**
-	 * Set operacional1.
-	 *
-	 * @param \AppBundle\Entity\Operacional|null $operacional1
-	 * @return Encargo
+	 * @param DateTime $fcExportacion
 	 */
-	public function setOperacional1(\AppBundle\Entity\Operacional $operacional1 = null)
+	public function setFcExportacion($fcExportacion)
 	{
-		$this->operacional1 = $operacional1;
-
-		return $this;
+		$this->fcExportacion = $fcExportacion;
 	}
 
 	/**
-	 * Get operacional1.
-	 *
-	 * @return \AppBundle\Entity\Operacional|null
+	 * @return DateTime
 	 */
-	public function getOperacional1()
+	public function getFcCierre()
 	{
-		return $this->operacional1;
+		return $this->fcCierre;
 	}
 
 	/**
-	 * Set operacional2.
-	 *
-	 * @param \AppBundle\Entity\Operacional|null $operacional2
-	 * @return Encargo
+	 * @param DateTime $fcCierre
 	 */
-	public function setOperacional2(\AppBundle\Entity\Operacional $operacional2 = null)
+	public function setFcCierre($fcCierre)
 	{
-		$this->operacional2 = $operacional2;
-
-		return $this;
+		$this->fcCierre = $fcCierre;
 	}
 
 	/**
-	 * Get operacional2.
-	 *
-	 * @return \AppBundle\Entity\Operacional|null
+	 * @return DateTime
 	 */
-	public function getOperacional2()
+	public function getFcRegistro()
 	{
-		return $this->operacional2;
+		return $this->fcRegistro;
 	}
 
 	/**
-	 * Set operacional3.
-	 *
-	 * @param \AppBundle\Entity\Operacional|null $operacional3
-	 * @return Encargo
+	 * @param DateTime $fcRegistro
 	 */
-	public function setOperacional3(\AppBundle\Entity\Operacional $operacional3 = null)
+	public function setFcRegistro($fcRegistro)
 	{
-		$this->operacional3 = $operacional3;
-
-		return $this;
+		$this->fcRegistro = $fcRegistro;
 	}
 
 	/**
-	 * Get operacional3.
-	 *
-	 * @return \AppBundle\Entity\Operacional|null
+	 * @return DateTime
 	 */
-	public function getOperacional3()
+	public function getFcAsignacion()
 	{
-		return $this->operacional3;
+		return $this->fcAsignacion;
 	}
 
 	/**
-	 * Set aplicacion.
-	 *
-	 * @param \AppBundle\Entity\Aplicacion|null $aplicacion
-	 * @return Encargo
+	 * @param DateTime $fcAsignacion
 	 */
-	public function setAplicacion(Aplicacion $aplicacion = null)
+	public function setFcAsignacion($fcAsignacion)
 	{
-		$this->aplicacion = $aplicacion;
-
-		return $this;
+		$this->fcAsignacion = $fcAsignacion;
 	}
 
 	/**
-	 * Get aplicacion.
-	 *
-	 * @return \AppBundle\Entity\Aplicacion|null
+	 * @return DateTime
 	 */
-	public function getAplicacion()
+	public function getFcEstimadaSolucion()
 	{
-		return $this->aplicacion;
+		return $this->fcEstimadaSolucion;
 	}
 
 	/**
-	 * Set tipoSolucion.
-	 *
-	 * @param \AppBundle\Entity\TipoSolucion|null $tipoSolucion
-	 * @return Encargo
+	 * @param DateTime $fcEstimadaSolucion
 	 */
-	public function setTipoSolucion(TipoSolucion $tipoSolucion = null)
+	public function setFcEstimadaSolucion($fcEstimadaSolucion)
 	{
-		$this->tipoSolucion = $tipoSolucion;
-
-		return $this;
+		$this->fcEstimadaSolucion = $fcEstimadaSolucion;
 	}
 
 	/**
-	 * Get tipoSolucion.
-	 *
-	 * @return \AppBundle\Entity\TipoSolucion|null
+	 * @return DateTime
 	 */
-	public function getTipoSolucion()
+	public function getFcRequeridaSolucion()
 	{
-		return $this->tipoSolucion;
+		return $this->fcRequeridaSolucion;
 	}
 
 	/**
-	 * Set solucionUsuario.
-	 *
-	 * @param string|null $solucionUsuario
-	 * @return Encargo
+	 * @param DateTime $fcRequeridaSolucion
 	 */
-	public function setSolucionUsuario($solucionUsuario = null)
+	public function setFcRequeridaSolucion($fcRequeridaSolucion)
 	{
-		$this->solucionUsuario = $solucionUsuario;
-
-		return $this;
+		$this->fcRequeridaSolucion = $fcRequeridaSolucion;
 	}
 
 	/**
-	 * Get solucionUsuario.
-	 *
-	 * @return string|null
+	 * @return DateTime
+	 */
+	public function getFcRequeridaValoracion()
+	{
+		return $this->fcRequeridaValoracion;
+	}
+
+	/**
+	 * @param DateTime $fcRequeridaValoracion
+	 */
+	public function setFcRequeridaValoracion($fcRequeridaValoracion)
+	{
+		$this->fcRequeridaValoracion = $fcRequeridaValoracion;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcEntregaValoracion()
+	{
+		return $this->fcEntregaValoracion;
+	}
+
+	/**
+	 * @param DateTime $fcEntregaValoracion
+	 */
+	public function setFcEntregaValoracion($fcEntregaValoracion)
+	{
+		$this->fcEntregaValoracion = $fcEntregaValoracion;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcRequeridaEntrega()
+	{
+		return $this->fcRequeridaEntrega;
+	}
+
+	/**
+	 * @param DateTime $fcRequeridaEntrega
+	 */
+	public function setFcRequeridaEntrega($fcRequeridaEntrega)
+	{
+		$this->fcRequeridaEntrega = $fcRequeridaEntrega;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcCompromiso()
+	{
+		return $this->fcCompromiso;
+	}
+
+	/**
+	 * @param DateTime $fcCompromiso
+	 */
+	public function setFcCompromiso($fcCompromiso)
+	{
+		$this->fcCompromiso = $fcCompromiso;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcFinPrevista()
+	{
+		return $this->fcFinPrevista;
+	}
+
+	/**
+	 * @param DateTime $fcFinPrevista
+	 */
+	public function setFcFinPrevista($fcFinPrevista)
+	{
+		$this->fcFinPrevista = $fcFinPrevista;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcComienzoEjecucion()
+	{
+		return $this->fcComienzoEjecucion;
+	}
+
+	/**
+	 * @param DateTime $fcComienzoEjecucion
+	 */
+	public function setFcComienzoEjecucion($fcComienzoEjecucion)
+	{
+		$this->fcComienzoEjecucion = $fcComienzoEjecucion;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcEntrega()
+	{
+		return $this->fcEntrega;
+	}
+
+	/**
+	 * @param DateTime $fcEntrega
+	 */
+	public function setFcEntrega($fcEntrega)
+	{
+		$this->fcEntrega = $fcEntrega;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcResolucionIcm()
+	{
+		return $this->fcResolucionIcm;
+	}
+
+	/**
+	 * @param DateTime $fcResolucionIcm
+	 */
+	public function setFcResolucionIcm($fcResolucionIcm)
+	{
+		$this->fcResolucionIcm = $fcResolucionIcm;
+	}
+
+	/**
+	 * @return DateTime
+	 */
+	public function getFcAceptacion()
+	{
+		return $this->fcAceptacion;
+	}
+
+	/**
+	 * @param DateTime $fcAceptacion
+	 */
+	public function setFcAceptacion($fcAceptacion)
+	{
+		$this->fcAceptacion = $fcAceptacion;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getTiempoTotal()
+	{
+		return $this->tiempoTotal;
+	}
+
+	/**
+	 * @param Float $tiempoTotal
+	 */
+	public function setTiempoTotal($tiempoTotal)
+	{
+		$this->tiempoTotal = $tiempoTotal;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getTiempoResolucion()
+	{
+		return $this->tiempoResolucion;
+	}
+
+	/**
+	 * @param Float $tiempoResolucion
+	 */
+	public function setTiempoResolucion($tiempoResolucion)
+	{
+		$this->tiempoResolucion = $tiempoResolucion;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getHorasValoradas()
+	{
+		return $this->horasValoradas;
+	}
+
+	/**
+	 * @param Float $horasValoradas
+	 */
+	public function setHorasValoradas($horasValoradas)
+	{
+		$this->horasValoradas = $horasValoradas;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getHorasComprometidas()
+	{
+		return $this->horasComprometidas;
+	}
+
+	/**
+	 * @param Float $horasComprometidas
+	 */
+	public function setHorasComprometidas($horasComprometidas)
+	{
+		$this->horasComprometidas = $horasComprometidas;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getHorasRealizadas()
+	{
+		return $this->horasRealizadas;
+	}
+
+	/**
+	 * @param Float $horasRealizadas
+	 */
+	public function setHorasRealizadas($horasRealizadas)
+	{
+		$this->horasRealizadas = $horasRealizadas;
+	}
+
+	/**
+	 * @return Float
+	 */
+	public function getCoste()
+	{
+		return $this->coste;
+	}
+
+	/**
+	 * @param Float $coste
+	 */
+	public function setCoste($coste)
+	{
+		$this->coste = $coste;
+	}
+
+	/**
+	 * @return text
 	 */
 	public function getSolucionUsuario()
 	{
@@ -1210,145 +971,109 @@ class Encargo
 	}
 
 	/**
-	 * Set solucionTecnica.
-	 *
-	 * @param string|null $solucionTecnica
-	 * @return Encargo
+	 * @param text $solucionUsuario
 	 */
-	public function setSolucionTecnica($solucionTecnica = null)
+	public function setSolucionUsuario($solucionUsuario)
 	{
-		$this->solucionTecnica = $solucionTecnica;
-
-		return $this;
+		$this->solucionUsuario = $solucionUsuario;
 	}
 
 	/**
-	 * Get solucionTecnica.
-	 *
-	 * @return string|null
+	 * @return text
 	 */
 	public function getSolucionTecnica()
 	{
 		return $this->solucionTecnica;
 	}
 
-    /**
-     * Set motivoCancelacion.
-     *
-     * @param string|null $motivoCancelacion
-     *
-     * @return Encargo
-     */
-    public function setMotivoCancelacion($motivoCancelacion = null)
-    {
-        $this->motivoCancelacion = $motivoCancelacion;
+	/**
+	 * @param text $solucionTecnica
+	 */
+	public function setSolucionTecnica($solucionTecnica)
+	{
+		$this->solucionTecnica = $solucionTecnica;
+	}
 
-        return $this;
-    }
+	/**
+	 * @return string
+	 */
+	public function getMotivoCancelacion()
+	{
+		return $this->motivoCancelacion;
+	}
 
-    /**
-     * Get motivoCancelacion.
-     *
-     * @return string|null
-     */
-    public function getMotivoCancelacion()
-    {
-        return $this->motivoCancelacion;
-    }
+	/**
+	 * @param string $motivoCancelacion
+	 */
+	public function setMotivoCancelacion($motivoCancelacion)
+	{
+		$this->motivoCancelacion = $motivoCancelacion;
+	}
 
-    /**
-     * Set criticidad.
-     *
-     * @param string|null $criticidad
-     *
-     * @return Encargo
-     */
-    public function setCriticidad($criticidad = null)
-    {
-        $this->criticidad = $criticidad;
+	/**
+	 * @return string
+	 */
+	public function getCriticidad()
+	{
+		return $this->criticidad;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param string $criticidad
+	 */
+	public function setCriticidad($criticidad)
+	{
+		$this->criticidad = $criticidad;
+	}
 
-    /**
-     * Get criticidad.
-     *
-     * @return string|null
-     */
-    public function getCriticidad()
-    {
-        return $this->criticidad;
-    }
+	/**
+	 * @return bool
+	 */
+	public function isBloqueado()
+	{
+		return $this->bloqueado;
+	}
 
-    /**
-     * Set bloqueado.
-     *
-     * @param bool|null $bloqueado
-     *
-     * @return Encargo
-     */
-    public function setBloqueado($bloqueado = null)
-    {
-        $this->bloqueado = $bloqueado;
+	/**
+	 * @param bool $bloqueado
+	 */
+	public function setBloqueado($bloqueado)
+	{
+		$this->bloqueado = $bloqueado;
+	}
 
-        return $this;
-    }
+	/**
+	 * @return bool
+	 */
+	public function isPenaliza()
+	{
+		return $this->penaliza;
+	}
 
-    /**
-     * Get bloqueado.
-     *
-     * @return bool|null
-     */
-    public function getBloqueado()
-    {
-        return $this->bloqueado;
-    }
+	/**
+	 * @param bool $penaliza
+	 */
+	public function setPenaliza($penaliza)
+	{
+		$this->penaliza = $penaliza;
+	}
 
-    /**
-     * Set penaliza.
-     *
-     * @param bool|null $penaliza
-     *
-     * @return Encargo
-     */
-    public function setPenaliza($penaliza = null)
-    {
-        $this->penaliza = $penaliza;
+	/**
+	 * @return Criticidad|null
+	 */
+	public function getCriticidad2()
+	{
+		return $this->criticidad2;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param Criticidad|null $criticidad2
+	 */
+	public function setCriticidad2($criticidad2)
+	{
+		$this->criticidad2 = $criticidad2;
+	}
 
-    /**
-     * Get penaliza.
-     *
-     * @return bool|null
-     */
-    public function getPenaliza()
-    {
-        return $this->penaliza;
-    }
 
-    /**
-     * Set remedy.
-     *
-     * @param \AppBundle\Entity\Remedy|null $remedy
-     *
-     * @return Encargo
-     */
-    public function setRemedy(\AppBundle\Entity\Remedy $remedy = null)
-    {
-        $this->remedy = $remedy;
 
-        return $this;
-    }
-
-    /**
-     * Get remedy.
-     *
-     * @return \AppBundle\Entity\Remedy|null
-     */
-    public function getRemedy()
-    {
-        return $this->remedy;
-    }
 }

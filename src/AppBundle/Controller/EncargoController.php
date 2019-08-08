@@ -2,8 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Datatables\EncargoDatatable;
+use AppBundle\Form\EncargoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -34,7 +38,7 @@ class EncargoController extends Controller
 	public function queryAction(Request $request)
 	{
 		$isAjax = $request->isXmlHttpRequest();
-		$datatable = $this->get('sg_datatables.factory')->create(\AppBundle\Datatables\EncargoDatatable::class);
+		$datatable = $this->get('sg_datatables.factory')->create(EncargoDatatable::class);
 		$datatable->buildDatatable();
 
 		if ($isAjax) {
@@ -45,10 +49,10 @@ class EncargoController extends Controller
 			return $responseService->getResponse();
 		}
 
-		return $this->render('encargo/query.html.twig', array(
+		return $this->render('encargo/query.html.twig', [
 			'datatable' => $datatable,
 			'agrupacion' => null
-		));
+		]);
 	}
 
 	public function queryByAgrupacionAction(Request $request, $idAgrupacion)
@@ -56,7 +60,7 @@ class EncargoController extends Controller
 		$Agrupacion = $this->getDoctrine()->getManager()->getRepository("AppBundle:Agrupacion")->find($idAgrupacion);
 
 		$isAjax = $request->isXmlHttpRequest();
-		$datatable = $this->get('sg_datatables.factory')->create(\AppBundle\Datatables\EncargoDatatable::class);
+		$datatable = $this->get('sg_datatables.factory')->create(EncargoDatatable::class);
 		$datatable->buildDatatable();
 
 		if ($isAjax) {
@@ -70,22 +74,51 @@ class EncargoController extends Controller
 
 		}
 
-		return $this->render('encargo/query.html.twig', array(
+		return $this->render('encargo/query.html.twig', [
 			'datatable' => $datatable,
 			'agrupacion' => $Agrupacion
-		));
+		]);
 	}
 
 
 	/**
 	 * @param $id
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 * @return RedirectResponse
 	 */
 
-	public function  editAction($id){
+	public function viewSecoAction($id)
+	{
 		$Encargo = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo")->find($id);
-		$url = 'http://intranet.madrid.org/seco/html/web/CmmaEncargoConsulta.icm?cdCmmaEncargo='.$Encargo->getNumero();
+		$url = 'http://intranet.madrid.org/seco/html/web/CmmaEncargoConsulta.icm?cdCmmaEncargo=' . $Encargo->getNumero();
 		return $this->redirect($url);
 
 	}
+
+	/**
+	 * @param Request $request
+	 * @param $id
+	 * @return RedirectResponse|Response
+	 */
+	public function editAction(Request $request, $id)
+	{
+		$Encargo = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo")->find($id);
+
+		$form = $this->createForm(EncargoType::class, $Encargo);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted()) {
+			$this->getDoctrine()->getManager()->persist($Encargo);
+			$this->getDoctrine()->getManager()->flush();
+			$status = 'ENCARGO '. $Encargo->getNumero().' MODIFICADO CORRECTAMENTE ';
+			$this->sesion->getFlashBag()->add("status", $status);
+			return $this->redirectToRoute("queryEncargo");
+		}
+
+		$params = ["encargo" => $Encargo,
+			"accion" => "MODIFICACIÓN",
+			"form" => $form->createView()];
+		return $this->render("encargo/edit.html.twig", $params);
+	}
+
 }
+

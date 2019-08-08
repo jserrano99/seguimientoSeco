@@ -78,10 +78,19 @@ class CertificadoServicios
 	/**
 	 * @var float
 	 *
-	 * @ORM\Column(name="total_factura", type="float", nullable=true)
+	 * @ORM\Column(name="total_cuota", type="float", nullable=true)
 	 */
 
-	private $totalFactura;
+	private $totalCuota;
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="base_imponible", type="float", nullable=true)
+	 */
+
+	private $baseImponible;
+
+
 
 	/**
 	 * @var float
@@ -728,4 +737,38 @@ class CertificadoServicios
     {
      return $this->descripcion;
     }
+
+	/**
+	 * @return float
+	 */
+	public function getTotalCuota()
+	{
+		return $this->totalCuota;
+	}
+
+	/**
+	 * @param float $totalCuota
+	 */
+	public function setTotalCuota($totalCuota)
+	{
+		$this->totalCuota = $totalCuota;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getBaseImponible()
+	{
+		return $this->baseImponible;
+	}
+
+	/**
+	 * @param float $baseImponible
+	 */
+	public function setBaseImponible($baseImponible)
+	{
+		$this->baseImponible = $baseImponible;
+	}
+
+
 }

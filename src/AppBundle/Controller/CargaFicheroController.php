@@ -253,7 +253,7 @@ class CargaFicheroController extends Controller
                 $Encargo = new Encargo();
             }
 
-            if ($Encargo->getBloqueado()) {
+            if ($Encargo->isBloqueado()) {
                 $ServicioLog->setMensaje(" **** Encargo= " . $Encargo->getNumero() . " Bloqueado ");
                 $ServicioLog->escribeLog($ficheroLog);
                 continue;

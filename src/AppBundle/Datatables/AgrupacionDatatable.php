@@ -54,7 +54,8 @@ class AgrupacionDatatable extends AbstractDatatable
 		$this->features->set([
 			'auto_width' => true,
 			'ordering' => true,
-			'length_change' => true
+			'length_change' => true,
+			'state_save' => true
 		]);
 
 		$TipoAgrupacionAll = $this->getEntityManager()->getRepository("AppBundle:TipoAgrupacion")->findAll();
@@ -66,11 +67,11 @@ class AgrupacionDatatable extends AbstractDatatable
 			->add('tipoAgrupacion.descripcion', Column::class, array(
 				'title' => 'Tipo Agrupación',
 				'width' => '400px',
-				'filter' => array(SelectFilter::class,
-					array(
+				'filter' => [SelectFilter::class,
+					[
 						'multiple' => false,
-						'select_options' => array('' => 'Todo') + $this->getOptionsArrayFromEntities($TipoAgrupacionAll, 'descripcion', 'descripcion'),
-						'search_type' => 'eq'))))
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($TipoAgrupacionAll, 'descripcion', 'descripcion'),
+						'search_type' => 'eq']]))
 			->add('fcInicio', DateTimeColumn::class, [
 				'title' => 'F.Inicio',
 				'width' => '80px',
@@ -101,48 +102,13 @@ class AgrupacionDatatable extends AbstractDatatable
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button'
 						]],
-//					['route' => 'deleteAgrupacion',
-//						'route_parameters' => [
-//							'id' => 'id'],
-//						'label' => '',
-//						'icon' => 'glyphicon glyphicon-trash',
-//						'attributes' => [
-//							'rel' => 'tooltip',
-//							'title' => 'Eliminar Agrupación',
-//							'class' => 'btn btn-danger btn-xs',
-//							'role' => 'button'],
-//						'confirm' => true,
-//						'confirm_message' => 'Confirmar la Eliminación de Agrupacion'],
-//					['route' => 'plasByAgrupacion2',
-//						'route_parameters' => [
-//							'pAgrupacion' => 'codigo'],
-//						'label' => '',
-//						'icon' => 'glyphicon glyphicon-print',
-//						'attributes' => [
-//							'rel' => 'tooltip',
-//							'title' => 'Report de Encargos de la Agrupación',
-//							'class' => 'btn btn-success btn-xs',
-//							'target' => 'blank',
-//							'role' => 'button']
-//					],
-//					['route' => 'planificacion',
-//						'route_parameters' => [
-//							'pAgrupacion' => 'codigo'],
-//						'label' => '',
-//						'icon' => 'glyphicon glyphicon-tasks',
-//						'attributes' => [
-//							'rel' => 'tooltip',
-//							'title' => 'Report de Planificación de Encargos' ,
-//							'class' => 'btn btn-success btn-xs',
-//							'target' => 'blank',
-//							'role' => 'button']
-//					],
 					['route' => 'queryEncargosAgrupacion',
 						'route_parameters' => ['idAgrupacion' => 'id'],
 						'label' => '',
 						'icon' => 'glyphicon glyphicon-folder-open',
 						'attributes' => [
 							'rel' => 'tooltip',
+							'target' => '_blank',
 							'title' => 'Consulta Encargos de la Agrupación',
 							'class' => 'btn btn-warning btn-xs',
 							'target' => 'blank',

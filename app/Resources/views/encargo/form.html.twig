@@ -1,10 +1,45 @@
-<script>
-    $(document).ready(function () {
-    });
-</script>
-
 <div class="container">
     {{ form_start (form,{'action':'','method':'POST'}) }}
-    {{ form_end (form) }}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="form_row mismalinea">{{ form_row(form.id) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.numero) }}</div>
+            <div class="clearfix"></div>
+            <div class="form_row mismalinea">{{ form_row(form.titulo) }}</div>
+            <div class="panel-body">
+                <div id="tabs" class="pestana container">
+                    <ul class="nav nav-tabs">
+                        <li><a id="tdatosGen" href="#datosGen">Datos Generales</a></li>
+                        <li><a id="tdatosGen" href="#descripcion">Descripcion</a></li>
+                        <li><a id="tdatosGen" href="#remedy">Remedy</a></li>
+                        <li><a id="tdatosGen" href="#solucion">Solución</a></li>
+                    </ul>
+                    <div id="datosGen">
+                        <div class="form_row mismalinea">{{ form_row(form.objetoEncargo) }}</div>
+                        <div class="form_row mismalinea">{{ form_row(form.estadoActual) }}</div>
+                        <div class="form_row mismalinea">{{ form_row(form.agrupacion) }}</div>
+                        <div class="form_row mismalinea">{{ form_row(form.criticidad2) }}</div>
+                        <div class="form_row mismalinea">{{ form_row(form.coste) }}</div>
+                    </div>
+                    <div id="descripcion">
+                        <div class="form_row mismalinea">{{ form_row(form.descripcion) }}</div>
+                    </div>
+                    <div id="remedy">
+                        <div class="form_row mismalinea">{{ form_row(form.remedy) }}
+                        {% if encargo.remedy %}
+                            {{ encargo.remedy }}
+                        {% endif %}
+                        </div>
+                    </div>
+                    <div id="solucion">
+                        <div class="form_row mismalinea">{{ form_row(form.solucionUsuario) }}</div>
+                        <div class="clearfix"></div>
+                        <div class="form_row mismalinea">{{ form_row(form.solucionTecnica) }}</div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>

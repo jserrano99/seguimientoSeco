@@ -16,9 +16,9 @@
                 <div class="form_row mismalinea">{{ form_row(form.cerrarCertificado) }}</div>
                 <div class="clearfix"></div>
                 <br/>
-                <div class="form_row mismalinea">{{ form_row(form.totalFactura) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.totalCuota) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.baseImponible) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.cuotaIva) }}</div>
-                <div class="form_row mismalinea">{{ form_row(form.totalFactura) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.totalPenalizaciones) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.penalizacionAplicable) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.totalFacturaConIva) }}</div>
@@ -30,6 +30,7 @@
             {% if  estado == 'GENERADO' or estado  == 'IMPRESO' %}
                 <div class="form_row mismalinea">{{ form_row(form.generarImportes) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.incluirEncargo) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.queryEncargos) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.revisionPenalizaciones) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.eliminarCertificado) }}</div>
                 <div class="clearfix"></div>

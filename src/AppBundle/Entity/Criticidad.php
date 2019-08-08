@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Table(name="estado_encargo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EstadoEncargoRepository")
+ * @ORM\Table(name="criticidad")
+ * @ORM\Entity()
  */
 
-class EstadoEncargo
+class Criticidad
 {
 	/**
 	 * @var integer

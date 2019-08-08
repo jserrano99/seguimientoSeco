@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -15,7 +16,6 @@ use DateTime;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AgrupacionRepository")
  *
  */
-
 class Agrupacion
 {
 	/**
@@ -65,133 +65,107 @@ class Agrupacion
 	private $tipoAgrupacion;
 
 
+	public function __toString()
+	{
+		// TODO: Implement __toString() method.
+		return $this->codigo . ' ' . $this->descripcion;
+	}
+
 	/**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set codigo.
-     *
-     * @param string $codigo
-     *
-     * @return Agrupacion
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
+	/**
+	 * @param int $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
 
-        return $this;
-    }
+	/**
+	 * @return int
+	 */
+	public function getCodigo()
+	{
+		return $this->codigo;
+	}
 
-    /**
-     * Get codigo.
-     *
-     * @return string
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
+	/**
+	 * @param int $codigo
+	 */
+	public function setCodigo($codigo)
+	{
+		$this->codigo = $codigo;
+	}
 
-    /**
-     * Set descripcion.
-     *
-     * @param string $descripcion
-     *
-     * @return Agrupacion
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
+	/**
+	 * @return string
+	 */
+	public function getDescripcion()
+	{
+		return $this->descripcion;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param string $descripcion
+	 */
+	public function setDescripcion($descripcion)
+	{
+		$this->descripcion = $descripcion;
+	}
 
-    /**
-     * Get descripcion.
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
+	/**
+	 * @return Datetime
+	 */
+	public function getFcInicio()
+	{
+		return $this->fcInicio;
+	}
 
-    /**
-     * Set fcInicio.
-     *
-     * @param \DateTime $fcInicio
-     *
-     * @return Agrupacion
-     */
-    public function setFcInicio($fcInicio)
-    {
-        $this->fcInicio = $fcInicio;
+	/**
+	 * @param Datetime $fcInicio
+	 */
+	public function setFcInicio($fcInicio)
+	{
+		$this->fcInicio = $fcInicio;
+	}
 
-        return $this;
-    }
+	/**
+	 * @return Datetime
+	 */
+	public function getFcFin()
+	{
+		return $this->fcFin;
+	}
 
-    /**
-     * Get fcInicio.
-     *
-     * @return \DateTime
-     */
-    public function getFcInicio()
-    {
-        return $this->fcInicio;
-    }
+	/**
+	 * @param Datetime $fcFin
+	 */
+	public function setFcFin($fcFin)
+	{
+		$this->fcFin = $fcFin;
+	}
 
-    /**
-     * Set fcFin.
-     *
-     * @param \DateTime $fcFin
-     *
-     * @return Agrupacion
-     */
-    public function setFcFin($fcFin)
-    {
-        $this->fcFin = $fcFin;
+	/**
+	 * @return TipoAgrupacion\null
+	 */
+	public function getTipoAgrupacion()
+	{
+		return $this->tipoAgrupacion;
+	}
 
-        return $this;
-    }
+	/**
+	 * @param TipoAgrupacion\null $tipoAgrupacion
+	 */
+	public function setTipoAgrupacion($tipoAgrupacion)
+	{
+		$this->tipoAgrupacion = $tipoAgrupacion;
+	}
 
-    /**
-     * Get fcFin.
-     *
-     * @return \DateTime
-     */
-    public function getFcFin()
-    {
-        return $this->fcFin;
-    }
 
-    /**
-     * Set tipoAgrupacion.
-     *
-     * @param \AppBundle\Entity\TipoAgrupacion|null $tipoAgrupacion
-     *
-     * @return Agrupacion
-     */
-    public function setTipoAgrupacion(\AppBundle\Entity\TipoAgrupacion $tipoAgrupacion = null)
-    {
-        $this->tipoAgrupacion = $tipoAgrupacion;
-
-        return $this;
-    }
-
-    /**
-     * Get tipoAgrupacion.
-     *
-     * @return \AppBundle\Entity\TipoAgrupacion|null
-     */
-    public function getTipoAgrupacion()
-    {
-        return $this->tipoAgrupacion;
-    }
 }

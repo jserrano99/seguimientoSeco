@@ -69,12 +69,15 @@
 
     {% if app.user != null %}
         <div class="container">
-            <button class="btn btn-success btn-md" onclick="window.history.go(-1)">
-                <span class="glyphicon glyphicon-arrow-left"></span> Atras
-            </button>
+{#            <button class="btn btn-success btn-md" onclick="window.history.go(-1)">#}
+{#                <span class="glyphicon glyphicon-arrow-left"></span> Atras#}
+{#            </button>#}
             <h3>{% block titulo %}{% endblock %}</h3>
         </div>
-        {% block contenido %} Contenido por Defecto de la Plantilla {% endblock %}
+        {% block contenido %}
+            <div class="container"><img src= "{{asset('img/textoMagma.jpg')}}" width="700" height="250" />
+            </div>
+             {% endblock %}
     {% else %}
         {% block login %}
             {% include 'login/login.form.html.twig' %}

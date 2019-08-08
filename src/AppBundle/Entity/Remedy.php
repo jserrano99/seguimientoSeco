@@ -605,4 +605,12 @@ class Remedy
     {
         return $this->mes;
     }
+
+	public function __toString()
+	{
+		// TODO: Implement __toString() method.
+		return $this->numero;
+	}
+
+
 }

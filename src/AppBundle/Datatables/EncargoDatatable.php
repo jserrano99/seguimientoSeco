@@ -86,22 +86,22 @@ class EncargoDatatable extends AbstractDatatable
 						'attributes' => [
 							'rel' => 'tooltip',
 							'title' => 'Editar',
+							'class' => 'btn btn-success btn-xs',
+							'role' => 'button',
+							'target' => 'blank'
+						]],
+					['route' => 'viewEncargoSeco',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-search',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Ver Encargo en SECO',
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button',
 							'target' => 'blank'
 						]],
-					['route' => 'deleteEncargo',
-						'route_parameters' => [
-							'id' => 'id'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-trash',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Eliminar',
-							'class' => 'btn btn-danger btn-xs',
-							'role' => 'button'],
-						'confirm' => true,
-						'confirm_message' => 'Confirmar la Eliminación de Encargo'],
 				]]);
 	}
 

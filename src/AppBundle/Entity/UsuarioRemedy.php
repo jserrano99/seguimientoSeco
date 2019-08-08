@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -15,7 +16,6 @@ use DateTime;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRemedyRepository")
  *
  */
-
 class UsuarioRemedy
 {
 	/**
@@ -59,109 +59,115 @@ class UsuarioRemedy
 	private $centro;
 
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id.
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set login.
-     *
-     * @param string $login
-     *
-     * @return UsuarioRemedy
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
+	/**
+	 * Set login.
+	 *
+	 * @param string $login
+	 *
+	 * @return UsuarioRemedy
+	 */
+	public function setLogin($login)
+	{
+		$this->login = $login;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get login.
-     *
-     * @return string
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
+	/**
+	 * Get login.
+	 *
+	 * @return string
+	 */
+	public function getLogin()
+	{
+		return $this->login;
+	}
 
-    /**
-     * Set apellidos.
-     *
-     * @param string $apellidos
-     *
-     * @return UsuarioRemedy
-     */
-    public function setApellidos($apellidos)
-    {
-        $this->apellidos = $apellidos;
+	/**
+	 * Set apellidos.
+	 *
+	 * @param string $apellidos
+	 *
+	 * @return UsuarioRemedy
+	 */
+	public function setApellidos($apellidos)
+	{
+		$this->apellidos = $apellidos;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get apellidos.
-     *
-     * @return string
-     */
-    public function getApellidos()
-    {
-        return $this->apellidos;
-    }
+	/**
+	 * Get apellidos.
+	 *
+	 * @return string
+	 */
+	public function getApellidos()
+	{
+		return $this->apellidos;
+	}
 
-    /**
-     * Set nombre.
-     *
-     * @param string|null $nombre
-     *
-     * @return UsuarioRemedy
-     */
-    public function setNombre($nombre = null)
-    {
-        $this->nombre = $nombre;
+	/**
+	 * Set nombre.
+	 *
+	 * @param string|null $nombre
+	 *
+	 * @return UsuarioRemedy
+	 */
+	public function setNombre($nombre = null)
+	{
+		$this->nombre = $nombre;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get nombre.
-     *
-     * @return string|null
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
+	/**
+	 * Get nombre.
+	 *
+	 * @return string|null
+	 */
+	public function getNombre()
+	{
+		return $this->nombre;
+	}
 
-    /**
-     * Set centro.
-     *
-     * @param \AppBundle\Entity\Centro|null $centro
-     *
-     * @return UsuarioRemedy
-     */
-    public function setCentro(\AppBundle\Entity\Centro $centro = null)
-    {
-        $this->centro = $centro;
+	/**
+	 * Set centro.
+	 *
+	 * @param \AppBundle\Entity\Centro|null $centro
+	 *
+	 * @return UsuarioRemedy
+	 */
+	public function setCentro(\AppBundle\Entity\Centro $centro = null)
+	{
+		$this->centro = $centro;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get centro.
-     *
-     * @return \AppBundle\Entity\Centro|null
-     */
-    public function getCentro()
-    {
-        return $this->centro;
-    }
+	/**
+	 * Get centro.
+	 *
+	 * @return \AppBundle\Entity\Centro|null
+	 */
+	public function getCentro()
+	{
+		return $this->centro;
+	}
+
+	public function __toString()
+	{
+		return $this->login . " " . $this->apellidos . ", " . $this->nombre;
+
+	}
 }

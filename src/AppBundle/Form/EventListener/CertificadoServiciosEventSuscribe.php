@@ -8,196 +8,210 @@ use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 
 class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents()
-    {
-        return array(
-            FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit',
-            FormEvents::POST_SET_DATA => 'postSetData'
-        );
-    }
+	public static function getSubscribedEvents()
+	{
+		return [
+			FormEvents::PRE_SET_DATA => 'preSetData',
+			FormEvents::PRE_SUBMIT => 'preSubmit',
+			FormEvents::POST_SET_DATA => 'postSetData'
+		];
+	}
 
-    public function preSetData(FormEvent $event)
-    {
-        $data = $event->getData();
-        $form = $event->getForm();
+	public function preSetData(FormEvent $event)
+	{
+		$data = $event->getData();
+		$form = $event->getForm();
 
-        if ($data->getEstadoCertificado() == null) {
-            $form->add('anyo', EntityType::class, array(
-                'label' => 'Año',
-                'class' => 'AppBundle:Anyo',
-                'mapped' => false,
-                'required' => "required",
-                'placeholder' => 'Seleccione Año ....',
-                'attr' => array("class" => "form-control ")))
-                ->add('mes', EntityType::class, array(
-                    'label' => 'Mes',
-                    'class' => 'AppBundle:Mes',
-                    'required' => "required",
-                    'placeholder' => 'Seleccione mes ....',
-                    'attr' => array("class" => "form-control ")))
-                ->add('aplicaPenalizacion', ChoiceType::class, array(
-                    "label" => 'Aplicar Penalizaciones ',
-                    "required" => "required",
-                    "choices" => array("Si" => true,
-                        "No" => false),
-                    "attr" => array("class" => "form-control "
-                    )))
-                ->add('generarCertificado', SubmitType::class, array(
-                    "attr" => array("class" => "btn btn-t btn-success")));
-        } else {
-            $form
-                ->add('id', TextType::class, array(
-                    "label" => 'Identificador',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control corto"
-                    )))
-                ->add('mes', EntityType::class, array(
-                    'label' => 'Mes',
-                    'class' => 'AppBundle:Mes',
-                    'disabled' => true,
-                    'attr' => array("class" => "form-control ")))
-                ->add('descripcion', TextType::class, array(
-                    "label" => 'Descripción',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control medio"
-                    )))
-                ->add('estadoCertificado', EntityType::class, array(
-                    'label' => 'Estado Certificado',
-                    'class' => 'AppBundle:EstadoCertificado',
-                    'disabled' => true,
-                    'attr' => array("class" => "form-control ")))
-                ->add('totalFactura', TextType::class, array(
-                    "label" => 'Base Imponible',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control "
-                    )))
-                ->add('cuotaIva', TextType::class, array(
-                    "label" => 'Cuota IVA (21%)',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control "
-                    )))
-                ->add('penalizacionAplicable', TextType::class, array(
-                    "label" => 'Penalización Aplicable',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control "
-                    )))
-                ->add('totalPenalizaciones', TextType::class, array(
-                    "label" => 'Total Penalizaciones',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control "
-                    )))
-                ->add('totalFacturaConIva', TextType::class, array(
-                    "label" => 'Total Factura',
-                    "required" => 'required',
-                    'disabled' => true,
-                    "attr" => array("class" => "form-control "
-                    )));
+		if ($data->getEstadoCertificado() == null) {
+			$form->add('anyo', EntityType::class, [
+				'label' => 'Año',
+				'class' => 'AppBundle:Anyo',
+				'mapped' => false,
+				'required' => "required",
+				'placeholder' => 'Seleccione Año ....',
+				'attr' => ["class" => "form-control "]])
+				->add('mes', EntityType::class, [
+					'label' => 'Mes',
+					'class' => 'AppBundle:Mes',
+					'required' => "required",
+					'placeholder' => 'Seleccione mes ....',
+					'attr' => ["class" => "form-control "]])
+				->add('aplicaPenalizacion', ChoiceType::class, [
+					"label" => 'Aplicar Penalizaciones ',
+					"required" => "required",
+					"choices" => ["Si" => true,
+						"No" => false],
+					"attr" => ["class" => "form-control "
+					]])
+				->add('generarCertificado', SubmitType::class, [
+					"attr" => ["class" => "btn btn-t btn-success"]]);
+		} else {
+			$form
+				->add('id', TextType::class, [
+					"label" => 'Identificador',
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control corto"
+					]])
+				->add('mes', EntityType::class, [
+					'label' => 'Mes',
+					'class' => 'AppBundle:Mes',
+					'disabled' => true,
+					'attr' => ["class" => "form-control "]])
+				->add('descripcion', TextType::class, [
+					"label" => 'Descripción',
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control medio"
+					]])
+				->add('estadoCertificado', EntityType::class, [
+					'label' => 'Estado Certificado',
+					'class' => 'AppBundle:EstadoCertificado',
+					'disabled' => true,
+					'attr' => ["class" => "form-control "]])
+				->add('baseImponible', MoneyType::class, [
+					"label" => 'Base Imponible', 'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]])
+				->add('totalCuota', MoneyType::class, [
+					"label" => 'Total Cuotas ',
+					'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]])
+				->add('cuotaIva', MoneyType::class, [
+					"label" => 'Cuota IVA (21%) ', 'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]])
+				->add('penalizacionAplicable', MoneyType::class, [
+					"label" => 'Penalización Aplicable ', 'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]])
+				->add('totalPenalizaciones', MoneyType::class, [
+					"label" => 'Total Penalizaciones ', 'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]])
+				->add('totalFacturaConIva', MoneyType::class, [
+					"label" => 'Total Factura', 'grouping' => true,
+					"required" => 'required',
+					'disabled' => true,
+					"attr" => ["class" => "form-control "
+					]]);
 
-            $form->add('queryEncargos', ButtonType::class, array(
-                'label' => 'Ver Encargos',
-                "attr" => array("class" => "btn btn-t btn-success")));
-
-
-            if ($data->getEstadoCertificado() == 'PENDIENTE') {
-                $form->add('generarImportes', ButtonType::class, array(
-                    'label' => 'Generar Importes',
-                    "attr" => array("class" => "btn btn-t btn-success")));
-                $form->add('incluirEncargo', ButtonType::class, array(
-                    'label' => 'Añadir Encargos',
-                    "attr" => array("class" => "btn btn-t btn-success")));
-            }
-
-            if ($data->getEstadoCertificado() == 'GENERADO' or
-                $data->getEstadoCertificado() == 'IMPRESO') {
-                $form
-                    ->add('generarImportes', ButtonType::class, array(
-                        'label' => 'Generar Importes',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('imprimirCertificado', ButtonType::class, array(
-                        'label' => 'Imprimir Certificado Servicios',
-                        "attr" => array("class" => "btn btn-t btn-primary")))
-                    ->add('imprimirCertificadoActividad', ButtonType::class, array(
-                        'label' => 'Imprimir Certificado Actividad',
-                        "attr" => array("class" => "btn btn-t btn-primary")))
-                    ->add('revisionPenalizaciones', ButtonType::class, array(
-                        'label' => 'Revisión Penalizaciones',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('penalizaciones', ButtonType::class, array(
-                        'label' => 'Imprimir Informe de Penalizaciones',
-                        "attr" => array("class" => "btn btn-t btn-primary")))
-                    ->add('penalizacionesDetalle', ButtonType::class, array(
-                        'label' => 'Detalle Penalizaciones',
-                        "attr" => array("class" => "btn btn-t btn-primary")))
-                    ->add('incluirEncargo', ButtonType::class, array(
-                        'label' => 'Añadir Encargos',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('cerrarCertificado', ButtonType::class, array(
-                        'label' => 'Cerrar Certificado Servicios',
-                        "attr" => array("class" => "btn btn-success")))
-                    ->add('enviarProveedor', ButtonType::class, array(
-                        'label' => 'Enviado a Proveedor',
-                        "attr" => array("class" => "btn btn-success")));
-            }
-
-            if ($data->getEstadoCertificado() == 'CERRADO') {
-                $form
-                    ->add('imprimirCertificado', ButtonType::class, array(
-                        'label' => 'Imprimir Certificado Servicios',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('imprimirCertificadoActividad', ButtonType::class, array(
-                        'label' => 'Imprimir Certificado Actividad',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('penalizacionesDetalle', ButtonType::class, array(
-                        'label' => 'Detalle Penalizaciones',
-                        "attr" => array("class" => "btn btn-t btn-success")))
-                    ->add('penalizaciones', ButtonType::class, array(
-                        'label' => 'Imprimir Informe de Penalizaciones',
-                        "attr" => array("class" => "btn btn-t btn-success")));
-            }
-
-            if ($data->getEstadoCertificado() != 'CERRADO') {
-                $form
-                    ->add('eliminarCertificado', ButtonType::class, array(
-                        'label' => 'Eliminar Certificado Servicios',
-                        "attr" => array("class" => "btn btn-t btn-danger")));
-            }
-        }
-        if (null === $data) {
-            return;
-        }
-
-        return;
-    }
-
-    public function preSubmit(FormEvent $event)
-    {
-        $form = $event->getForm();
-    }
-
-    public function postSetData(FormEvent $event)
-    {
-        $data = $event->getData();
-        $form = $event->getForm();
-
-        if (null === $data) {
-            return;
-        }
+			$form->add('queryEncargos', ButtonType::class, [
+				'label' => 'Ver Encargos',
+				"attr" => ["class" => "btn btn-t btn-success"]]);
 
 
-        return;
-    }
+			if ($data->getEstadoCertificado() == 'PENDIENTE') {
+				$form->add('generarImportes', ButtonType::class, [
+					'label' => 'Generar Importes',
+					"attr" => ["class" => "btn btn-t btn-success"]]);
+				$form->add('incluirEncargo', ButtonType::class, [
+					'label' => 'Añadir Encargos',
+					"attr" => ["class" => "btn btn-t btn-success"]]);
+				$form->add('queryEncargos', ButtonType::class, [
+					'label' => 'Ver  Encargos',
+					"attr" => ["class" => "btn btn-t btn-success"]]);
+			}
+
+			if ($data->getEstadoCertificado() == 'GENERADO' or
+				$data->getEstadoCertificado() == 'IMPRESO') {
+				$form
+					->add('generarImportes', ButtonType::class, [
+						'label' => 'Generar Importes',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('imprimirCertificado', ButtonType::class, [
+						'label' => 'Imprimir Certificado Servicios',
+						"attr" => ["class" => "btn btn-t btn-primary"]])
+					->add('imprimirCertificadoActividad', ButtonType::class, [
+						'label' => 'Imprimir Certificado Actividad',
+						"attr" => ["class" => "btn btn-t btn-primary"]])
+					->add('revisionPenalizaciones', ButtonType::class, [
+						'label' => 'Revisión Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('penalizaciones', ButtonType::class, [
+						'label' => 'Imprimir Informe de Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-primary"]])
+					->add('penalizacionesDetalle', ButtonType::class, [
+						'label' => 'Detalle Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-primary"]])
+					->add('incluirEncargo', ButtonType::class, [
+						'label' => 'Añadir Encargos',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('queryEncargos', ButtonType::class, [
+						'label' => 'Ver  Encargos',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('cerrarCertificado', ButtonType::class, [
+						'label' => 'Cerrar Certificado Servicios',
+						"attr" => ["class" => "btn btn-success"]])
+					->add('enviarProveedor', ButtonType::class, [
+						'label' => 'Enviado a Proveedor',
+						"attr" => ["class" => "btn btn-success"]]);
+			}
+
+			if ($data->getEstadoCertificado() == 'CERRADO') {
+				$form
+					->add('imprimirCertificado', ButtonType::class, [
+						'label' => 'Imprimir Certificado Servicios',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('imprimirCertificadoActividad', ButtonType::class, [
+						'label' => 'Imprimir Certificado Actividad',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('penalizacionesDetalle', ButtonType::class, [
+						'label' => 'Detalle Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('penalizaciones', ButtonType::class, [
+						'label' => 'Imprimir Informe de Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-success"]]);
+			}
+
+			if ($data->getEstadoCertificado() != 'CERRADO') {
+				$form
+					->add('eliminarCertificado', ButtonType::class, [
+						'label' => 'Eliminar Certificado Servicios',
+						"attr" => ["class" => "btn btn-t btn-danger"]]);
+			}
+		}
+		if (null === $data) {
+			return;
+		}
+
+		return;
+	}
+
+	public function preSubmit(FormEvent $event)
+	{
+		$form = $event->getForm();
+	}
+
+	public function postSetData(FormEvent $event)
+	{
+		$data = $event->getData();
+		$form = $event->getForm();
+
+		if (null === $data) {
+			return;
+		}
+
+
+		return;
+	}
 
 }

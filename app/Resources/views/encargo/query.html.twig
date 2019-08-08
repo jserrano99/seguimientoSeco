@@ -1,9 +1,11 @@
 {% extends "base.html.twig" %}
-{% block titulo %} 
-    <div id='dtitulo' class="container"> ENCARGOS **CONSULTA**
-    {% if (agrupacion) %}
-        <span> AGRUPACION: {{ agrupacion.codigo }}:{{ agrupacion.descripcion }} </span>
-    {% endif %}
+{% block titulo %}
+    <div id='dtitulo' class="container"> ENCARGOS **CONSULTA** <br/>
+        {% if (agrupacion) %}
+            <span> AGRUPACION: {{ agrupacion.codigo }}:{{ agrupacion.descripcion }} </span>
+            <span><a href="{{ path("queryAgrupacion") }}" class="btn btn-success">Consulta Agrupaciones</a> </span>
+        {% else %}
+        {% endif %}
     </div>
 {% endblock %} 
 
@@ -11,7 +13,7 @@
     <div class="container-fluid">
         {% for message in app.session.flashbag().get('status') %}
             <div class="alert alert-success">
-                {{message}}
+                {{ message }}
             </div>
             <hr/>
         {% endfor %}

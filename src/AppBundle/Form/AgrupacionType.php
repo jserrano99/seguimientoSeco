@@ -38,10 +38,9 @@ class AgrupacionType extends AbstractType
 				'placeholder' => 'Seleccione Tipo de Agrupacion....',
 				'attr' => array("class" => "form-control")
 			))
-
-			->add('Guardar', SubmitType::class, array(
-					"attr" => array("class" => "btn btn-t btn-success")
-				)
+			->add('Guardar', SubmitType::class, [
+					"attr" => ["class" => "btn btn-t btn-success"]
+				]
 			);
 	}
 
