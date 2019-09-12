@@ -3,12 +3,15 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Datatables\EncargoDatatable;
+use AppBundle\Entity\AnotacionEncargo;
+use AppBundle\Form\AnotacionEncargoType;
 use AppBundle\Form\EncargoType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use DateTime;
 
 /**
  * Class EncargoController
@@ -101,24 +104,63 @@ class EncargoController extends Controller
 	 */
 	public function editAction(Request $request, $id)
 	{
-		$Encargo = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo")->find($id);
+		$EntityManager = $this->getDoctrine()->getManager();
+
+		$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($id);
 
 		$form = $this->createForm(EncargoType::class, $Encargo);
 		$form->handleRequest($request);
 
+		$Anotaciones = $EntityManager->getRepository("AppBundle:AnotacionEncargo")->findBy(["encargo" => $Encargo]);
+
 		if ($form->isSubmitted()) {
 			$this->getDoctrine()->getManager()->persist($Encargo);
 			$this->getDoctrine()->getManager()->flush();
-			$status = 'ENCARGO '. $Encargo->getNumero().' MODIFICADO CORRECTAMENTE ';
+			$status = 'ENCARGO ' . $Encargo->getNumero() . ' MODIFICADO CORRECTAMENTE ';
 			$this->sesion->getFlashBag()->add("status", $status);
 			return $this->redirectToRoute("queryEncargo");
 		}
 
 		$params = ["encargo" => $Encargo,
 			"accion" => "MODIFICACIÓN",
+			"anotacionesEncargo" => $Anotaciones,
 			"form" => $form->createView()];
 		return $this->render("encargo/edit.html.twig", $params);
 	}
 
+
+	/**
+	 * @param Request $request
+	 * @param int $encargo_id
+	 * @return RedirectResponse|Response
+	 */
+	public function addAnotacionAction(Request $request, $encargo_id)
+	{
+
+		$EntityManager = $this->getDoctrine()->getManager();
+
+		$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($encargo_id);
+		$fecha = new DateTime();
+		$AnotacionEncargo = new AnotacionEncargo();
+		$AnotacionEncargo->setEncargo($Encargo);
+		$AnotacionEncargo->setUsuario($this->getUser());
+		$AnotacionEncargo->setFecha($fecha);
+
+		$form = $this->createForm(AnotacionEncargoType::class, $AnotacionEncargo);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted()) {
+			$EntityManager->persist($AnotacionEncargo);
+			$EntityManager->flush();
+			$status = 'ANOTACIÓN CREADA CORRECTAMENTE ';
+			$this->sesion->getFlashBag()->add("status", $status);
+			$params = ["id" => $Encargo->getId()];
+			return $this->redirectToRoute("editEncargo", $params);
+		}
+
+		$params = ["encargo" => $Encargo,
+			"form" => $form->createView()];
+		return $this->render("encargo/addAnotacion.html.twig", $params);
+	}
 }
 

@@ -55,6 +55,13 @@ class CertificadoServicios
 	private $estadoCertificado;
 
 	/**
+	 * @var \Datetime
+	 *
+	 * @ORM\Column(name="fecha_certificado", type="datetime", nullable=false)
+	 */
+	private $fechaCertificado;
+
+	/**
 	 * @var Mes\null
 	 *
 	 * @ORM\ManyToOne(targetEntity="Mes")
@@ -768,6 +775,22 @@ class CertificadoServicios
 	public function setBaseImponible($baseImponible)
 	{
 		$this->baseImponible = $baseImponible;
+	}
+
+	/**
+	 * @return Datetime
+	 */
+	public function getFechaCertificado()
+	{
+		return $this->fechaCertificado;
+	}
+
+	/**
+	 * @param Datetime $fechaCertificado
+	 */
+	public function setFechaCertificado($fechaCertificado)
+	{
+		$this->fechaCertificado = $fechaCertificado;
 	}
 
 

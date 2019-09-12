@@ -34,7 +34,7 @@ class Encargo
 	private $numero;
 
 	/**
-	 * @var \AppBundle\Entity\Contrato|null
+	 * @var Contrato|null
 	 * @ORM\ManyToOne(targetEntity="Contrato")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="contrato_id", referencedColumnName="id")
@@ -43,7 +43,7 @@ class Encargo
 	private $contrato;
 
 	/**
-	 * @var \AppBundle\Entity\Remedy|null
+	 * @var Remedy|null
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Remedy")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="remedy_id", referencedColumnName="id")
@@ -52,7 +52,7 @@ class Encargo
 	private $remedy;
 
 	/**
-	 * @var \AppBundle\Entity\ObjetoEncargo|null
+	 * @var ObjetoEncargo|null
 	 * @ORM\ManyToOne(targetEntity="ObjetoEncargo")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="objeto_encargo_id", referencedColumnName="id")
@@ -61,7 +61,7 @@ class Encargo
 	private $objetoEncargo;
 
 	/**
-	 * @var \AppBundle\Entity\Agrupacion|null
+	 * @var Agrupacion|null
 	 * @ORM\ManyToOne(targetEntity="Agrupacion")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="agrupacion_id", referencedColumnName="id")
@@ -70,7 +70,7 @@ class Encargo
 	private $agrupacion;
 
 	/**
-	 * @var \AppBundle\Entity\EstadoEncargo|null
+	 * @var EstadoEncargo|null
 	 * @ORM\ManyToOne(targetEntity="EstadoEncargo")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="estado_actual_id", referencedColumnName="id")
@@ -79,7 +79,7 @@ class Encargo
 	private $estadoActual;
 
 	/**
-	 * @var \AppBundle\Entity\Aplicacion|null
+	 * @var Aplicacion|null
 	 * @ORM\ManyToOne(targetEntity="Aplicacion")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="aplicacion_id", referencedColumnName="id")
@@ -88,7 +88,7 @@ class Encargo
 	private $aplicacion;
 
 	/**
-	 * @var \AppBundle\Entity\ModuloFuncional|null
+	 * @var ModuloFuncional|null
 	 * @ORM\ManyToOne(targetEntity="ModuloFuncional")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="modulo_funcional_id", referencedColumnName="id")
@@ -97,7 +97,7 @@ class Encargo
 	private $moduloFuncional;
 
 	/**
-	 * @var \AppBundle\Entity\ModuloTecnico|null
+	 * @var ModuloTecnico|null
 	 * @ORM\ManyToOne(targetEntity="ModuloTecnico")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="modulo_tecnico_id", referencedColumnName="id")
@@ -106,7 +106,7 @@ class Encargo
 	private $moduloTecnico;
 
 	/**
-	 * @var \AppBundle\Entity\TipoSolucion|null
+	 * @var TipoSolucion|null
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TipoSolucion")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="tipo_solucion_id", referencedColumnName="id")
@@ -115,7 +115,7 @@ class Encargo
 	private $tipoSolucion;
 
 	/**
-	 * @var \AppBundle\Entity\Criticidad|null
+	 * @var Criticidad|null
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Criticidad")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="criticidad_id", referencedColumnName="id")
@@ -124,7 +124,7 @@ class Encargo
 	private $criticidad2;
 
 	/**
-	 * @var \AppBundle\Entity\Operacional|null
+	 * @var Operacional|null
 	 * @ORM\ManyToOne(targetEntity="Operacional")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="operacional1_id", referencedColumnName="id")
@@ -133,7 +133,7 @@ class Encargo
 	private $operacional1;
 
 	/**
-	 * @var \AppBundle\Entity\Operacional|null
+	 * @var Operacional|null
 	 * @ORM\ManyToOne(targetEntity="Operacional")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="operacional2_id", referencedColumnName="id")
@@ -141,7 +141,7 @@ class Encargo
 	 */
 	private $operacional2;
 	/**
-	 * @var \AppBundle\Entity\Operacional|null
+	 * @var Operacional|null
 	 * @ORM\ManyToOne(targetEntity="Operacional")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="operacional3_id", referencedColumnName="id")

@@ -72,6 +72,15 @@ class ImportesCertificado
 	 */
 	private $tarifa;
 
+	/**
+	 * @var PosicionEconomica\null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PosicionEconomica")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="posicion_economica_id", referencedColumnName="id")
+	 * })
+	 */
+	private $posicionEconomica;
 
 	/**
 	 * @var float
@@ -288,7 +297,7 @@ class ImportesCertificado
     /**
      * Get certificadoServicios.
      *
-     * @return \AppBundle\Entity\CertificadoServicios|null
+     * @return \AppBundle\Entity\CertificadoServicios
      */
     public function getCertificadoServicios()
     {
@@ -309,13 +318,29 @@ class ImportesCertificado
         return $this;
     }
 
-    /**
-     * Get tipoCuota.
-     *
-     * @return \AppBundle\Entity\TipoCuota|null
-     */
+	/**
+	 * @return TipoCuota\null
+	 */
     public function getTipoCuota()
     {
         return $this->tipoCuota;
     }
+
+	/**
+	 * @return PosicionEconomica\null
+	 */
+	public function getPosicionEconomica()
+	{
+		return $this->posicionEconomica;
+	}
+
+	/**
+	 * @param PosicionEconomica $posicionEconomica
+	 */
+	public function setPosicionEconomica($posicionEconomica)
+	{
+		$this->posicionEconomica = $posicionEconomica;
+	}
+
+
 }

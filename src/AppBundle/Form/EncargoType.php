@@ -23,7 +23,7 @@ class EncargoType extends AbstractType
 			->add('id', TextType::class, [
 				"label" => 'Identificador',
 				"required" => 'required',
-				"attr" => ["class" => "form-control muycorto"
+				"attr" => ["class" => "form-control"
 				]])
 			->add('numero', TextType::class, [
 				"label" => 'Número',
@@ -39,7 +39,8 @@ class EncargoType extends AbstractType
 			->add('titulo', TextType::class, [
 				"label" => 'Título',
 				"required" => 'required',
-				"attr" => ["class" => "form-control largo"
+				"attr" => ["class" => "form-control",
+					      "width" => "650px"
 				]])
 			->add('objetoEncargo', EntityType::class, [
 				'label' => 'Objeto Encargo',

@@ -1,45 +1,102 @@
-<div class="container">
+<script>
+
+    $(document).ready(function () {
+        $('#anotacionesTable').DataTable({
+            "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+        });
+
+
+    });
+
+    function addAnotacion() {
+        let recurso;
+        let id = $("#formEncargo_id").val();
+        recurso = Routing.generate("addAnotacionEncargo", {"encargo_id": id}, true);
+        window.location = recurso;
+    }
+
+</script>
+
+
+<div class="container" width="800px">
     {{ form_start (form,{'action':'','method':'POST'}) }}
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-heading"> Identificación del Encargo</div>
+        <div class="panel-body">
             <div class="form_row mismalinea">{{ form_row(form.id) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.numero) }}</div>
             <div class="clearfix"></div>
-            <div class="form_row mismalinea">{{ form_row(form.titulo) }}</div>
-            <div class="panel-body">
-                <div id="tabs" class="pestana container">
-                    <ul class="nav nav-tabs">
-                        <li><a id="tdatosGen" href="#datosGen">Datos Generales</a></li>
-                        <li><a id="tdatosGen" href="#descripcion">Descripcion</a></li>
-                        <li><a id="tdatosGen" href="#remedy">Remedy</a></li>
-                        <li><a id="tdatosGen" href="#solucion">Solución</a></li>
-                    </ul>
-                    <div id="datosGen">
-                        <div class="form_row mismalinea">{{ form_row(form.objetoEncargo) }}</div>
-                        <div class="form_row mismalinea">{{ form_row(form.estadoActual) }}</div>
-                        <div class="form_row mismalinea">{{ form_row(form.agrupacion) }}</div>
-                        <div class="form_row mismalinea">{{ form_row(form.criticidad2) }}</div>
-                        <div class="form_row mismalinea">{{ form_row(form.coste) }}</div>
-                    </div>
-                    <div id="descripcion">
-                        <div class="form_row mismalinea">{{ form_row(form.descripcion) }}</div>
-                    </div>
-                    <div id="remedy">
-                        <div class="form_row mismalinea">{{ form_row(form.remedy) }}
-                        {% if encargo.remedy %}
-                            {{ encargo.remedy }}
-                        {% endif %}
-                        </div>
-                    </div>
-                    <div id="solucion">
-                        <div class="form_row mismalinea">{{ form_row(form.solucionUsuario) }}</div>
-                        <div class="clearfix"></div>
-                        <div class="form_row mismalinea">{{ form_row(form.solucionTecnica) }}</div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
-            </div>
+            <div class="form_row">{{ form_row(form.titulo) }}</div>
         </div>
     </div>
+    <div id="tabs" class="pestana container">
+        <ul class="nav nav-tabs">
+            <li><a id="t1" href="#datosGen">Datos Generales</a></li>
+            <li><a id="t2" href="#descripcion">Descripción</a></li>
+            <li><a id="t3" href="#anotaciones">Anotaciones</a></li>
+            <li><a id="t4" href="#remedy">Remedy</a></li>
+            <li><a id="t5" href="#solucion">Solución</a></li>
+        </ul>
+        <div id="datosGen">
+            <div class="form_row mismalinea">{{ form_row(form.objetoEncargo) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.estadoActual) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.agrupacion) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.criticidad2) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.coste) }}</div>
+        </div>
+        <div id="descripcion">
+            <div class="form_row ">{{ form_row(form.descripcion) }}</div>
+        </div>
+        <div id="anotaciones">
+            <button type="button"
+                    id="btnAddAnotacion"
+                    class="btn btn-default btn-warning btn-t"
+                    onclick="addAnotacion()"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Añadir Anotacion"> Añadir Anotación
+            </button>
+            <br/><br/>
+            <table id="anotacionesTable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Anotación</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for anotacionEncargo in anotacionesEncargo %}
+                    <tr>
+                        <td>{{ anotacionEncargo.id is empty ? "" :  anotacionEncargo.id }}</td>
+                        <td>{{ anotacionEncargo.fecha is empty ? "": anotacionEncargo.fecha|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ anotacionEncargo.usuario.codigo }}</td>
+                        <td>{{ anotacionEncargo.anotacion }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="clearfix"></div>
+        </div>
+        <div id="remedy">
+            <div class="form_row mismalinea">{{ form_row(form.remedy) }}
+                {% if encargo.remedy %}
+                    {{ encargo.remedy }}
+                {% endif %}
+            </div>
+        </div>
+        <div id="solucion">
+            <div class="form_row ">{{ form_row(form.solucionUsuario) }}</div>
+            <div class="clearfix"></div>
+            <div class="form_row ">{{ form_row(form.solucionTecnica) }}</div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
+</div>
+</div>
+</div>
 </div>

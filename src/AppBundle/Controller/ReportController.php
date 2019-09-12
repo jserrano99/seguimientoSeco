@@ -8,6 +8,7 @@ use AppBundle\Form\FiltroType;
 use AppBundle\Form\ReportType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -18,7 +19,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 class ReportController extends Controller
 {
     /**
-     * @var \Symfony\Component\HttpFoundation\Session\Session
+     * @var Session
      */
     private $sesion;
 
@@ -43,8 +44,8 @@ class ReportController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      *
      */
     public function esfuerzoPLAExtAction(Request $request)
@@ -66,8 +67,8 @@ class ReportController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      *
      */
     public function esfuerzoPLAAction(Request $request)
@@ -89,8 +90,8 @@ class ReportController extends Controller
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      */
     public function incidentesPorCentroAction(Request $request)
     {
@@ -112,8 +113,8 @@ class ReportController extends Controller
 
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      */
     public function seguimientoNPLAction(Request $request)
     {
@@ -155,7 +156,7 @@ class ReportController extends Controller
 
     /**
      * @param $certificado_id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function imprimirCertificadoServiciosAction($id)
     {
@@ -204,7 +205,7 @@ class ReportController extends Controller
 
     /**
      * @param $id
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function certificadoActividadAction($id)
     {
@@ -218,7 +219,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function seguimientoLineaBaseAction()
     {
@@ -227,8 +228,29 @@ class ReportController extends Controller
         return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
+	/**
+	 * @return Response
+	 */
+	public function seguimientoImportesAction()
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/seguimientoImportes";
+		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
+	}
+
+	/**
+	 * @return Response
+	 */
+	public function esfuerzoComprometidoEquipoBaseAction()
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/esfuerzoComprometidoEquipoBase";
+		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
+	}
+
+
+	/**
+     * @return Response
      */
     public function seguimientoPLAAction()
     {
@@ -238,7 +260,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function esfuerzoPLACompromisoAction()
     {
@@ -248,7 +270,7 @@ class ReportController extends Controller
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function plasByAgrupacionAction()
     {
@@ -259,36 +281,19 @@ class ReportController extends Controller
 
     /**
      * @param $pAgrupacion
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function plasByAgrupacion2Action($pAgrupacion)
+    public function encargosAgrupacionAction($id)
     {
         $format = "pdf";
-        $reportUnit = "/reports/plasByAgrupacion2";
-        $params = ["pAgrupacion" => $pAgrupacion];
+        $reportUnit = "/reports/encargosAgrupacion";
+        $params = ["agrupacionId" => $id];
         return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
     }
-
-    public function planificacionAction($pAgrupacion)
-    {
-        $format = "pdf";
-        $reportUnit = "/reports/pla001";
-        $params = ["pAgrupacion" => $pAgrupacion];
-        return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
-    }
-
-    public function planificacionProyectoAction($pProyecto)
-    {
-        $format = "pdf";
-        $reportUnit = "/reports/planificacionProyecto";
-        $params = ["pProyecto" => $pProyecto];
-        return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
-    }
-
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      */
     public function planificacionEBAction(Request $request)
     {
@@ -311,8 +316,8 @@ class ReportController extends Controller
 
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param Request $request
+     * @return Response
      */
     public function esfuerzoNplAplicacionAction(Request $request)
     {

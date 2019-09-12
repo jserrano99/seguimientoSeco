@@ -8,7 +8,6 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
-use DateTime;
 
 /**
  * @ORM\Table(name="criticidad")
@@ -50,12 +49,12 @@ class Criticidad
         return $this->id;
     }
 
-    /**
-     * Set codigo.
-     *
-     * @param string $codigo
-     * @return EstadoEncargo
-     */
+	/**
+	 * Set codigo.
+	 *
+	 * @param string $codigo
+	 * @return Criticidad
+	 */
     public function setCodigo($codigo)
     {
         $this->codigo = $codigo;
@@ -73,12 +72,12 @@ class Criticidad
         return $this->codigo;
     }
 
-    /**
-     * Set descripcion.
-     *
-     * @param string $descripcion
-     * @return EstadoEncargo
-     */
+	/**
+	 * Set descripcion.
+	 *
+	 * @param string $descripcion
+	 * @return Criticidad
+	 */
     public function setDescripcion($descripcion)
     {
         $this->descripcion = $descripcion;
@@ -96,6 +95,9 @@ class Criticidad
         return $this->descripcion;
     }
 
+	/**
+	 * @return string
+	 */
 	public function __toString()
 	{
 		return $this->descripcion;// TODO: Implement __toString() method.

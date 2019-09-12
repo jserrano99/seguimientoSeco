@@ -11,11 +11,11 @@ use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 use Sg\DatatablesBundle\Datatable\Style;
 
 /**
- * Class AgrupacionDatatable
+ * Class AnotacionEncargoDatatable
  *
  * @package AppBundle\Datatables
  */
-class AgrupacionDatatable extends AbstractDatatable
+class AnotacionEncargoDatatable extends AbstractDatatable
 {
 
 	/**
@@ -58,29 +58,9 @@ class AgrupacionDatatable extends AbstractDatatable
 			'state_save' => true
 		]);
 
-		$TipoAgrupacionAll = $this->getEntityManager()->getRepository("AppBundle:TipoAgrupacion")->findAll();
-
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
-			->add('codigo', Column::class, ['title' => 'Código', 'width' => '25px'])
-			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '850px', 'searchable' => true])
-			->add('tipoAgrupacion.descripcion', Column::class, [
-				'title' => 'Tipo Agrupación',
-				'width' => '400px',
-				'filter' => [SelectFilter::class,
-					[
-						'multiple' => false,
-						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($TipoAgrupacionAll, 'descripcion', 'descripcion'),
-						'search_type' => 'eq']]])
-			->add('fcInicio', DateTimeColumn::class, [
-				'title' => 'F.Inicio',
-				'width' => '80px',
-				'date_format' => 'DD/MM/YYYY',
-				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
-				]],
-			])
-			->add('fcFin', DateTimeColumn::class, [
+			->add('fecha', DateTimeColumn::class, [
 				'title' => 'F.Fin',
 				'width' => '80px',
 				'date_format' => 'DD/MM/YYYY',
@@ -88,45 +68,21 @@ class AgrupacionDatatable extends AbstractDatatable
 					'cancel_button' => true,
 				]],
 			])
+			->add('anotacion', Column::class, ['title' => 'Anotación', 'width' => '850px', 'searchable' => true])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'actions' => [
-					['route' => 'editAgrupacion',
+					['route' => 'editAnotacionEncargo',
 						'route_parameters' => [
 							'id' => 'id'],
 						'label' => '',
 						'icon' => 'glyphicon glyphicon-edit',
 						'attributes' => [
 							'rel' => 'tooltip',
-							'title' => 'Editar Agrupación',
+							'title' => 'Editar Anotación',
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button'
-						]],
-					['route' => 'queryEncargosAgrupacion',
-						'route_parameters' => ['idAgrupacion' => 'id'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-folder-open',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'target' => '_blank',
-							'title' => 'Consulta Encargos de la Agrupación',
-							'class' => 'btn btn-warning btn-xs',
-							'target' => 'blank',
-							'role' => 'button']
-					],
-					['route' => 'encargosAgrupacion',
-						'route_parameters' => ['id' => 'id'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-print',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'target' => '_blank',
-							'title' => 'Informe Encargos de la Agrupación',
-							'class' => 'btn btn-success btn-xs',
-							'target' => 'blank',
-							'role' => 'button']
-					]
-
+						]]
 				]]);
 	}
 
@@ -135,7 +91,7 @@ class AgrupacionDatatable extends AbstractDatatable
 	 */
 	public function getEntity()
 	{
-		return 'AppBundle\Entity\Agrupacion';
+		return 'AppBundle\Entity\AnotacionEncargo';
 	}
 
 	/**
@@ -143,7 +99,7 @@ class AgrupacionDatatable extends AbstractDatatable
 	 */
 	public function getName()
 	{
-		return 'agrupacion_datatable';
+		return 'anotacionEncargo_datatable';
 	}
 
 }

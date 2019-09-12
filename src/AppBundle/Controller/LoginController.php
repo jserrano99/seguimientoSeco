@@ -37,6 +37,7 @@ class LoginController extends Controller {
 	    $authenticationUtils = $this->get('security.authentication_utils');
 	    $error = $authenticationUtils->getLastAuthenticationError();
 	    $lastUsername = $authenticationUtils->getLastUsername();
+
 	    $params=	['last_username' => $lastUsername,
 		    'error' => $error];
 

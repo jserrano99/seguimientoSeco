@@ -37,7 +37,7 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
 			'individual_filtering' => true,
 			'individual_filtering_position' => 'head',
-			'order' => [[0, 'asc']],
+			'order' => [[2, 'asc']],
 			'order_cells_top' => true,
 			'search_in_non_visible_columns' => true,
 			'dom' => 'lBtrip'
@@ -62,6 +62,7 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
 			->add('descripcion', Column::class, ['title' => 'Descripcion', 'width' => '400px', 'searchable' => true])
+			->add('mes.fechaInicio' ,Column::class, ['title' => 'Fecha', 'width' => '40px', 'searchable' => true])
 			->add('mes.anyo.descripcion', Column::class, ['title' => 'Año', 'width' => '40px', 'searchable' => true])
 			->add('mes.descripcion', Column::class, ['title' => 'Mes', 'width' => '40px', 'searchable' => true])
 			->add('totalFacturaConIva', NumberColumn::class, ['title' => 'Total Factura',

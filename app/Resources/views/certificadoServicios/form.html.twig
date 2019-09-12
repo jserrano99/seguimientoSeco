@@ -9,11 +9,14 @@
                 <div class="form_row mismalinea">{{ form_row(form.aplicaPenalizacion) }}</div>
                 <div class="clearfix"></div>
                 <br/>
-            {% endif %}
-            {% if  estado == 'GENERADO' or estado  == 'IMPRESO' %}
+            {% else %}
                 <div class="form_row mismalinea">{{ form_row(form.id) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.estadoCertificado) }}</div>
-                <div class="form_row mismalinea">{{ form_row(form.cerrarCertificado) }}</div>
+                {% if estado == 'ENVIADO A PROVEEDOR' %}
+                    <div class="form_row mismalinea">{{ form_row(form.abrirCertificado) }}</div>
+                {% else %}
+                    <div class="form_row mismalinea">{{ form_row(form.cerrarCertificado) }}</div>
+                {% endif %}
                 <div class="clearfix"></div>
                 <br/>
                 <div class="form_row mismalinea">{{ form_row(form.totalCuota) }}</div>

@@ -7,13 +7,29 @@
         $(document).ready(function () {
 
             $("#formCertificadoServicios_eliminarCertificado").click(function () {
-                let recurso;
-                let id;
-                id = $("#formCertificadoServicios_id").val();
-                recurso = Routing.generate("deleteCertificadoServicios", {"id": id}, true);
-                window.location = recurso;
+                bootbox.confirm({
+                    message: "Esta seguro de eliminar  el certificado de Servicios",
+                    buttons: {
+                        confirm: {
+                            label: 'Confirmar',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'Cancelar',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(result) {
+                        if (result) {
+                            let recurso;
+                            let id;
+                            id = $("#formCertificadoServicios_id").val();
+                            recurso = Routing.generate("deleteCertificadoServicios", {"id": id}, true);
+                            window.location = recurso;
+                        };
+                    }
+                });
             });
-
             $("#formCertificadoServicios_generarCertificado").click(function () {
                 $("#procesando").show();
                 let recurso;
@@ -96,6 +112,31 @@
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("cerrarCertificado", {"id": id}, true);
                 window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_abrirCertificado").click(function () {
+                bootbox.confirm({
+                    message: "Esta seguro de abrir el certificado de Servici, asegurese que no se ha enviado al proveedor y que no esté ya firmado y tramitado",
+                    buttons: {
+                        confirm: {
+                            label: 'Confirmar',
+                            className: 'btn-danger'
+                        },
+                        cancel: {
+                            label: 'Cancelar',
+                            className: 'btn-success'
+                        }
+                    },
+                    callback: function(result) {
+                      if (result) {
+                          let recurso;
+                          let id;
+                          id = $("#formCertificadoServicios_id").val();
+                          recurso = Routing.generate("abrirCertificado", {"id": id}, true);
+                          window.location = recurso;
+                      };
+                    }
+                });
             });
 
 

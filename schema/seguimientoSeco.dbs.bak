@@ -1100,6 +1100,40 @@
 		</view>
 	</schema>
 	<connector name="EquipoLocal" database="MySql2" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-5.1.44-bin.jar" host="10.127.240.149" port="3306" instance="seguimientoseco" user="root" />
+	<layout name="Certificado servicios" id="Layout_2a8ff07" show_relation="columns" >
+		<entity schema="seguimientoseco" name="certificado_servicios" color="3986C1" x="528" y="352" >
+			<column name="id" />
+			<column name="contrato_id" />
+			<column name="estado_certificado_id" />
+			<column name="descripcion" />
+			<column name="meses_id" />
+			<column name="fichero_log_id" />
+		</entity>
+		<entity schema="seguimientoseco" name="meses" color="3986C1" x="368" y="80" />
+		<entity schema="seguimientoseco" name="indicadores" color="3986C1" x="1120" y="48" />
+		<entity schema="seguimientoseco" name="penalizaciones" color="3986C1" x="768" y="48" />
+		<entity schema="seguimientoseco" name="encargo" color="3986C1" x="1024" y="512" >
+			<column name="id" />
+			<column name="objeto_encargo_id" />
+			<column name="numero" />
+			<column name="contrato_id" />
+			<column name="agrupacion_id" />
+			<column name="estado_actual_id" />
+			<column name="modulo_funcional_id" />
+			<column name="modulo_tecnico_id" />
+			<column name="operacional1_id" />
+			<column name="operacional2_id" />
+			<column name="operacional3_id" />
+			<column name="aplicacion_id" />
+			<column name="tipo_solucion_id" />
+			<column name="remedy_id" />
+			<column name="criticidad_id" />
+		</entity>
+		<entity schema="seguimientoseco" name="linea_certificado" color="3986C1" x="976" y="304" />
+		<entity schema="seguimientoseco" name="importes_certificado_servicios" color="3986C1" x="112" y="224" />
+		<entity schema="seguimientoseco" name="contrato" color="3986C1" x="352" y="560" />
+		<entity schema="seguimientoseco" name="importes_contrato" color="3986C1" x="48" y="592" />
+	</layout>
 	<layout name="General" id="Layout_412bd68" show_relation="columns" >
 		<entity schema="seguimientoseco" name="accesos" color="BED3F4" x="640" y="80" />
 		<entity schema="seguimientoseco" name="modulo_funcional" color="3986C1" x="592" y="752" />
@@ -1244,11 +1278,18 @@ FROM
 			</query_table>
 		</query>
 	</layout>
-	<layout name="Vistas" id="Layout_26136b9" show_relation="columns" >
-		<entity schema="seguimientoseco" name="view_encargos_remedy" color="3986C1" x="320" y="64" />
-		<entity schema="seguimientoseco" name="view_encargos_CF_en_ejecucion" color="3986C1" x="48" y="80" />
-		<entity schema="seguimientoseco" name="view_encargos_penalizados" color="3986C1" x="720" y="48" />
-		<entity schema="seguimientoseco" name="view_penalizaciones" color="3986C1" x="528" y="64" />
+	<layout name="Vistas" id="Layout_26136b9" show_column_type="y" show_relation="columns" >
+		<entity schema="seguimientoseco" name="view_encargos_penalizados" color="3986C1" x="720" y="112" />
+		<entity schema="seguimientoseco" name="view_penalizaciones" color="3986C1" x="528" y="128" />
+		<entity schema="seguimientoseco" name="view_encargos_remedy" color="3986C1" x="320" y="128" />
+		<entity schema="seguimientoseco" name="view_encargos_CF_en_ejecucion" color="3986C1" x="48" y="144" />
+		<entity schema="seguimientoseco" name="view_implantaciones" color="3986C1" x="1872" y="320" />
+		<entity schema="seguimientoseco" name="view_lineas_certificado" color="3986C1" x="1984" y="320" />
+		<entity schema="seguimientoseco" name="view_nuevos_desarrollos" color="3986C1" x="2112" y="320" />
+		<entity schema="seguimientoseco" name="view_actividad_tasada" color="3986C1" x="960" y="64" />
+		<entity schema="seguimientoseco" name="view_adaptaciones_menores" color="3986C1" x="944" y="256" />
+		<entity schema="seguimientoseco" name="view_certificado_servicios" color="3986C1" x="1152" y="64" />
+		<entity schema="seguimientoseco" name="view_encargos_cf_cerrados" color="3986C1" x="1440" y="48" />
 		<script name="Sql_Editor" id="Editor_23efac2" language="SQL" >
 			<string><![CDATA[ CREATE TABLE centro (id INT AUTO_INCREMENT NOT NULL, codigo VARCHAR(15) NOT NULL, descripcion VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET UTF8 COLLATE UTF8_unicode_ci ENGINE = InnoDB;
      ALTER TABLE remedy ADD centro_id INT DEFAULT NULL, DROP centro, CHANGE fecha_entrada fecha_entrada DATETIME NOT NULL;

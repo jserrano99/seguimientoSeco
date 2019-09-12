@@ -34,7 +34,7 @@ class EncargoDatatable extends AbstractDatatable
 		$this->options->set([
 			'classes' => Style::BOOTSTRAP_4_STYLE,
 			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
-			'individual_filtering' => false,
+			'individual_filtering' => true,
 			'individual_filtering_position' => 'head',
 			'order' => [[0, 'asc']],
 			'order_cells_top' => true,

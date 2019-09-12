@@ -64,10 +64,36 @@ class LineaCertificado
 	 */
 	private $penalizacion;
 
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="dias_totales", type="integer", nullable=true)
+	 */
+	private $diasTotales;
+
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="dias_mes", type="integer", nullable=true)
+	 */
+	private $diasMes;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="horas_dia", type="float", nullable=true)
+	 */
+	private $horasDia;
+
+	/**
+	 * @var float
+	 *
+	 * @ORM\Column(name="horas_mes", type="float", nullable=true)
+	 */
+	private $horasMes;
 
 
-
-    /**
+	/**
      * Get id.
      *
      * @return int
@@ -172,4 +198,70 @@ class LineaCertificado
     {
         return $this->tipoCuota;
     }
+
+	/**
+	 * @return int
+	 */
+	public function getDiasTotales()
+	{
+		return $this->diasTotales;
+	}
+
+	/**
+	 * @param int $diasTotales
+	 */
+	public function setDiasTotales($diasTotales)
+	{
+		$this->diasTotales = $diasTotales;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDiasMes()
+	{
+		return $this->diasMes;
+	}
+
+	/**
+	 * @param int $diasMes
+	 */
+	public function setDiasMes($diasMes)
+	{
+		$this->diasMes = $diasMes;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getHorasDia()
+	{
+		return $this->horasDia;
+	}
+
+	/**
+	 * @param float $horasDia
+	 */
+	public function setHorasDia($horasDia)
+	{
+		$this->horasDia = $horasDia;
+	}
+
+	/**
+	 * @return float
+	 */
+	public function getHorasMes()
+	{
+		return $this->horasMes;
+	}
+
+	/**
+	 * @param float $horasMes
+	 */
+	public function setHorasMes($horasMes)
+	{
+		$this->horasMes = $horasMes;
+	}
+
+
 }

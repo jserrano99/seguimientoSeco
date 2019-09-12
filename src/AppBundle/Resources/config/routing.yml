@@ -67,6 +67,11 @@ cerrarCertificado:
     defaults: { _controller: AppBundle:CertificadoServicios:cerrar}
     options:
         expose: true
+abrirCertificado:
+  path: /certificadoServicios/abrir/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:abrir}
+  options:
+    expose: true
 addCertificadoServicios:
     path: /certificadoServicios/add
     defaults: { _controller: AppBundle:CertificadoServicios:add}
@@ -203,6 +208,11 @@ deleteEncargo:
     defaults: { _controller: AppBundle:Encargo:delete}
     options:
         expose: true
+addAnotacionEncargo:
+  path: /encargo/addAnotacion/{encargo_id}
+  defaults: { _controller: AppBundle:Encargo:addAnotacion}
+  options:
+    expose: true
 
 
 #
@@ -230,24 +240,9 @@ filtroInformes:
     defaults: { _controller: AppBundle:Report:filtro}
     options:
         expose: true
-plasByAgrupacion:
-    path: /report/plasByAgrupacion
-    defaults: { _controller: AppBundle:Report:plasByAgrupacion}
-    options:
-        expose: true
-plasByAgrupacion2:
-    path: /report/plasByAgrupacion2/{pAgrupacion}
-    defaults: { _controller: AppBundle:Report:plasByAgrupacion2}
-    options:
-        expose: true
-planificacion:
-    path: /report/planificacion/{pAgrupacion}
-    defaults: { _controller: AppBundle:Report:planificacion}
-    options:
-        expose: true
-planificacionProyecto:
-    path: /report/planificacionProyecto/{pProyecto}
-    defaults: { _controller: AppBundle:Report:planificacionProyecto}
+encargosAgrupacion:
+    path: /report/encargosAgrupacion/{id}
+    defaults: { _controller: AppBundle:Report:encargosAgrupacion}
     options:
         expose: true
 seguimientoLineaBase:
@@ -255,6 +250,17 @@ seguimientoLineaBase:
     defaults: { _controller: AppBundle:Report:seguimientoLineaBase}
     options:
         expose: true
+seguimientoImportes:
+  path: /report/seguimientoImportes
+  defaults: { _controller: AppBundle:Report:seguimientoImportes}
+  options:
+    expose: true
+esfuerzoComprometidoEquipoBase:
+  path: /report/esfuerzoComprometidoEquipoBase
+  defaults: { _controller: AppBundle:Report:esfuerzoComprometidoEquipoBase}
+  options:
+    expose: true
+
 seguimentoPLA:
     path: /report/seguimientoPLA
     defaults: { _controller: AppBundle:Report:seguimientoPLA}

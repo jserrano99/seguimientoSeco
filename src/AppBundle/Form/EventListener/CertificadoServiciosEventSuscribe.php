@@ -131,8 +131,7 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 					"attr" => ["class" => "btn btn-t btn-success"]]);
 			}
 
-			if ($data->getEstadoCertificado() == 'GENERADO' or
-				$data->getEstadoCertificado() == 'IMPRESO') {
+			if ($data->getEstadoCertificado() == 'GENERADO' or $data->getEstadoCertificado() == 'IMPRESO') {
 				$form
 					->add('generarImportes', ButtonType::class, [
 						'label' => 'Generar Importes',
@@ -181,6 +180,13 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 						'label' => 'Imprimir Informe de Penalizaciones',
 						"attr" => ["class" => "btn btn-t btn-success"]]);
 			}
+
+			if ($data->getEstadoCertificado()->getId() == 3) {
+				$form->add('abrirCertificado', ButtonType::class, [
+					'label' => 'Abrir Certificado Servicios',
+					"attr" => ["class" => "btn btn-warning"]]);
+			}
+
 
 			if ($data->getEstadoCertificado() != 'CERRADO') {
 				$form
