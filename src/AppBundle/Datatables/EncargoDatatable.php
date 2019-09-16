@@ -7,6 +7,7 @@ use Sg\DatatablesBundle\Datatable\Column\ActionColumn;
 use Sg\DatatablesBundle\Datatable\Column\Column;
 use Sg\DatatablesBundle\Datatable\Column\DateTimeColumn;
 use Sg\DatatablesBundle\Datatable\Filter\DateRangeFilter;
+use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 use Sg\DatatablesBundle\Datatable\Style;
 
 
@@ -56,21 +57,57 @@ class EncargoDatatable extends AbstractDatatable
             'state_save' => true
 		]);
 
+		$ObjetosEncargo = $this->getEntityManager()->getRepository("AppBundle:ObjetoEncargo")
+			->createQueryBuilder('u')
+			->orderBy('u.codigo', 'ASC')
+			->getQuery()->getResult();
+		$Estados = $this->getEntityManager()->getRepository("AppBundle:EstadoEncargo")
+			->createQueryBuilder('u')
+			->orderBy('u.codigo', 'ASC')
+			->getQuery()->getResult();
+		$Agrupaciones = $this->getEntityManager()->getRepository("AppBundle:Agrupacion")
+			->createQueryBuilder('u')
+			->orderBy('u.codigo', 'ASC')
+			->getQuery()->getResult();
+
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
 			->add('numero', Column::class, ['title' => 'Número', 'width' => '25px'])
 			->add('nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '30px', 'searchable' => true])
 			->add('titulo', Column::class, ['title' => 'Titulo', 'searchable' => true])
-			->add('agrupacion.codigo', Column::class, ['title' => 'Agrupación',
-				'default_content' => '', 'width' => '20px', 'searchable' => true])
-			->add('objetoEncargo.codigo', Column::class, ['title' => 'Objeto', 'width' => '20px', 'searchable' => true])
-			->add('estadoActual.codigo', Column::class, ['title' => 'Estado', 'width' => '20px', 'searchable' => true])
+			->add('agrupacion.codigo', Column::class, [
+				'title' => 'Objeto',
+				'width' => '80px',
+				'default_content' =>'',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => true,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Agrupaciones, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+
+			->add('objetoEncargo.codigo', Column::class, [
+				'title' => 'Objeto',
+				'width' => '100px',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => true,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($ObjetosEncargo, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+			->add('estadoActual.codigo', Column::class, [
+				'title' => 'Estado Actual',
+				'width' => '100px',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => true,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Estados, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+
 			->add('fcEstadoActual', DateTimeColumn::class, [
 				'title' => 'F.Estado',
 				'width' => '180px',
-				'date_format' => 'DD/MM/YYYY hh:mm:SS',
+				'date_format' => 'DD/MM/YYYY HH:mm:SS',
 				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
+					'cancel_button' => false,
 				]],
 			])
 			->add('horasRealizadas', Column::class, ['title' => 'Horas', 'width' => '20px', 'searchable' => true])

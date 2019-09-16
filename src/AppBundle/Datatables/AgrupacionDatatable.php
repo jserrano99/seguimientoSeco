@@ -77,7 +77,7 @@ class AgrupacionDatatable extends AbstractDatatable
 				'width' => '80px',
 				'date_format' => 'DD/MM/YYYY',
 				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
+					'cancel_button' => false,
 				]],
 			])
 			->add('fcFin', DateTimeColumn::class, [

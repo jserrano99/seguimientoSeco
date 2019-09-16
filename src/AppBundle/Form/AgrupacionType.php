@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,30 +19,49 @@ class AgrupacionType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			->add('id', TextType::class, array(
+			->add('id', HiddenType::class, [
 				"label" => 'Identificador',
-				"attr" => array("class" => "form-control"
-				)))
-			->add('codigo', TextType::class, array(
+				"attr" => ["class" => "form-control"
+				]])
+			->add('codigo', TextType::class, [
 				"label" => 'Código',
 				"required" => 'required',
-				"attr" => array("class" => "form-control"
-				)))
-			->add('descripcion', TextType::class, array(
+				"attr" => ["class" => "form-control"
+				]])
+			->add('descripcion', TextType::class, [
 				"label" => 'Descripción',
-				"required" => 'required',
-				"attr" => array("class" => "form-control"
-				)))
-			->add('tipoAgrupacion', EntityType::class, array(
+				"required" => true,
+				"attr" => ["class" => "form-control"
+				]])
+			->add('tipoAgrupacion', EntityType::class, [
 				'label' => 'TipoAgrupacion',
 				'class' => 'AppBundle:TipoAgrupacion',
 				'required' => "required",
 				'placeholder' => 'Seleccione Tipo de Agrupacion....',
-				'attr' => array("class" => "form-control")
-			))
+				'attr' => ["class" => "form-control"]
+			])
+			->add('fcInicio', DateType::class, [
+				"label" => 'Fecha Inicio',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcFin', DateType::class, [
+				"label" => 'Fecha Fin',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
 			->add('Guardar', SubmitType::class, [
 					"attr" => ["class" => "btn btn-t btn-success"]
 				]
+
 			);
 	}
 
@@ -49,9 +70,9 @@ class AgrupacionType extends AbstractType
 	 */
 	public function configureOptions(OptionsResolver $resolver)
 	{
-		$resolver->setDefaults(array(
+		$resolver->setDefaults([
 			'data_class' => 'AppBundle\Entity\Agrupacion'
-		));
+		]);
 	}
 
 	/**
