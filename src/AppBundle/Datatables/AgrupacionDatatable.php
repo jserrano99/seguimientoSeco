@@ -55,15 +55,23 @@ class AgrupacionDatatable extends AbstractDatatable
 			'auto_width' => true,
 			'ordering' => true,
 			'length_change' => true,
-			'state_save' => true
+			'state_save' => true,
 		]);
 
-		$TipoAgrupacionAll = $this->getEntityManager()->getRepository("AppBundle:TipoAgrupacion")->findAll();
+		$TipoAgrupacionAll = $this->getEntityManager()->getRepository("AppBundle:TipoAgrupacion")
+			->createQueryBuilder('u')
+			->orderBy('u.descripcion', 'ASC')
+			->getQuery()->getResult();
+
+		$PosicionEcomicaAll = $this->getEntityManager()->getRepository("AppBundle:PosicionEconomica")
+			->createQueryBuilder('u')
+			->orderBy('u.descripcion', 'ASC')
+			->getQuery()->getResult();
 
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
 			->add('codigo', Column::class, ['title' => 'Código', 'width' => '25px'])
-			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '850px', 'searchable' => true])
+			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '650px', 'searchable' => true])
 			->add('tipoAgrupacion.descripcion', Column::class, [
 				'title' => 'Tipo Agrupación',
 				'width' => '400px',
@@ -71,6 +79,15 @@ class AgrupacionDatatable extends AbstractDatatable
 					[
 						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($TipoAgrupacionAll, 'descripcion', 'descripcion'),
+						'search_type' => 'eq']]])
+			->add('posicionEconomica.descripcion', Column::class, [
+				'title' => 'Posición Economica',
+				'width' => '300px',
+				'default_content' => '',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($PosicionEcomicaAll, 'descripcion', 'descripcion'),
 						'search_type' => 'eq']]])
 			->add('fcInicio', DateTimeColumn::class, [
 				'title' => 'F.Inicio',
@@ -85,7 +102,7 @@ class AgrupacionDatatable extends AbstractDatatable
 				'width' => '80px',
 				'date_format' => 'DD/MM/YYYY',
 				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
+					'cancel_button' => false,
 				]],
 			])
 			->add(null, ActionColumn::class, [

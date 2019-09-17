@@ -64,6 +64,16 @@ class Agrupacion
 	 */
 	private $tipoAgrupacion;
 
+	/**
+	 * @var PosicionEconomica \null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PosicionEconomica")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="posicion_economica_id", referencedColumnName="id")
+	 * })
+	 */
+	private $posicionEconomica;
+
 
 	public function __toString()
 	{
@@ -165,6 +175,22 @@ class Agrupacion
 	public function setTipoAgrupacion($tipoAgrupacion)
 	{
 		$this->tipoAgrupacion = $tipoAgrupacion;
+	}
+
+	/**
+	 * @return PosicionEconomica
+	 */
+	public function getPosicionEconomica()
+	{
+		return $this->posicionEconomica;
+	}
+
+	/**
+	 * @param PosicionEconomica $posicionEconomica
+	 */
+	public function setPosicionEconomica($posicionEconomica)
+	{
+		$this->posicionEconomica = $posicionEconomica;
 	}
 
 

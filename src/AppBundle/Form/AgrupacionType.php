@@ -40,6 +40,13 @@ class AgrupacionType extends AbstractType
 				'placeholder' => 'Seleccione Tipo de Agrupacion....',
 				'attr' => ["class" => "form-control"]
 			])
+			->add('posicionEconomica', EntityType::class, [
+				'label' => 'Posición Economica ',
+				'class' => 'AppBundle:PosicionEconomica',
+				'required' => false,
+				'placeholder' => 'SeleccionePosición Posición Económica...',
+				'attr' => ["class" => "form-control"]
+			])
 			->add('fcInicio', DateType::class, [
 				"label" => 'Fecha Inicio',
 				"required" => false,

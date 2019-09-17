@@ -76,7 +76,7 @@ class EncargoDatatable extends AbstractDatatable
 			->add('nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '30px', 'searchable' => true])
 			->add('titulo', Column::class, ['title' => 'Titulo', 'searchable' => true])
 			->add('agrupacion.codigo', Column::class, [
-				'title' => 'Objeto',
+				'title' => 'Agrupación',
 				'width' => '80px',
 				'default_content' =>'',
 				'filter' => [SelectFilter::class,

@@ -67,16 +67,16 @@ class CargaFicheroDatatable extends AbstractDatatable
 				)),
 			))
 			->add('usuario.codigo', Column::class, array(
-				'title' => 'Usuario',
+				'title' => 'Usuario', 'width' => '20px'
 			))
 			->add('descripcion', Column::class, array(
-				'title' => 'Descripción'
+				'title' => 'Descripción' ,'width' => '220px'
 			))
 			->add('numeroRegistros', Column::class, array(
-				'title' => 'Nº Registros'
+				'title' => 'Nº Registros','width' => '20px'
 			))
 			->add('numeroRegistrosCargados', Column::class, array(
-				'title' => 'Registros Cargados'
+				'title' => 'Registros Cargados','width' => '20px'
 			))
 			->add('ficheroLog.nombreFichero', Column::class, array(
 				'title' => 'Fichero Log',
@@ -97,16 +97,6 @@ class CargaFicheroDatatable extends AbstractDatatable
 							'rel' => 'tooltip',
 							'title' => 'Descarga Log de Ejecución',
 							'class' => 'btn btn-primary btn-xs',
-							'role' => 'button']
-					],
-					['route' => 'recargaFichero',
-						'route_parameters' => ['id' => 'id'],
-						'label' => 'Recarga Fichero' ,
-						'icon' => 'glyphicon glyphicon-download',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Volver a cargar el Fichero',
-							'class' => 'btn btn-warning btn-xs',
 							'role' => 'button']
 					]
 				]]);

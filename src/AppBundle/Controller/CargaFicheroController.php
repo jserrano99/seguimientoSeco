@@ -390,6 +390,9 @@ class CargaFicheroController extends Controller
 					$this->cargaRemedy($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog);
 					$ServicioLog->setMensaje("Finaliza carga fichero remedy: " . $file . " Registros Totales :" . $CargaFichero->getNumeroRegistros());
 					$ServicioLog->escribeLog($ficheroLog);
+					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
+					$entityManager->persist($FicheroLog);
+					$entityManager->flush();
 
 					$CargaFichero->setFicheroLog($FicheroLog);
 					$entityManager->persist($CargaFichero);
