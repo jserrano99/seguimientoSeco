@@ -74,6 +74,16 @@ class Agrupacion
 	 */
 	private $posicionEconomica;
 
+	/**
+	 * @var Seguimiento \null
+	 *
+	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Seguimiento")
+	 * * @ORM\JoinColumns({
+	 *   @ORM\JoinColumn(name="seguimiento_id", referencedColumnName="id")
+	 * })
+	 */
+	private $seguimiento;
+
 
 	public function __toString()
 	{
@@ -191,6 +201,22 @@ class Agrupacion
 	public function setPosicionEconomica($posicionEconomica)
 	{
 		$this->posicionEconomica = $posicionEconomica;
+	}
+
+	/**
+	 * @return Seguimiento
+	 */
+	public function getSeguimiento()
+	{
+		return $this->seguimiento;
+	}
+
+	/**
+	 * @param Seguimiento $seguimiento
+	 */
+	public function setSeguimiento($seguimiento)
+	{
+		$this->seguimiento = $seguimiento;
 	}
 
 

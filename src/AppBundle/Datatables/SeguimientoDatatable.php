@@ -11,11 +11,11 @@ use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 use Sg\DatatablesBundle\Datatable\Style;
 
 /**
- * Class ProyectoDatatable
+ * Class SeguimientoDatatable
  *
  * @package AppBundle\Datatables
  */
-class ProyectoDatatable extends AbstractDatatable
+class SeguimientoDatatable extends AbstractDatatable
 {
 
 	/**
@@ -54,33 +54,36 @@ class ProyectoDatatable extends AbstractDatatable
 		$this->features->set([
 			'auto_width' => true,
 			'ordering' => true,
-			'length_change' => true
+			'length_change' => true,
+			'state_save' => true,
 		]);
+
 
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
 			->add('codigo', Column::class, ['title' => 'Código', 'width' => '25px'])
-			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '850px', 'searchable' => true])
-			->add('fcInicio', DateTimeColumn::class, [
+			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '450px', 'searchable' => true])
+			->add('fechaInicio', DateTimeColumn::class, [
 				'title' => 'F.Inicio',
 				'width' => '80px',
 				'date_format' => 'DD/MM/YYYY',
 				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
+					'cancel_button' => false,
 				]],
 			])
-			->add('fcFin', DateTimeColumn::class, [
+			->add('fechaFin', DateTimeColumn::class, [
 				'title' => 'F.Fin',
 				'width' => '80px',
 				'date_format' => 'DD/MM/YYYY',
 				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => true,
+					'cancel_button' => false,
 				]],
 			])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
+				'width' => '80px',
 				'actions' => [
-					['route' => 'editProyecto',
+					['route' => 'editSeguimiento',
 						'route_parameters' => [
 							'id' => 'id'],
 						'label' => '',
@@ -91,29 +94,28 @@ class ProyectoDatatable extends AbstractDatatable
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button'
 						]],
-					['route' => 'planificacionProyecto',
+					['route' => 'queryAgrupacionBySeguimiento',
 						'route_parameters' => [
-							'pProyecto' => 'codigo'],
-						'label' => '',
-						'icon' => 'glyphicon glyphicon-print',
-						'attributes' => [
-							'rel' => 'tooltip',
-							'title' => 'Planificación de Encargos del Proyecto',
-							'class' => 'btn btn-success btn-xs',
-							'target' => 'blank',
-							'role' => 'button']
-					],
-					['route' => 'queryProyectoAgrupacion',
-						'route_parameters' => ['id' => 'id'],
+							'id' => 'id'],
 						'label' => '',
 						'icon' => 'glyphicon glyphicon-folder-open',
 						'attributes' => [
 							'rel' => 'tooltip',
-							'title' => 'Consulta Agrupaciones del Proyecto',
+							'title' => 'Agrupaciones en Seguimiento',
 							'class' => 'btn btn-warning btn-xs',
+							'role' => 'button'
+						]],
+					['route' => 'informeSeguimiento',
+						'route_parameters' => ['seguimiento_id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-print',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'target' => '_blank',
+							'title' => 'Informe de Seguimiento',
+							'class' => 'btn btn-success btn-xs',
 							'target' => 'blank',
-							'role' => 'button']
-					]
+							'role' => 'button']]
 				]]);
 	}
 
@@ -122,7 +124,7 @@ class ProyectoDatatable extends AbstractDatatable
 	 */
 	public function getEntity()
 	{
-		return 'AppBundle\Entity\Proyecto';
+		return 'AppBundle\Entity\Seguimiento';
 	}
 
 	/**

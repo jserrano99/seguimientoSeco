@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AgrupacionType extends AbstractType
+class SeguimientoType extends AbstractType
 {
 	/**
 	 * {@inheritdoc}
@@ -33,29 +33,7 @@ class AgrupacionType extends AbstractType
 				"required" => true,
 				"attr" => ["class" => "form-control"
 				]])
-			->add('tipoAgrupacion', EntityType::class, [
-				'label' => 'TipoAgrupacion',
-				'class' => 'AppBundle:TipoAgrupacion',
-				'required' => "required",
-				'placeholder' => 'Seleccione Tipo de Agrupacion....',
-				'attr' => ["class" => "form-control"]
-			])
-			->add('posicionEconomica', EntityType::class, [
-				'label' => 'Posición Economica ',
-				'class' => 'AppBundle:PosicionEconomica',
-				'required' => false,
-				'placeholder' => 'Seleccione Posición Económica...',
-				'attr' => ["class" => "form-control"]
-			])
-
-			->add('seguimiento', EntityType::class, [
-				'label' => 'Linea de Seguimiento ',
-				'class' => 'AppBundle:Seguimiento',
-				'required' => false,
-				'placeholder' => 'Seleccione Linea de Seguimiento ...',
-				'attr' => ["class" => "form-control"]
-			])
-			->add('fcInicio', DateType::class, [
+			->add('fechaInicio', DateType::class, [
 				"label" => 'Fecha Inicio',
 				"required" => false,
 				"disabled" => false,
@@ -64,7 +42,7 @@ class AgrupacionType extends AbstractType
 					'class' => 'form-control corto',
 					'data-date-format' => 'dd-mm-yyyy',
 					'data-class' => 'string']])
-			->add('fcFin', DateType::class, [
+			->add('fechaFin', DateType::class, [
 				"label" => 'Fecha Fin',
 				"required" => false,
 				"disabled" => false,
@@ -86,7 +64,7 @@ class AgrupacionType extends AbstractType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults([
-			'data_class' => 'AppBundle\Entity\Agrupacion'
+			'data_class' => 'AppBundle\Entity\Seguimiento'
 		]);
 	}
 
@@ -95,6 +73,6 @@ class AgrupacionType extends AbstractType
 	 */
 	public function getBlockPrefix()
 	{
-		return 'formAgrupacion';
+		return 'formSeguimiento';
 	}
 }

@@ -137,6 +137,11 @@ queryAgrupacion:
     defaults: { _controller: AppBundle:Agrupacion:query}
     options:
         expose: true
+queryAgrupacionBySeguimiento:
+  path: /agrupacion/querybyseguimiento/{id}
+  defaults: { _controller: AppBundle:Agrupacion:queryBySeguimiento}
+  options:
+    expose: true
 editAgrupacion:
     path: /agrupacion/edit/{id}
     defaults: { _controller: AppBundle:Agrupacion:edit}
@@ -152,6 +157,30 @@ deleteAgrupacion:
     defaults: { _controller: AppBundle:Agrupacion:edit}
     options:
         expose: true
+
+#
+# LINEA DE SEGUIMIENTO
+#
+querySeguimiento:
+  path: /seguimiento/query
+  defaults: { _controller: AppBundle:Seguimiento:query}
+  options:
+    expose: true
+editSeguimiento:
+  path: /seguimiento/edit/{id}
+  defaults: { _controller: AppBundle:Seguimiento:edit}
+  options:
+    expose: true
+addSeguimiento:
+  path: /seguimiento/add
+  defaults: { _controller: AppBundle:Seguimiento:add}
+  options:
+    expose: true
+deleteSeguimiento:
+  path: /seguimiento/delete/{id}
+  defaults: { _controller: AppBundle:Seguimiento:edit}
+  options:
+    expose: true
 #
 # PROYECCTO
 #
@@ -258,6 +287,12 @@ seguimientoImportes:
 esfuerzoComprometidoEquipoBase:
   path: /report/esfuerzoComprometidoEquipoBase
   defaults: { _controller: AppBundle:Report:esfuerzoComprometidoEquipoBase}
+  options:
+    expose: true
+
+informeSeguimiento:
+  path: /report/informeSeguimiento/{seguimiento_id}
+  defaults: { _controller: AppBundle:Report:informeSeguimiento}
   options:
     expose: true
 

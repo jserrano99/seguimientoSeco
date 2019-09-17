@@ -2,9 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Datatables\AgrupacionDatatable;
 use AppBundle\Entity\Agrupacion;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use AppBundle\Form\AgrupacionType;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -18,7 +23,7 @@ use Doctrine\DBAL\DBALException;
 class AgrupacionController extends Controller
 {
 	/**
-	 * @var \Symfony\Component\HttpFoundation\Session\Session
+	 * @var Session
 	 */
 	private $sesion;
 
@@ -31,13 +36,13 @@ class AgrupacionController extends Controller
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
-	 * @throws \Exception
+	 * @param Request $request
+	 * @return JsonResponse|Response
+	 * @throws Exception
 	 */
 	public function queryAction(Request $request) {
 		$isAjax = $request->isXmlHttpRequest();
-		$datatable = $this->get('sg_datatables.factory')->create(\AppBundle\Datatables\AgrupacionDatatable::class);
+		$datatable = $this->get('sg_datatables.factory')->create(AgrupacionDatatable::class);
 		$datatable->buildDatatable();
 
 		if ($isAjax) {
@@ -54,9 +59,37 @@ class AgrupacionController extends Controller
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 * @param Request $request
+	 * @param $seguiemiento_id
+	 * @return JsonResponse|Response
+	 * @throws Exception
+	 */
+	public function queryBySeguimientoAction(Request $request, $id) {
+		$Seguimiento = $this->getDoctrine()->getManager()->getRepository("AppBundle:Seguimiento")->find($id);
+		$isAjax = $request->isXmlHttpRequest();
+		$datatable = $this->get('sg_datatables.factory')->create(AgrupacionDatatable::class);
+		$datatable->buildDatatable();
+
+		if ($isAjax) {
+			$responseService = $this->get('sg_datatables.response');
+			$responseService->setDatatable($datatable);
+			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+			$qb = $datatableQueryBuilder->getQb();
+			$qb->andWhere('seguimiento = :seguimiento');
+			$qb->setParameter('seguimiento', $Seguimiento);
+
+			return $responseService->getResponse();
+		}
+
+		return $this->render('agrupacion/query.html.twig', array(
+			'datatable' => $datatable,
+		));
+	}
+
+	/**
+	 * @param Request $request
 	 * @param                                           $id
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @return RedirectResponse|Response
 	 */
 	public function editAction(Request $request, $id) {
 		
@@ -90,8 +123,8 @@ class AgrupacionController extends Controller
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+	 * @param Request $request
+	 * @return RedirectResponse|Response
 	 */
 	public function addAction(Request $request) {
 

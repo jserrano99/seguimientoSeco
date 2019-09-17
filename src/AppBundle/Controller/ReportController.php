@@ -279,7 +279,18 @@ class ReportController extends Controller
         return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
     }
 
-    /**
+	/**
+	 * @return Response
+	 */
+	public function informeSeguimientoAction($seguimiento_id)
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/informeSeguimiento";
+		$params = ["seguimientoId" => $seguimiento_id];
+		return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
+	}
+
+	/**
      * @param $pAgrupacion
      * @return Response
      */
@@ -311,6 +322,7 @@ class ReportController extends Controller
         return $this->render("informe/edit.html.twig", array(
             "form" => $filtroForm->createView()
         ));
+
 
     }
 

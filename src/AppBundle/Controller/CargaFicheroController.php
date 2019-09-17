@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\AnotacionEncargo;
 use AppBundle\Entity\CargaFichero;
 use AppBundle\Entity\Centro;
 use AppBundle\Entity\EncargoRemedy;
@@ -249,8 +250,10 @@ class CargaFicheroController extends Controller
 		foreach ($FicheroAll as $Fichero) {
 			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findByNumero($Fichero->getNumeroEncargo());
 
+			$nuevo = false;
 			if (!$Encargo) {
 				$Encargo = new Encargo();
+				$nuevo = true;
 			}
 
 			if ($Encargo->isBloqueado()) {
@@ -320,7 +323,7 @@ class CargaFicheroController extends Controller
 			$Encargo->setHorasRealizadas($Fichero->getHorasRealizadas());
 			if ($Encargo->getObjetoEncargo()->getTipoCuota()->getId() == 2) {
 				$Encargo->setCoste(round($Encargo->getHorasComprometidas() * 37.42, 2));
-            }
+			}
 			if ($Encargo->getObjetoEncargo()->getTipoCuota()->getId() == 3) {
 				$Encargo->getCoste() > 0 ? null : $Encargo->setCoste(0);
 			}
@@ -338,6 +341,16 @@ class CargaFicheroController extends Controller
 			$entityManager->persist($Encargo);
 			$entityManager->flush();
 			$ct++;
+			if ($nuevo and $Encargo->getObjetoEncargo()->getTipoObjeto() != 1) {
+				$AnotacionEncargo = new AnotacionEncargo();
+				$fecha = new DateTime();
+				$AnotacionEncargo->setEncargo($Encargo);
+				$AnotacionEncargo->setFecha($fecha);
+				$AnotacionEncargo->setAnotacion("Creación del Encargo");
+				$AnotacionEncargo->setUsuario($this->getUser());
+				$entityManager->persist($AnotacionEncargo);
+				$entityManager->flush();
+			}
 			$ServicioLog->setMensaje(" >>>> Encargo= " . $Encargo->getNumero() . " Actualizado <<<< ");
 			$ServicioLog->escribeLog($ficheroLog);
 		}

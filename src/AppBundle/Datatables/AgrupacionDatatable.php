@@ -63,6 +63,11 @@ class AgrupacionDatatable extends AbstractDatatable
 			->orderBy('u.descripcion', 'ASC')
 			->getQuery()->getResult();
 
+		$SeguimientoAll = $this->getEntityManager()->getRepository("AppBundle:Seguimiento")
+			->createQueryBuilder('u')
+			->orderBy('u.descripcion', 'ASC')
+			->getQuery()->getResult();
+
 		$PosicionEcomicaAll = $this->getEntityManager()->getRepository("AppBundle:PosicionEconomica")
 			->createQueryBuilder('u')
 			->orderBy('u.descripcion', 'ASC')
@@ -71,10 +76,10 @@ class AgrupacionDatatable extends AbstractDatatable
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
 			->add('codigo', Column::class, ['title' => 'Código', 'width' => '25px'])
-			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '650px', 'searchable' => true])
+			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '450px', 'searchable' => true])
 			->add('tipoAgrupacion.descripcion', Column::class, [
 				'title' => 'Tipo Agrupación',
-				'width' => '400px',
+				'width' => '200px',
 				'filter' => [SelectFilter::class,
 					[
 						'multiple' => false,
@@ -88,6 +93,15 @@ class AgrupacionDatatable extends AbstractDatatable
 					[
 						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($PosicionEcomicaAll, 'descripcion', 'descripcion'),
+						'search_type' => 'eq']]])
+			->add('seguimiento.descripcion', Column::class, [
+				'title' => 'Linea de Seguimiento',
+				'width' => '200px',
+				'default_content' => '',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($SeguimientoAll, 'descripcion', 'descripcion'),
 						'search_type' => 'eq']]])
 			->add('fcInicio', DateTimeColumn::class, [
 				'title' => 'F.Inicio',
@@ -107,6 +121,7 @@ class AgrupacionDatatable extends AbstractDatatable
 			])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
+				'width' => '80px',
 				'actions' => [
 					['route' => 'editAgrupacion',
 						'route_parameters' => [

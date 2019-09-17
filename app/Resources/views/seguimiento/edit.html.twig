@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block titulo %} LINEAS DE SEGUIMIENTO **{{accion}}**
+    <a href="{{path("querySeguimiento")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    {% include 'seguimiento/form.html.twig' %}
+{% endblock %}
