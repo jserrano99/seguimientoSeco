@@ -115,7 +115,19 @@ class SeguimientoDatatable extends AbstractDatatable
 							'title' => 'Informe de Seguimiento',
 							'class' => 'btn btn-success btn-xs',
 							'target' => 'blank',
+							'role' => 'button']],
+					['route' => 'exportarSeguimiento',
+						'route_parameters' => ['id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-share',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'target' => '_blank',
+							'title' => 'Exportar Seguimiento',
+							'class' => 'btn btn-primary btn-xs',
+							'target' => 'blank',
 							'role' => 'button']]
+
 				]]);
 	}
 

@@ -33,6 +33,7 @@
         <ul class="nav nav-tabs">
             <li><a id="t1" href="#datosGen">Datos Generales</a></li>
             <li><a id="t2" href="#descripcion">Descripción</a></li>
+            <li><a id="t6" href="#fechas">Fechas</a></li>
             <li><a id="t3" href="#anotaciones">Anotaciones</a></li>
             <li><a id="t4" href="#remedy">Remedy</a></li>
             <li><a id="t5" href="#solucion">Solución</a></li>
@@ -40,6 +41,7 @@
         <div id="datosGen">
             <div class="form_row mismalinea">{{ form_row(form.objetoEncargo) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.estadoActual) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.fcEstadoActual) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.agrupacion) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.criticidad2) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.coste) }}</div>
@@ -47,6 +49,15 @@
         <div id="descripcion">
             <div class="form_row ">{{ form_row(form.descripcion) }}</div>
         </div>
+        <div id="fechas">
+            <div class="form_row mismalinea">{{ form_row(form.fcRequeridaValoracion) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.fcEntregaValoracion)}}</div>
+            <div class="clearfix"></div>
+            <div class="form_row mismalinea">{{ form_row(form.fcComienzoEjecucion)}}</div>
+            <div class="form_row mismalinea">{{ form_row(form.fcCompromiso) }}</div><br/>
+            <div class="form_row mismalinea">{{ form_row(form.fcEntrega) }}</div><br/>
+        </div>
+
         <div id="anotaciones">
             <button type="button"
                     id="btnAddAnotacion"

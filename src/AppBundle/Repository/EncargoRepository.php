@@ -8,10 +8,14 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Agrupacion;
+use Doctrine\DBAL\DBALException;
+use Doctrine\orm\EntityRepository;
+
 /**
  * @author jluis_local
  */
-class EncargoRepository extends \Doctrine\orm\EntityRepository
+class EncargoRepository extends EntityRepository
 {
 
 	/**
@@ -32,6 +36,23 @@ class EncargoRepository extends \Doctrine\orm\EntityRepository
 		}
 	}
 
+	/**
+	 * @param Agrupacion $Agrupacion
+	 * @return mixed
+	 * @throws DBALException
+	 */
+	public function findActivosByAgrupacion (Agrupacion $Agrupacion) {
+		$conection = $this->getEntityManager()->getConnection();
+		$sentencia = " select * from view_encargos_activos where agrupacionId = :id";
+
+		$stmt = $conection->prepare($sentencia);
+		$params = [];
+		$params[":id"] = $Agrupacion->getId();
+		$stmt->execute($params);
+		$Encargos = $stmt->fetchAll();
+
+		return ($Encargos);
+	}
 
 
 }

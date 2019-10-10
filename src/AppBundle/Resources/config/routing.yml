@@ -5,6 +5,19 @@ app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Login:login }
 #
+# REMEDY
+#
+queryRemedy:
+  path: /remedy/query
+  defaults: { _controller: AppBundle:Remedy:query}
+  options:
+    expose: true
+incidentesByRemedy:
+  path: /remedy/imprimir/{id}
+  defaults: { _controller: AppBundle:Remedy:imprimir}
+  options:
+    expose: true
+#
 # login
 #
 login:
@@ -32,6 +45,11 @@ recargaFichero:
     defaults: { _controller: AppBundle:CargaFichero:recarga}
     options:
         expose: true
+cargaSeguimiento:
+  path: /cargaFichero/seguimiento
+  defaults: { _controller: AppBundle:CargaFichero:cargaSeguimiento}
+  options:
+    expose: true
 
 queryFichero:
     path: /cargaFicheros/query
@@ -97,6 +115,11 @@ revisionPenalizaciones:
     defaults: { _controller: AppBundle:CertificadoServicios:revisionPenalizaciones}
     options:
         expose: true
+cargaRevisionPenalizaciones:
+  path: /certificadoServicios/revisionpenalizaciones/carga/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:cargaRevisionPenalizaciones}
+  options:
+    expose: true
 quitarPenalizacion:
   path: /certificadoServicios/quitarPenalizacion/{id}
   defaults: { _controller: AppBundle:CertificadoServicios:quitarPenalizacion}
@@ -181,6 +204,12 @@ deleteSeguimiento:
   defaults: { _controller: AppBundle:Seguimiento:edit}
   options:
     expose: true
+exportarSeguimiento:
+  path: /seguimiento/exportar/{id}
+  defaults: { _controller: AppBundle:Seguimiento:exportar}
+  options:
+    expose: true
+
 #
 # PROYECCTO
 #

@@ -6,7 +6,9 @@ use AppBundle\Datatables\EncargoDatatable;
 use AppBundle\Entity\AnotacionEncargo;
 use AppBundle\Form\AnotacionEncargoType;
 use AppBundle\Form\EncargoType;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +23,7 @@ use DateTime;
 class EncargoController extends Controller
 {
 	/**
-	 * @var \Symfony\Component\HttpFoundation\Session\Session
+	 * @var Session
 	 */
 	private $sesion;
 
@@ -34,9 +36,9 @@ class EncargoController extends Controller
 	}
 
 	/**
-	 * @param \Symfony\Component\HttpFoundation\Request $request
-	 * @return \Symfony\Component\HttpFoundation\JsonResponse|\Symfony\Component\HttpFoundation\Response
-	 * @throws \Exception
+	 * @param Request $request
+	 * @return JsonResponse|Response
+	 * @throws Exception
 	 */
 	public function queryAction(Request $request)
 	{
@@ -133,6 +135,7 @@ class EncargoController extends Controller
 	 * @param Request $request
 	 * @param int $encargo_id
 	 * @return RedirectResponse|Response
+	 * @throws Exception
 	 */
 	public function addAnotacionAction(Request $request, $encargo_id)
 	{

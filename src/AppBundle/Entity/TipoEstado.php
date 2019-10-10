@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Table(name="estado_encargo")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\EstadoEncargoRepository")
+ * @ORM\Table(name="tipo_estado")
+ * @ORM\Entity()
  */
 
-class EstadoEncargo
+class TipoEstado
 {
 	/**
 	 * @var integer
@@ -39,16 +39,6 @@ class EstadoEncargo
 	 */
 	private $descripcion;
 
-	/**
-	 * @var TipoEstado|null
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TipoEstado")
-	 * * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="tipo_estado_id", referencedColumnName="id")
-	 * })
-	 */
-	private $tipoEstado;
-
-
 
 	/**
      * Get id.
@@ -64,7 +54,7 @@ class EstadoEncargo
      * Set codigo.
      *
      * @param string $codigo
-     * @return EstadoEncargo
+     * @return TipoEstado
      */
     public function setCodigo($codigo)
     {
@@ -87,7 +77,7 @@ class EstadoEncargo
      * Set descripcion.
      *
      * @param string $descripcion
-     * @return EstadoEncargo
+     * @return TipoEstado
      */
     public function setDescripcion($descripcion)
     {
@@ -110,22 +100,4 @@ class EstadoEncargo
 	{
 		return $this->descripcion;// TODO: Implement __toString() method.
 	}
-
-	/**
-	 * @return TipoEstado|null
-	 */
-	public function getTipoEstado()
-	{
-		return $this->tippoEstado;
-	}
-
-	/**
-	 * @param TipoEstado|null $tippoEstado
-	 */
-	public function setTipoEstado($tippoEstado)
-	{
-		$this->tippoEstado = $tippoEstado;
-	}
-
-
 }

@@ -18,7 +18,7 @@ class EscribeLog {
     private $filename;
 
 	/**
-	 * @param $ficheroLog
+	 * @param string $ficheroLog
 	 * @return bool
 	 */
     public function escribeLog($ficheroLog) {

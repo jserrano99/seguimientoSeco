@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -35,12 +36,11 @@ class EncargoType extends AbstractType
 				"required" => false,
 				"attr" => ["class" => "form-control"
 				]])
-
 			->add('titulo', TextType::class, [
 				"label" => 'Título',
 				"required" => 'required',
 				"attr" => ["class" => "form-control",
-					      "width" => "650px"
+					"width" => "650px"
 				]])
 			->add('objetoEncargo', EntityType::class, [
 				'label' => 'Objeto Encargo',
@@ -82,7 +82,60 @@ class EncargoType extends AbstractType
 			->add('Guardar', SubmitType::class, [
 				"attr" => ["class" => "btn btn-t btn-success"]
 			])
-		;
+			->add('fcEstadoActual', DateType::class, [
+				"label" => 'Fecha Estado Actual',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcRequeridaValoracion', DateType::class, [
+				"label" => 'Fecha Valoración Requerida',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcEntregaValoracion', DateType::class, [
+				"label" => 'Fecha Entrega Valoración',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcCompromiso', DateType::class, [
+				"label" => 'Fecha Compromiso Entrega',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcComienzoEjecucion', DateType::class, [
+				"label" => 'Fecha Comienzo Ejecución',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
+			->add('fcEntrega', DateType::class, [
+				"label" => 'Fecha Entrega',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']]);
 	}
 
 	/**

@@ -145,6 +145,9 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 					->add('revisionPenalizaciones', ButtonType::class, [
 						'label' => 'Revisión Penalizaciones',
 						"attr" => ["class" => "btn btn-t btn-success"]])
+					->add('cargaRevisionPenalizaciones', ButtonType::class, [
+						'label' => ' Carga Revisión Penalizaciones',
+						"attr" => ["class" => "btn btn-t btn-success"]])
 					->add('penalizaciones', ButtonType::class, [
 						'label' => 'Imprimir Informe de Penalizaciones',
 						"attr" => ["class" => "btn btn-t btn-primary"]])

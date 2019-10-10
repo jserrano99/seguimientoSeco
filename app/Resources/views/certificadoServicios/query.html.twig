@@ -9,7 +9,7 @@
 {% endblock %} 
 
 {% block contenido %}
-    <div class="container-fluid">
+    <div class="container">
         {% for message in app.session.flashbag().get('status') %}
             <div class="alert alert-success">
                 {{message}}

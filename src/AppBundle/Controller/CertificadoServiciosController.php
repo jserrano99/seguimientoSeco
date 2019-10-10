@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Datatables\CertificadoServiciosDatatable;
 use AppBundle\Datatables\EncargoPenalizadoDatatable;
 use AppBundle\Datatables\LineaCertificadoDatatable;
+use AppBundle\Entity\CargaFichero;
 use AppBundle\Entity\CertificadoServicios;
 use AppBundle\Entity\Encargo;
 use AppBundle\Entity\EncargoPenalizado;
@@ -18,12 +19,20 @@ use AppBundle\Entity\PosicionEconomica;
 use AppBundle\Entity\TipoCuota;
 use AppBundle\Form\AddEncargoType;
 use AppBundle\Form\CertificadoServiciosType;
+use AppBundle\Form\ImportarType;
 use AppBundle\Servicios\EscribeLog;
 use DateInterval;
 use DateTime;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -258,8 +267,8 @@ class CertificadoServiciosController extends Controller
 
 		$status = " IMPORTES DEL CERTIFICADO DE SERVICIO GENERADO CORRECTAMENTE ";
 		$this->sesion->getFlashBag()->add("status", $status);
-		$params = ["id"=> $CertificadoServicios->getId()];
-		return $this->redirectToRoute("editCertificadoServicios",$params);
+		$params = ["id" => $CertificadoServicios->getId()];
+		return $this->redirectToRoute("editCertificadoServicios", $params);
 
 	}
 
@@ -375,7 +384,7 @@ class CertificadoServiciosController extends Controller
 			$ImportesCertificado->setDescripcion($LineaCertificado["posicionEconomicaDs"]);
 			$ImportesCertificado->setHorasCertificadas(0);
 			$ImportesCertificado->setTarifa(0);
-			$ImportesCertificado->setImporte(round($LineaCertificado["importeAcumulado"],2));
+			$ImportesCertificado->setImporte(round($LineaCertificado["importeAcumulado"], 2));
 			$ImportesCertificado->setPenalizacion(0);
 			$ImportesCertificado->setTotal(0);
 			/** @var PosicionEconomica $PosicionEconomica */
@@ -385,7 +394,6 @@ class CertificadoServiciosController extends Controller
 			$EntityManager->flush();
 			$importe = $importe + $ImportesCertificado->getImporte();
 		}
-
 
 
 		return $importe;
@@ -524,6 +532,9 @@ class CertificadoServiciosController extends Controller
 		$totalEncargos = $CertificadoServicios->getContadorNPLCRI() + $CertificadoServicios->getContadorNPLNOR();
 		$encargosPenalizados = count($EncargosPenalizadosALL);
 
+		if ($totalEncargos == 0 )
+			$porcentaje = 1;
+		 else
 		$porcentaje = $encargosPenalizados / $totalEncargos;
 
 		$factor = 0;
@@ -570,7 +581,7 @@ class CertificadoServiciosController extends Controller
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLCRI - count($EncargosPenalizadosALL);
 
-		if ($encargosNPLCRI > 0)
+		if ($encargosNPLCRI > 0 and !is_null($encargosNPLCRI))
 			$porcentaje = $encargosCumplen / $encargosNPLCRI;
 		else
 			$porcentaje = 1;
@@ -602,7 +613,10 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
-		$porcentaje = $encargosCumplen / $encargosNPLNOR;
+		if ($encargosNPLNOR >0 and !is_null($encargosNPLNOR))
+			$porcentaje = $encargosCumplen / $encargosNPLNOR;
+		else
+			$porcentaje = 1;
 		$factor = 0;
 
 		if ($porcentaje > 0.95) $factor = 0;
@@ -633,7 +647,10 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
-		$porcentaje = $encargosCumplen / $encargosNPLNOR;
+		if ($encargosNPLNOR >0 and !is_null($encargosNPLNOR))
+			$porcentaje = $encargosCumplen / $encargosNPLNOR;
+		else
+			$porcentaje = 1;
 		$factor = 0;
 
 		if ($porcentaje > 0.95) $factor = 0;
@@ -717,27 +734,27 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
-//        $encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
-//        $porcentaje = $encargosCumplen / $encargosADM;
-//
-//        $factor = 0;
-//        if ($porcentaje > 0.95) $factor = 0;
-//        if ($porcentaje > 0.90 and $porcentaje <= 0.95) $factor = 0.5;
-//        if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
-//        if ($porcentaje <= 0.85) $factor = 1;
-//        $peso = $IndicadorIRS03->getPeso() * $factor;
-//        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
+		$importe = 0;
+		//$thpCs = $CertificadoServicios->getContrato()->getImporteContrato()->getTarifaHora();
+
+		$thpCs = 37.47;
+
+		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
+			$diasRetraso = $EncargoPenalizado->getDiasRetrasoValoracion();
+			$importePenalizacion = $diasRetraso * 8 * 2 * $thpCs;
+			$importe = $importe + $importePenalizacion;
+		}
 
 		$Penalizacion = new Penalizacion();
 		$Penalizacion->setIndicador($IndicadorENC01);
 		$Penalizacion->setCertificadoServicios($CertificadoServicios);
 		$Penalizacion->setTotalEncargos(0);
-		$Penalizacion->setTotalEncargosPenalizados(0);
+		$Penalizacion->setTotalEncargosPenalizados(count($EncargosPenalizadosALL));
 		$Penalizacion->setTotalCumplen(0);
 		$Penalizacion->setPorcentaje(0);
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
-		$Penalizacion->setImporte(0);
+		$Penalizacion->setImporte($importe);
 		$entityManager->persist($Penalizacion);
 		$entityManager->flush();
 
@@ -746,27 +763,23 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
-//        $encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
-//        $porcentaje = $encargosCumplen / $encargosADM;
-//
-//        $factor = 0;
-//        if ($porcentaje > 0.95) $factor = 0;
-//        if ($porcentaje > 0.90 and $porcentaje <= 0.95) $factor = 0.5;
-//        if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
-//        if ($porcentaje <= 0.85) $factor = 1;
-//        $peso = $IndicadorIRS03->getPeso() * $factor;
+		$importe = 0;
+		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
+			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
+			$importePenalizacion = $diasRetraso * 8 * 2 * $thpCs;
+			$importe = $importe + $importePenalizacion;
+		}
 
-//        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
 		$Penalizacion = new Penalizacion();
 		$Penalizacion->setIndicador($IndicadorENC02);
 		$Penalizacion->setCertificadoServicios($CertificadoServicios);
 		$Penalizacion->setTotalEncargos(0);
-		$Penalizacion->setTotalEncargosPenalizados(0);
+		$Penalizacion->setTotalEncargosPenalizados(count($EncargosPenalizadosALL));
 		$Penalizacion->setTotalCumplen(0);
 		$Penalizacion->setPorcentaje(0);
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
-		$Penalizacion->setImporte(0);
+		$Penalizacion->setImporte($importe);
 		$entityManager->persist($Penalizacion);
 		$entityManager->flush();
 
@@ -787,36 +800,30 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
-//        $encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
-//        $porcentaje = $encargosCumplen / $encargosADM;
-//
-//        $factor = 0;
-//        if ($porcentaje > 0.95) $factor = 0;
-//        if ($porcentaje > 0.90 and $porcentaje <= 0.95) $factor = 0.5;
-//        if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
-//        if ($porcentaje <= 0.85) $factor = 1;
-//        $peso = $IndicadorIRS03->getPeso() * $factor;
+		$importe = 0;
+		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
+			$factorPenalizacion = $EncargoPenalizado->getDiasRetrasoEntrega() / $EncargoPenalizado->getDiasEjecucion();
+			$importePenalizacion = $factorPenalizacion * $EncargoPenalizado->getEncargo()->getCoste();
+			$importe = $importe + $importePenalizacion;
+		}
 
-//        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
 		$Penalizacion = new Penalizacion();
 		$Penalizacion->setIndicador($IndicadorENT01);
 		$Penalizacion->setCertificadoServicios($CertificadoServicios);
 		$Penalizacion->setTotalEncargos(0);
-		$Penalizacion->setTotalEncargosPenalizados(0);
+		$Penalizacion->setTotalEncargosPenalizados(count($EncargosPenalizadosALL));
 		$Penalizacion->setTotalCumplen(0);
 		$Penalizacion->setPorcentaje(0);
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
-		$Penalizacion->setImporte(0);
+		$Penalizacion->setImporte($importe);
 		$entityManager->persist($Penalizacion);
 		$entityManager->flush();
 
-		$IndicadorENT02 = $entityManager->getRepository("AppBundle:Indicador")->find(14);
-
+//		$IndicadorENT02 = $entityManager->getRepository("AppBundle:Indicador")->find(14);
 //		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENT02,
 //			"certificadoServicios" => $CertificadoServicios,
 //			"eliminada" => null]);
-
 //        $encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
 //        $porcentaje = $encargosCumplen / $encargosADM;
 //
@@ -826,20 +833,20 @@ class CertificadoServiciosController extends Controller
 //        if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
 //        if ($porcentaje <= 0.85) $factor = 1;
 //        $peso = $IndicadorIRS03->getPeso() * $factor;
-
 //        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
-		$Penalizacion = new Penalizacion();
-		$Penalizacion->setIndicador($IndicadorENT02);
-		$Penalizacion->setCertificadoServicios($CertificadoServicios);
-		$Penalizacion->setTotalEncargos(0);
-		$Penalizacion->setTotalEncargosPenalizados(0);
-		$Penalizacion->setTotalCumplen(0);
-		$Penalizacion->setPorcentaje(0);
-		$Penalizacion->setFactor(0);
-		$Penalizacion->setPeso(0);
-		$Penalizacion->setImporte(0);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+
+//		$Penalizacion = new Penalizacion();
+//		$Penalizacion->setIndicador($IndicadorENT02);
+//		$Penalizacion->setCertificadoServicios($CertificadoServicios);
+//		$Penalizacion->setTotalEncargos(0);
+//		$Penalizacion->setTotalEncargosPenalizados(0);
+//		$Penalizacion->setTotalCumplen(0);
+//		$Penalizacion->setPorcentaje(0);
+//		$Penalizacion->setFactor(0);
+//		$Penalizacion->setPeso(0);
+//		$Penalizacion->setImporte(0);
+//		$entityManager->persist($Penalizacion);
+//		$entityManager->flush();
 
 		return true;
 	}
@@ -850,8 +857,9 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @param EscribeLog $ServicioLog
-	 * @param FicheroLog $ficheroLog
+	 * @param string $ficheroLog
 	 * @return bool
+	 * @throws DBALException
 	 */
 	public
 	function incluirNPL($CertificadoServicios, $ServicioLog, $ficheroLog)
@@ -902,7 +910,7 @@ class CertificadoServiciosController extends Controller
 				/** @var Encargo $Existe */
 				$Existe = $this->encargoEnCertificado($Encargo);
 				if ($Existe) {
-					$ServicioLog->setMensaje("Encargo: " . $Encargo->getNumero() . " YA INCLUIDO EN CERTIFICADO SERVICIOS: " . $Existe->getDescripcion());
+					$ServicioLog->setMensaje("Encargo: " . $Encargo->getNumero() . " YA INCLUIDO EN CERTIFICADO SERVICIOS: " . $Existe->getTitulo());
 					$ServicioLog->escribeLog($ficheroLog);
 					continue;
 				}
@@ -1024,8 +1032,8 @@ class CertificadoServiciosController extends Controller
 		$EncargoRepository = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo");
 		$EstadoEncargoCRR = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(2);
 		$EstadoEncargoFIN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(12);
-
-		$IndicadorIRS03 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(3);
+		$EstadoEncargoCAN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(10);
+		$IndicadorIRS03 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(4);
 
 		$ObjetosEncargoAll = $ObjetoRepository->createQueryBuilder('u')
 			->where('u.tipoObjeto = :tipoObjeto')
@@ -1037,10 +1045,11 @@ class CertificadoServiciosController extends Controller
 			//CERRADOS, FINALIZADOS y CANCELADOS
 			$Encargos = $EncargoRepository->createQueryBuilder('u')
 				->where('u.objetoEncargo =  :objetoEncargo')
-				->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2)')
+				->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2, :estadoEncargo3)')
 				->andWhere('u.fcEstadoActual >= :fcini and u.fcEstadoActual <= :fcfin')
 				->setParameter('estadoEncargo1', $EstadoEncargoCRR)
 				->setParameter('estadoEncargo2', $EstadoEncargoFIN)
+				->setParameter('estadoEncargo3', $EstadoEncargoCAN)
 				->setParameter('objetoEncargo', $ObjetosEncargo)
 				->setParameter('fcini', $CertificadoServicios->getMes()->getFechaInicio())
 				->setParameter('fcfin', $CertificadoServicios->getMes()->getFechaFin())
@@ -1080,8 +1089,8 @@ class CertificadoServiciosController extends Controller
 					}
 				}
 				$Encargo->setBloqueado(true);
-				$this->getDoctrine()->getManager()->persist($Encargo);
-				$this->getDoctrine()->getManager()->flush();
+				$EntityManager->persist($Encargo);
+				$EntityManager->flush();
 				$ct++;
 			}
 		}
@@ -1097,7 +1106,7 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @param EscribeLog $ServicioLog
-	 * @param FicheroLog $ficheroLog
+	 * @param string $ficheroLog
 	 * @return bool
 	 * @throws Exception
 	 */
@@ -1117,12 +1126,11 @@ class CertificadoServiciosController extends Controller
 			->where('u.tipoObjeto = :tipoObjeto')
 			->setParameter('tipoObjeto', $TipoObjetoEncargoSCF)
 			->getQuery()->getResult();
-
 		foreach ($ObjetosEncargoAll as $ObjetosEncargo) {
 			$Encargos = $EncargoRepository->createQueryBuilder('u')
 				->where('u.objetoEncargo =  :objetoEncargo')
 				->andWhere('u.estadoActual = :estadoEncargo')
-				->andWhere('u.fcComienzoEjecucion <= :fcini and u.fcCompromiso <= :fcfin')
+				->andWhere('u.fcComienzoEjecucion <= :fcfin and u.fcCompromiso >= :fcini')
 				->setParameter('estadoEncargo', $EstadoEncargoEJE)
 				->setParameter('objetoEncargo', $ObjetosEncargo)
 				->setParameter('fcini', $CertificadoServicios->getMes()->getFechaInicio())
@@ -1134,6 +1142,8 @@ class CertificadoServiciosController extends Controller
 				$fechaInicio = clone $Encargo->getFcComienzoEjecucion();
 				$fechaFin = clone $Encargo->getFcCompromiso();
 				$diasTotales = $this->getDiasHabiles($fechaInicio, $fechaFin);
+
+				if ($diasTotales == 0 or is_null($diasTotales)) $diasTotales = 1;
 				$horasDia = round($Encargo->getHorasComprometidas() / $diasTotales, 2);
 
 				$fechaInicio2 = clone $Encargo->getFcComienzoEjecucion();
@@ -1145,6 +1155,7 @@ class CertificadoServiciosController extends Controller
 					$fechaFin2 = clone $CertificadoServicios->getMes()->getFechaFin();
 				}
 				$diasMes = $this->getDiasHabiles($fechaInicio2, $fechaFin2);
+				if ($diasMes == 0) $diasMes = 1;
 
 				$LineaCertificadoEje = new LineaCertificadoEje();
 				$LineaCertificadoEje->setCertificadoServicios($CertificadoServicios);
@@ -1160,7 +1171,6 @@ class CertificadoServiciosController extends Controller
 				$ServicioLog->escribeLog($ficheroLog);
 			}
 		}
-
 		return true;
 	}
 
@@ -1215,7 +1225,7 @@ class CertificadoServiciosController extends Controller
 				$fechaInicio = clone $Encargo->getFcComienzoEjecucion();
 				$fechaFin = clone $Encargo->getFcCompromiso();
 				$diasTotales = $this->getDiasHabiles($fechaInicio, $fechaFin);
-				if ($diasTotales == 0 ) $diasTotales = 1;
+				if ($diasTotales == 0) $diasTotales = 1;
 				$horasDia = round($Encargo->getHorasComprometidas() / $diasTotales, 2);
 
 				$fechaInicio2 = clone $Encargo->getFcComienzoEjecucion();
@@ -1227,7 +1237,7 @@ class CertificadoServiciosController extends Controller
 					$fechaFin2 = clone $CertificadoServicios->getMes()->getFechaFin();
 				}
 				$diasMes = $this->getDiasHabiles($fechaInicio2, $fechaFin2);
-
+				if ($diasMes == 0 or is_null($diasMes)) $diasMes = 1;
 				$LineaCertificado = new LineaCertificado();
 				$LineaCertificado->setCertificadoServicios($CertificadoServicios);
 				$LineaCertificado->setTipoCuota($TipoCuota);
@@ -1309,34 +1319,43 @@ class CertificadoServiciosController extends Controller
 
 			$fechaInicio = $Encargo->getFcRequeridaValoracion();
 			$fechaFin = $Encargo->getFcEntregaValoracion();
-			$diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
+			//$diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
-			if ($diasRetrasoValoracion > 0) {
-				$EncargoPenalizado = new EncargoPenalizado();
-				$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-				$EncargoPenalizado->setIndicador($IndicadorENC01);
-				$EncargoPenalizado->setDiasRetrasoValoracion($diasRetrasoValoracion);
-				$EncargoPenalizado->setEncargo($Encargo);
-				$EntityManager->persist($EncargoPenalizado);
-				$EntityManager->flush();
-				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC01*** ");
-				$ServicioLog->escribeLog($ficheroLog);
+			if ($fechaFin > $fechaInicio) {
+				$diff = $fechaInicio->diff($fechaFin);
+				$diasRetrasoValoracion = $diff->format('%a');
+				if ($diasRetrasoValoracion > 0) {
+					$EncargoPenalizado = new EncargoPenalizado();
+					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+					$EncargoPenalizado->setIndicador($IndicadorENC01);
+					$EncargoPenalizado->setDiasRetrasoValoracion($diasRetrasoValoracion);
+					$EncargoPenalizado->setEncargo($Encargo);
+					$EntityManager->persist($EncargoPenalizado);
+					$EntityManager->flush();
+					$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC01*** ");
+					$ServicioLog->escribeLog($ficheroLog);
+				}
 			}
+
 
 			$fechaInicio = $Encargo->getFcRequeridaEntrega();
 			$fechaFin = $Encargo->getFcEntrega();
-			$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+			//$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
-			if ($diasRetrasoEntrega > 0) {
-				$EncargoPenalizado = new EncargoPenalizado();
-				$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-				$EncargoPenalizado->setIndicador($IndicadorENC02);
-				$EncargoPenalizado->setDiasRetrasoEntrega($diasRetrasoEntrega);
-				$EncargoPenalizado->setEncargo($Encargo);
-				$EntityManager->persist($EncargoPenalizado);
-				$EntityManager->flush();
-				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC02*** ");
-				$ServicioLog->escribeLog($ficheroLog);
+			$diff = $fechaInicio->diff($fechaFin);
+			$diasRetrasoEntrega = $diff->format('%a');
+			if ($fechaFin > $fechaInicio) {
+				if ($diasRetrasoEntrega > 0) {
+					$EncargoPenalizado = new EncargoPenalizado();
+					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+					$EncargoPenalizado->setIndicador($IndicadorENC02);
+					$EncargoPenalizado->setDiasRetrasoEntrega($diasRetrasoEntrega);
+					$EncargoPenalizado->setEncargo($Encargo);
+					$EntityManager->persist($EncargoPenalizado);
+					$EntityManager->flush();
+					$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC02*** ");
+					$ServicioLog->escribeLog($ficheroLog);
+				}
 			}
 
 			$Encargo->setBloqueado(true);
@@ -1350,7 +1369,7 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @param EscribeLog $ServicioLog
-	 * @param FicheroLog $ficheroLog
+	 * @param string $ficheroLog
 	 * @return bool
 	 * @throws Exception
 	 */
@@ -1358,7 +1377,9 @@ class CertificadoServiciosController extends Controller
 	function incluirTAS($CertificadoServicios, $ServicioLog, $ficheroLog)
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
+		/** @var Indicador $IndicadorENT01 */
 		$IndicadorENT01 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(13);
+		/** @var Indicador $IndicadorENT02 */
 		$IndicadorENT02 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(14);
 		$tipoCuotaTasada = $EntityManager->getRepository("AppBundle:TipoCuota")->find(3);
 
@@ -1394,7 +1415,7 @@ class CertificadoServiciosController extends Controller
 
 			$LineaCertificado = new LineaCertificado();
 			$LineaCertificado->setCertificadoServicios($CertificadoServicios);
-			/** @var TipoCuota $tipoCuotaVariable */
+			/** @var TipoCuota $tipoCuotaTasada */
 			$LineaCertificado->setTipoCuota($tipoCuotaTasada);
 			$LineaCertificado->setEncargo($Encargo);
 			$this->getDoctrine()->getManager()->persist($LineaCertificado);
@@ -1402,41 +1423,51 @@ class CertificadoServiciosController extends Controller
 			$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO EN CUOTA TASADA");
 			$ServicioLog->escribeLog($ficheroLog);
 
-			$fechaInicio = $Encargo->getFcRequeridaValoracion();
-			$fechaFin = $Encargo->getFcEntregaValoracion();
-			$diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
+			$fechaInicio = $Encargo->getFcCompromiso();
+			$fechaFin = $Encargo->getFcEntrega();
 
-			if ($diasRetrasoValoracion > 0) {
+			//			$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+			$diff = $fechaInicio->diff($fechaFin);
+			$diasRetrasoEntrega = $diff->format('%a');
+			$diff2 = $Encargo->getFcComienzoEjecucion()->diff($Encargo->getFcCompromiso());
+			$diasEjecucion = $diff2->format('%a');
+
+			if ($diasRetrasoEntrega > 0) {
 				$EncargoPenalizado = new EncargoPenalizado();
 				$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-				/** @var Indicador $IndicadorENT01 */
 				$EncargoPenalizado->setIndicador($IndicadorENT01);
 				$EncargoPenalizado->setEncargo($Encargo);
+				$EncargoPenalizado->setDiasRetrasoEntrega($diasRetrasoEntrega);
+				$EncargoPenalizado->setDiasEjecucion($diasEjecucion);
 				$EntityManager->persist($EncargoPenalizado);
 				$EntityManager->flush();
 				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENT01*** ");
 				$ServicioLog->escribeLog($ficheroLog);
 			}
 
-			$fechaInicio = $Encargo->getFcRequeridaEntrega();
-			$fechaFin = $Encargo->getFcEntrega();
-			$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+//			$fechaInicio = $Encargo->getFcCompromiso();
+//			$fechaFin = $Encargo->getFcEntrega();
+//
+//			//			$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+//			$diff = $fechaInicio->diff($fechaFin);
+//			$diasRetrasoValoracion = $diff->format('%a');
+//
+//			if ($diasRetrasoEntrega > 0) {
+//				$EncargoPenalizado = new EncargoPenalizado();
+//				$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+//				/** @var Indicador $IndicadorENT02 */
+//				$EncargoPenalizado->setIndicador($IndicadorENT02);
+//				$EncargoPenalizado->setEncargo($Encargo);
+//				$EntityManager->persist($EncargoPenalizado);
+//				$EntityManager->flush();
+//				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENT02*** ");
+//				$ServicioLog->escribeLog($ficheroLog);
+//			}
+//
+//			$Encargo->setBloqueado(true);
+//			$this->getDoctrine()->getManager()->persist($Encargo);
+//			$this->getDoctrine()->getManager()->flush();
 
-			if ($diasRetrasoEntrega > 0) {
-				$EncargoPenalizado = new EncargoPenalizado();
-				$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-				/** @var Indicador $IndicadorENT02 */
-				$EncargoPenalizado->setIndicador($IndicadorENT02);
-				$EncargoPenalizado->setEncargo($Encargo);
-				$EntityManager->persist($EncargoPenalizado);
-				$EntityManager->flush();
-				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENT02*** ");
-				$ServicioLog->escribeLog($ficheroLog);
-			}
-
-			$Encargo->setBloqueado(true);
-			$this->getDoctrine()->getManager()->persist($Encargo);
-			$this->getDoctrine()->getManager()->flush();
 		}
 
 		return true;
@@ -1509,7 +1540,8 @@ class CertificadoServiciosController extends Controller
 	 * @param integer $id
 	 * @return bool
 	 */
-	public function inicializaCertificadoServicios($id)
+	public
+	function inicializaCertificadoServicios($id)
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
 
@@ -1531,7 +1563,8 @@ class CertificadoServiciosController extends Controller
 
 	}
 
-	public function quitarPenalizacionAction($id)
+	public
+	function quitarPenalizacionAction($id)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -1548,7 +1581,8 @@ class CertificadoServiciosController extends Controller
 	}
 
 
-	public function activarPenalizacionAction($id)
+	public
+	function activarPenalizacionAction($id)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -1604,8 +1638,8 @@ class CertificadoServiciosController extends Controller
 
 		$status = "CERTIFICADO DE SERVICIO CERRADO CORRECTAMENTE ";
 		$this->sesion->getFlashBag()->add("status", $status);
-		$params = ["id"=> $CertificadoServicios->getId()];
-		return $this->redirectToRoute("editCertificadoServicios",$params);
+		$params = ["id" => $CertificadoServicios->getId()];
+		return $this->redirectToRoute("editCertificadoServicios", $params);
 	}
 
 	/**
@@ -1625,8 +1659,8 @@ class CertificadoServiciosController extends Controller
 
 		$status = "CERTIFICADO DE SERVICIO ABIERTO CORRECTAMENTE ";
 		$this->sesion->getFlashBag()->add("status", $status);
-	$params = ["id"=> $CertificadoServicios->getId()];
-		return $this->redirectToRoute("editCertificadoServicios",$params);
+		$params = ["id" => $CertificadoServicios->getId()];
+		return $this->redirectToRoute("editCertificadoServicios", $params);
 	}
 
 	/**
@@ -1664,8 +1698,8 @@ class CertificadoServiciosController extends Controller
 					$this->getDoctrine()->getManager()->flush();
 					$status = "NUMERO DE ENCARGO INCLUIDO CORRECTAMENTE EN LA CERTIFICACIÓN DE SERVICIOS GENERE DE NUEVO LOS IMPORTES ";
 					$this->sesion->getFlashBag()->add("status", $status);
-					$params = ["id"=> $CertificadoServicios->getId()];
-					return $this->redirectToRoute("editCertificadoServicios",$params);
+					$params = ["id" => $CertificadoServicios->getId()];
+					return $this->redirectToRoute("editCertificadoServicios", $params);
 				}
 			} else {
 				$status = "NUMERO DE ENCARGO INEXISTENTE ";
@@ -1683,13 +1717,16 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param Encargo $Encargo
 	 * @return bool
+	 * @throws DBALException
 	 */
-	public function esReapertura($Encargo)
+	public
+	function esReapertura($Encargo)
 	{
 
+		/** @var Connection $conection */
 		$conection = $this->getDoctrine()->getConnection();
 
-		$sentencia = " select ver.numeroRemedy, count(*)-1 as total from linea_certificado as lc "
+		$sentencia = "select ver.numeroRemedy, count(*)-1 as total from linea_certificado as lc "
 			. " inner join view_encargos_remedy as ver on ver.encargoId = lc.encargo_id "
 			. " where ver.numeroRemedy= :numeroRemedy "
 			. " group by ver.numeroRemedy ";
@@ -1714,7 +1751,8 @@ class CertificadoServiciosController extends Controller
 	 * @return int
 	 * @throws Exception
 	 */
-	public function getDiasHabiles($fechainicio, $fechafin)
+	public
+	function getDiasHabiles($fechainicio, $fechafin)
 	{
 		// Arreglo de dias habiles, inicianlizacion
 		$diasNoHabiles = ['Sab', 'Sat', 'Dom', 'Sun'];
@@ -1729,6 +1767,70 @@ class CertificadoServiciosController extends Controller
 		}
 
 		return $dias;
+	}
+
+	/**
+	 * @param Request $request
+	 * @param int $id
+	 * @return RedirectResponse
+	 * @throws ORMException
+	 * @throws OptimisticLockException
+	 * @throws \PhpOffice\PhpSpreadsheet\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+	 */
+	public function cargaRevisionPenalizaciones(Request $request, $id)
+	{
+		/** @var EntityManager $entityManager */
+		$entityManager = $this->getDoctrine()->getManager();
+		$ImportarForm = $this->createForm(ImportarType::class);
+		$ImportarForm->handleRequest($request);
+
+		if ($ImportarForm->isSubmitted()) {
+			/** @var UploadedFile $fichero */
+			$fichero = $ImportarForm["fichero"]->getData();
+			if (!empty($fichero) && $fichero != null) {
+				$file_name = $fichero->getClientOriginalName();
+				$fichero->move("upload", $file_name);
+				$file = "upload/" . $fichero->getClientOriginalName();
+				$PHPExcel = IOFactory::load($file);
+				$fecha = new DateTime();
+				$CargaFichero = new CargaFichero();
+				$CargaFichero->setFechaCarga($fecha);
+				$CargaFichero->setDescripcion($ImportarForm["descripcion"]->getdata());
+				$CargaFichero->setFichero($file_name);
+				$Usuario = $this->getUser();
+				$CargaFichero->setUsuario($Usuario);
+				$entityManager->persist($CargaFichero);
+				$entityManager->flush();
+
+				$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
+				$highestRow = $objWorksheet->getHighestRow();
+				$ct = 0;
+				for ($i = 2; $i <= $highestRow; $i++) {
+					$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':G' . $i, null, true, true, true);
+					$headingsArray = $headingsArray[$i];
+					if ($headingsArray["G"] == 'OK') {
+						$nmEncargo = $headingsArray["A"];
+
+						$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findBy(["numero" => $nmEncargo]);
+						$EncargoPenalizado = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["encargo" => $Encargo]);
+
+						$EncargoPenalizado->setEliminada(true);
+						$entityManager->persist($EncargoPenalizado);
+						$entityManager->flush();
+					}
+				}
+				$this->inicializaCertificadoServicios($id);
+				$status = "REVISIÓN DE PENALIZACIONES CARGADA CORRECTAMENTE";
+				$this->sesion->getFlashBag()->add("status", $status);
+				$params = ["id" => $id];
+				return $this->redirectToRoute("editCertificadoServicios", $params);
+			}
+		}
+
+		$params = ["form" => $ImportarForm->createView()];
+		return $this->render("cargaFichero/carga.html.twig", $params);
+
 	}
 
 }

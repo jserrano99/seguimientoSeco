@@ -6,8 +6,10 @@ use NumberFormatter;
 use Sg\DatatablesBundle\Datatable\AbstractDatatable;
 use Sg\DatatablesBundle\Datatable\Column\ActionColumn;
 use Sg\DatatablesBundle\Datatable\Column\Column;
+use Sg\DatatablesBundle\Datatable\Column\DateTimeColumn;
 use Sg\DatatablesBundle\Datatable\Column\NumberColumn;
 
+use Sg\DatatablesBundle\Datatable\Filter\DateRangeFilter;
 use Sg\DatatablesBundle\Datatable\Style;
 
 /**
@@ -62,16 +64,22 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
 			->add('descripcion', Column::class, ['title' => 'Descripcion', 'width' => '400px', 'searchable' => true])
-			->add('mes.fechaInicio' ,Column::class, ['title' => 'Fecha', 'width' => '40px', 'searchable' => true])
+			->add('mes.fechaInicio', DateTimeColumn::class, array('title' => 'Fecha Proceso', 'width' => '150px',
+				'date_format' => 'DD/MM/YYYY',
+				'filter' => array(DateRangeFilter::class, array(
+					'cancel_button' => false,
+				)),
+			))
+
 			->add('mes.anyo.descripcion', Column::class, ['title' => 'Año', 'width' => '40px', 'searchable' => true])
-			->add('mes.descripcion', Column::class, ['title' => 'Mes', 'width' => '40px', 'searchable' => true])
+			->add('mes.descripcion', Column::class, ['title' => 'Mes', 'width' => '140px', 'searchable' => true])
 			->add('totalFacturaConIva', NumberColumn::class, ['title' => 'Total Factura',
 															  'width' => '40px',
 															  'formatter' =>$formatter,
 															  'use_format_currency' => true,
 															  'currency' => 'EUR',
 															  'searchable' => true])
-			->add('estadoCertificado.descripcion', Column::class, ['title' => 'Estado Certificado', 'width' => '100px', 'searchable' => true])
+			->add('estadoCertificado.descripcion', Column::class, ['title' => 'Estado Certificado', 'width' => '200px', 'searchable' => true])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'actions' => [

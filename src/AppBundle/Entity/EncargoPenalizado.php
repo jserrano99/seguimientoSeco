@@ -82,7 +82,15 @@ class EncargoPenalizado
 
     private $diasRetrasoEntrega;
 
-    /**
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="dias_ejecucion", type="integer", nullable=true)*
+	 */
+
+	private $diasEjecucion;
+
+	/**
      * Get id.
      *
      * @return int
@@ -211,6 +219,22 @@ class EncargoPenalizado
     {
         $this->diasRetrasoEntrega = $diasRetrasoEntrega;
     }
+
+	/**
+	 * @return int
+	 */
+	public function getDiasEjecucion()
+	{
+		return $this->diasEjecucion;
+	}
+
+	/**
+	 * @param int $diasEjecucion
+	 */
+	public function setDiasEjecucion($diasEjecucion)
+	{
+		$this->diasEjecucion = $diasEjecucion;
+	}
 
 
 }
