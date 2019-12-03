@@ -96,6 +96,14 @@
                 recurso = Routing.generate("penalizacionesDetalle", {"id": id}, true);
                 window.location = recurso;
             });
+            $("#formCertificadoServicios_exportarReaperturas").click(function () {
+                // $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("exportarReaperturas", {"id": id}, true);
+                window.location = recurso;
+            });
             $("#formCertificadoServicios_revisionPenalizaciones").click(function () {
                 $("#procesando").show();
                 let recurso;

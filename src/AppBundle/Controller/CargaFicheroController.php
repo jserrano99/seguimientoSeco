@@ -389,7 +389,6 @@ class CargaFicheroController extends Controller
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
-
 		if ($ImportarForm->isSubmitted()) {
 			/** @var UploadedFile $fichero */
 			$fichero = $ImportarForm["fichero"]->getData();
@@ -397,7 +396,6 @@ class CargaFicheroController extends Controller
 				$file_name = $fichero->getClientOriginalName();
 				$fichero->move("upload", $file_name);
 				try {
-
 					$file = "upload/" . $fichero->getClientOriginalName();
 					$PHPExcel = IOFactory::load($file);
 					$CargaFichero = new CargaFichero();
@@ -435,10 +433,12 @@ class CargaFicheroController extends Controller
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
 
 				} catch (Exception $e) {
+					dump($e);
+					die();
 					$status = "***ERROR EN CARGA DE FICHERO **: " . $file_name;
 					$this->sesion->getFlashBag()->add("status", $status);
 					$params = [];
-					return $this->render("cargaFichero/query.html.twig", $params);
+					return $this->render("cargaFichero/carga.html.twig", $params);
 				}
 			}
 		}
@@ -496,16 +496,17 @@ class CargaFicheroController extends Controller
 				$ServicioLog->escribeLog($ficheroLog);
 			}
 
-			$UsuarioRemedy = $entityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["login" => $headingsArray["N"]]);
+			$UsuarioRemedy = $entityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["login" => $headingsArray["M"]]);
 
 			if (is_null($UsuarioRemedy)) {
 				$UsuarioRemedy = $entityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["apellidos" => $headingsArray["H"]]);
 				if (is_null($UsuarioRemedy)) {
 					$UsuarioRemedy = new UsuarioRemedy();
-					$UsuarioRemedy->setLogin($headingsArray["N"]);
+					$UsuarioRemedy->setLogin($headingsArray["M"]);
 					$UsuarioRemedy->setApellidos($headingsArray["H"]);
 					$UsuarioRemedy->setNombre($headingsArray["I"]);
 					$UsuarioRemedy->setCentro($Centro);
+					dump($UsuarioRemedy);
 					$entityManager->persist($UsuarioRemedy);
 					$entityManager->flush();
 					$ServicioLog->setMensaje(" **** Generado Usuario login= " . $UsuarioRemedy->getLogin() .
@@ -540,8 +541,8 @@ class CargaFicheroController extends Controller
 
 			$headingsArray["P"] == null ? $Remedy->setFechaCierre(null) : $Remedy->setFechaCierre(DateTime::createFromFormat('d/m/Y H:i:s', $headingsArray["P"]));
 
-			$Remedy->setLogin($headingsArray["N"]);
-			$Remedy->setDescripcionProblema($headingsArray["O"]);
+			$Remedy->setLogin($headingsArray["M"]);
+			$Remedy->setDescripcionProblema($headingsArray["N"]);
 			$Remedy->setMes($Mes);
 			$entityManager->persist($Remedy);
 			$entityManager->flush();
@@ -550,6 +551,12 @@ class CargaFicheroController extends Controller
 			$ct++;
 
 			$EncargoAll = $entityManager->getRepository("AppBundle:Encargo")->findBy(["nmRemedy" => $Remedy->getNumero()]);
+
+			if ($Remedy->getNumero()== '10-6108244') {
+				dump($Remedy);
+				dump($EncargoAll);
+				die();
+			}
 
 			foreach ($EncargoAll as $Encargo) {
 				$EncargoRemedy = $entityManager->getRepository("AppBundle:EncargoRemedy")->findOneBy(["encargo" => $Encargo, "remedy" => $Remedy]);
@@ -676,6 +683,256 @@ class CargaFicheroController extends Controller
 				$Anotacion->setUsuario($this->getUser());
 				$Anotacion->setFecha($fecha);
 				$Anotacion->setAnotacion($headingsArray["J"]);
+				$entityManager->persist($Anotacion);
+				$entityManager->flush();
+				$ServicioLog->setMensaje('-Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());
+				$ServicioLog->escribeLog($ficheroLog);
+				$ct++;
+			}
+
+		}
+
+		$CargaFichero->setNumeroRegistros($ct);
+		$entityManager->persist($CargaFichero);
+		$entityManager->flush();
+		return true;
+	}
+
+
+
+	/**
+	 * @param Request $request
+	 * @return Response
+	 */
+
+	public function cargaAgrupacionAction(Request $request)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$ImportarForm = $this->createForm(ImportarType::class);
+		$ImportarForm->handleRequest($request);
+
+		if ($ImportarForm->isSubmitted()) {
+			/** @var UploadedFile $fichero */
+			$fichero = $ImportarForm["fichero"]->getData();
+			if (!empty($fichero) && $fichero != null) {
+				$file_name = $fichero->getClientOriginalName();
+				$fichero->move("upload", $file_name);
+				try {
+					$file = "upload/" . $fichero->getClientOriginalName();
+					$PHPExcel = IOFactory::load($file);
+					$CargaFichero = new CargaFichero();
+					$fecha = new DateTime();
+					$CargaFichero->setFechaCarga($fecha);
+					$CargaFichero->setDescripcion($ImportarForm["descripcion"]->getdata());
+					$CargaFichero->setFichero($file_name);
+					$Usuario = $this->getUser();
+					$CargaFichero->setUsuario($Usuario);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+
+					$FicheroLog = new FicheroLog();
+					$fechaProceso = new DateTime();
+					$FicheroLog->setFechaProceso($fechaProceso);
+
+					$ServicioLog = $this->get('app.escribelog');
+					$ServicioLog->setLogger('CARGA EXCEL SEGUIMIENTO POR AGRUPACIÓN  : ID= ' . $CargaFichero->getId());
+					$ficheroLog = 'FicheroLog-' . $CargaFichero->getId() . '.log';
+
+					$ServicioLog->setMensaje("Comienza carga fichero: " . $file);
+					$ServicioLog->escribeLog($ficheroLog);
+					$this->actualizaAgrupacion($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog);
+					$ServicioLog->setMensaje("Finalizada carga Seguimiento Agrupación " . $file . " Encargos Actualizados Totales :" . $CargaFichero->getNumeroRegistros());
+					$ServicioLog->escribeLog($ficheroLog);
+					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
+					$entityManager->persist($FicheroLog);
+					$entityManager->flush();
+
+					$CargaFichero->setFicheroLog($FicheroLog);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+
+					$params = ["CargaFichero" => $CargaFichero];
+					return $this->render("cargaFichero/finProceso.html.twig", $params);
+
+				} catch (Exception $e) {
+					$status = "***ERROR EN CARGA DE FICHERO **: " . $file_name;
+					$this->sesion->getFlashBag()->add("status", $status);
+					$params = [];
+					return $this->render("cargaFichero/query.html.twig", $params);
+				}
+			}
+		}
+		$params = ["form" => $ImportarForm->createView()];
+		return $this->render("cargaFichero/carga.html.twig", $params);
+	}
+
+
+	/**
+	 * @param CargaFichero $CargaFichero
+	 * @param Spreadsheet $PHPExcel
+	 * @param EscribeLog $ServicioLog
+	 * @param string $ficheroLog
+	 * @return bool
+	 * @throws Exception
+	 */
+	public function actualizaAgrupacion($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
+	{
+
+		/** @var EntityManager $entityManager */
+		$entityManager = $this->getDoctrine()->getManager();
+
+		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
+		$highestRow = $objWorksheet->getHighestRow();
+		$fecha = new DateTime();
+		$ct = 0;
+
+		for ($i = 14; $i <= $highestRow; $i++) {
+			if (!$entityManager->isOpen()) {
+				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			}
+			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':H' . $i, null, true, true, true);
+			$headingsArray = $headingsArray[$i];
+
+			if ($headingsArray["B"] == "") continue;
+
+
+			/** @var Encargo $Encargo */
+			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->find($headingsArray["B"]);
+			if (is_null($Encargo)) {
+				$ServicioLog->setMensaje(' **** Error Encargo id=' . $headingsArray["D"] . ' NO ENCONTRADO **** ');
+				$ServicioLog->escribeLog($ficheroLog);
+				continue;
+			}
+
+			if ($headingsArray["H"] != "") {
+				$Anotacion = new AnotacionEncargo();
+				$Anotacion->setEncargo($Encargo);
+				$Anotacion->setUsuario($this->getUser());
+				$Anotacion->setFecha($fecha);
+				$Anotacion->setAnotacion($headingsArray["H"]);
+				$entityManager->persist($Anotacion);
+				$entityManager->flush();
+				$ServicioLog->setMensaje('Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());
+				$ServicioLog->escribeLog($ficheroLog);
+				$ct++;
+			}
+
+		}
+
+		$CargaFichero->setNumeroRegistros($ct);
+		$entityManager->persist($CargaFichero);
+		$entityManager->flush();
+		return true;
+	}
+
+	/**
+	 * @param Request $request
+	 * @return Response
+	 */
+
+	public function cargaLineaSeguimientoAction(Request $request)
+	{
+		$entityManager = $this->getDoctrine()->getManager();
+		$ImportarForm = $this->createForm(ImportarType::class);
+		$ImportarForm->handleRequest($request);
+
+		if ($ImportarForm->isSubmitted()) {
+			/** @var UploadedFile $fichero */
+			$fichero = $ImportarForm["fichero"]->getData();
+			if (!empty($fichero) && $fichero != null) {
+				$file_name = $fichero->getClientOriginalName();
+				$fichero->move("upload", $file_name);
+				try {
+					$file = "upload/" . $fichero->getClientOriginalName();
+					$PHPExcel = IOFactory::load($file);
+					$CargaFichero = new CargaFichero();
+					$fecha = new DateTime();
+					$CargaFichero->setFechaCarga($fecha);
+					$CargaFichero->setDescripcion($ImportarForm["descripcion"]->getdata());
+					$CargaFichero->setFichero($file_name);
+					$Usuario = $this->getUser();
+					$CargaFichero->setUsuario($Usuario);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+
+					$FicheroLog = new FicheroLog();
+					$fechaProceso = new DateTime();
+					$FicheroLog->setFechaProceso($fechaProceso);
+
+					$ServicioLog = $this->get('app.escribelog');
+					$ServicioLog->setLogger('CARGA EXCEL LINEA DE SEGUIEMIENTO  : ID= ' . $CargaFichero->getId());
+					$ficheroLog = 'FicheroLog-' . $CargaFichero->getId() . '.log';
+
+					$ServicioLog->setMensaje("Comienza carga fichero: " . $file);
+					$ServicioLog->escribeLog($ficheroLog);
+
+					$this->actualizaLineaSeguimiento($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog);
+
+					$ServicioLog->setMensaje("Finalizada carga Seguiemiento " . $file . " Encargos Actualizados Totales :" . $CargaFichero->getNumeroRegistros());
+					$ServicioLog->escribeLog($ficheroLog);
+					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
+					$entityManager->persist($FicheroLog);
+					$entityManager->flush();
+
+					$CargaFichero->setFicheroLog($FicheroLog);
+					$entityManager->persist($CargaFichero);
+					$entityManager->flush();
+
+					$params = ["CargaFichero" => $CargaFichero];
+					return $this->render("cargaFichero/finProceso.html.twig", $params);
+
+				} catch (Exception $e) {
+					$status = "***ERROR EN CARGA DE FICHERO **: " . $file_name;
+					$this->sesion->getFlashBag()->add("status", $status);
+					$params = [];
+					return $this->render("cargaFichero/query.html.twig", $params);
+				}
+			}
+		}
+		$params = ["form" => $ImportarForm->createView()];
+		return $this->render("cargaFichero/carga.html.twig", $params);
+	}
+
+	/**
+	 * @param CargaFichero $CargaFichero
+	 * @param Spreadsheet $PHPExcel
+	 * @param EscribeLog $ServicioLog
+	 * @param string $ficheroLog
+	 * @return bool
+	 * @throws Exception
+	 */
+	public function actualizaLineaSeguimiento($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
+	{
+
+		$entityManager = $this->getDoctrine()->getManager();
+
+		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
+		$highestRow = $objWorksheet->getHighestRow();
+		$fecha = new DateTime();
+		$ct = 0;
+		for ($i = 2; $i <= $highestRow; $i++) {
+			if (!$entityManager->isOpen()) {
+				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			}
+			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':L' . $i, null, true, true, true);
+			$headingsArray = $headingsArray[$i];
+
+			if ($headingsArray["D"] == "") continue;
+
+			/** @var Encargo $Encargo */
+			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->find($headingsArray["D"]);
+			if (is_null($Encargo)) {
+				$ServicioLog->setMensaje(' **** Error Encargo id=' . $headingsArray["D"] . ' NO ENCONTRADO **** ');
+				$ServicioLog->escribeLog($ficheroLog);
+				continue;
+			}
+
+			if ($headingsArray["L"] != "") {
+				$Anotacion = new AnotacionEncargo();
+				$Anotacion->setEncargo($Encargo);
+				$Anotacion->setUsuario($this->getUser());
+				$Anotacion->setFecha($fecha);
+				$Anotacion->setAnotacion($headingsArray["L"]);
 				$entityManager->persist($Anotacion);
 				$entityManager->flush();
 				$ServicioLog->setMensaje('-Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());

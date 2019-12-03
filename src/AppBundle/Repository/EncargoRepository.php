@@ -54,5 +54,21 @@ class EncargoRepository extends EntityRepository
 		return ($Encargos);
 	}
 
+	/**
+	 * @return mixed[]
+	 * @throws DBALException
+	 */
+	public  function findPla (){
+		$conection = $this->getEntityManager()->getConnection();
+		$sentencia = " select encargoId from view_encargos_pla";
+
+		$stmt = $conection->prepare($sentencia);
+		$params = [];
+		$stmt->execute($params);
+		$Encargos = $stmt->fetchAll();
+
+		return ($Encargos);
+
+	}
 
 }

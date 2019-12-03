@@ -103,22 +103,22 @@ class AgrupacionDatatable extends AbstractDatatable
 						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($SeguimientoAll, 'descripcion', 'descripcion'),
 						'search_type' => 'eq']]])
-			->add('fcInicio', DateTimeColumn::class, [
-				'title' => 'F.Inicio',
-				'width' => '80px',
-				'date_format' => 'DD/MM/YYYY',
-				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => false,
-				]],
-			])
-			->add('fcFin', DateTimeColumn::class, [
-				'title' => 'F.Fin',
-				'width' => '80px',
-				'date_format' => 'DD/MM/YYYY',
-				'filter' => [DateRangeFilter::class, [
-					'cancel_button' => false,
-				]],
-			])
+//			->add('fcInicio', DateTimeColumn::class, [
+//				'title' => 'F.Inicio',
+//				'width' => '80px',
+//				'date_format' => 'DD/MM/YYYY',
+//				'filter' => [DateRangeFilter::class, [
+//					'cancel_button' => false,
+//				]],
+//			])
+//			->add('fcFin', DateTimeColumn::class, [
+//				'title' => 'F.Fin',
+//				'width' => '80px',
+//				'date_format' => 'DD/MM/YYYY',
+//				'filter' => [DateRangeFilter::class, [
+//					'cancel_button' => false,
+//				]],
+//			])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'width' => '80px',
@@ -157,7 +157,20 @@ class AgrupacionDatatable extends AbstractDatatable
 							'class' => 'btn btn-success btn-xs',
 							'target' => 'blank',
 							'role' => 'button']
+					],
+					['route' => 'exportarAgrupacion',
+						'route_parameters' => ['id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-share',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'target' => '_blank',
+							'title' => 'Exportar Encargos de la Agrupación',
+							'class' => 'btn btn-success btn-xs',
+							'target' => 'blank',
+							'role' => 'button']
 					]
+
 
 				]]);
 	}

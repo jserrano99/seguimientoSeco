@@ -9,6 +9,7 @@ use AppBundle\Entity\CargaFichero;
 use AppBundle\Entity\CertificadoServicios;
 use AppBundle\Entity\Encargo;
 use AppBundle\Entity\EncargoPenalizado;
+use AppBundle\Entity\EstadoCertificado;
 use AppBundle\Entity\FicheroLog;
 use AppBundle\Entity\ImportesCertificado;
 use AppBundle\Entity\Indicador;
@@ -31,14 +32,20 @@ use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\ORM\Query\ResultSetMappingesultSetMapping;
 
 
 /**
@@ -99,9 +106,6 @@ class CertificadoServiciosController extends Controller
 		$form = $this->createForm(CertificadoServiciosType::class, $CertificadoServicios);
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted()) {
-		}
-
 		return $this->render("certificadoServicios/edit.html.twig", [
 			"form" => $form->createView(),
 			"accion" => "EDITAR",
@@ -155,17 +159,21 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param $id
 	 * @return RedirectResponse
+	 * @throws DBALException
 	 */
 	public function deleteAction($id)
 	{
-		$sentencia = " update encargo set bloqueado = null "
+		$sentencia = " update encargo  set bloqueado = null "
 			. " where encargo.id in (select encargo_id from linea_certificado "
 			. "  where certificado_servicios_id = :id )";
 
 
-		$conexion = $this->getDoctrine()->getConnection()->prepare($sentencia);
+		/** @var Connection $conexion */
+		$conexion = $this->getDoctrine()->getConnection();
+		$stmt = $conexion->prepare($sentencia);
 		$params = [":id" => $id];
-		$conexion->execute($params);
+
+		$stmt->execute($params);
 
 		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
 
@@ -248,7 +256,7 @@ class CertificadoServiciosController extends Controller
 		 */
 		$ServicioLog->setMensaje("==>GENERACIÓN DE IMPORTES DEL CERTIFICADO");
 		$ServicioLog->escribeLog($ficheroLog);
-		$this->generarImportes($CertificadoServicios, $ServicioLog, $ficheroLog);
+		$this->generarImportes($CertificadoServicios);
 
 		return true;
 
@@ -257,6 +265,7 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param $id
 	 * @return RedirectResponse
+	 * @throws DBALException
 	 */
 	public function importesAction($id)
 	{
@@ -275,9 +284,11 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return bool
+	 * @throws DBALException
 	 */
 	public function aplicaPenalizacion($CertificadoServicios)
 	{
+		/** @var Connection $conection */
 		$conection = $this->getDoctrine()->getConnection();
 
 		$this->penalizacionNPL($CertificadoServicios);
@@ -303,6 +314,7 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return bool
+	 * @throws DBALException
 	 */
 	public function generarImportes($CertificadoServicios)
 	{
@@ -310,19 +322,22 @@ class CertificadoServiciosController extends Controller
 		$sentencia = " delete from importes_certificado_servicios  "
 			. " where  certificado_servicios_id = :id";
 
-		$conexion = $this->getDoctrine()->getConnection()->prepare($sentencia);
+		/** @var Connection $conexion */
+		$conexion = $this->getDoctrine()->getConnection();
+		$stmt = $conexion->prepare($sentencia);
 		$params = [":id" => $CertificadoServicios->getId()];
-		$conexion->execute($params);
+		$stmt->execute($params);
 
 		$sentencia = " delete from penalizaciones  "
 			. " where  certificado_servicios_id = :id";
 
-		$conexion = $this->getDoctrine()->getConnection()->prepare($sentencia);
+		$stmt = $conexion->prepare($sentencia);
 		$params = [":id" => $CertificadoServicios->getId()];
-		$conexion->execute($params);
+		$stmt->execute($params);
 
 		$ImporteCuotaFija = $this->importesCuotaFija($CertificadoServicios);
 		$ImporteCuotaVariable = $this->importesCuotaVariable($CertificadoServicios);
+
 		$importeCuotaTasada = $this->importesCuotaTasada($CertificadoServicios);
 
 		$total = $ImporteCuotaFija->getImporte() + $ImporteCuotaVariable->getImporte() + $importeCuotaTasada;
@@ -359,7 +374,8 @@ class CertificadoServiciosController extends Controller
 
 	/**
 	 * @param CertificadoServicios $CertificadoServicios
-	 * @return ImportesCertificado
+	 * @return ImportesCertificado|float|int
+	 * @throws DBALException
 	 */
 	public function importesCuotaTasada($CertificadoServicios)
 	{
@@ -369,11 +385,13 @@ class CertificadoServiciosController extends Controller
 		$sentencia = " select * from view_actividad_tasada_acum "
 			. " where  certificadoServiciosId = :id";
 
-		$conexion = $this->getDoctrine()->getConnection()->prepare($sentencia);
+		/** @var Connection $conexion */
+		$conexion = $this->getDoctrine()->getConnection();
+		$stmt = $conexion->prepare($sentencia);
 		$params = [":id" => $CertificadoServicios->getId()];
-		$conexion->execute($params);
+		$stmt->execute($params);
 
-		$LineaCertificadoAll = $conexion->fetchAll();
+		$LineaCertificadoAll = $stmt->fetchAll();
 
 		$importe = 0;
 		foreach ($LineaCertificadoAll as $LineaCertificado) {
@@ -532,10 +550,10 @@ class CertificadoServiciosController extends Controller
 		$totalEncargos = $CertificadoServicios->getContadorNPLCRI() + $CertificadoServicios->getContadorNPLNOR();
 		$encargosPenalizados = count($EncargosPenalizadosALL);
 
-		if ($totalEncargos == 0 )
+		if ($totalEncargos == 0)
 			$porcentaje = 1;
-		 else
-		$porcentaje = $encargosPenalizados / $totalEncargos;
+		else
+			$porcentaje = $encargosPenalizados / $totalEncargos;
 
 		$factor = 0;
 		if ($porcentaje < 0.05) $factor = 0;
@@ -613,7 +631,7 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
-		if ($encargosNPLNOR >0 and !is_null($encargosNPLNOR))
+		if ($encargosNPLNOR > 0 and !is_null($encargosNPLNOR))
 			$porcentaje = $encargosCumplen / $encargosNPLNOR;
 		else
 			$porcentaje = 1;
@@ -647,7 +665,7 @@ class CertificadoServiciosController extends Controller
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
-		if ($encargosNPLNOR >0 and !is_null($encargosNPLNOR))
+		if ($encargosNPLNOR > 0 and !is_null($encargosNPLNOR))
 			$porcentaje = $encargosCumplen / $encargosNPLNOR;
 		else
 			$porcentaje = 1;
@@ -1001,11 +1019,12 @@ class CertificadoServiciosController extends Controller
 
 	/**
 	 * @param Encargo $Encargo
-	 * @return |null
+	 * @return CertificadoServicios|null
 	 */
 	public
 	function encargoEnCertificado($Encargo)
 	{
+		/** @var LineaCertificado $LineaServicios */
 		$LineaServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:LineaCertificado")->findOneBy(["encargo" => $Encargo]);
 
 		if ($LineaServicios) {
@@ -1040,7 +1059,8 @@ class CertificadoServiciosController extends Controller
 			->setParameter('tipoObjeto', $TipoObjetoEncargoADM)
 			->getQuery()->getResult();
 
-
+		$ct = 0;
+		$ctPenalizado = 0;
 		foreach ($ObjetosEncargoAll as $ObjetosEncargo) {
 			//CERRADOS, FINALIZADOS y CANCELADOS
 			$Encargos = $EncargoRepository->createQueryBuilder('u')
@@ -1059,7 +1079,7 @@ class CertificadoServiciosController extends Controller
 			$ctPenalizado = 0;
 			/** @var Encargo $Encargo */
 			foreach ($Encargos as $Encargo) {
-				/** @var Encargo $Existe */
+				/** @var CertificadoServicios $Existe */
 				$Existe = $this->encargoEnCertificado($Encargo);
 				if ($Existe) {
 					$ServicioLog->setMensaje("Encargo: " . $Encargo->getNumero() . " YA INCLUIDO EN CERTIFICADO SERVICIOS: " . $Existe->getDescripcion());
@@ -1276,6 +1296,7 @@ class CertificadoServiciosController extends Controller
 		$IndicadorENC02 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(11);
 		$tipoCuotaVariable = $EntityManager->getRepository("AppBundle:TipoCuota")->find(2);
 
+		/** @var Connection $conection */
 		$conection = $this->getDoctrine()->getConnection();
 		$sentencia = " select * from view_nuevos_desarrollos as vnd"
 			. "  where vnd.estadoEncargoId in ( 2, 12 )"
@@ -1338,7 +1359,7 @@ class CertificadoServiciosController extends Controller
 			}
 
 
-			$fechaInicio = $Encargo->getFcRequeridaEntrega();
+			$fechaInicio = $Encargo->getFcCompromiso();
 			$fechaFin = $Encargo->getFcEntrega();
 			//$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
 
@@ -1383,6 +1404,7 @@ class CertificadoServiciosController extends Controller
 		$IndicadorENT02 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(14);
 		$tipoCuotaTasada = $EntityManager->getRepository("AppBundle:TipoCuota")->find(3);
 
+		/** @var Connection $conection */
 		$conection = $this->getDoctrine()->getConnection();
 		$sentencia = " select * from view_implantaciones as vi "
 			. "  where vi.estadoEncargoId in ( 2, 12 )"
@@ -1563,11 +1585,16 @@ class CertificadoServiciosController extends Controller
 
 	}
 
+	/**
+	 * @param $id
+	 * @return RedirectResponse
+	 */
 	public
 	function quitarPenalizacionAction($id)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
+		/** @var EncargoPenalizado $EncargoPenalizado */
 		$EncargoPenalizado = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->find($id);
 
 		$EncargoPenalizado->setEliminada(true);
@@ -1581,11 +1608,16 @@ class CertificadoServiciosController extends Controller
 	}
 
 
+	/**
+	 * @param $id
+	 * @return RedirectResponse
+	 */
 	public
 	function activarPenalizacionAction($id)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
+		/** @var EncargoPenalizado $EncargoPenalizado */
 		$EncargoPenalizado = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->find($id);
 
 		$EncargoPenalizado->setEliminada(null);
@@ -1605,6 +1637,7 @@ class CertificadoServiciosController extends Controller
 	public
 	function excluirEncargoAction($lineaCertificado_id)
 	{
+		/** @var LineaCertificado $LineaCertificado */
 		$LineaCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:LineaCertificado")->find($lineaCertificado_id);
 
 		$this->inicializaCertificadoServicios($LineaCertificado->getCertificadoServicios()->getId());
@@ -1643,7 +1676,7 @@ class CertificadoServiciosController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 * @return RedirectResponse
 	 */
 	public
@@ -1665,23 +1698,28 @@ class CertificadoServiciosController extends Controller
 
 	/**
 	 * @param Request $request
-	 * @param                                           $id
+	 * @param int $id
 	 * @return JsonResponse|Response
 	 * @throws Exception
 	 */
 	public
 	function incluirEncargoAction(Request $request, $id)
 	{
+		/** @var EstadoCertificado $EstadoCertificado */
 		$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
 
+		/** @var CertificadoServicios $CertificadoServicios */
 		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
 
 		$form = $this->createForm(AddEncargoType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted()) {
+			/** @var Encargo $Encargo */
+
 			$Encargo = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo")->findOneBy(["numero" => $form->getNormData("numeroEncargo")]);
 			if ($Encargo) {
+				/** @var LineaCertificado $LineaCertificado */
 				$LineaCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:LineaCertificado")->findOneBy(["encargo" => $Encargo]);
 				if ($LineaCertificado) {
 					$status = "NUMERO DE ENCARGO YA INCLUIDO EN UNA CERTIFICACIÓN DE SERVICIOS: " . $LineaCertificado->getCertificadoServicios()->getDescripcion();
@@ -1772,7 +1810,7 @@ class CertificadoServiciosController extends Controller
 	/**
 	 * @param Request $request
 	 * @param int $id
-	 * @return RedirectResponse
+	 * @return Response
 	 * @throws ORMException
 	 * @throws OptimisticLockException
 	 * @throws \PhpOffice\PhpSpreadsheet\Exception
@@ -1812,7 +1850,10 @@ class CertificadoServiciosController extends Controller
 					if ($headingsArray["G"] == 'OK') {
 						$nmEncargo = $headingsArray["A"];
 
+						/** @var Encargo $Encargo */
 						$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findBy(["numero" => $nmEncargo]);
+
+						/** @var EncargoPenalizado $EncargoPenalizado */
 						$EncargoPenalizado = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["encargo" => $Encargo]);
 
 						$EncargoPenalizado->setEliminada(true);
@@ -1833,4 +1874,81 @@ class CertificadoServiciosController extends Controller
 
 	}
 
+	/**
+	 * @param $id
+	 * @return Response
+	 * @throws DBALException
+	 * @throws \PhpOffice\PhpSpreadsheet\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+	 */
+	public function exportarReaperturasAction($id)
+	{
+		$EntityManager = $this->getDoctrine()->getManager();
+		/** @var CertificadoServicios $CertificadoServicios */
+		$CertificadoServicios = $EntityManager->getRepository("AppBundle:CertificadoServicios")->find($id);
+		/** @var Connection $conection */
+		$conection = $this->getDoctrine()->getConnection();
+
+		$sentencia = " select * from view_encargos_penalizados "
+			. "where certificadoServiciosid = :certificadoServiciosId and indicadorId = 6";
+
+		$stmt = $conection->prepare($sentencia);
+		$params = [];
+		$params[":certificadoServiciosId"] = $id;
+		$stmt->execute($params);
+		$Reaperturas = $stmt->fetchAll();
+
+		$reader = IOFactory::createReader('Xlsx');
+		/** @var Spreadsheet $sheet */
+		$Spreadsheet = $reader->load('plantillas/PlantillaReaperturas.xlsx');
+		$sheet = $Spreadsheet->getActiveSheet();
+		$sheet->setCellValue('B8', $CertificadoServicios->getMes()->getDescripcion());
+		$row = 12;
+		foreach ($Reaperturas as $Reapertura) {
+//			$sheet->insertNewRowBefore($row, 1);
+			$sheet->setCellValue('B' . $row, $Reapertura["encargoPenalizadoId"]);
+			$sheet->setCellValue('C' . $row, $Reapertura["encargoNumero"]);
+			$sheet->setCellValue('D' . $row, $Reapertura["numeroRemedy"]);
+			$sheet->setCellValue('E' . $row, $Reapertura["encargoTitulo"]);
+			$sheet->setCellValue('F' . $row, '');
+			$sheet->setCellValue('g' . $row, 'NO');
+			$row++;
+		}
+
+		$rango = "B12:G" . $row;
+		$estiloArray = ['font' => ['name' => 'Calibri',
+			'bold' => false,
+			'italic' => false,
+			'underline' => false,
+			'strikethrough' => false,
+			'color' => ['rgb' => '808080']],
+			'fill' => ['fill' => Fill::FILL_NONE,
+				'color' => []],
+			'borders' => ['bottom' => ['borderStyle' => Border::BORDER_DASHDOT,
+				'color' => ['rgb' => '808080']],
+				'top' => ['borderStyle' => Border::BORDER_THIN,
+					'color' => ['rgb' => '808080']]],
+			'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER,
+				'vertical' => Alignment::VERTICAL_CENTER,
+				'wrapText' => true,],
+			'quotePrefix' => true];
+
+		$sheet->getStyle($rango)->applyFromArray($estiloArray);
+
+		$writer = new Xlsx($Spreadsheet);
+		$fechaActual = new DateTime();
+		$filename = 'Reaperturas-' . $CertificadoServicios->getId() . '-' . $fechaActual->format('Ymd-His') . '.xlsx';
+		$writer->save($filename);
+
+		$response = new Response();
+		$response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+		$response->headers->set('Content-Disposition', 'attachment;filename=' . $filename);
+		$response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		$response->headers->set('Pragma', 'public');
+		$response->headers->set('Cache-Control', 'max-age=1');
+		$response->setContent(file_get_contents($filename));
+
+		return $response;
+	}
 }

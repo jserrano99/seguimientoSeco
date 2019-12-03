@@ -44,6 +44,10 @@
             <div class="form_row mismalinea">{{ form_row(form.fcEstadoActual) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.agrupacion) }}</div>
             <div class="form_row mismalinea">{{ form_row(form.criticidad2) }}</div>
+            <div class="clearfix"></div>
+            <div class="form_row mismalinea">{{ form_row(form.horasComprometidas) }}</div>
+            <div class="form_row mismalinea">{{ form_row(form.horasRealizadas) }}</div>
+            <div class="clearfix"></div>
             <div class="form_row mismalinea">{{ form_row(form.coste) }}</div>
         </div>
         <div id="descripcion">
@@ -93,10 +97,10 @@
             <div class="clearfix"></div>
         </div>
         <div id="remedy">
-            <div class="form_row mismalinea">{{ form_row(form.remedy) }}
-                {% if encargo.remedy %}
-                    {{ encargo.remedy }}
-                {% endif %}
+            <div class="form_row mismalinea">{{ form_row(form.nmRemedy) }}
+{#                {% if encargo.remedy %}#}
+{#                    {{ encargo.remedy }}#}
+{#                {% endif %}#}
             </div>
         </div>
         <div id="solucion">

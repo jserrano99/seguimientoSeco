@@ -50,6 +50,16 @@ cargaSeguimiento:
   defaults: { _controller: AppBundle:CargaFichero:cargaSeguimiento}
   options:
     expose: true
+cargaAgrupacion:
+  path: /cargaFichero/cargaAgrupacion
+  defaults: { _controller: AppBundle:CargaFichero:cargaAgrupacion}
+  options:
+    expose: true
+cargaLineaSeguimiento:
+  path: /cargaFichero/lineaSeguimiento
+  defaults: { _controller: AppBundle:CargaFichero:cargaLineaSeguimiento}
+  options:
+    expose: true
 
 queryFichero:
     path: /cargaFicheros/query
@@ -130,6 +140,11 @@ activarPenalizacion:
   defaults: { _controller: AppBundle:CertificadoServicios:activarPenalizacion}
   options:
     expose: true
+exportarReaperturas:
+  path: /report/exportarReaperturas/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:exportarReaperturas}
+  options:
+    expose: true
 
 penalizacionesDetalle:
     path: /report/penalizacioneDetalle/{id}
@@ -180,6 +195,17 @@ deleteAgrupacion:
     defaults: { _controller: AppBundle:Agrupacion:edit}
     options:
         expose: true
+exportarAgrupacion:
+  path: /agrupacion/exportar/{id}
+  defaults: { _controller: AppBundle:Agrupacion:exportar}
+  options:
+    expose: true
+
+exportarTodo:
+  path: /encargo/exportarTodo
+  defaults: { _controller: AppBundle:Encargo:exportarTodo}
+  options:
+    expose: true
 
 #
 # LINEA DE SEGUIMIENTO

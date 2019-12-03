@@ -147,20 +147,25 @@ class SeguimientoController extends Controller
 		$Seguimiento = $EntityManager->getRepository("AppBundle:Seguimiento")->find($id);
 		$Agrupaciones = $EntityManager->getRepository("AppBundle:Agrupacion")->findBy(["seguimiento" => $Seguimiento]);
 
-
-		$PHPExcel = new Spreadsheet();
-		$sheet = $PHPExcel->getActiveSheet();
-		$row = 1;
-		$sheet->setCellValueByColumnAndRow(1, $row, 'ID AGRUPACION');
-		$sheet->setCellValueByColumnAndRow(2, $row, 'CODIGO AGRUPACION');
-		$sheet->setCellValueByColumnAndRow(3, $row, 'AGRUPACIÓN');
+		$reader = IOFactory::createReader('Xlsx');
+		/** @var Spreadsheet $sheet */
+		$Spreadsheet = $reader->load('plantillas/PlantillaSeguimiento.xlsx');
+		$sheet = $Spreadsheet->getActiveSheet();
+		$row = 8;
+		$sheet->setCellValueByColumnAndRow(1, $row, 'ID ');
+		$sheet->setCellValueByColumnAndRow(2, $row, 'CÓDIGO');
+		$sheet->setCellValueByColumnAndRow(3, $row, 'DESCRIPCIÓN');
 		$sheet->setCellValueByColumnAndRow(4, $row, 'ID');
 		$sheet->setCellValueByColumnAndRow(5, $row, 'NUMERO');
 		$sheet->setCellValueByColumnAndRow(6, $row, 'TITULO');
 		$sheet->setCellValueByColumnAndRow(7, $row, 'OBJETO');
 		$sheet->setCellValueByColumnAndRow(8, $row, 'ESTADO');
 		$sheet->setCellValueByColumnAndRow(9, $row, 'FECHA ESTADO');
-		$sheet->setCellValueByColumnAndRow(10, $row, 'ANOTACIÓN');
+		$sheet->setCellValueByColumnAndRow(10, $row, 'FECHA VALORACIÓN ');
+		$sheet->setCellValueByColumnAndRow(11, $row, 'FECHA COMPROMISO');
+		$sheet->setCellValueByColumnAndRow(12, $row, 'FECHA REQUERIDA ');
+		$sheet->setCellValueByColumnAndRow(13, $row, 'HORAS ');
+		$sheet->setCellValueByColumnAndRow(14, $row, 'ANOTACIÓN');
 		$row++;
 		foreach ($Agrupaciones as $Agrupacion) {
 			$Encargos = $EntityManager->getRepository("AppBundle:Encargo")->findActivosByAgrupacion($Agrupacion);
@@ -174,13 +179,17 @@ class SeguimientoController extends Controller
 				$sheet->setCellValueByColumnAndRow(7, $row, $Encargo["objetoEncargoCd"]);
 				$sheet->setCellValueByColumnAndRow(8, $row, $Encargo["estadoEncargoCd"]);
 				$sheet->setCellValueByColumnAndRow(9, $row, $Encargo["fechaEstadoActual"]);
-				$sheet->setCellValueByColumnAndRow(10, $row, '');
+				$sheet->setCellValueByColumnAndRow(10, $row, $Encargo["fechaValoracion"]);
+				$sheet->setCellValueByColumnAndRow(11, $row, $Encargo["fechaCompromiso"]);
+				$sheet->setCellValueByColumnAndRow(12, $row, $Encargo["fechaEntregaRequerida"]);
+				$sheet->setCellValueByColumnAndRow(13, $row, $Encargo["horasValoradas"]);
+				$sheet->setCellValueByColumnAndRow(14, $row, '');
 				$row++;
 			}
 		}
 
-		/** @var Spreadsheet $PHPExcel */
-		$writer = IOFactory::createWriter($PHPExcel, 'Xlsx');
+		/** @var Spreadsheet $Spreadsheet */
+		$writer = IOFactory::createWriter($Spreadsheet, 'Xlsx');
 		$fechaActual = new DateTime();
 		$filename = 'Seguimiento-' . $Seguimiento->getCodigo() . '-' . $fechaActual->format('Ymd-His') . '.xlsx';
 		$writer->save($filename);

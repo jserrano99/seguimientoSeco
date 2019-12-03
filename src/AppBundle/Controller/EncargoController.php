@@ -6,12 +6,21 @@ use AppBundle\Datatables\EncargoDatatable;
 use AppBundle\Entity\AnotacionEncargo;
 use AppBundle\Form\AnotacionEncargoType;
 use AppBundle\Form\EncargoType;
+use Doctrine\DBAL\DBALException;
 use Exception;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use DateTime;
 
@@ -164,6 +173,85 @@ class EncargoController extends Controller
 		$params = ["encargo" => $Encargo,
 			"form" => $form->createView()];
 		return $this->render("encargo/addAnotacion.html.twig", $params);
+	}
+
+	/**
+	 * @return Response
+	 * @throws DBALException
+	 * @throws \PhpOffice\PhpSpreadsheet\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+	 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+	 */
+
+	public function exportarTodoAction()
+	{
+		$EntityManager = $this->getDoctrine()->getManager();
+
+		$reader = IOFactory::createReader('Xlsx');
+		/** @var Spreadsheet $sheet */
+		$Spreadsheet = $reader->load('plantillas/PlantillaMagma.xlsx');
+		$sheet = $Spreadsheet->getActiveSheet();
+		$Encargos = $EntityManager->getRepository("AppBundle:Encargo")->findPla();
+		$row = 7;
+		$sheet->setCellValue('B' . $row, "ID");
+		$sheet->setCellValue('C' . $row, "NUMERO");
+		$sheet->setCellValue('D' . $row, "TITULO");
+		$sheet->setCellValue('E' . $row, "OBJETO");
+		$sheet->setCellValue('F' . $row, "ESTADO");
+		$sheet->setCellValue('G' . $row, "AGRUPACION");
+		$sheet->setCellValue('H' . $row, "FECHA INICIO");
+		$sheet->setCellValue('I' . $row, "FECHA COMPROMISO");
+		$sheet->setCellValue('J' . $row, "FECHA ENTREGA");
+		$sheet->setCellValue('K' . $row, "HORAS COMPROMETIDAS");
+		$row++;
+		foreach ($Encargos as $RstEncargo) {
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($RstEncargo["encargoId"]);
+			$sheet->setCellValue('B' . $row, $Encargo->getId());
+			$sheet->setCellValue('C' . $row, $Encargo->getNumero());
+			$sheet->setCellValue('D' . $row, $Encargo->getTitulo());
+			$sheet->setCellValue('E' . $row, $Encargo->getObjetoEncargo()->getDescripcion());
+			$sheet->setCellValue('F' . $row, $Encargo->getEstadoActual()->getDescripcion());
+			$sheet->setCellValue('G' . $row, $Encargo->getAgrupacion()->getDescripcion());
+			$sheet->setCellValue('H' . $row, $Encargo->getFcComienzoEjecucion());
+			$sheet->setCellValue('I' . $row, $Encargo->getFcCompromiso());
+			$sheet->setCellValue('J' . $row, $Encargo->getFcEntrega());
+			$sheet->setCellValue('K' . $row, $Encargo->getHorasComprometidas());
+			$row++;
+		}
+
+		$rango = "B1:G" . $row;
+		$estiloArray = ['font' => ['name' => 'Verdana',
+			'bold' => true,
+			'italic' => false,
+			'underline' => Font::UNDERLINE_SINGLE,
+			'strikethrough' => false,
+			'color' => ['rgb' => '808080']],
+			'borders' => ['bottom' => ['borderStyle' => Border::BORDER_DASHDOT,
+				'color' => ['rgb' => '808080']],
+				'top' => ['borderStyle' => Border::BORDER_DASHDOT,
+					'color' => ['rgb' => '808080']]],
+			'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER,
+				'vertical' => Alignment::VERTICAL_CENTER,
+				'wrapText' => true,],
+			'quotePrefix' => true];
+
+//		$sheet->getStyle($rango)->applyFromArray($estiloArray);
+//		$fichero = IOFactory::createWriter($sheet, 'Xlsx');
+
+		$writer = new Xlsx($Spreadsheet);
+		$fechaActual = new DateTime();
+		$filename = 'ExportacionGlobal-' . $fechaActual->format('Ymd-His') . '.xlsx';
+		$writer->save($filename);
+
+		$response = new Response();
+		$response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
+		$response->headers->set('Content-Disposition', 'attachment;filename=' . $filename);
+		$response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		$response->headers->set('Pragma', 'public');
+		$response->headers->set('Cache-Control', 'max-age=1');
+		$response->setContent(file_get_contents($filename));
+
+		return $response;
 	}
 }
 

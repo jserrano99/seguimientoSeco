@@ -31,6 +31,12 @@ class EncargoType extends AbstractType
 				"required" => 'required',
 				"attr" => ["class" => "form-control"
 				]])
+			->add('nmRemedy', TextType::class, [
+				"label" => 'Número Remedy',
+				"required" => false,
+				'disabled' => true,
+				"attr" => ["class" => "form-control"
+				]])
 			->add('coste', MoneyType::class, [
 				"label" => 'Coste',
 				"required" => false,
@@ -56,6 +62,7 @@ class EncargoType extends AbstractType
 				'label' => 'Agrupacion',
 				'class' => 'AppBundle:Agrupacion',
 				'disabled' => false,
+				'required' => false,
 				'attr' => ["class" => "form-control "]])
 			->add('criticidad2', EntityType::class, [
 				'label' => 'Criticidad',
@@ -64,7 +71,7 @@ class EncargoType extends AbstractType
 				'attr' => ["class" => "form-control "]])
 			->add('descripcion', TextareaType::class, [
 				'label' => 'Descripcion',
-				'disabled' => true,
+				'disabled' => false,
 				'attr' => ["class" => "form-control "]])
 			->add('solucionUsuario', TextareaType::class, [
 				'label' => 'Solución Usuario',
@@ -74,14 +81,23 @@ class EncargoType extends AbstractType
 				'label' => 'Solución Técnica',
 				'disabled' => true,
 				'attr' => ["class" => "form-control "]])
+			->add('horasComprometidas', TextType::class, [
+				'label' => 'Horas Comprometidas',
+				'disabled' => false,
+				'attr' => ["class" => "form-control "]])
+			->add('horasRealizadas', TextType::class, [
+				'label' => 'Horas Realizadas',
+				'disabled' => false,
+				'attr' => ["class" => "form-control "]])
+
+
 			->add('remedy', EntityType::class, [
 				'label' => 'Nº Remedy',
 				'class' => 'AppBundle:Remedy',
 				'disabled' => true,
 				'attr' => ["class" => "form-control "]])
 			->add('Guardar', SubmitType::class, [
-				"attr" => ["class" => "btn btn-t btn-success"]
-			])
+				"attr" => ["class" => "btn btn-t btn-success"]])
 			->add('fcEstadoActual', DateType::class, [
 				"label" => 'Fecha Estado Actual',
 				"required" => false,
@@ -135,7 +151,9 @@ class EncargoType extends AbstractType
 				'attr' => [
 					'class' => 'form-control corto',
 					'data-date-format' => 'dd-mm-yyyy',
-					'data-class' => 'string']]);
+					'data-class' => 'string']])
+
+		;
 	}
 
 	/**
