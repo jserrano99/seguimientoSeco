@@ -68,7 +68,7 @@
 
     function editImporte(id) {
         let recurso;
-        recurso = Routing.generate("editImporteContratoAnualidad", {"id": id}, true);
+        recurso = Routing.generate("editImporteContrato", {"id": id}, true);
         window.location = recurso;
     }
 
@@ -204,9 +204,5 @@
         </div>
         <div class="clearfix"></div>
     </div>
-</div>
-<div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
-</div>
-</div>
-</div>
+    <div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
 </div>

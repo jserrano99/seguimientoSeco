@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Datatables\ContratoDatatable;
 use AppBundle\Entity\Contrato;
 use AppBundle\Entity\ImportesContratoAnualidad;
+use AppBundle\Form\ImportesContratoType;
 use DateTime;
 use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -182,6 +183,46 @@ class ContratoController extends Controller
 			'ImportesContratoAnualidad' => $ImportesContratoAnualidad,
 			"form" => $form->createView()];
 		return $this->render("contrato/editImporte.html.twig", $params);
+	}
+
+	/**
+	 * @param Request $request
+	 * @param                                           $id
+	 * @return RedirectResponse|Response
+	 */
+	public function editImportesContratoAction(Request $request, $id)
+	{
+
+		$EntityManager = $this->getDoctrine()->getManager();
+		/** @var ImportesContrato  $ImportesContrato */
+		$ImportesContrato= $EntityManager->getRepository("AppBundle:ImportesContrato")->find($id);
+		$Contrato = $ImportesContrato->getContrato();
+
+		$form = $this->createForm(ImportesContratoType::class, $ImportesContrato);
+		$form->handleRequest($request);
+
+
+		if ($form->isSubmitted()) {
+			try {
+				$EntityManager->persist($ImportesContrato);
+				$EntityManager->flush();
+				$status = "IMPORTE MODIFICADO CORRECTAMENTE";
+				$this->sesion->getFlashBag()->add("status", $status);
+				$params = ["id" => $ImportesContrato->getContrato()->getId()];
+				return $this->redirectToRoute("editContrato",$params);
+			} catch (DBALException $ex) {
+				$status = "ERROR GENERAL=" . $ex->getMessage();
+				$this->sesion->getFlashBag()->add("status", $status);
+				$params = ["id" => $ImportesContrato->getContrato()->getId()];
+				return $this->redirectToRoute("editContrato",$params);
+			}
+		}
+
+		$params = ["contrato" => $Contrato,
+			"accion" => "MODIFICACIÓN",
+			'ImportesContrato' => $ImportesContrato,
+			"form" => $form->createView()];
+		return $this->render("contrato/editImporteContrato.html.twig", $params);
 	}
 
 

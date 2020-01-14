@@ -38,6 +38,12 @@ class ImportesContratoType extends AbstractType
 			'disabled' => false,
 			'grouping' => true,
 			"attr" => ["class" => "form-control"]]);
+		$builder->add('cuotaFijaMensual', MoneyType::class, [
+			"label" => 'Importe Cuota Fija Mensual ',
+			"required" => true,
+			'disabled' => false,
+			'grouping' => true,
+			"attr" => ["class" => "form-control"]]);
 		$builder->add('cuotaVariable', MoneyType::class, [
 			"label" => 'Importe Cuota Variable',
 			"required" => true,

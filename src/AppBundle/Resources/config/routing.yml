@@ -208,7 +208,11 @@ editImporteContratoAnualidad:
   defaults: { _controller: AppBundle:Contrato:editImporteAnualidad}
   options:
     expose: true
-
+editImporteContrato:
+  path: /contrato/importes/edit/{id}
+  defaults: { _controller: AppBundle:Contrato:editImportesContrato}
+  options:
+    expose: true
 #
 # AGRUPACION
 #
