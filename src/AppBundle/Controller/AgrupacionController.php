@@ -69,7 +69,7 @@ class AgrupacionController extends Controller
 
 	/**
 	 * @param Request $request
-	 * @param $seguiemiento_id
+	 * @param int $id
 	 * @return JsonResponse|Response
 	 * @throws Exception
 	 */
@@ -149,6 +149,7 @@ class AgrupacionController extends Controller
 			try {
 				$this->getDoctrine()->getManager()->persist($Agrupacion);
 				$this->getDoctrine()->getManager()->flush();
+				return $this->redirectToRoute('queryAgrupacion');
 			} catch (UniqueConstraintViolationException $ex) {
 				$status = " YA EXISTE UNA AGRUPACIÓN CON ESTE CÓDIGO: " . $Agrupacion->getCodigo();
 				$this->sesion->getFlashBag()->add("status", $status);

@@ -1,0 +1,23 @@
+<script>
+
+    $(document).ready(function () {
+
+    });
+</script>
+
+<div class="container">
+    {{ form_start (form,{'action':'','method':'POST'}) }}
+    <div class="panel panel-default">
+        <div class="panel-heading"> Importes por Anualidad del Contrato</div>
+        <div class="panel-body">
+            <div class="form_row mismalinea">{{ form_row(form.id) }}</div>
+            <div class="form_row ">{{ form_row(form.contrato) }}</div>
+            <div class="form_row ">{{ form_row(form.anyo) }}</div>
+            <div class="form_row ">{{ form_row(form.posicionEconomica) }}</div>
+
+            <div class="form_row muycorto">{{ form_row(form.importe) }}</div>
+            <div class="form_row ">{{ form_row(form.Guardar) }}</div>
+        </div>
+    </div>
+
+</div>

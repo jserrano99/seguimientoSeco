@@ -30,13 +30,14 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 		$form = $event->getForm();
 
 		if ($data->getEstadoCertificado() == null) {
-			$form->add('anyo', EntityType::class, [
-				'label' => 'Año',
-				'class' => 'AppBundle:Anyo',
-				'mapped' => false,
-				'required' => "required",
-				'placeholder' => 'Seleccione Año ....',
-				'attr' => ["class" => "form-control "]])
+			$form
+				->add('anyo', EntityType::class, [
+					'label' => 'Año',
+					'class' => 'AppBundle:Anyo',
+					'mapped' => false,
+					'required' => "required",
+					'placeholder' => 'Seleccione Año ....',
+					'attr' => ["class" => "form-control "]])
 				->add('mes', EntityType::class, [
 					'label' => 'Mes',
 					'class' => 'AppBundle:Mes',
@@ -168,7 +169,10 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 						"attr" => ["class" => "btn btn-success"]])
 					->add('enviarProveedor', ButtonType::class, [
 						'label' => 'Enviado a Proveedor',
-						"attr" => ["class" => "btn btn-success"]]);
+						"attr" => ["class" => "btn btn-success"]])
+					->add('verHorasCuotaFija', ButtonType::class, [
+						'label' => 'Horas Cuota Fija',
+						"attr" => ["class" => "btn btn-t btn-success"]]);
 			}
 
 			if ($data->getEstadoCertificado() == 'CERRADO') {
@@ -191,6 +195,10 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 				$form->add('abrirCertificado', ButtonType::class, [
 					'label' => 'Abrir Certificado Servicios',
 					"attr" => ["class" => "btn btn-warning"]]);
+				$form->add('verHorasCuotaFija', ButtonType::class, [
+					'label' => 'Horas Cuota Fija',
+					"attr" => ["class" => "btn btn-success"]]);
+
 			}
 
 
@@ -208,11 +216,17 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 		return;
 	}
 
+	/**
+	 * @param FormEvent $event
+	 */
 	public function preSubmit(FormEvent $event)
 	{
 		$form = $event->getForm();
 	}
 
+	/**
+	 * @param FormEvent $event
+	 */
 	public function postSetData(FormEvent $event)
 	{
 		$data = $event->getData();

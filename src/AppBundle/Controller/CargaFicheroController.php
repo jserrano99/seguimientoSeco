@@ -169,6 +169,22 @@ class CargaFicheroController extends Controller
 	}
 
 	/**
+	 * @param int $id
+	 * @return RedirectResponse
+	 *
+	 */
+	public  function deleteAction($id) {
+		$entityManager = $this->getDoctrine()->getManager();
+
+		$CargaFichero = $entityManager->getRepository("AppBundle:CargaFichero")->find($id);
+
+		$entityManager->remove($CargaFichero);
+		$entityManager->flush();
+
+		return $this->redirectToRoute("queryFichero");
+
+	}
+	/**
 	 * @param CargaFichero $CargaFichero
 	 * @param Spreadsheet $PHPExcel
 	 * @return bool

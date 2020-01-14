@@ -14,6 +14,7 @@
                 <div class="form_row mismalinea">{{ form_row(form.estadoCertificado) }}</div>
                 {% if estado == 'ENVIADO A PROVEEDOR' %}
                     <div class="form_row mismalinea">{{ form_row(form.abrirCertificado) }}</div>
+                    <div class="form_row mismalinea">{{ form_row(form.verHorasCuotaFija) }}</div>
                 {% else %}
                     <div class="form_row mismalinea">{{ form_row(form.cerrarCertificado) }}</div>
                 {% endif %}
@@ -38,6 +39,7 @@
                 <div class="form_row mismalinea">{{ form_row(form.exportarReaperturas) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.cargaRevisionPenalizaciones) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.eliminarCertificado) }}</div>
+                <div class="form_row mismalinea">{{ form_row(form.verHorasCuotaFija) }}</div>
                 <div class="clearfix"></div>
                 <div class="form_row mismalinea">{{ form_row(form.imprimirCertificado) }}</div>
                 <div class="form_row mismalinea">{{ form_row(form.imprimirCertificadoActividad) }}</div>

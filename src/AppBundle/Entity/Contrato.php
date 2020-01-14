@@ -109,6 +109,11 @@ class Contrato
 	private $numeroPedido;
 
 
+	public function setId($id) {
+		$this->id = $id;
+
+		return $this;
+	}
 	/**
      * Get id.
      *
@@ -406,4 +411,9 @@ class Contrato
     {
         return $this->numeroPedido;
     }
+
+    public  function __toString()
+	{
+		return $this->codigo.'-'.$this->descripcion;
+	}
 }

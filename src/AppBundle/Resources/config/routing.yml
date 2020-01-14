@@ -40,6 +40,12 @@ cargaFichero:
     defaults: { _controller: AppBundle:CargaFichero:carga}
     options:
         expose: true
+deleteCargaFichero:
+  path: /cargaFichero/carga/{id}
+  defaults: { _controller: AppBundle:CargaFichero:delete}
+  options:
+    expose: true
+
 recargaFichero:
     path: /cargaFichero/recarga/{id}
     defaults: { _controller: AppBundle:CargaFichero:recarga}
@@ -110,6 +116,12 @@ deleteCertificadoServicios:
     defaults: { _controller: AppBundle:CertificadoServicios:delete}
     options:
         expose: true
+horasCuotaFija:
+  path: /certificadoServicios/horasCuotaFija/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:queryHorasCuotaFija}
+  options:
+    expose: true
+
 imprimirCertificadoServicios:
     path: /report/certificadoServicios/{id}
     defaults: { _controller: AppBundle:Report:imprimirCertificadoServicios}
@@ -140,6 +152,13 @@ activarPenalizacion:
   defaults: { _controller: AppBundle:CertificadoServicios:activarPenalizacion}
   options:
     expose: true
+
+ajaxPeriodo:
+  path: /certificadoServicios/periodo/{idAnyo}
+  defaults: { _controller: AppBundle:CertificadoServicios:ajaxPeriodo}
+  options:
+    expose: true
+
 exportarReaperturas:
   path: /report/exportarReaperturas/{id}
   defaults: { _controller: AppBundle:CertificadoServicios:exportarReaperturas}
@@ -166,6 +185,29 @@ incluirEncargo:
     defaults: { _controller: AppBundle:CertificadoServicios:incluirEncargo}
     options:
         expose: true
+#
+# CONTRATO
+#
+queryContrato:
+  path: /contrato/query
+  defaults: { _controller: AppBundle:Contrato:query}
+  options:
+    expose: true
+editContrato:
+  path: /contrato/edit/{id}
+  defaults: { _controller: AppBundle:Contrato:edit}
+  options:
+    expose: true
+addContrato:
+  path: /contrato/add
+  defaults: { _controller: AppBundle:Contrato:add}
+  options:
+    expose: true
+editImporteContratoAnualidad:
+  path: /contrato/importeAnualidad/edit/{id}
+  defaults: { _controller: AppBundle:Contrato:editImporteAnualidad}
+  options:
+    expose: true
 
 #
 # AGRUPACION
@@ -350,7 +392,11 @@ informeSeguimiento:
   defaults: { _controller: AppBundle:Report:informeSeguimiento}
   options:
     expose: true
-
+planificacionLB:
+  path: /report/planificacionLB
+  defaults: { _controller: AppBundle:Report:planificacionLB}
+  options:
+    expose: true
 seguimentoPLA:
     path: /report/seguimientoPLA
     defaults: { _controller: AppBundle:Report:seguimientoPLA}
@@ -416,3 +462,4 @@ deleteUsuario:
     defaults: { _controller: AppBundle:Usuario:delete}
     options:
         expose: true
+

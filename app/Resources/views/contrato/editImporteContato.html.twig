@@ -1,0 +1,8 @@
+{% extends "base.html.twig" %}
+{% block titulo %} Importes Contrato  **{{accion}}**
+    <a href="{{path("editContrato",{'id':contrato.id})}}" class="btn btn-success"> Volver </a>
+
+{% endblock %}
+{% block contenido %}
+    {% include 'contrato/formImporteContrato.html.twig' %}
+{% endblock %}

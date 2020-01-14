@@ -91,6 +91,14 @@ class EncargoPenalizado
 	private $diasEjecucion;
 
 	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="dias_previstos_ejecucion", type="integer", nullable=true)*
+	 */
+
+	private $diasPrevistosEjecucion;
+
+	/**
      * Get id.
      *
      * @return int
@@ -234,6 +242,22 @@ class EncargoPenalizado
 	public function setDiasEjecucion($diasEjecucion)
 	{
 		$this->diasEjecucion = $diasEjecucion;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getDiasPrevistosEjecucion()
+	{
+		return $this->diasPrevistosEjecucion;
+	}
+
+	/**
+	 * @param int $diasPrevistosEjecucion
+	 */
+	public function setDiasPrevistosEjecucion($diasPrevistosEjecucion)
+	{
+		$this->diasPrevistosEjecucion = $diasPrevistosEjecucion;
 	}
 
 

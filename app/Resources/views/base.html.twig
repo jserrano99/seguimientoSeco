@@ -10,11 +10,31 @@
 </head>
 
 <script>
+    var formatNumber = {
+        sepDecimal: ',', // separad
+        separador: ".", // separadoor para los decimales
+        formatear: function (num) {
+            num += '';
+            var splitStr = num.split('.');
+            var splitLeft = splitStr[0];
+            var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+            var regx = /(\d+)(\d{3})/;
+            while (regx.test(splitLeft)) {
+                splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+            }
+            return this.simbol + splitLeft + splitRight;
+        },
+        new: function (num, simbol) {
+            this.simbol = simbol || '';
+            return this.formatear(num);
+        }
+    }
+
     $(function () {
         $('.tabla').DataTable({
             "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
             "autoWidth": true,
-            "jQueryUI": true,
+            "jQueryUI": false,
             "stateSave": true,
             "order": [[0, "desc"]]
         })

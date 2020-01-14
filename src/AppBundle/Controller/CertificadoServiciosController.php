@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Datatables\CertificadoServiciosDatatable;
 use AppBundle\Datatables\EncargoPenalizadoDatatable;
 use AppBundle\Datatables\LineaCertificadoDatatable;
+use AppBundle\Entity\Anyo;
 use AppBundle\Entity\CargaFichero;
 use AppBundle\Entity\CertificadoServicios;
 use AppBundle\Entity\Encargo;
@@ -12,6 +13,7 @@ use AppBundle\Entity\EncargoPenalizado;
 use AppBundle\Entity\EstadoCertificado;
 use AppBundle\Entity\FicheroLog;
 use AppBundle\Entity\ImportesCertificado;
+use AppBundle\Entity\ImportesContrato;
 use AppBundle\Entity\Indicador;
 use AppBundle\Entity\LineaCertificado;
 use AppBundle\Entity\LineaCertificadoEje;
@@ -31,6 +33,7 @@ use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
+use PDO;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -109,6 +112,7 @@ class CertificadoServiciosController extends Controller
 		return $this->render("certificadoServicios/edit.html.twig", [
 			"form" => $form->createView(),
 			"accion" => "EDITAR",
+			'certificadoServicios' => $CertificadoServicios,
 			'estado' => $CertificadoServicios->getEstadoCertificado()]);
 
 	}
@@ -120,12 +124,14 @@ class CertificadoServiciosController extends Controller
 	 */
 	public function addAction(Request $request)
 	{
-
+		$EntityManager = $this->getDoctrine()->getManager();
 		$CertificadoServicios = new CertificadoServicios();
 		$form = $this->createForm(CertificadoServiciosType::class, $CertificadoServicios);
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
-			$CertificadoServicios2 = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->findOneBy(["mes" => $CertificadoServicios->getMes()]);
+			$idMes =$_POST["formCertificadoServicios"]["mes"];
+			$Mes = $EntityManager->getRepository("AppBundle:Mes")->find($idMes);
+			$CertificadoServicios2 = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->findOneBy(["mes" => $Mes]);
 			if ($CertificadoServicios2) {
 				$status = " YA EXISTE UN CERTIFICADO PARA ESTE MES ";
 				$this->sesion->getFlashBag()->add("status", $status);
@@ -138,8 +144,9 @@ class CertificadoServiciosController extends Controller
 				$Contrato = $this->getDoctrine()->getManager()->getRepository("AppBundle:Contrato")->find(1);
 				$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
 				$CertificadoServicios->setContrato($Contrato);
-				$CertificadoServicios->setDescripcion("Certificado de Servicios " . $CertificadoServicios->getMes()->getDescripcion());
-				$CertificadoServicios->setFechaCertificado($CertificadoServicios->getMes()->getFechaInicio());
+				$CertificadoServicios->setMes($Mes);
+				$CertificadoServicios->setDescripcion("Certificado de Servicios " . $Mes->getDescripcion());
+				$CertificadoServicios->setFechaCertificado($Mes->getFechaInicio());
 				$ImportesContrato = $this->getDoctrine()->getManager()->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $Contrato]);
 				$CertificadoServicios->setImporteCuotaFijaMensual($ImportesContrato->getCuotaFijaMensual());
 				$this->getDoctrine()->getManager()->persist($CertificadoServicios);
@@ -471,9 +478,8 @@ class CertificadoServiciosController extends Controller
 		$entityManager = $this->getDoctrine()->getManager();
 		$TipoCuota = $entityManager->getRepository("AppBundle:TipoCuota")->find(1);
 
-		$ImportesContrato = $entityManager->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $CertificadoServicios->getContrato()]);
+		$ImportesContrato = $this->importesContrato($CertificadoServicios);
 		$PosicionEconomica = $entityManager->getRepository("AppBundle:PosicionEconomica")->find(1);
-
 
 		$ImportesCertificado = new ImportesCertificado();
 		$ImportesCertificado->setCertificadoServicios($CertificadoServicios);
@@ -489,8 +495,8 @@ class CertificadoServiciosController extends Controller
 		$entityManager->persist($ImportesCertificado);
 		$entityManager->flush();
 
-
 		return $ImportesCertificado;
+
 	}
 
 	/**
@@ -753,9 +759,8 @@ class CertificadoServiciosController extends Controller
 			"eliminada" => null]);
 
 		$importe = 0;
-		//$thpCs = $CertificadoServicios->getContrato()->getImporteContrato()->getTarifaHora();
-
-		$thpCs = 37.47;
+		$ImportesContrato = $this->importesContrato($CertificadoServicios);
+		$thpCs = $ImportesContrato->getTarifaHoraCs();
 
 		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoValoracion();
@@ -776,6 +781,9 @@ class CertificadoServiciosController extends Controller
 		$entityManager->persist($Penalizacion);
 		$entityManager->flush();
 
+		/**
+		 * ENC02
+		 */
 		$IndicadorENC02 = $entityManager->getRepository("AppBundle:Indicador")->find(11);
 		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENC02,
 			"certificadoServicios" => $CertificadoServicios,
@@ -784,7 +792,13 @@ class CertificadoServiciosController extends Controller
 		$importe = 0;
 		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
-			$importePenalizacion = $diasRetraso * 8 * 2 * $thpCs;
+			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
+			$factor = $diasRetraso / $diasPrevistosEjecucion;
+			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0 ) {
+				$factor = $factor / 2;
+			}
+			$costeEncargo = $thpCs * $EncargoPenalizado->getEncargo()->getHorasComprometidas();
+			$importePenalizacion = $factor * $costeEncargo;
 			$importe = $importe + $importePenalizacion;
 		}
 
@@ -820,8 +834,14 @@ class CertificadoServiciosController extends Controller
 
 		$importe = 0;
 		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
-			$factorPenalizacion = $EncargoPenalizado->getDiasRetrasoEntrega() / $EncargoPenalizado->getDiasEjecucion();
-			$importePenalizacion = $factorPenalizacion * $EncargoPenalizado->getEncargo()->getCoste();
+			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
+			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
+			$factor = $diasRetraso / $diasPrevistosEjecucion;
+			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0 ) {
+				$factor = $factor / 2;
+			}
+
+			$importePenalizacion = $factor * $EncargoPenalizado->getEncargo()->getCoste();
 			$importe = $importe + $importePenalizacion;
 		}
 
@@ -837,34 +857,6 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setImporte($importe);
 		$entityManager->persist($Penalizacion);
 		$entityManager->flush();
-
-//		$IndicadorENT02 = $entityManager->getRepository("AppBundle:Indicador")->find(14);
-//		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENT02,
-//			"certificadoServicios" => $CertificadoServicios,
-//			"eliminada" => null]);
-//        $encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
-//        $porcentaje = $encargosCumplen / $encargosADM;
-//
-//        $factor = 0;
-//        if ($porcentaje > 0.95) $factor = 0;
-//        if ($porcentaje > 0.90 and $porcentaje <= 0.95) $factor = 0.5;
-//        if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
-//        if ($porcentaje <= 0.85) $factor = 1;
-//        $peso = $IndicadorIRS03->getPeso() * $factor;
-//        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
-
-//		$Penalizacion = new Penalizacion();
-//		$Penalizacion->setIndicador($IndicadorENT02);
-//		$Penalizacion->setCertificadoServicios($CertificadoServicios);
-//		$Penalizacion->setTotalEncargos(0);
-//		$Penalizacion->setTotalEncargosPenalizados(0);
-//		$Penalizacion->setTotalCumplen(0);
-//		$Penalizacion->setPorcentaje(0);
-//		$Penalizacion->setFactor(0);
-//		$Penalizacion->setPeso(0);
-//		$Penalizacion->setImporte(0);
-//		$entityManager->persist($Penalizacion);
-//		$entityManager->flush();
 
 		return true;
 	}
@@ -1208,6 +1200,8 @@ class CertificadoServiciosController extends Controller
 
 		$TipoObjetoEncargoSCF = $this->getDoctrine()->getManager()->getRepository("AppBundle:TipoObjeto")->find(4);
 		$TipoCuota = $EntityManager->getRepository("AppBundle:TipoCuota")->find(1);
+		$IndicadorENC01 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(10);
+		$IndicadorENC02 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(11);
 
 		$ObjetoRepository = $EntityManager->getRepository("AppBundle:ObjetoEncargo");
 		$EncargoRepository = $EntityManager->getRepository("AppBundle:Encargo");
@@ -1272,9 +1266,53 @@ class CertificadoServiciosController extends Controller
 				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO ");
 				$ServicioLog->escribeLog($ficheroLog);
 
+				$fechaInicio = $Encargo->getFcRequeridaValoracion();
+				$fechaFin = $Encargo->getFcEntregaValoracion();
+				//$diasRetrasoValoracion = $this->getDiasHabiles($fechaInicio, $fechaFin);
+
+				if ($fechaFin > $fechaInicio) {
+					$diff = $fechaInicio->diff($fechaFin);
+					$diasRetrasoValoracion = $diff->format('%a');
+					if ($diasRetrasoValoracion > 0) {
+						$EncargoPenalizado = new EncargoPenalizado();
+						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+						$EncargoPenalizado->setIndicador($IndicadorENC01);
+						$EncargoPenalizado->setDiasRetrasoValoracion($diasRetrasoValoracion);
+						$EncargoPenalizado->setEncargo($Encargo);
+						$EntityManager->persist($EncargoPenalizado);
+						$EntityManager->flush();
+						$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC01*** ");
+						$ServicioLog->escribeLog($ficheroLog);
+					}
+				}
+
+
+				$fechaInicio = $Encargo->getFcCompromiso();
+				$fechaFin = $Encargo->getFcEntrega();
+				//$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
+
+				$diff = $fechaInicio->diff($fechaFin);
+				$diasRetrasoEntrega = $diff->format('%a');
+				if ($fechaFin > $fechaInicio) {
+					if ($diasRetrasoEntrega > 0) {
+						$EncargoPenalizado = new EncargoPenalizado();
+						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+						$EncargoPenalizado->setIndicador($IndicadorENC02);
+						$EncargoPenalizado->setDiasRetrasoEntrega($diasRetrasoEntrega);
+						$EncargoPenalizado->setEncargo($Encargo);
+						$EntityManager->persist($EncargoPenalizado);
+						$EntityManager->flush();
+						$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " *** PENALIZADO  ENC02*** ");
+						$ServicioLog->escribeLog($ficheroLog);
+					}
+				}
+
+
 				$Encargo->setBloqueado(true);
 				$this->getDoctrine()->getManager()->persist($Encargo);
 				$this->getDoctrine()->getManager()->flush();
+
+
 			}
 		}
 
@@ -1367,10 +1405,15 @@ class CertificadoServiciosController extends Controller
 			$diasRetrasoEntrega = $diff->format('%a');
 			if ($fechaFin > $fechaInicio) {
 				if ($diasRetrasoEntrega > 0) {
+					$fechaInicio = $Encargo->getFcComienzoEjecucion();
+					$fechaFin = $Encargo->getFcCompromiso();
+					$diff = $fechaInicio->diff($fechaFin);
+					$diasPrevistosEjecucion = $diff->format('%a');
 					$EncargoPenalizado = new EncargoPenalizado();
 					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
 					$EncargoPenalizado->setIndicador($IndicadorENC02);
 					$EncargoPenalizado->setDiasRetrasoEntrega($diasRetrasoEntrega);
+					$EncargoPenalizado->setDiasPrevistosEjecucion($diasPrevistosEjecucion);
 					$EncargoPenalizado->setEncargo($Encargo);
 					$EntityManager->persist($EncargoPenalizado);
 					$EntityManager->flush();
@@ -1567,8 +1610,9 @@ class CertificadoServiciosController extends Controller
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
 
+		/** @var int $id */
 		$CertificadoServicios = $EntityManager->getRepository("AppBundle:CertificadoServicios")->find($id);
-		$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
+		$EstadoCertificado = $EntityManager->getRepository("AppBundle:EstadoCertificado")->find(1);
 
 		$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
 		$CertificadoServicios->setTotalFactura(0);
@@ -1586,7 +1630,7 @@ class CertificadoServiciosController extends Controller
 	}
 
 	/**
-	 * @param $id
+	 * @param int $id
 	 * @return RedirectResponse
 	 */
 	public
@@ -1595,6 +1639,7 @@ class CertificadoServiciosController extends Controller
 
 		$EntityManager = $this->getDoctrine()->getManager();
 		/** @var EncargoPenalizado $EncargoPenalizado */
+		/** @var int $id */
 		$EncargoPenalizado = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->find($id);
 
 		$EncargoPenalizado->setEliminada(true);
@@ -1607,9 +1652,8 @@ class CertificadoServiciosController extends Controller
 			["id" => $EncargoPenalizado->getCertificadoServicios()->getId()]);
 	}
 
-
 	/**
-	 * @param $id
+	 * @param int $id
 	 * @return RedirectResponse
 	 */
 	public
@@ -1816,7 +1860,7 @@ class CertificadoServiciosController extends Controller
 	 * @throws \PhpOffice\PhpSpreadsheet\Exception
 	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
 	 */
-	public function cargaRevisionPenalizaciones(Request $request, $id)
+	public function cargaRevisionPenalizacionesAction(Request $request, $id)
 	{
 		/** @var EntityManager $entityManager */
 		$entityManager = $this->getDoctrine()->getManager();
@@ -1848,14 +1892,12 @@ class CertificadoServiciosController extends Controller
 					$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':G' . $i, null, true, true, true);
 					$headingsArray = $headingsArray[$i];
 					if ($headingsArray["G"] == 'OK') {
-						$nmEncargo = $headingsArray["A"];
-
+						$encargoPenalizadoId = (int)$headingsArray["B"];
+						$nmEncargo = (int)$headingsArray["C"];
 						/** @var Encargo $Encargo */
 						$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findBy(["numero" => $nmEncargo]);
-
 						/** @var EncargoPenalizado $EncargoPenalizado */
-						$EncargoPenalizado = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["encargo" => $Encargo]);
-
+						$EncargoPenalizado = $entityManager->getRepository("AppBundle:EncargoPenalizado")->find($encargoPenalizadoId);
 						$EncargoPenalizado->setEliminada(true);
 						$entityManager->persist($EncargoPenalizado);
 						$entityManager->flush();
@@ -1951,4 +1993,66 @@ class CertificadoServiciosController extends Controller
 
 		return $response;
 	}
+
+
+	public function ajaxPeriodoAction($idAnyo)
+	{
+
+		$EntityManager = $this->getDoctrine()->getManager();
+		$Anyo = $EntityManager->getRepository("AppBundle:Anyo")->find($idAnyo);
+
+		$Periodos = $EntityManager->getRepository("AppBundle:Mes")->findBy(["anyo" => $Anyo]);
+
+		$html = " <select id='formCertificadoServicios_mes' " .
+			" name='formCertificadoServicios[mes]' " .
+			" required='required' " .
+			" class='form-control'>" .
+			" <option value='' selected='selected'>Seleccione mes ....</option> ";
+		foreach ($Periodos as $Periodo) {
+			$opcion = " <option value=' " . $Periodo->getId(). "'>" . $Periodo->getDescripcion() . "</option> ";
+			$html = $html . $opcion;
+			}
+		$html = $html . "</select>";
+
+
+		$reponse = new Response($html);
+
+		return $reponse;
+
+	}
+
+	/**
+	 * @param int $id
+	 * @return Response
+	 */
+	public  function queryHorasCuotaFijaAction($id) {
+
+		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
+		$conection = $this->getDoctrine()->getConnection();
+		$sentencia = " select * from view_horas_cuota_fija where CertificadoServiciosId = :id";
+
+		$stmt = $conection->prepare($sentencia);
+		$params = ["id"=> $id];
+		$stmt->execute($params);
+		$HorasCuotaFija = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$params = ["HorasCuotaFija" => $HorasCuotaFija, "certificadoServicios" => $CertificadoServicios];
+		return $this->render("certificadoServicios/queryHorasCF.html.twig", $params);
+
+
+	}
+
+	/**
+	 * @param CertificadoServicios $CertificadoServicios
+	 * @return ImportesContrato|object|null
+	 */
+	public function importesContrato($CertificadoServicios) {
+		$EntityManager = $this->getDoctrine()->getManager();
+		$Contrato = $CertificadoServicios->getContrato();
+		$Anyo = $CertificadoServicios->getMes()->getAnyo();
+		$ImportesContrato = $EntityManager->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $Contrato,'anyo' =>$Anyo]);
+
+		return $ImportesContrato;
+	}
 }
+
+

@@ -247,6 +247,16 @@ class ReportController extends Controller
 		$reportUnit = "/reports/esfuerzoComprometidoEquipoBase";
 		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
 	}
+	/**
+	 * @return Response
+	 */
+	public function planificacionLBAction()
+	{
+		$format = "pdf";
+		$reportUnit = "/reports/planificacionLB";
+		return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
+	}
+
 
 
 	/**

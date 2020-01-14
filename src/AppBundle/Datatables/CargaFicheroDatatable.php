@@ -98,6 +98,16 @@ class CargaFicheroDatatable extends AbstractDatatable
 							'title' => 'Descarga Log de Ejecución',
 							'class' => 'btn btn-primary btn-xs',
 							'role' => 'button']
+					],
+					['route' => 'deleteCargaFichero',
+						'route_parameters' => ['id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-trash',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Borrar',
+							'class' => 'btn btn-danger btn-xs',
+							'role' => 'button']
 					]
 				]]);
 	}

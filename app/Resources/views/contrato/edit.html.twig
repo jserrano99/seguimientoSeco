@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block titulo %} CONTRATOS **{{accion}}**
+    <a href="{{path("queryContrato")}}" class="btn btn-success"> Consulta Contratos </a>
+{% endblock %}
+{% block contenido %}
+    {% include 'contrato/form.html.twig' %}
+{% endblock %}

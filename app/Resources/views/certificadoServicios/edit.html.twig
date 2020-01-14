@@ -1,10 +1,29 @@
 {% extends "base.html.twig" %}
 {% block titulo %} CERTIFICACIONES DE SERVICIO  **{{ accion }}**
+    {% if (accion == 'EDITAR') %}
+        <br/><br/> {{ certificadoServicios.descripcion }}
+    {% endif %}
     <a href="{{ path("queryCertificadoServicios") }}" class="btn btn-success">Volver</a>
 {% endblock %}
 {% block contenido %}
     <script>
         $(document).ready(function () {
+            $("#formCertificadoServicios_anyo").change(function () {
+
+                idAnyo = $("#formCertificadoServicios_anyo").val();
+                let recurso;
+                recurso = Routing.generate("ajaxPeriodo", {"idAnyo": idAnyo}, true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $("#formCertificadoServicios_mes").html(data);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#formCertificadoServicios_mes").html('error');
+                    }
+                });
+            });
 
             $("#formCertificadoServicios_eliminarCertificado").click(function () {
                 bootbox.confirm({
@@ -19,14 +38,15 @@
                             className: 'btn-success'
                         }
                     },
-                    callback: function(result) {
+                    callback: function (result) {
                         if (result) {
                             let recurso;
                             let id;
                             id = $("#formCertificadoServicios_id").val();
                             recurso = Routing.generate("deleteCertificadoServicios", {"id": id}, true);
                             window.location = recurso;
-                        };
+                        }
+                        ;
                     }
                 });
             });
@@ -60,6 +80,15 @@
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("incluirEncargo", {"id": id}, true);
+                window.location = recurso;
+            });
+
+            $("#formCertificadoServicios_verHorasCuotaFija").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("horasCuotaFija", {"id": id}, true);
                 window.location = recurso;
             });
 
@@ -112,14 +141,15 @@
                 recurso = Routing.generate("revisionPenalizaciones", {"id": id}, true);
                 window.location = recurso;
             });
-            // $("#formCertificadoServicios_cargaRevisionPenalizaciones").click(function () {
-            //     $("#procesando").show();
-            //     let recurso;
-            //     let id;
-            //     id = $("#formCertificadoServicios_id").val();
-            //     recurso = Routing.generate("cargaRevisionPenalizaciones", {"id": id}, true);
-            //     window.location = recurso;
-            // });
+
+            $("#formCertificadoServicios_cargaRevisionPenalizaciones").click(function () {
+                $("#procesando").show();
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("cargaRevisionPenalizaciones", {"id": id}, true);
+                window.location = recurso;
+            });
 
             $("#formCertificadoServicios_cerrarCertificado").click(function () {
                 $("#procesando").show();
@@ -143,14 +173,15 @@
                             className: 'btn-success'
                         }
                     },
-                    callback: function(result) {
-                      if (result) {
-                          let recurso;
-                          let id;
-                          id = $("#formCertificadoServicios_id").val();
-                          recurso = Routing.generate("abrirCertificado", {"id": id}, true);
-                          window.location = recurso;
-                      };
+                    callback: function (result) {
+                        if (result) {
+                            let recurso;
+                            let id;
+                            id = $("#formCertificadoServicios_id").val();
+                            recurso = Routing.generate("abrirCertificado", {"id": id}, true);
+                            window.location = recurso;
+                        }
+                        ;
                     }
                 });
             });
