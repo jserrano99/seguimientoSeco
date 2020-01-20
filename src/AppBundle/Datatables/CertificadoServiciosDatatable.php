@@ -10,6 +10,7 @@ use Sg\DatatablesBundle\Datatable\Column\DateTimeColumn;
 use Sg\DatatablesBundle\Datatable\Column\NumberColumn;
 
 use Sg\DatatablesBundle\Datatable\Filter\DateRangeFilter;
+use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 use Sg\DatatablesBundle\Datatable\Style;
 
 /**
@@ -19,7 +20,6 @@ use Sg\DatatablesBundle\Datatable\Style;
  */
 class CertificadoServiciosDatatable extends AbstractDatatable
 {
-
 	/**
 	 * {@inheritdoc}
 	 */
@@ -44,6 +44,7 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 			'search_in_non_visible_columns' => true,
 			'dom' => 'lBtrip'
 		]);
+
 //		$this->events->set([
 //			'xhr' => ['template' => 'fin.js.twig'],
 //			'pre_xhr' => ['template' => 'inicio.js.twig'],
@@ -59,19 +60,22 @@ class CertificadoServiciosDatatable extends AbstractDatatable
             'state_save' => true
 		]);
 
+		$Anualidades = $this->getEntityManager()->getRepository("AppBundle:Anyo")->findAll();
+
 		$formatter = new NumberFormatter("es_ES", NumberFormatter::CURRENCY);
 
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
 			->add('descripcion', Column::class, ['title' => 'Descripcion', 'width' => '400px', 'searchable' => true])
-			->add('mes.fechaInicio', DateTimeColumn::class, array('title' => 'Fecha Proceso', 'width' => '150px',
-				'date_format' => 'DD/MM/YYYY',
-				'filter' => array(DateRangeFilter::class, array(
-					'cancel_button' => false,
-				)),
-			))
 
-			->add('mes.anyo.descripcion', Column::class, ['title' => 'Año', 'width' => '40px', 'searchable' => true])
+			->add('mes.anyo.descripcion', Column::class, ['title' => 'Año',
+				'width' => '80px', 'searchable' => true,
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Anualidades, 'descripcion', 'descripcion'),
+						'search_type' => 'eq']]])
+
 			->add('mes.descripcion', Column::class, ['title' => 'Mes', 'width' => '140px', 'searchable' => true])
 			->add('totalFacturaConIva', NumberColumn::class, ['title' => 'Total Factura',
 															  'width' => '40px',
@@ -95,9 +99,7 @@ class CertificadoServiciosDatatable extends AbstractDatatable
 							'role' => 'button'],
 					]
 				]]);
-
 	}
-
 	/**
 	 * {@inheritdoc}
 	 */

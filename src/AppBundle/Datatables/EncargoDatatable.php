@@ -110,8 +110,8 @@ class EncargoDatatable extends AbstractDatatable
 					'cancel_button' => false,
 				]],
 			])
-			->add('horasRealizadas', Column::class, ['title' => 'Horas', 'width' => '20px', 'searchable' => true])
-			->add('coste', Column::class, ['title' => 'Coste', 'width' => '20px', 'searchable' => true])
+			->add('horasComprometidas', Column::class, ['title' => 'Horas Comprometidas', 'width' => '20px', 'searchable' => true])
+			->add('horasRealizadas', Column::class, ['title' => 'Horas Realizadas', 'width' => '20px', 'searchable' => true])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'actions' => [

@@ -28,9 +28,9 @@ class AnotacionEncargo
 	private $id;
 
 	/**
-	 * @var text
+	 * @var string
 	 *
-	 * @ORM\Column(name="anotacion", type="text", length=255, nullable=false)
+	 * @ORM\Column(name="anotacion", type="string", length=255, nullable=false)
 	 */
 	private $anotacion;
 
@@ -78,7 +78,7 @@ class AnotacionEncargo
 	}
 
 	/**
-	 * @return text
+	 * @return string
 	 */
 	public function getAnotacion()
 	{
@@ -86,7 +86,7 @@ class AnotacionEncargo
 	}
 
 	/**
-	 * @param text $anotacion
+	 * @param string $anotacion
 	 */
 	public function setAnotacion($anotacion)
 	{

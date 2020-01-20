@@ -475,11 +475,11 @@ class CertificadoServiciosController extends Controller
 	public
 	function importesCuotaFija($CertificadoServicios)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
-		$TipoCuota = $entityManager->getRepository("AppBundle:TipoCuota")->find(1);
+		$EntityManager = $this->getDoctrine()->getManager();
+		$TipoCuota = $EntityManager->getRepository("AppBundle:TipoCuota")->find(1);
 
 		$ImportesContrato = $this->importesContrato($CertificadoServicios);
-		$PosicionEconomica = $entityManager->getRepository("AppBundle:PosicionEconomica")->find(1);
+		$PosicionEconomica = $EntityManager->getRepository("AppBundle:PosicionEconomica")->find(1);
 
 		$ImportesCertificado = new ImportesCertificado();
 		$ImportesCertificado->setCertificadoServicios($CertificadoServicios);
@@ -492,8 +492,8 @@ class CertificadoServiciosController extends Controller
 		$ImportesCertificado->setPenalizacion(0);
 		$ImportesCertificado->setTotal($ImportesContrato->getCuotaFijaMensual());
 		$ImportesCertificado->setPosicionEconomica($PosicionEconomica);
-		$entityManager->persist($ImportesCertificado);
-		$entityManager->flush();
+		$EntityManager->persist($ImportesCertificado);
+		$EntityManager->flush();
 
 		return $ImportesCertificado;
 
@@ -506,9 +506,9 @@ class CertificadoServiciosController extends Controller
 	public function penalizacionIRQ01($CertificadoServicios)
 	{
 
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
-		$RemedyRepo = $entityManager->getRepository("AppBundle:Remedy");
+		$RemedyRepo = $EntityManager->getRepository("AppBundle:Remedy");
 
 		$QuejasPeriodo = $RemedyRepo->createQueryBuilder('u')
 			->where("u.tipo = 'QUEJAS'")
@@ -518,7 +518,7 @@ class CertificadoServiciosController extends Controller
 			->getQuery()->getResult();
 
 		$nmQuejas = count($QuejasPeriodo);
-		$IndicadorIRQ01 = $entityManager->getRepository("AppBundle:Indicador")->find(5);
+		$IndicadorIRQ01 = $EntityManager->getRepository("AppBundle:Indicador")->find(5);
 
 		$Penalizacion = new Penalizacion();
 		$Penalizacion->setIndicador($IndicadorIRQ01);
@@ -530,8 +530,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
 		$Penalizacion->setImporte(0);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		return true;
 
@@ -545,11 +545,11 @@ class CertificadoServiciosController extends Controller
 	{
 
 
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
-		$IndicadorIRIi = $entityManager->getRepository("AppBundle:Indicador")->find(6);
+		$IndicadorIRIi = $EntityManager->getRepository("AppBundle:Indicador")->find(6);
 
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRIi,
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRIi,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
@@ -580,8 +580,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor($factor);
 		$Penalizacion->setPeso(0);
 		$Penalizacion->setImporte($importePenalizacion);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		return true;
 
@@ -594,13 +594,13 @@ class CertificadoServiciosController extends Controller
 	public function penalizacionNPL($CertificadoServicios)
 	{
 
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$encargosNPLCRI = $CertificadoServicios->getContadorNPLCRI();
 		$encargosNPLNOR = $CertificadoServicios->getContadorNPLNOR();
 
-		$IndicadorIRS01 = $entityManager->getRepository("AppBundle:Indicador")->find(1);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS01,
+		$IndicadorIRS01 = $EntityManager->getRepository("AppBundle:Indicador")->find(1);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS01,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLCRI - count($EncargosPenalizadosALL);
@@ -629,11 +629,11 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setPeso($peso);
 		$Penalizacion->setImporte($importe);
 
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
-		$IndicadorIRS02 = $entityManager->getRepository("AppBundle:Indicador")->find(3);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS02,
+		$IndicadorIRS02 = $EntityManager->getRepository("AppBundle:Indicador")->find(3);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS02,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
@@ -662,12 +662,12 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setPeso($peso);
 		$Penalizacion->setImporte($importe);
 
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 
-		$IndicadorIRS03 = $entityManager->getRepository("AppBundle:Indicador")->find(4);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS03,
+		$IndicadorIRS03 = $EntityManager->getRepository("AppBundle:Indicador")->find(4);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS03,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosNPLNOR - count($EncargosPenalizadosALL);
@@ -696,8 +696,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setPeso($peso);
 		$Penalizacion->setImporte($importe);
 
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		return true;
 
@@ -710,12 +710,12 @@ class CertificadoServiciosController extends Controller
 	public
 	function penalizacionADM($CertificadoServicios)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$encargosADM = $CertificadoServicios->getContadorADM();
 
-		$IndicadorIRS03 = $entityManager->getRepository("AppBundle:Indicador")->find(4);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS03,
+		$IndicadorIRS03 = $EntityManager->getRepository("AppBundle:Indicador")->find(4);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorIRS03,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 		$encargosCumplen = $encargosADM - count($EncargosPenalizadosALL);
@@ -740,8 +740,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor($factor);
 		$Penalizacion->setPeso($peso);
 		$Penalizacion->setImporte($importe);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 		return true;
 	}
 
@@ -751,10 +751,10 @@ class CertificadoServiciosController extends Controller
 	 */
 	public function penalizacionPLA($CertificadoServicios)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
-		$IndicadorENC01 = $entityManager->getRepository("AppBundle:Indicador")->find(10);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENC01,
+		$IndicadorENC01 = $EntityManager->getRepository("AppBundle:Indicador")->find(10);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENC01,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
@@ -778,14 +778,14 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
 		$Penalizacion->setImporte($importe);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		/**
 		 * ENC02
 		 */
-		$IndicadorENC02 = $entityManager->getRepository("AppBundle:Indicador")->find(11);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENC02,
+		$IndicadorENC02 = $EntityManager->getRepository("AppBundle:Indicador")->find(11);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENC02,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
@@ -812,8 +812,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
 		$Penalizacion->setImporte($importe);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		return true;
 	}
@@ -825,10 +825,10 @@ class CertificadoServiciosController extends Controller
 	public
 	function penalizacionTAS($CertificadoServicios)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
-		$IndicadorENT01 = $entityManager->getRepository("AppBundle:Indicador")->find(13);
-		$EncargosPenalizadosALL = $entityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENT01,
+		$IndicadorENT01 = $EntityManager->getRepository("AppBundle:Indicador")->find(13);
+		$EncargosPenalizadosALL = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->findBy(["indicador" => $IndicadorENT01,
 			"certificadoServicios" => $CertificadoServicios,
 			"eliminada" => null]);
 
@@ -855,8 +855,8 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setFactor(0);
 		$Penalizacion->setPeso(0);
 		$Penalizacion->setImporte($importe);
-		$entityManager->persist($Penalizacion);
-		$entityManager->flush();
+		$EntityManager->persist($Penalizacion);
+		$EntityManager->flush();
 
 		return true;
 	}
@@ -1862,8 +1862,8 @@ class CertificadoServiciosController extends Controller
 	 */
 	public function cargaRevisionPenalizacionesAction(Request $request, $id)
 	{
-		/** @var EntityManager $entityManager */
-		$entityManager = $this->getDoctrine()->getManager();
+		/** @var EntityManager $EntityManager */
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -1882,8 +1882,8 @@ class CertificadoServiciosController extends Controller
 				$CargaFichero->setFichero($file_name);
 				$Usuario = $this->getUser();
 				$CargaFichero->setUsuario($Usuario);
-				$entityManager->persist($CargaFichero);
-				$entityManager->flush();
+				$EntityManager->persist($CargaFichero);
+				$EntityManager->flush();
 
 				$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 				$highestRow = $objWorksheet->getHighestRow();
@@ -1895,12 +1895,12 @@ class CertificadoServiciosController extends Controller
 						$encargoPenalizadoId = (int)$headingsArray["B"];
 						$nmEncargo = (int)$headingsArray["C"];
 						/** @var Encargo $Encargo */
-						$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findBy(["numero" => $nmEncargo]);
+						$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->findBy(["numero" => $nmEncargo]);
 						/** @var EncargoPenalizado $EncargoPenalizado */
-						$EncargoPenalizado = $entityManager->getRepository("AppBundle:EncargoPenalizado")->find($encargoPenalizadoId);
+						$EncargoPenalizado = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->find($encargoPenalizadoId);
 						$EncargoPenalizado->setEliminada(true);
-						$entityManager->persist($EncargoPenalizado);
-						$entityManager->flush();
+						$EntityManager->persist($EncargoPenalizado);
+						$EntityManager->flush();
 					}
 				}
 				$this->inicializaCertificadoServicios($id);

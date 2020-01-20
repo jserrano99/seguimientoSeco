@@ -99,8 +99,8 @@ class CargaFicheroController extends Controller
 
 	public function cargaAction(Request $request)
 	{
-		/** @var EntityManager $entityManager */
-		$entityManager = $this->getDoctrine()->getManager();
+		/** @var EntityManager $EntityManager */
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -121,8 +121,8 @@ class CargaFicheroController extends Controller
 					/** @var Usuario $Usuario */
 					$Usuario = $this->getUser();
 					$CargaFichero->setUsuario($Usuario);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$FicheroLog = new FicheroLog();
 					$fechaProceso = new DateTime();
@@ -146,13 +146,13 @@ class CargaFicheroController extends Controller
 
 					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
 
-					$entityManager->persist($FicheroLog);
-					$entityManager->flush();
+					$EntityManager->persist($FicheroLog);
+					$EntityManager->flush();
 
 
 					$CargaFichero->setFicheroLog($FicheroLog);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 					$params = ["CargaFichero" => $CargaFichero];
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
 
@@ -174,12 +174,12 @@ class CargaFicheroController extends Controller
 	 *
 	 */
 	public  function deleteAction($id) {
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
-		$CargaFichero = $entityManager->getRepository("AppBundle:CargaFichero")->find($id);
+		$CargaFichero = $EntityManager->getRepository("AppBundle:CargaFichero")->find($id);
 
-		$entityManager->remove($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->remove($CargaFichero);
+		$EntityManager->flush();
 
 		return $this->redirectToRoute("queryFichero");
 
@@ -192,16 +192,16 @@ class CargaFicheroController extends Controller
 	 */
 	public function cargaFichero($CargaFichero, $PHPExcel)
 	{
-		/** @var EntityManager $entityManager */
-		$entityManager = $this->getDoctrine()->getManager();
+		/** @var EntityManager $EntityManager */
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 		$highestRow = $objWorksheet->getHighestRow();
 
 		$ct = 0;
 		for ($i = 2; $i <= $highestRow; $i++) {
-			if (!$entityManager->isOpen()) {
-				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			if (!$EntityManager->isOpen()) {
+				$EntityManager = $EntityManager->create($EntityManager->getConnection(), $EntityManager->getConfiguration());
 			}
 			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':CG' . $i, null, true, true, true);
 			$headingsArray = $headingsArray[$i];
@@ -249,15 +249,15 @@ class CargaFicheroController extends Controller
 			$Fichero->setOperacional3($headingsArray["CD"]);
 			$Fichero->setMotivoCancelacion($headingsArray["BC"]);
 
-			$entityManager->persist($Fichero);
-			$entityManager->flush();
+			$EntityManager->persist($Fichero);
+			$EntityManager->flush();
 			$ct++;
 
 		}
 
 		$CargaFichero->setNumeroRegistros($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 
 		return true;
 	}
@@ -271,7 +271,7 @@ class CargaFicheroController extends Controller
 	 */
 	public function cargaEncargos($CargaFichero, $ServicioLog, $ficheroLog)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$FicheroAll = $this->getDoctrine()->getManager()
 			->getRepository("AppBundle:Fichero")->findBy(["cargaFichero" => $CargaFichero]);
@@ -279,7 +279,7 @@ class CargaFicheroController extends Controller
 		$ct = 0;
 		/** @var Fichero $Fichero */
 		foreach ($FicheroAll as $Fichero) {
-			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->findByNumero($Fichero->getNumeroEncargo());
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->findByNumero($Fichero->getNumeroEncargo());
 
 			$nuevo = false;
 			if (!$Encargo) {
@@ -295,17 +295,17 @@ class CargaFicheroController extends Controller
 
 			$Encargo->setNumero($Fichero->getNumeroEncargo());
 			$Encargo->setNmRemedy($Fichero->getNumeroRemedy());
-			$ObjetoEncargo = $entityManager->getRepository("AppBundle:ObjetoEncargo")->findByCodigo($Fichero->getObjetoEncargo());
+			$ObjetoEncargo = $EntityManager->getRepository("AppBundle:ObjetoEncargo")->findByCodigo($Fichero->getObjetoEncargo());
 			$Encargo->setObjetoEncargo($ObjetoEncargo);
 
 			if ($Fichero->getContrato() == null)
-				$Contrato = $entityManager->getRepository("AppBundle:Contrato")->findByCodigo('1099');
+				$Contrato = $EntityManager->getRepository("AppBundle:Contrato")->findByCodigo('1099');
 			else
-				$Contrato = $entityManager->getRepository("AppBundle:Contrato")->findByCodigo($Fichero->getContrato());
+				$Contrato = $EntityManager->getRepository("AppBundle:Contrato")->findByCodigo($Fichero->getContrato());
 			$Encargo->setContrato($Contrato);
 
 			$Encargo->setNmRemedy($Fichero->getNumeroRemedy());
-			$Agrupacion = $entityManager->getRepository("AppBundle:Agrupacion")->findByCodigo($Fichero->getNumeroAgrupacion());
+			$Agrupacion = $EntityManager->getRepository("AppBundle:Agrupacion")->findByCodigo($Fichero->getNumeroAgrupacion());
 			if (is_null($Agrupacion) and $ObjetoEncargo->getTipoObjeto()->getId() != 1) {
 				$ServicioLog->setMensaje(" >>>> Encargo= " . $Encargo->getNumero() . " Agrupación inexistente: " . $Fichero->getNumeroAgrupacion());
 				$ServicioLog->escribeLog($ficheroLog);
@@ -315,7 +315,7 @@ class CargaFicheroController extends Controller
 			$Encargo->setAgrupacion($Agrupacion);
 			$Encargo->setTitulo($Fichero->getTitulo());
 			$Encargo->setDescripcion($Fichero->getDescripcion());
-			$EstadoActual = $entityManager->getRepository("AppBundle:EstadoEncargo")->findByCodigo($Fichero->getEstadoActual());
+			$EstadoActual = $EntityManager->getRepository("AppBundle:EstadoEncargo")->findByCodigo($Fichero->getEstadoActual());
 			$Encargo->setEstadoActual($EstadoActual);
 
 			$Encargo->setFcEstadoActual($Fichero->getFechaEstadoActual());
@@ -335,19 +335,19 @@ class CargaFicheroController extends Controller
 
 
 			$Encargo->setCriticidad($Fichero->getCriticidad());
-			$Criticidad = $entityManager->getRepository("AppBundle:Criticidad")->findOneBy(["codigo" => $Fichero->getCriticidad()]);
+			$Criticidad = $EntityManager->getRepository("AppBundle:Criticidad")->findOneBy(["codigo" => $Fichero->getCriticidad()]);
 			$Encargo->setCriticidad2($Criticidad);
 
 			$Encargo->setTiempoTotal($Fichero->getTiempoTotal());
 			$Encargo->setTiempoResolucion($Fichero->getTiempoResolucion());
 
-			$Aplicacion = $entityManager->getRepository("AppBundle:Aplicacion")->findByCodigo($Fichero->getAplicacion());
+			$Aplicacion = $EntityManager->getRepository("AppBundle:Aplicacion")->findByCodigo($Fichero->getAplicacion());
 			$Encargo->setAplicacion($Aplicacion);
 
-			$ModuloFuncional = $entityManager->getRepository("AppBundle:ModuloFuncional")->findByCodigo($Fichero->getModuloFuncional());
+			$ModuloFuncional = $EntityManager->getRepository("AppBundle:ModuloFuncional")->findByCodigo($Fichero->getModuloFuncional());
 			$Encargo->setModuloFuncional($ModuloFuncional);
 
-			$ModuloTecnico = $entityManager->getRepository("AppBundle:ModuloTecnico")->findByCodigo($Fichero->getModuloTecnico());
+			$ModuloTecnico = $EntityManager->getRepository("AppBundle:ModuloTecnico")->findByCodigo($Fichero->getModuloTecnico());
 			$Encargo->setModuloTecnico($ModuloTecnico);
 			$Encargo->setHorasValoradas($Fichero->getHorasValoradas());
 			$Encargo->setHorasComprometidas($Fichero->getHorasComprometidas());
@@ -358,19 +358,19 @@ class CargaFicheroController extends Controller
 			if ($Encargo->getObjetoEncargo()->getTipoCuota()->getId() == 3) {
 				$Encargo->getCoste() > 0 ? null : $Encargo->setCoste(0);
 			}
-			$TipoSolucion = $entityManager->getRepository("AppBundle:TipoSolucion")->findByCodigo($Fichero->getTipoSolucion());
+			$TipoSolucion = $EntityManager->getRepository("AppBundle:TipoSolucion")->findByCodigo($Fichero->getTipoSolucion());
 			$Encargo->setTipoSolucion($TipoSolucion);
 			$Encargo->setSolucionUsuario($Fichero->getSolucionUsuario());
 			$Encargo->setSolucionTecnica($Fichero->getSolucionTecnica());
-			$Operacional1 = $entityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional1());
-			$Operacional2 = $entityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional2());
-			$Operacional3 = $entityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional3());
+			$Operacional1 = $EntityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional1());
+			$Operacional2 = $EntityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional2());
+			$Operacional3 = $EntityManager->getRepository("AppBundle:Operacional")->findByCodigo($Fichero->getOperacional3());
 			$Encargo->setOperacional1($Operacional1);
 			$Encargo->setOperacional2($Operacional2);
 			$Encargo->setOperacional3($Operacional3);
 			$Encargo->setMotivoCancelacion($Fichero->getMotivoCancelacion());
-			$entityManager->persist($Encargo);
-			$entityManager->flush();
+			$EntityManager->persist($Encargo);
+			$EntityManager->flush();
 			$ct++;
 			if ($nuevo and $Encargo->getObjetoEncargo()->getTipoObjeto()->getId() != 1) {
 				$AnotacionEncargo = new AnotacionEncargo();
@@ -381,16 +381,16 @@ class CargaFicheroController extends Controller
 				/** @var Usuario $Usuario */
 				$Usuario = $this->getUser();
 				$AnotacionEncargo->setUsuario($Usuario);
-				$entityManager->persist($AnotacionEncargo);
-				$entityManager->flush();
+				$EntityManager->persist($AnotacionEncargo);
+				$EntityManager->flush();
 			}
 			$ServicioLog->setMensaje(" >>>> Encargo= " . $Encargo->getNumero() . " Actualizado <<<< ");
 			$ServicioLog->escribeLog($ficheroLog);
 		}
 
 		$CargaFichero->setNumeroRegistrosCargados($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 
 		return true;
 	}
@@ -401,7 +401,7 @@ class CargaFicheroController extends Controller
 	 */
 	public function cargaFicheroRemedyAction(Request $request)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -421,8 +421,8 @@ class CargaFicheroController extends Controller
 					$CargaFichero->setFichero($file_name);
 					$Usuario = $this->getUser();
 					$CargaFichero->setUsuario($Usuario);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$FicheroLog = new FicheroLog();
 					$fechaProceso = new DateTime();
@@ -439,18 +439,16 @@ class CargaFicheroController extends Controller
 					$ServicioLog->setMensaje("Finaliza carga fichero remedy: " . $file . " Registros Totales :" . $CargaFichero->getNumeroRegistros());
 					$ServicioLog->escribeLog($ficheroLog);
 					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
-					$entityManager->persist($FicheroLog);
-					$entityManager->flush();
+					$EntityManager->persist($FicheroLog);
+					$EntityManager->flush();
 
 					$CargaFichero->setFicheroLog($FicheroLog);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 					$params = ["CargaFichero" => $CargaFichero];
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
 
 				} catch (Exception $e) {
-					dump($e);
-					die();
 					$status = "***ERROR EN CARGA DE FICHERO **: " . $file_name;
 					$this->sesion->getFlashBag()->add("status", $status);
 					$params = [];
@@ -474,27 +472,27 @@ class CargaFicheroController extends Controller
 	 */
 	public function cargaRemedy($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 		$highestRow = $objWorksheet->getHighestRow();
 
 		$ct = 0;
 		for ($i = 2; $i <= $highestRow; $i++) {
-			/** @var EntityManager $entityManager */
-			if (!$entityManager->isOpen()) {
-				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			/** @var EntityManager $EntityManager */
+			if (!$EntityManager->isOpen()) {
+				$EntityManager = $EntityManager->create($EntityManager->getConnection(), $EntityManager->getConfiguration());
 			}
 			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':Q' . $i, null, true, true, true);
 			$headingsArray = $headingsArray[$i];
 
-			$Remedy = $entityManager->getRepository("AppBundle:Remedy")->findOneBy(["numero" => $headingsArray["B"]]);
+			$Remedy = $EntityManager->getRepository("AppBundle:Remedy")->findOneBy(["numero" => $headingsArray["B"]]);
 
 			if (is_null($Remedy)) {
 				$Remedy = new Remedy();
 			}
 			/** @var Aplicacion $Aplicacion */
-			$Aplicacion = $entityManager->getRepository("AppBundle:Aplicacion")->findOneBy(["codigo" => $headingsArray["J"]]);
+			$Aplicacion = $EntityManager->getRepository("AppBundle:Aplicacion")->findOneBy(["codigo" => $headingsArray["J"]]);
 
 			if (is_null($Aplicacion)) {
 				$ServicioLog->setMensaje(" **** Ticket :  " . $headingsArray["B"] . " aplicación no tratada : " . $headingsArray["J"]);
@@ -502,36 +500,34 @@ class CargaFicheroController extends Controller
 				continue;
 			}
 
-			$Centro = $entityManager->getRepository("AppBundle:Centro")->findOneBy(["descripcion" => $headingsArray["G"]]);
+			$Centro = $EntityManager->getRepository("AppBundle:Centro")->findOneBy(["descripcion" => $headingsArray["G"]]);
 			if (is_null($Centro)) {
 				$Centro = new Centro();
 				$Centro->setDescripcion($headingsArray["G"]);
-				$entityManager->persist($Centro);
-				$entityManager->flush();
+				$EntityManager->persist($Centro);
+				$EntityManager->flush();
 				$ServicioLog->setMensaje(" **** Generado Centro= " . $Centro->getDescripcion());
 				$ServicioLog->escribeLog($ficheroLog);
 			}
 
-			$UsuarioRemedy = $entityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["login" => $headingsArray["M"]]);
+			$UsuarioRemedy = $EntityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["login" => $headingsArray["M"]]);
 
 			if (is_null($UsuarioRemedy)) {
-				$UsuarioRemedy = $entityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["apellidos" => $headingsArray["H"]]);
+				$UsuarioRemedy = $EntityManager->getRepository("AppBundle:UsuarioRemedy")->findOneBy(["apellidos" => $headingsArray["H"]]);
 				if (is_null($UsuarioRemedy)) {
 					$UsuarioRemedy = new UsuarioRemedy();
 					$UsuarioRemedy->setLogin($headingsArray["M"]);
 					$UsuarioRemedy->setApellidos($headingsArray["H"]);
 					$UsuarioRemedy->setNombre($headingsArray["I"]);
 					$UsuarioRemedy->setCentro($Centro);
-					dump($UsuarioRemedy);
-					$entityManager->persist($UsuarioRemedy);
-					$entityManager->flush();
+					$EntityManager->persist($UsuarioRemedy);
+					$EntityManager->flush();
 					$ServicioLog->setMensaje(" **** Generado Usuario login= " . $UsuarioRemedy->getLogin() .
 						" Nombre = " . $UsuarioRemedy->getApellidos() . ", " . $UsuarioRemedy->getNombre() .
 						" Centro " . $Centro->getDescripcion());
 					$ServicioLog->escribeLog($ficheroLog);
 				}
 			}
-
 
 			$Remedy->setAplicacion($Aplicacion);
 			$Remedy->setTipo($headingsArray["A"]);
@@ -547,7 +543,7 @@ class CargaFicheroController extends Controller
 			$Remedy->setProductoNivel4($headingsArray["K"]);
 			$Remedy->setFechaModificacion(DateTime::createFromFormat('d/m/Y H:i:s', $headingsArray["L"]));
 
-			$MesAll = $entityManager->getRepository("AppBundle:Mes")
+			$MesAll = $EntityManager->getRepository("AppBundle:Mes")
 				->createQueryBuilder('u')
 				->where(':fecha between u.fechaInicio and u.fechaFin')
 				->setParameter('fecha', $Remedy->getFechaModificacion())
@@ -560,13 +556,13 @@ class CargaFicheroController extends Controller
 			$Remedy->setLogin($headingsArray["M"]);
 			$Remedy->setDescripcionProblema($headingsArray["N"]);
 			$Remedy->setMes($Mes);
-			$entityManager->persist($Remedy);
-			$entityManager->flush();
+			$EntityManager->persist($Remedy);
+			$EntityManager->flush();
 			$ServicioLog->setMensaje(" **** Generado Ticket . " . $Remedy->getNumero() . " Estado: " . $Remedy->getEstado());
 			$ServicioLog->escribeLog($ficheroLog);
 			$ct++;
 
-			$EncargoAll = $entityManager->getRepository("AppBundle:Encargo")->findBy(["nmRemedy" => $Remedy->getNumero()]);
+			$EncargoAll = $EntityManager->getRepository("AppBundle:Encargo")->findBy(["nmRemedy" => $Remedy->getNumero()]);
 
 			if ($Remedy->getNumero()== '10-6108244') {
 				dump($Remedy);
@@ -575,21 +571,20 @@ class CargaFicheroController extends Controller
 			}
 
 			foreach ($EncargoAll as $Encargo) {
-				$EncargoRemedy = $entityManager->getRepository("AppBundle:EncargoRemedy")->findOneBy(["encargo" => $Encargo, "remedy" => $Remedy]);
+				$EncargoRemedy = $EntityManager->getRepository("AppBundle:EncargoRemedy")->findOneBy(["encargo" => $Encargo, "remedy" => $Remedy]);
 				if (is_null($EncargoRemedy)) {
 					$EncargoRemedy = new EncargoRemedy();
 					$EncargoRemedy->setEncargo($Encargo);
 					$EncargoRemedy->setRemedy($Remedy);
-					$entityManager->persist($EncargoRemedy);
-					$entityManager->flush();
+					$EntityManager->persist($EncargoRemedy);
+					$EntityManager->flush();
 				}
 			}
-
 		}
 
 		$CargaFichero->setNumeroRegistros($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 		return true;
 	}
 
@@ -600,7 +595,7 @@ class CargaFicheroController extends Controller
 
 	public function cargaSeguimientoAction(Request $request)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -620,8 +615,8 @@ class CargaFicheroController extends Controller
 					$CargaFichero->setFichero($file_name);
 					$Usuario = $this->getUser();
 					$CargaFichero->setUsuario($Usuario);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$FicheroLog = new FicheroLog();
 					$fechaProceso = new DateTime();
@@ -639,12 +634,12 @@ class CargaFicheroController extends Controller
 					$ServicioLog->setMensaje("Finalizada carga Seguiemiento " . $file . " Encargos Actualizados Totales :" . $CargaFichero->getNumeroRegistros());
 					$ServicioLog->escribeLog($ficheroLog);
 					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
-					$entityManager->persist($FicheroLog);
-					$entityManager->flush();
+					$EntityManager->persist($FicheroLog);
+					$EntityManager->flush();
 
 					$CargaFichero->setFicheroLog($FicheroLog);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$params = ["CargaFichero" => $CargaFichero];
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
@@ -672,21 +667,22 @@ class CargaFicheroController extends Controller
 	public function actualizaSeguimiento($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
 	{
 
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 		$highestRow = $objWorksheet->getHighestRow();
 		$fecha = new DateTime();
 		$ct = 0;
 		for ($i = 2; $i <= $highestRow; $i++) {
-			if (!$entityManager->isOpen()) {
-				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			/** @var EntityManager $EntityManager */
+			if (!$EntityManager->isOpen()) {
+				$EntityManager = $EntityManager->create($EntityManager->getConnection(), $EntityManager->getConfiguration());
 			}
 			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':J' . $i, null, true, true, true);
 			$headingsArray = $headingsArray[$i];
 
 			/** @var Encargo $Encargo */
-			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->find($headingsArray["D"]);
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($headingsArray["D"]);
 			if (is_null($Encargo)) {
 				$ServicioLog->setMensaje(' **** Error Encargo id=' . $headingsArray["D"] . ' NO ENCONTRADO **** ');
 				$ServicioLog->escribeLog($ficheroLog);
@@ -694,14 +690,15 @@ class CargaFicheroController extends Controller
 			}
 
 			if ($headingsArray["J"] != "") {
-				$Anotacion = new AnotacionEncargo();
-				$Anotacion->setEncargo($Encargo);
-				$Anotacion->setUsuario($this->getUser());
-				$Anotacion->setFecha($fecha);
-				$Anotacion->setAnotacion($headingsArray["J"]);
-				$entityManager->persist($Anotacion);
-				$entityManager->flush();
-				$ServicioLog->setMensaje('-Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());
+				/** @var AnotacionEncargo $AnotacionEncargo */
+				$AnotacionEncargo = new AnotacionEncargo();
+				$AnotacionEncargo->setEncargo($Encargo);
+				$AnotacionEncargo->setUsuario($this->getUser());
+				$AnotacionEncargo->setFecha($fecha);
+				$AnotacionEncargo->setAnotacion($headingsArray["J"]);
+				$EntityManager->persist($AnotacionEncargo);
+				$EntityManager->flush();
+				$ServicioLog->setMensaje('-Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $AnotacionEncargo->getAnotacion());
 				$ServicioLog->escribeLog($ficheroLog);
 				$ct++;
 			}
@@ -709,8 +706,8 @@ class CargaFicheroController extends Controller
 		}
 
 		$CargaFichero->setNumeroRegistros($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 		return true;
 	}
 
@@ -723,7 +720,7 @@ class CargaFicheroController extends Controller
 
 	public function cargaAgrupacionAction(Request $request)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -743,8 +740,8 @@ class CargaFicheroController extends Controller
 					$CargaFichero->setFichero($file_name);
 					$Usuario = $this->getUser();
 					$CargaFichero->setUsuario($Usuario);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$FicheroLog = new FicheroLog();
 					$fechaProceso = new DateTime();
@@ -760,12 +757,12 @@ class CargaFicheroController extends Controller
 					$ServicioLog->setMensaje("Finalizada carga Seguimiento Agrupación " . $file . " Encargos Actualizados Totales :" . $CargaFichero->getNumeroRegistros());
 					$ServicioLog->escribeLog($ficheroLog);
 					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
-					$entityManager->persist($FicheroLog);
-					$entityManager->flush();
+					$EntityManager->persist($FicheroLog);
+					$EntityManager->flush();
 
 					$CargaFichero->setFicheroLog($FicheroLog);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$params = ["CargaFichero" => $CargaFichero];
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
@@ -794,8 +791,8 @@ class CargaFicheroController extends Controller
 	public function actualizaAgrupacion($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
 	{
 
-		/** @var EntityManager $entityManager */
-		$entityManager = $this->getDoctrine()->getManager();
+		/** @var EntityManager $EntityManager */
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 		$highestRow = $objWorksheet->getHighestRow();
@@ -803,8 +800,8 @@ class CargaFicheroController extends Controller
 		$ct = 0;
 
 		for ($i = 14; $i <= $highestRow; $i++) {
-			if (!$entityManager->isOpen()) {
-				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			if (!$EntityManager->isOpen()) {
+				$EntityManager = $EntityManager->create($EntityManager->getConnection(), $EntityManager->getConfiguration());
 			}
 			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':H' . $i, null, true, true, true);
 			$headingsArray = $headingsArray[$i];
@@ -813,7 +810,7 @@ class CargaFicheroController extends Controller
 
 
 			/** @var Encargo $Encargo */
-			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->find($headingsArray["B"]);
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($headingsArray["B"]);
 			if (is_null($Encargo)) {
 				$ServicioLog->setMensaje(' **** Error Encargo id=' . $headingsArray["D"] . ' NO ENCONTRADO **** ');
 				$ServicioLog->escribeLog($ficheroLog);
@@ -821,14 +818,14 @@ class CargaFicheroController extends Controller
 			}
 
 			if ($headingsArray["H"] != "") {
-				$Anotacion = new AnotacionEncargo();
-				$Anotacion->setEncargo($Encargo);
-				$Anotacion->setUsuario($this->getUser());
-				$Anotacion->setFecha($fecha);
-				$Anotacion->setAnotacion($headingsArray["H"]);
-				$entityManager->persist($Anotacion);
-				$entityManager->flush();
-				$ServicioLog->setMensaje('Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());
+				$AnotacionEncargo = new AnotacionEncargo();
+				$AnotacionEncargo->setEncargo($Encargo);
+				$AnotacionEncargo->setUsuario($this->getUser());
+				$AnotacionEncargo->setFecha($fecha);
+				$AnotacionEncargo->setAnotacion($headingsArray["H"]);
+				$EntityManager->persist($AnotacionEncargo);
+				$EntityManager->flush();
+				$ServicioLog->setMensaje('Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $AnotacionEncargo->getAnotacion());
 				$ServicioLog->escribeLog($ficheroLog);
 				$ct++;
 			}
@@ -836,8 +833,8 @@ class CargaFicheroController extends Controller
 		}
 
 		$CargaFichero->setNumeroRegistros($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 		return true;
 	}
 
@@ -848,7 +845,7 @@ class CargaFicheroController extends Controller
 
 	public function cargaLineaSeguimientoAction(Request $request)
 	{
-		$entityManager = $this->getDoctrine()->getManager();
+		$EntityManager = $this->getDoctrine()->getManager();
 		$ImportarForm = $this->createForm(ImportarType::class);
 		$ImportarForm->handleRequest($request);
 
@@ -868,8 +865,8 @@ class CargaFicheroController extends Controller
 					$CargaFichero->setFichero($file_name);
 					$Usuario = $this->getUser();
 					$CargaFichero->setUsuario($Usuario);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$FicheroLog = new FicheroLog();
 					$fechaProceso = new DateTime();
@@ -887,12 +884,12 @@ class CargaFicheroController extends Controller
 					$ServicioLog->setMensaje("Finalizada carga Seguiemiento " . $file . " Encargos Actualizados Totales :" . $CargaFichero->getNumeroRegistros());
 					$ServicioLog->escribeLog($ficheroLog);
 					$FicheroLog->setNombreFichero($ServicioLog->getFileName());
-					$entityManager->persist($FicheroLog);
-					$entityManager->flush();
+					$EntityManager->persist($FicheroLog);
+					$EntityManager->flush();
 
 					$CargaFichero->setFicheroLog($FicheroLog);
-					$entityManager->persist($CargaFichero);
-					$entityManager->flush();
+					$EntityManager->persist($CargaFichero);
+					$EntityManager->flush();
 
 					$params = ["CargaFichero" => $CargaFichero];
 					return $this->render("cargaFichero/finProceso.html.twig", $params);
@@ -920,15 +917,16 @@ class CargaFicheroController extends Controller
 	public function actualizaLineaSeguimiento($CargaFichero, $PHPExcel, $ServicioLog, $ficheroLog)
 	{
 
-		$entityManager = $this->getDoctrine()->getManager();
+		/** @var EntityManager $EntityManager */
+		$EntityManager = $this->getDoctrine()->getManager();
 
 		$objWorksheet = $PHPExcel->setActiveSheetIndex(0);
 		$highestRow = $objWorksheet->getHighestRow();
 		$fecha = new DateTime();
 		$ct = 0;
 		for ($i = 2; $i <= $highestRow; $i++) {
-			if (!$entityManager->isOpen()) {
-				$entityManager = $this->getDoctrine()->getManager()->create($entityManager->getConnection(), $entityManager->getConfiguration());
+			if (!$EntityManager->isOpen()) {
+				$EntityManager = $EntityManager->create($EntityManager->getConnection(), $EntityManager->getConfiguration());
 			}
 			$headingsArray = $objWorksheet->rangeToArray('A' . $i . ':L' . $i, null, true, true, true);
 			$headingsArray = $headingsArray[$i];
@@ -936,7 +934,7 @@ class CargaFicheroController extends Controller
 			if ($headingsArray["D"] == "") continue;
 
 			/** @var Encargo $Encargo */
-			$Encargo = $entityManager->getRepository("AppBundle:Encargo")->find($headingsArray["D"]);
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($headingsArray["D"]);
 			if (is_null($Encargo)) {
 				$ServicioLog->setMensaje(' **** Error Encargo id=' . $headingsArray["D"] . ' NO ENCONTRADO **** ');
 				$ServicioLog->escribeLog($ficheroLog);
@@ -949,8 +947,8 @@ class CargaFicheroController extends Controller
 				$Anotacion->setUsuario($this->getUser());
 				$Anotacion->setFecha($fecha);
 				$Anotacion->setAnotacion($headingsArray["L"]);
-				$entityManager->persist($Anotacion);
-				$entityManager->flush();
+				$EntityManager->persist($Anotacion);
+				$EntityManager->flush();
 				$ServicioLog->setMensaje('-Anotación Generada, Encargo Número: ' . $Encargo->getNumero() . ' ' . $Encargo->getTitulo() . ' ' . $Anotacion->getAnotacion());
 				$ServicioLog->escribeLog($ficheroLog);
 				$ct++;
@@ -959,8 +957,8 @@ class CargaFicheroController extends Controller
 		}
 
 		$CargaFichero->setNumeroRegistros($ct);
-		$entityManager->persist($CargaFichero);
-		$entityManager->flush();
+		$EntityManager->persist($CargaFichero);
+		$EntityManager->flush();
 		return true;
 	}
 

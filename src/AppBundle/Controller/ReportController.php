@@ -154,10 +154,10 @@ class ReportController extends Controller
         ));
     }
 
-    /**
-     * @param $certificado_id
-     * @return Response
-     */
+	/**
+	 * @param int $id
+	 * @return Response
+	 */
     public function imprimirCertificadoServiciosAction($id)
     {
         $CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
