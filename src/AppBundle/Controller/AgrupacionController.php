@@ -226,6 +226,7 @@ class AgrupacionController extends Controller
 		$filename = 'Agrupacion-' . $Agrupacion->getCodigo() . '-' . $fechaActual->format('Ymd-His') . '.xlsx';
 		$writer->save($filename);
 
+		/** @var Response $response */
 		$response = new Response();
 		$response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $filename);
 		$response->headers->set('Content-Disposition', 'attachment;filename=' . $filename);

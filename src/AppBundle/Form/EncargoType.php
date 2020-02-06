@@ -152,6 +152,15 @@ class EncargoType extends AbstractType
 					'class' => 'form-control corto',
 					'data-date-format' => 'dd-mm-yyyy',
 					'data-class' => 'string']])
+			->add('fcRequeridaEntrega', DateType::class, [
+				"label" => 'Fecha Entrega Requerida',
+				"required" => false,
+				"disabled" => false,
+				'widget' => 'single_text',
+				'attr' => [
+					'class' => 'form-control corto',
+					'data-date-format' => 'dd-mm-yyyy',
+					'data-class' => 'string']])
 
 		;
 	}

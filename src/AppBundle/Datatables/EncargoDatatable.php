@@ -61,6 +61,14 @@ class EncargoDatatable extends AbstractDatatable
 			->createQueryBuilder('u')
 			->orderBy('u.codigo', 'ASC')
 			->getQuery()->getResult();
+		$TiposObjeto = $this->getEntityManager()->getRepository("AppBundle:TipoObjeto")
+			->createQueryBuilder('u')
+			->orderBy('u.codigo', 'ASC')
+			->getQuery()->getResult();
+		$TipoEstados = $this->getEntityManager()->getRepository("AppBundle:TipoEstado")
+			->createQueryBuilder('u')
+			->orderBy('u.codigo', 'ASC')
+			->getQuery()->getResult();
 		$Estados = $this->getEntityManager()->getRepository("AppBundle:EstadoEncargo")
 			->createQueryBuilder('u')
 			->orderBy('u.codigo', 'ASC')
@@ -69,6 +77,7 @@ class EncargoDatatable extends AbstractDatatable
 			->createQueryBuilder('u')
 			->orderBy('u.codigo', 'ASC')
 			->getQuery()->getResult();
+
 
 		$this->columnBuilder
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
@@ -81,7 +90,7 @@ class EncargoDatatable extends AbstractDatatable
 				'default_content' =>'',
 				'filter' => [SelectFilter::class,
 					[
-						'multiple' => true,
+						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Agrupaciones, 'codigo', 'codigo'),
 						'search_type' => 'eq']]])
 
@@ -90,16 +99,32 @@ class EncargoDatatable extends AbstractDatatable
 				'width' => '100px',
 				'filter' => [SelectFilter::class,
 					[
-						'multiple' => true,
+						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($ObjetosEncargo, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+			->add('objetoEncargo.tipoObjeto.codigo', Column::class, [
+				'title' => 'Tipo Objeto',
+				'width' => '100px',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($TiposObjeto, 'codigo', 'codigo'),
 						'search_type' => 'eq']]])
 			->add('estadoActual.codigo', Column::class, [
 				'title' => 'Estado Actual',
 				'width' => '100px',
 				'filter' => [SelectFilter::class,
 					[
-						'multiple' => true,
+						'multiple' => false,
 						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Estados, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+			->add('estadoActual.tipoEstado.descripcion', Column::class, [
+				'title' => 'Tipo Estado',
+				'width' => '100px',
+				'filter' => [SelectFilter::class,
+					[
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($TipoEstados, 'descripcion', 'descripcion'),
 						'search_type' => 'eq']]])
 
 			->add('fcEstadoActual', DateTimeColumn::class, [

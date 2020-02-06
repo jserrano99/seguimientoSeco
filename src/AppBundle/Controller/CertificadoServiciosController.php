@@ -147,7 +147,7 @@ class CertificadoServiciosController extends Controller
 				$CertificadoServicios->setMes($Mes);
 				$CertificadoServicios->setDescripcion("Certificado de Servicios " . $Mes->getDescripcion());
 				$CertificadoServicios->setFechaCertificado($Mes->getFechaInicio());
-				$ImportesContrato = $this->getDoctrine()->getManager()->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $Contrato]);
+				$ImportesContrato = $this->importesContrato($CertificadoServicios);
 				$CertificadoServicios->setImporteCuotaFijaMensual($ImportesContrato->getCuotaFijaMensual());
 				$this->getDoctrine()->getManager()->persist($CertificadoServicios);
 				$this->getDoctrine()->getManager()->flush();
@@ -797,9 +797,18 @@ class CertificadoServiciosController extends Controller
 			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0 ) {
 				$factor = $factor / 2;
 			}
+
 			$costeEncargo = $thpCs * $EncargoPenalizado->getEncargo()->getHorasComprometidas();
 			$importePenalizacion = $factor * $costeEncargo;
 			$importe = $importe + $importePenalizacion;
+
+//			dump($diasPrevistosEjecucion);
+//			dump($diasRetraso);
+//			dump($factor);
+//			dump($costeEncargo);
+//			dump($importePenalizacion);
+//			dump($importe);
+//			die();
 		}
 
 		$Penalizacion = new Penalizacion();
@@ -941,7 +950,7 @@ class CertificadoServiciosController extends Controller
 					/**
 					 * Calculo de las penalizaciones
 					 */
-					if ($Encargo->getCriticidad() == 3 and $Encargo->getTiempoResolucion() > 14400000) {
+					if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getTiempoResolucion() > 14400000) {
 						$EncargoPenalizado = new EncargoPenalizado();
 						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
 						$EncargoPenalizado->setIndicador($IndicadorIRS01);
@@ -952,7 +961,7 @@ class CertificadoServiciosController extends Controller
 						$ServicioLog->escribeLog($ficheroLog);
 						$ctPenalizaoosCRI++;
 					}
-					if ($Encargo->getCriticidad() == 0 and $Encargo->getTiempoResolucion() > 144000000) {
+					if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getTiempoResolucion() > 144000000) {
 						$EncargoPenalizado = new EncargoPenalizado();
 						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
 						$EncargoPenalizado->setIndicador($IndicadorIRS02);
@@ -981,10 +990,10 @@ class CertificadoServiciosController extends Controller
 				$Encargo->setBloqueado(true);
 				$this->getDoctrine()->getManager()->persist($Encargo);
 				$this->getDoctrine()->getManager()->flush();
-				if ($Encargo->getCriticidad() == 0 and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
+				if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
 					$ctNPLNOR++;
 				}
-				if ($Encargo->getCriticidad() == 3 and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
+				if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
 					$ctNPLCRI++;
 				}
 				if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {

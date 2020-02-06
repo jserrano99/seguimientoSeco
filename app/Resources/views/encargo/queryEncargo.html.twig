@@ -1,0 +1,152 @@
+{% extends "base.html.twig" %}
+{% block titulo %}
+    <div id='dtitulo' class="container"> ENCARGOS **CONSULTA** <br/>
+        {% if (agrupacion) %}
+            <span> AGRUPACION: {{ agrupacion.codigo }}:{{ agrupacion.descripcion }} </span>
+            <span><a href="{{ path("queryAgrupacion") }}" class="btn btn-success">Consulta Agrupaciones</a> </span>
+        {% else %}
+        {% endif %}
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+            $("#accordion").accordion();
+            $(".check").checkboxradio();
+
+            $("#aplicarFiltro").click(function(){
+                alert ("aplicar filtro");
+            });
+
+            $("#quitarSeleccion").click(function(){
+                alert ("quitar selecction");
+            });
+            $("#seleccionarTodo").click(function(){
+                alert (" selecction");
+            });
+
+
+            $('#tablaEncargos').DataTable({
+                language: {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+                autoWidth: true,
+                jQueryUI: false,
+                stateSave: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ],
+                order: [[0, "desc"]],
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.header()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                footerCallback: function (row, data, start, end, display) {
+                    var api = this.api(), data;
+
+                    var intVal = function (i) {
+
+                        return typeof i === 'string' ?
+                            i.replace(/[\$,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                                i : 0;
+                    };
+                    encargos = api
+                        .column(2, {page: 'current'})
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    horas = api
+                        .column(4, {page: 'current'})
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    $(api.column(2).footer()).html(
+                        formatNumber.new(encargos)
+                    );
+                    $(api.column(3).footer()).html(
+                        formatNumber.new(horas.toFixed(2))
+                    );
+                }
+            });
+            // $('#tablaHoras tbody').on('click', 'tr', function () {
+            //     var data = table.row( this ).data();
+            //     alert( 'You clicked on '+data[0]+'\'s row' );
+            // });
+        });
+
+
+    </script>
+
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            <hr/>
+        {% endfor %}
+
+        <table id="tablaEncargos" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Número Encargo</th>
+                <th>Remedy</th>
+                <th>Titulo</th>
+                <th>Agrupación</th>
+                <th>Objeto</th>
+                <th>Estado Actual</th>
+                <th>Fecha</th>
+                <th>Horas Comprometidas</th>
+                <th>Horas Realizadas</th>
+                <th style="visibility:hidden"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for registro in Encargos %}
+                <tr>
+                    <td>{{ registro.id }}</td>
+                    <td>{{ registro.numeroEncargo }}</td>
+                    <td align="right">{{ registro.numeroRemedy }}</td>
+                    <td>{{ registro.tituloEncargo }}</td>
+                    <td>{{ registro.agrupacionCd }}</td>
+                    <td>{{ registro.objetoEncargoCd }}</td>
+                    <td>{{ registro.estadoEncargoCd }}</td>
+                    <td>{{ registro.fechaEstadoActual }}</td>
+                    {% if (registro.tipoObjetoCd != 'SCF') %}
+                        <td align="right">{{ registro.HorasRealizadas|number_format(2,',','.') }}</td>
+                        <td style="visibility:hidden">{{ registro.HorasRealizadas|number_format(2,'.',',') }}</td>
+                    {% else %}
+                        <td align="right">{{ registro.HorasComprometidas|number_format(2,',','.') }}</td>
+                        <td style="visibility:hidden">{{ registro.HorasComprometidas|number_format(2,'.',',') }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td style=" font-weight:bold;text-align:right" colspan="2">Total:</td>
+                <td style=" font-weight:bold" align="right"></td>
+                <td style=" font-weight:bold" align="right"></td>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+{% endblock %}
