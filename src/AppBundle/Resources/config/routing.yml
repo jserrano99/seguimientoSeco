@@ -17,6 +17,11 @@ incidentesByRemedy:
   defaults: { _controller: AppBundle:Remedy:imprimir}
   options:
     expose: true
+queryCentros:
+  path: /remedy/centros/query
+  defaults: { _controller: AppBundle:Remedy:queryCentros}
+  options:
+    expose: true
 #
 # login
 #

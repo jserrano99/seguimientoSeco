@@ -129,37 +129,40 @@ class CertificadoServiciosController extends Controller
 		$form = $this->createForm(CertificadoServiciosType::class, $CertificadoServicios);
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
-			$idMes =$_POST["formCertificadoServicios"]["mes"];
+			$idMes = $_POST["formCertificadoServicios"]["mes"];
 			$Mes = $EntityManager->getRepository("AppBundle:Mes")->find($idMes);
 			$CertificadoServicios2 = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->findOneBy(["mes" => $Mes]);
 			if ($CertificadoServicios2) {
-				$status = " YA EXISTE UN CERTIFICADO PARA ESTE MES ";
-				$this->sesion->getFlashBag()->add("status", $status);
-				return $this->render("certificadoServicios/edit.html.twig", [
-					"form" => $form->createView(),
-					"accion" => "GENERAR",
-					'estado' => 'PENDIENTE']);
-			} else {
-				$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
-				$Contrato = $this->getDoctrine()->getManager()->getRepository("AppBundle:Contrato")->find(1);
-				$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
-				$CertificadoServicios->setContrato($Contrato);
-				$CertificadoServicios->setMes($Mes);
-				$CertificadoServicios->setDescripcion("Certificado de Servicios " . $Mes->getDescripcion());
-				$CertificadoServicios->setFechaCertificado($Mes->getFechaInicio());
-				$ImportesContrato = $this->importesContrato($CertificadoServicios);
-				$CertificadoServicios->setImporteCuotaFijaMensual($ImportesContrato->getCuotaFijaMensual());
-				$this->getDoctrine()->getManager()->persist($CertificadoServicios);
-				$this->getDoctrine()->getManager()->flush();
-				$this->generarCertificado($CertificadoServicios);
-				return $this->redirectToRoute("queryCertificadoServicios");
+				if ($CertificadoServicios2->getEstadoCertificado()->getId() == 1 or
+					$CertificadoServicios2->getEstadoCertificado()->getId() == 4) {
+					$this->deleteAction($CertificadoServicios2->getId());
+				} else {
+					$status = " YA EXISTE UN CERTIFICADO PARA ESTE MES ";
+					$this->sesion->getFlashBag()->add("status", $status);
+					return $this->render("certificadoServicios/edit.html.twig", [
+						"form" => $form->createView(),
+						"accion" => "GENERAR",
+						'estado' => 'PENDIENTE']);
+				}
 			}
+			$EstadoCertificado = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoCertificado")->find(1);
+			$Contrato = $this->getDoctrine()->getManager()->getRepository("AppBundle:Contrato")->find(1);
+			$CertificadoServicios->setEstadoCertificado($EstadoCertificado);
+			$CertificadoServicios->setContrato($Contrato);
+			$CertificadoServicios->setMes($Mes);
+			$CertificadoServicios->setDescripcion("Certificado de Servicios " . $Mes->getDescripcion());
+			$CertificadoServicios->setFechaCertificado($Mes->getFechaInicio());
+			$ImportesContrato = $this->importesContrato($CertificadoServicios);
+			$CertificadoServicios->setImporteCuotaFijaMensual($ImportesContrato->getCuotaFijaMensual());
+			$this->getDoctrine()->getManager()->persist($CertificadoServicios);
+			$this->getDoctrine()->getManager()->flush();
+			$this->generarCertificado($CertificadoServicios);
+			return $this->redirectToRoute("queryCertificadoServicios");
 		}
-		return $this->render("certificadoServicios/edit.html.twig", [
-			"form" => $form->createView(),
+
+		return $this->render("certificadoServicios/edit.html.twig", ["form" => $form->createView(),
 			"accion" => "GENERAR",
-			'estado' => 'PENDIENTE'
-		]);
+			'estado' => 'PENDIENTE']);
 
 	}
 
@@ -168,7 +171,8 @@ class CertificadoServiciosController extends Controller
 	 * @return RedirectResponse
 	 * @throws DBALException
 	 */
-	public function deleteAction($id)
+	public
+	function deleteAction($id)
 	{
 		$sentencia = " update encargo  set bloqueado = null "
 			. " where encargo.id in (select encargo_id from linea_certificado "
@@ -198,7 +202,8 @@ class CertificadoServiciosController extends Controller
 	 * @throws Exception
 	 */
 
-	public function generarCertificado($CertificadoServicios)
+	public
+	function generarCertificado($CertificadoServicios)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -274,7 +279,8 @@ class CertificadoServiciosController extends Controller
 	 * @return RedirectResponse
 	 * @throws DBALException
 	 */
-	public function importesAction($id)
+	public
+	function importesAction($id)
 	{
 
 		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
@@ -293,7 +299,8 @@ class CertificadoServiciosController extends Controller
 	 * @return bool
 	 * @throws DBALException
 	 */
-	public function aplicaPenalizacion($CertificadoServicios)
+	public
+	function aplicaPenalizacion($CertificadoServicios)
 	{
 		/** @var Connection $conection */
 		$conection = $this->getDoctrine()->getConnection();
@@ -323,7 +330,8 @@ class CertificadoServiciosController extends Controller
 	 * @return bool
 	 * @throws DBALException
 	 */
-	public function generarImportes($CertificadoServicios)
+	public
+	function generarImportes($CertificadoServicios)
 	{
 
 		$sentencia = " delete from importes_certificado_servicios  "
@@ -384,7 +392,8 @@ class CertificadoServiciosController extends Controller
 	 * @return ImportesCertificado|float|int
 	 * @throws DBALException
 	 */
-	public function importesCuotaTasada($CertificadoServicios)
+	public
+	function importesCuotaTasada($CertificadoServicios)
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
 		$TipoCuota = $EntityManager->getRepository("AppBundle:TipoCuota")->find(3);
@@ -420,7 +429,6 @@ class CertificadoServiciosController extends Controller
 			$importe = $importe + $ImportesCertificado->getImporte();
 		}
 
-
 		return $importe;
 
 	}
@@ -429,7 +437,8 @@ class CertificadoServiciosController extends Controller
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return ImportesCertificado
 	 */
-	public function importesCuotaVariable($CertificadoServicios)
+	public
+	function importesCuotaVariable($CertificadoServicios)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -503,7 +512,8 @@ class CertificadoServiciosController extends Controller
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return bool
 	 */
-	public function penalizacionIRQ01($CertificadoServicios)
+	public
+	function penalizacionIRQ01($CertificadoServicios)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -532,7 +542,6 @@ class CertificadoServiciosController extends Controller
 		$Penalizacion->setImporte(0);
 		$EntityManager->persist($Penalizacion);
 		$EntityManager->flush();
-
 		return true;
 
 	}
@@ -541,7 +550,8 @@ class CertificadoServiciosController extends Controller
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return bool
 	 */
-	public function penalizacionIRIi($CertificadoServicios)
+	public
+	function penalizacionIRIi($CertificadoServicios)
 	{
 
 
@@ -591,7 +601,8 @@ class CertificadoServiciosController extends Controller
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return bool
 	 */
-	public function penalizacionNPL($CertificadoServicios)
+	public
+	function penalizacionNPL($CertificadoServicios)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -749,7 +760,8 @@ class CertificadoServiciosController extends Controller
 	 * @param $CertificadoServicios CertificadoServicios
 	 * @return float
 	 */
-	public function penalizacionPLA($CertificadoServicios)
+	public
+	function penalizacionPLA($CertificadoServicios)
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
 
@@ -794,11 +806,19 @@ class CertificadoServiciosController extends Controller
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
 			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
 			$factor = $diasRetraso / $diasPrevistosEjecucion;
-			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0 ) {
+			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0) {
 				$factor = $factor / 2;
 			}
+			/**
+			 * Para encargos de Cuota Variable se coje el importe aceptado por MD, para encargos de cuota fihja se coge el numero de horas por tarifa
+			 * de Consultor senior
+			 */
+			if ($EncargoPenalizado->getEncargo()->getObjetoEncargo()->getTipoObjeto()->getCodigo() == 'PLA') {
+				$costeEncargo = $EncargoPenalizado->getEncargo()->getCoste();
+			} else {
+				$costeEncargo = $thpCs * $EncargoPenalizado->getEncargo()->getHorasComprometidas();
+			}
 
-			$costeEncargo = $thpCs * $EncargoPenalizado->getEncargo()->getHorasComprometidas();
 			$importePenalizacion = $factor * $costeEncargo;
 			$importe = $importe + $importePenalizacion;
 
@@ -846,7 +866,7 @@ class CertificadoServiciosController extends Controller
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
 			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
 			$factor = $diasRetraso / $diasPrevistosEjecucion;
-			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0 ) {
+			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0) {
 				$factor = $factor / 2;
 			}
 
@@ -879,28 +899,31 @@ class CertificadoServiciosController extends Controller
 	 * @param string $ficheroLog
 	 * @return bool
 	 * @throws DBALException
+	 * @throws ORMException
+	 * @throws OptimisticLockException
 	 */
 	public
 	function incluirNPL($CertificadoServicios, $ServicioLog, $ficheroLog)
 	{
+		/** @var EntityManager $EntityManager */
 		$EntityManager = $this->getDoctrine()->getManager();
 		$TipoObjetoEncargoNPL = $this->getDoctrine()->getManager()->getRepository("AppBundle:TipoObjeto")->find(1);
 		$TipoCuota = $EntityManager->getRepository("AppBundle:TipoCuota")->find(1);
 
-		$ObjetoRepository = $this->getDoctrine()->getManager()->getRepository("AppBundle:ObjetoEncargo");
-		$EncargoRepository = $this->getDoctrine()->getManager()->getRepository("AppBundle:Encargo");
-		$EstadoEncargoCRR = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(2);
-		$EstadoEncargoFIN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(12);
-		$EstadoEncargoCAN = $this->getDoctrine()->getManager()->getRepository("AppBundle:EstadoEncargo")->find(10);
+		$ObjetoRepository = $EntityManager->getRepository("AppBundle:ObjetoEncargo");
+		$EncargoRepository = $EntityManager->getRepository("AppBundle:Encargo");
+		$EstadoEncargoCRR = $EntityManager->getRepository("AppBundle:EstadoEncargo")->find(2);
+		$EstadoEncargoFIN = $EntityManager->getRepository("AppBundle:EstadoEncargo")->find(12);
+		$EstadoEncargoCAN = $EntityManager->getRepository("AppBundle:EstadoEncargo")->find(10);
 
-		$IndicadorIRS01 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(1);
-		$IndicadorIRS02 = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(3);
-		$IndicadorIRIi = $this->getDoctrine()->getManager()->getRepository("AppBundle:Indicador")->find(6);
+		$IndicadorIRS01 = $EntityManager->getRepository("AppBundle:Indicador")->find(1);
+		$IndicadorIRS02 = $EntityManager->getRepository("AppBundle:Indicador")->find(3);
+		$IndicadorIRIi = $EntityManager->getRepository("AppBundle:Indicador")->find(6);
 
-		$ObjetosEncargoNPLAll = $ObjetoRepository->createQueryBuilder('u')
-			->where('u.tipoObjeto = :tipoObjeto')
-			->setParameter('tipoObjeto', $TipoObjetoEncargoNPL)
-			->getQuery()->getResult();
+//		$ObjetosEncargoNPLAll = $ObjetoRepository->createQueryBuilder('u')
+//			->where('u.tipoObjeto = :tipoObjeto')
+//			->setParameter('tipoObjeto', $TipoObjetoEncargoNPL)
+//			->getQuery()->getResult();
 
 		$ct = 0;
 		$ctCAN = 0;
@@ -910,97 +933,108 @@ class CertificadoServiciosController extends Controller
 		$ctNPLNOR = 0;
 
 
-		foreach ($ObjetosEncargoNPLAll as $ObjetosEncargoNPL) {
-			//CERRADOS, FINALIZADOS y CANCELADOS
-			$Encargos = $EncargoRepository->createQueryBuilder('u')
-				->where('u.objetoEncargo = :objetoEncargo')
-				->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2, :estadoEncargo3)')
-				->andWhere('u.fcEstadoActual >= :fcini and u.fcEstadoActual <= :fcfin')
-				->setParameter('estadoEncargo1', $EstadoEncargoCRR)
-				->setParameter('estadoEncargo2', $EstadoEncargoFIN)
-				->setParameter('estadoEncargo3', $EstadoEncargoCAN)
-				->setParameter('objetoEncargo', $ObjetosEncargoNPL)
-				->setParameter('fcini', $CertificadoServicios->getMes()->getFechaInicio())
-				->setParameter('fcfin', $CertificadoServicios->getMes()->getFechaFin())
-				->getQuery()->getResult();
+		//CERRADOS, FINALIZADOS y CANCELADOS
+//		$Encargos = $EncargoRepository->createQueryBuilder('u')
+//			->where('u.objetoEncargo = :objetoEncargo')
+//			->andWhere('u.estadoActual in (:estadoEncargo1, :estadoEncargo2, :estadoEncargo3)')
+//			->andWhere('u.fcEstadoActual >= :fcini and u.fcEstadoActual <= :fcfin')
+//			->setParameter('estadoEncargo1', $EstadoEncargoCRR)
+//			->setParameter('estadoEncargo2', $EstadoEncargoFIN)
+//			->setParameter('estadoEncargo3', $EstadoEncargoCAN)
+//			->setParameter('objetoEncargo', $ObjetosEncargoNPL)
+//			->setParameter('fcini', $CertificadoServicios->getMes()->getFechaInicio())
+//			->setParameter('fcfin', $CertificadoServicios->getMes()->getFechaFin())
+//			->getQuery()->getResult();
 
+		$sentencia = "select encargo.id as id from encargo ".
+			 " inner join objetos_encargo as oe on oe.id = encargo.objeto_encargo_id ".
+			" where fc_estado_actual between :fcini and :fcfin and estado_actual_id in (2,10,12) ".
+			" and oe.tipo_objeto_id = 1 ";
+
+		$conection = $this->getDoctrine()->getConnection();
+		$stmt = $conection->prepare($sentencia);
+		$params = ["fcini" => $CertificadoServicios->getMes()->getFechaInicio()->format('Y-m-d'),
+			"fcfin" => $CertificadoServicios->getMes()->getFechaFin()->format('Y-m-d')];
+		$stmt->execute($params);
+		$EncargosNPL = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		foreach ($EncargosNPL as $EncargoNPL) {
 			/** @var Encargo $Encargo */
-			foreach ($Encargos as $Encargo) {
-				/** @var Encargo $Existe */
-				$Existe = $this->encargoEnCertificado($Encargo);
-				if ($Existe) {
-					$ServicioLog->setMensaje("Encargo: " . $Encargo->getNumero() . " YA INCLUIDO EN CERTIFICADO SERVICIOS: " . $Existe->getTitulo());
-					$ServicioLog->escribeLog($ficheroLog);
-					continue;
-				}
-				$LineaCertificado = new LineaCertificado();
-				$LineaCertificado->setCertificadoServicios($CertificadoServicios);
-				$LineaCertificado->setTipoCuota($TipoCuota);
-				$LineaCertificado->setEncargo($Encargo);
-				$this->getDoctrine()->getManager()->persist($LineaCertificado);
-				$this->getDoctrine()->getManager()->flush();
-				$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO ");
+			$Encargo = $EntityManager->getRepository("AppBundle:Encargo")->find($EncargoNPL["id"]);
+			/** @var Encargo $Existe */
+			$Existe = $this->encargoEnCertificado($Encargo);
+			if ($Existe) {
+				$ServicioLog->setMensaje("Encargo: " . $Encargo->getNumero() . " YA INCLUIDO EN CERTIFICADO SERVICIOS: " . $Existe->getTitulo());
 				$ServicioLog->escribeLog($ficheroLog);
+				continue;
+			}
+			$LineaCertificado = new LineaCertificado();
+			$LineaCertificado->setCertificadoServicios($CertificadoServicios);
+			$LineaCertificado->setTipoCuota($TipoCuota);
+			$LineaCertificado->setEncargo($Encargo);
+			$this->getDoctrine()->getManager()->persist($LineaCertificado);
+			$this->getDoctrine()->getManager()->flush();
+			$ServicioLog->setMensaje("+Encargo: " . $Encargo->getNumero() . " INCLUIDO ");
+			$ServicioLog->escribeLog($ficheroLog);
 
+			/**
+			 * Si el encargo esta cancelado solo se tiene en cuenta para la imputación de horas, no en el calculo
+			 * de ANS
+			 */
+			if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {
 				/**
-				 * Si el encargo esta cancelado solo se tiene en cuenta para la imputación de horas, no en el calculo
-				 * de ANS
+				 * Calculo de las penalizaciones
 				 */
-				if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {
-					/**
-					 * Calculo de las penalizaciones
-					 */
-					if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getTiempoResolucion() > 14400000) {
-						$EncargoPenalizado = new EncargoPenalizado();
-						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-						$EncargoPenalizado->setIndicador($IndicadorIRS01);
-						$EncargoPenalizado->setEncargo($Encargo);
-						$EntityManager->persist($EncargoPenalizado);
-						$EntityManager->flush();
-						$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
-						$ServicioLog->escribeLog($ficheroLog);
-						$ctPenalizaoosCRI++;
-					}
-					if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getTiempoResolucion() > 144000000) {
-						$EncargoPenalizado = new EncargoPenalizado();
-						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-						$EncargoPenalizado->setIndicador($IndicadorIRS02);
-						$EncargoPenalizado->setEncargo($Encargo);
-						$EntityManager->persist($EncargoPenalizado);
-						$EntityManager->flush();
-						$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
-						$ServicioLog->escribeLog($ficheroLog);
-						$ctPenalizaoosNOR++;
-					}
+				if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getTiempoResolucion() > 14400000) {
+					$EncargoPenalizado = new EncargoPenalizado();
+					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+					$EncargoPenalizado->setIndicador($IndicadorIRS01);
+					$EncargoPenalizado->setEncargo($Encargo);
+					$EntityManager->persist($EncargoPenalizado);
+					$EntityManager->flush();
+					$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
+					$ServicioLog->escribeLog($ficheroLog);
+					$ctPenalizaoosCRI++;
+				}
+				if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getTiempoResolucion() > 144000000) {
+					$EncargoPenalizado = new EncargoPenalizado();
+					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+					$EncargoPenalizado->setIndicador($IndicadorIRS02);
+					$EncargoPenalizado->setEncargo($Encargo);
+					$EntityManager->persist($EncargoPenalizado);
+					$EntityManager->flush();
+					$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
+					$ServicioLog->escribeLog($ficheroLog);
+					$ctPenalizaoosNOR++;
+				}
 
-					if ($this->esReapertura($Encargo)) {
-						$EncargoPenalizado = new EncargoPenalizado();
-						$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
-						$EncargoPenalizado->setIndicador($IndicadorIRIi);
-						$EncargoPenalizado->setEncargo($Encargo);
-						$EntityManager->persist($EncargoPenalizado);
-						$EntityManager->flush();
-						$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
-						$ServicioLog->escribeLog($ficheroLog);
+				if ($this->esReapertura($Encargo)) {
+					$EncargoPenalizado = new EncargoPenalizado();
+					$EncargoPenalizado->setCertificadoServicios($CertificadoServicios);
+					$EncargoPenalizado->setIndicador($IndicadorIRIi);
+					$EncargoPenalizado->setEncargo($Encargo);
+					$EntityManager->persist($EncargoPenalizado);
+					$EntityManager->flush();
+					$ServicioLog->setMensaje("Encargo " . $Encargo->getNumero() . " *** PENALIZADO *** ");
+					$ServicioLog->escribeLog($ficheroLog);
 //                        $ctPenalizaoosIri++;
-					}
+				}
 
 
-				}
-				$Encargo->setBloqueado(true);
-				$this->getDoctrine()->getManager()->persist($Encargo);
-				$this->getDoctrine()->getManager()->flush();
-				if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
-					$ctNPLNOR++;
-				}
-				if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
-					$ctNPLCRI++;
-				}
-				if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {
-					$ct++;
-				} else {
-					$ctCAN++;
-				}
+			}
+			$Encargo->setBloqueado(true);
+			$this->getDoctrine()->getManager()->persist($Encargo);
+			$this->getDoctrine()->getManager()->flush();
+			if ($Encargo->getCriticidad2()->getDescripcion() == 'NORMAL' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
+				$ctNPLNOR++;
+			}
+			if ($Encargo->getCriticidad2()->getDescripcion() == 'CRÍTICA' and $Encargo->getEstadoActual() != $EstadoEncargoCAN) {
+				$ctNPLCRI++;
+			}
+			if ($Encargo->getEstadoActual() != $EstadoEncargoCAN) {
+				$ct++;
+			} else {
+				$ctCAN++;
 			}
 		}
 
@@ -1869,7 +1903,8 @@ class CertificadoServiciosController extends Controller
 	 * @throws \PhpOffice\PhpSpreadsheet\Exception
 	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
 	 */
-	public function cargaRevisionPenalizacionesAction(Request $request, $id)
+	public
+	function cargaRevisionPenalizacionesAction(Request $request, $id)
 	{
 		/** @var EntityManager $EntityManager */
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -1933,7 +1968,8 @@ class CertificadoServiciosController extends Controller
 	 * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
 	 * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
 	 */
-	public function exportarReaperturasAction($id)
+	public
+	function exportarReaperturasAction($id)
 	{
 		$EntityManager = $this->getDoctrine()->getManager();
 		/** @var CertificadoServicios $CertificadoServicios */
@@ -2004,7 +2040,8 @@ class CertificadoServiciosController extends Controller
 	}
 
 
-	public function ajaxPeriodoAction($idAnyo)
+	public
+	function ajaxPeriodoAction($idAnyo)
 	{
 
 		$EntityManager = $this->getDoctrine()->getManager();
@@ -2018,9 +2055,9 @@ class CertificadoServiciosController extends Controller
 			" class='form-control'>" .
 			" <option value='' selected='selected'>Seleccione mes ....</option> ";
 		foreach ($Periodos as $Periodo) {
-			$opcion = " <option value=' " . $Periodo->getId(). "'>" . $Periodo->getDescripcion() . "</option> ";
+			$opcion = " <option value=' " . $Periodo->getId() . "'>" . $Periodo->getDescripcion() . "</option> ";
 			$html = $html . $opcion;
-			}
+		}
 		$html = $html . "</select>";
 
 
@@ -2034,14 +2071,16 @@ class CertificadoServiciosController extends Controller
 	 * @param int $id
 	 * @return Response
 	 */
-	public  function queryHorasCuotaFijaAction($id) {
+	public
+	function queryHorasCuotaFijaAction($id)
+	{
 
 		$CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
 		$conection = $this->getDoctrine()->getConnection();
 		$sentencia = " select * from view_horas_cuota_fija where CertificadoServiciosId = :id";
 
 		$stmt = $conection->prepare($sentencia);
-		$params = ["id"=> $id];
+		$params = ["id" => $id];
 		$stmt->execute($params);
 		$HorasCuotaFija = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$params = ["HorasCuotaFija" => $HorasCuotaFija, "certificadoServicios" => $CertificadoServicios];
@@ -2054,11 +2093,13 @@ class CertificadoServiciosController extends Controller
 	 * @param CertificadoServicios $CertificadoServicios
 	 * @return ImportesContrato|object|null
 	 */
-	public function importesContrato($CertificadoServicios) {
+	public
+	function importesContrato($CertificadoServicios)
+	{
 		$EntityManager = $this->getDoctrine()->getManager();
 		$Contrato = $CertificadoServicios->getContrato();
 		$Anyo = $CertificadoServicios->getMes()->getAnyo();
-		$ImportesContrato = $EntityManager->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $Contrato,'anyo' =>$Anyo]);
+		$ImportesContrato = $EntityManager->getRepository("AppBundle:ImportesContrato")->findOneBy(["contrato" => $Contrato, 'anyo' => $Anyo]);
 
 		return $ImportesContrato;
 	}

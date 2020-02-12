@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@EquipoLocal" uuid="26229212-466b-40d5-892a-67f4c1c4cc45">
+    <data-source source="LOCAL" name="@10.127.240.149" uuid="273bd0b7-e05f-4286-9653-debb2c951395">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://10.127.240.149:3306/seguimientoseco</jdbc-url>
+      <jdbc-url>jdbc:mysql://10.127.240.149:3306</jdbc-url>
       <driver-properties>
-        <property name="autoReconnect" value="true" />
-        <property name="zeroDateTimeBehavior" value="CONVERT_TO_NULL" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
-        <property name="serverTimezone" value="UTC" />
+        <property name="serverTimezone" value="Europe/Madrid" />
       </driver-properties>
     </data-source>
   </component>

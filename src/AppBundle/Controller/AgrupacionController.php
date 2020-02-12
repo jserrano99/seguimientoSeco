@@ -198,7 +198,14 @@ class AgrupacionController extends Controller
 			$sheet->setCellValue('E'. $row, $Encargo->getObjetoEncargo()->getCodigo());
 			$sheet->setCellValue('F'. $row, $Encargo->getEstadoActual()->getCodigo());
 			$sheet->setCellValue('G'. $row, $Encargo->getFcEstadoActual());
-			$sheet->setCellValue('H'. $row, '');
+			if ($Encargo->getObjetoEncargo()->getTipoObjeto()->getCodigo() != 'NPL') {
+				$sheet->setCellValue('H' . $row, $Encargo->getHorasComprometidas());
+				$sheet->setCellValue('I' . $row,'');
+			} else {
+				$sheet->setCellValue('H' . $row,'');
+				$sheet->setCellValue('I' . $row, $Encargo->getHorasRealizadas());
+			}
+			$sheet->setCellValue('J'. $row, '');
 			$row++;
 		}
 
@@ -234,7 +241,6 @@ class AgrupacionController extends Controller
 		$response->headers->set('Pragma', 'public');
 		$response->headers->set('Cache-Control', 'max-age=1');
 		$response->setContent(file_get_contents($filename));
-
 		return $response;
 	}
 }

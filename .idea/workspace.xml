@@ -2,25 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45/storage_v2/_src_/schema/seguimientoseco.J80lXQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45/storage_v2/_src_/schema/seguimientoseco.J80lXQ.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/encargo/queryEncargo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/plantillas/PlantillaAgrupacion.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/plantillas/PlantillaMagma.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/plantillas/PlantillaReaperturas.xlsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/plantillas/PlantillaSeguimiento.xlsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/contrato/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/query.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AgrupacionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AgrupacionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/RemedyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/RemedyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Centro.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Centro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/plantillas/PlantillaAgrupacion.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/plantillas/PlantillaAgrupacion.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,54 +43,31 @@
     <expand>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
+        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
+        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
+        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
       </path>
       <path>
         <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
+        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@EquipoLocal" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="views" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="view_nuevos_desarrollos: view" type="d3266483:MysqlImplModel$View" />
       </path>
     </expand>
     <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="seguimientoSeco" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>entityManager</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>EntityManager</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -183,6 +156,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -191,11 +166,15 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="http.proxy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/AppBundle/Datatables" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\seguimientoSeco\src\AppBundle\Datatables" />
       <recent name="C:\wamp64\www\seguimientoSeco" />
       <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\encargo" />
     </key>
@@ -205,7 +184,17 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@10.127.240.149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@10.127.240.149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@422b38b4" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -252,7 +241,12 @@
       <workItem from="1580905082303" duration="4271000" />
       <workItem from="1580992618182" duration="2553000" />
       <workItem from="1581004150850" duration="868000" />
-      <workItem from="1581005377776" duration="1778000" />
+      <workItem from="1581005377776" duration="1873000" />
+      <workItem from="1581060541406" duration="2381000" />
+      <workItem from="1581317374881" duration="1151000" />
+      <workItem from="1581336581559" duration="1842000" />
+      <workItem from="1581426698273" duration="1797000" />
+      <workItem from="1581493028858" duration="6046000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -261,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579522612895</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="cambio Importes">
+      <created>1581007349478</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581007349478</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,28 +296,74 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="cambio Importes" />
     <option name="LAST_COMMIT_MESSAGE" value="cambio Importes" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="179" key="#Deployment/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581501267504" />
+    <state x="552" y="179" width="1224" height="682" key="#SQL_Resolution_Scopes" timestamp="1581433061306">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="179" width="1224" height="682" key="#SQL_Resolution_Scopes/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061306" />
+    <state x="552" y="179" key="#Servers" timestamp="1581502720594">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="179" key="#Servers/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502720594" />
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581502391139">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502391139" />
     <state x="-1280" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580712823053">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
     <state x="-1280" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580712823053" />
     <state x="640" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1579593891287" />
-    <state x="461" y="163" key="SettingsEditor" timestamp="1581005846681">
+    <state x="536" y="115" key="CommitChangelistDialog2" timestamp="1581007345401">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581007345401" />
+    <state width="1293" height="274" key="GridCell.Tab.0.bottom" timestamp="1581502431183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502431183" />
+    <state width="1293" height="274" key="GridCell.Tab.0.center" timestamp="1581502431183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="274" key="GridCell.Tab.0.center/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502431183" />
+    <state width="1293" height="274" key="GridCell.Tab.0.left" timestamp="1581502431183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="274" key="GridCell.Tab.0.left/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502431183" />
+    <state width="1293" height="274" key="GridCell.Tab.0.right" timestamp="1581502431183">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="274" key="GridCell.Tab.0.right/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502431183" />
+    <state width="230" height="457" key="HiddenNamespacesPopup" timestamp="1581502418216">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="230" height="457" key="HiddenNamespacesPopup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502418216" />
+    <state x="461" y="163" key="SettingsEditor" timestamp="1581503115867">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1459" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580827619891" />
-    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581005846681" />
-    <state width="956" height="693" key="SwitcherDM" timestamp="1580907403111">
+    <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581503115867" />
+    <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1581433061256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1580907403111" />
-    <state x="-1244" y="100" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1580827660181">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="200" height="441" key="SqlResolveConfigurable/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061256" />
+    <state width="956" height="693" key="SwitcherDM" timestamp="1581493055874">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581493055874" />
+    <state x="676" y="67" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1581501253454">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1244" y="100" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580827660181" />
+    <state x="676" y="67" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581501253454" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1580907389061">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

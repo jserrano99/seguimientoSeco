@@ -12,7 +12,7 @@ use DateTime;
 
 /**
  * @ORM\Table(name="centro")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\CentroRepository")
+ * @ORM\Entity
  */
 
 class Centro
@@ -44,9 +44,8 @@ class Centro
 	private $valido;
 
 
-
 	/**
-	 * @var \AppBundle\Entity\Centroo|null
+	 * @var \AppBundle\Entity\Centro|null
 	 * @ORM\ManyToOne(targetEntity="Centro")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="centro_unif_id", referencedColumnName="id")

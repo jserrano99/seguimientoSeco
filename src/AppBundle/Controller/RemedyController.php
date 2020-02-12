@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Datatables\CentroDatatable;
 use AppBundle\Datatables\RemedyDatatable;
 use AppBundle\Entity\Remedy;
 use Exception;
@@ -69,4 +70,29 @@ class RemedyController extends Controller
 		$reportUnit = "/reports/incidentesByRemedy";
 		return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
 	}
+
+	/**
+	 * @param Request $request
+	 * @return JsonResponse|Response
+	 * @throws Exception
+	 */
+	public function queryCentrosAction (Request $request)
+	{
+		$isAjax = $request->isXmlHttpRequest();
+		$datatable = $this->get('sg_datatables.factory')->create(CentroDatatable::class);
+		$datatable->buildDatatable();
+
+		if ($isAjax) {
+			$responseService = $this->get('sg_datatables.response');
+			$responseService->setDatatable($datatable);
+			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+			$datatableQueryBuilder->buildQuery();
+			return $responseService->getResponse();
+		}
+
+		$params = ['datatable' => $datatable];
+		return $this->render('usuariosRemedy/query.html.twig', $params);
+	}
+
+
 }
