@@ -22,6 +22,31 @@ queryCentros:
   defaults: { _controller: AppBundle:Remedy:queryCentros}
   options:
     expose: true
+editCentro:
+  path: /remedy/centros/edit/{id}
+  defaults: { _controller: AppBundle:Remedy:editCentro}
+  options:
+    expose: true
+queryUsuarioRemedy:
+  path: /remedy/usuarioRemedy/query
+  defaults: { _controller: AppBundle:Remedy:queryUsuarioRemedy}
+  options:
+    expose: true
+editUsuarioRemedy:
+  path: /remedy/usuarioRemedy/edit/{id}
+  defaults: { _controller: AppBundle:Remedy:editUsuarioRemedy}
+  options:
+    expose: true
+queryUsuarioRemedyByCentro:
+  path: /remedy/usuarioRemedy/query/{id}
+  defaults: { _controller: AppBundle:Remedy:queryUsuarioRemedyByCentro}
+  options:
+    expose: true
+deleteUsuarioRemedy:
+  path: /remedy/usuarioRemedy/edit
+  defaults: { _controller: AppBundle:Remedy:deleteUsuarioRemedy}
+  options:
+    expose: true
 #
 # login
 #

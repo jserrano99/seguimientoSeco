@@ -829,6 +829,7 @@ class CertificadoServiciosController extends Controller
 //			dump($importePenalizacion);
 //			dump($importe);
 //			die();
+
 		}
 
 		$Penalizacion = new Penalizacion();
@@ -946,9 +947,9 @@ class CertificadoServiciosController extends Controller
 //			->setParameter('fcfin', $CertificadoServicios->getMes()->getFechaFin())
 //			->getQuery()->getResult();
 
-		$sentencia = "select encargo.id as id from encargo ".
-			 " inner join objetos_encargo as oe on oe.id = encargo.objeto_encargo_id ".
-			" where fc_estado_actual between :fcini and :fcfin and estado_actual_id in (2,10,12) ".
+		$sentencia = "select encargo.id as id from encargo " .
+			" inner join objetos_encargo as oe on oe.id = encargo.objeto_encargo_id " .
+			" where fc_estado_actual between :fcini and :fcfin and estado_actual_id in (2,10,12) " .
 			" and oe.tipo_objeto_id = 1 ";
 
 		$conection = $this->getDoctrine()->getConnection();
@@ -1328,8 +1329,6 @@ class CertificadoServiciosController extends Controller
 						$ServicioLog->escribeLog($ficheroLog);
 					}
 				}
-
-
 				$fechaInicio = $Encargo->getFcCompromiso();
 				$fechaFin = $Encargo->getFcEntrega();
 				//$diasRetrasoEntrega = $this->getDiasHabiles($fechaInicio, $fechaFin);
@@ -1349,13 +1348,9 @@ class CertificadoServiciosController extends Controller
 						$ServicioLog->escribeLog($ficheroLog);
 					}
 				}
-
-
 				$Encargo->setBloqueado(true);
 				$this->getDoctrine()->getManager()->persist($Encargo);
 				$this->getDoctrine()->getManager()->flush();
-
-
 			}
 		}
 

@@ -45,7 +45,7 @@ class Centro
 
 
 	/**
-	 * @var \AppBundle\Entity\Centro|null
+	 * @var Centro|null
 	 * @ORM\ManyToOne(targetEntity="Centro")
 	 * * @ORM\JoinColumns({
 	 *   @ORM\JoinColumn(name="centro_unif_id", referencedColumnName="id")
@@ -142,26 +142,26 @@ class Centro
     }
 
     /**
-     * Set contratoUnificado.
+     * Set centroUnificado.
      *
-     * @param \AppBundle\Entity\Centro|null $contratoUnificado
+     * @param Centro|null $centroUnificado
      *
      * @return Centro
      */
-    public function setCentroUnificado(\AppBundle\Entity\Centro $contratoUnificado = null)
+    public function setCentroUnificado(Centro $centroUnificado = null)
     {
-        $this->contratoUnificado = $contratoUnificado;
+        $this->centroUnificado = $centroUnificado;
 
         return $this;
     }
 
     /**
-     * Get contratoUnificado.
+     * Get centroUnificado.
      *
-     * @return \AppBundle\Entity\Centro|null
+     * @return Centro|null
      */
     public function getCentroUnificado()
     {
-        return $this->contratoUnificado;
+        return $this->centroUnificado;
     }
 }

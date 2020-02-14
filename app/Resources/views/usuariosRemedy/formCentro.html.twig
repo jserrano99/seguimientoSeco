@@ -1,0 +1,55 @@
+<script>
+    $(document).ready(function () {
+        $('#usuariosTable').DataTable({
+            "language": {"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"},
+        });
+    });
+</script>
+
+<div class="container" width="800px">
+    {{ form_start (form,{'action':'','method':'POST'}) }}
+    <div class="panel panel-default">
+        <div class="panel-heading"> Identificación del Centro</div>
+        <div style="padding-left: 30px">
+            <span><h3>{{ centro.descripcion}}</h3></span>
+        </div>
+    </div>
+    <div id="tabs" class="pestana container">
+        <ul class="nav nav-tabs">
+            <li><a id="t1" href="#datosGen">Datos Generales</a></li>
+            <li><a id="t2" href="#usuarios">Usuarios</a></li>
+        </ul>
+        <div id="datosGen">
+            <div class="form_row ">{{ form_row(form.id) }}</div>
+            <div class="form_row ">{{ form_row(form.codigo) }}</div>
+            <div class="form_row ">{{ form_row(form.descripcion) }}</div>
+            <div class="form_row ">{{ form_row(form.centroUnificado) }}</div>
+            <div class="form_row ">{{ form_row(form.valido) }}</div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="usuarios">
+            <br/><br/>
+            <table id="usuariosTable" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>login</th>
+                    <th>Nombre</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for usuarioRemedy in usuariosRemedy %}
+                    <tr>
+                        <td>{{ usuarioRemedy.id is empty ? "" :  usuarioRemedy.id }}</td>
+                        <td>{{ usuarioRemedy.login }}</td>
+                        <td>{{ usuarioRemedy.apellidos }},{{ usuarioRemedy.nombre}}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="form_row mismalinea">{{ form_row(form.Guardar) }}</div>
+</div>

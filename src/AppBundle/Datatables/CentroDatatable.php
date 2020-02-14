@@ -63,24 +63,47 @@ class CentroDatatable extends AbstractDatatable
 			->add('id', Column::class, ['title' => 'Id', 'width' => '20px'])
 			->add('codigo', Column::class, ['title' => 'Código', 'width' => '25px'])
 			->add('descripcion', Column::class, ['title' => 'Descripción', 'width' => '450px', 'searchable' => true])
-			->add('valido', Column::class, ['title' => 'Hosp. PeopleNet', 'width' => '50px', 'searchable' => true]);
 
-//			->add(null, ActionColumn::class, [
-//				'title' => 'Acciones',
-//				'width' => '80px',
-//				'actions' => [
-//					['route' => 'queryUsuariosRemedy',
-//						'route_parameters' => [
-//							'id' => 'id'],
-//						'label' => '',
-//						'icon' => 'glyphicon glyphicon-edit',
-//						'attributes' => [
-//							'rel' => 'tooltip',
-//							'title' => 'Ver Usuarios',
-//							'class' => 'btn btn-primary btn-xs',
-//							'role' => 'button'
-//						]],
-//					]
+			->add('valido', Column::class,
+				['title' => 'Hosp. PeopleNet',
+					'width' => '40px',
+					'searchable' => true,
+					'filter' => [SelectFilter::class, ['search_type' => 'eq',
+						'multiple' => false,
+						'select_options' => [
+							'' => 'Todo',
+							true => 'Si'],
+						'cancel_button' => false],
+					]])
+
+
+			->add(null, ActionColumn::class, [
+				'title' => 'Acciones',
+				'width' => '80px',
+				'actions' => [
+					['route' => 'queryUsuarioRemedyByCentro',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => '',
+						'icon' => 'glyphicon glyphicon-search',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Ver Usuarios',
+							'class' => 'btn btn-primary btn-xs',
+							'role' => 'button'
+						]],
+					['route' => 'editCentro',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => 'Editar',
+						'icon' => 'glyphicon glyphicon-edit',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Ver Usuarios',
+							'class' => 'btn btn-success btn-xs',
+							'role' => 'button'
+						]],
+					]]);
 
 	}
 

@@ -44,13 +44,14 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
             'search_in_non_visible_columns' => true,
             'dom' => 'lBftrip'
         ]);
-//		$this->events->set([
-//			'xhr' => ['template' => 'fin.js.twig'],
-//			'pre_xhr' => ['template' => 'inicio.js.twig'],
-//			'search' => ['template' => 'search.js.twig'],
-//			'state_loaded' => ['template' => 'loaded.js.twig'],
-//
-//		]);
+
+		$this->events->set([
+			'xhr' => ['template' => 'fin.js.twig'],
+			'pre_xhr' => ['template' => 'inicio.js.twig'],
+			'search' => ['template' => 'search.js.twig'],
+			'state_loaded' => ['template' => 'loaded.js.twig'],
+
+		]);
 
         $this->features->set([
             'auto_width' => false,

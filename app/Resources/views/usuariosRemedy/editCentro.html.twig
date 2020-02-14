@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block titulo %} Centro Remedy **{{accion}}**
+    <a href="{{path("queryCentros")}}" class="btn btn-success"> Consulta Centros Remedy </a>
+{% endblock %}
+{% block contenido %}
+    {% include 'usuariosRemedy/formCentro.html.twig' %}
+{% endblock %}

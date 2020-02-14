@@ -1,0 +1,7 @@
+{% extends "base.html.twig" %}
+{% block titulo %} Usuarios Remedy **{{accion}}**
+    <a href="{{path("queryUsuarioRemedy")}}" class="btn btn-success"> Consulta Usuarios Remedy </a>
+{% endblock %}
+{% block contenido %}
+    {% include 'usuariosRemedy/form.html.twig' %}
+{% endblock %}
