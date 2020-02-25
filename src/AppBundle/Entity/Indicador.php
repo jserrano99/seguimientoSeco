@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -15,7 +16,6 @@ use DateTime;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IndicadorRepository")
  *
  */
-
 class Indicador
 {
 	/**
@@ -60,109 +60,114 @@ class Indicador
 
 	private $peso;
 
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * Get id.
+	 *
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * Set codigo.
-     *
-     * @param string $codigo
-     *
-     * @return Indicador
-     */
-    public function setCodigo($codigo)
-    {
-        $this->codigo = $codigo;
+	/**
+	 * Set codigo.
+	 *
+	 * @param string $codigo
+	 *
+	 * @return Indicador
+	 */
+	public function setCodigo($codigo)
+	{
+		$this->codigo = $codigo;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get codigo.
-     *
-     * @return string
-     */
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
+	/**
+	 * Get codigo.
+	 *
+	 * @return string
+	 */
+	public function getCodigo()
+	{
+		return $this->codigo;
+	}
 
-    /**
-     * Set descripcion.
-     *
-     * @param string $descripcion
-     *
-     * @return Indicador
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
+	/**
+	 * Set descripcion.
+	 *
+	 * @param string $descripcion
+	 *
+	 * @return Indicador
+	 */
+	public function setDescripcion($descripcion)
+	{
+		$this->descripcion = $descripcion;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get descripcion.
-     *
-     * @return string
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
+	/**
+	 * Get descripcion.
+	 *
+	 * @return string
+	 */
+	public function getDescripcion()
+	{
+		return $this->descripcion;
+	}
 
-    /**
-     * Set tipoIndicador.
-     *
-     * @param \AppBundle\Entity\TipoIndicador|null $tipoIndicador
-     *
-     * @return Indicador
-     */
-    public function setTipoIndicador(\AppBundle\Entity\TipoIndicador $tipoIndicador = null)
-    {
-        $this->tipoIndicador = $tipoIndicador;
+	/**
+	 * Set tipoIndicador.
+	 *
+	 * @param \AppBundle\Entity\TipoIndicador|null $tipoIndicador
+	 *
+	 * @return Indicador
+	 */
+	public function setTipoIndicador(\AppBundle\Entity\TipoIndicador $tipoIndicador = null)
+	{
+		$this->tipoIndicador = $tipoIndicador;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get tipoIndicador.
-     *
-     * @return \AppBundle\Entity\TipoIndicador|null
-     */
-    public function getTipoIndicador()
-    {
-        return $this->tipoIndicador;
-    }
+	/**
+	 * Get tipoIndicador.
+	 *
+	 * @return \AppBundle\Entity\TipoIndicador|null
+	 */
+	public function getTipoIndicador()
+	{
+		return $this->tipoIndicador;
+	}
 
-    /**
-     * Set peso.
-     *
-     * @param float $peso
-     *
-     * @return Indicador
-     */
-    public function setPeso($peso)
-    {
-        $this->peso = $peso;
+	/**
+	 * Set peso.
+	 *
+	 * @param float $peso
+	 *
+	 * @return Indicador
+	 */
+	public function setPeso($peso)
+	{
+		$this->peso = $peso;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Get peso.
-     *
-     * @return float
-     */
-    public function getPeso()
-    {
-        return $this->peso;
-    }
+	/**
+	 * Get peso.
+	 *
+	 * @return float
+	 */
+	public function getPeso()
+	{
+		return $this->peso;
+	}
+
+	public function __toString()
+	{
+		return $this->codigo.' : '.$this->descripcion;
+	}
 }

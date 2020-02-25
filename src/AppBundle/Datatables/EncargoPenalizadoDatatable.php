@@ -20,30 +20,30 @@ use Sg\DatatablesBundle\Datatable\Style;
 class EncargoPenalizadoDatatable extends AbstractDatatable
 {
 
-    /**
-     * {@inheritdoc}
-     */
-    public function buildDatatable(array $options = [])
-    {
-        $this->language->set([
-            //'cdn_language_by_locale' => true
-            //'language_by_locale' => true
-            'language' => 'es'
+	/**
+	 * {@inheritdoc}
+	 */
+	public function buildDatatable(array $options = [])
+	{
+		$this->language->set([
+			//'cdn_language_by_locale' => true
+			//'language_by_locale' => true
+			'language' => 'es'
 
-        ]);
+		]);
 
-        $this->ajax->set([]);
+		$this->ajax->set([]);
 
-        $this->options->set([
-            'classes' => Style::BOOTSTRAP_4_STYLE,
-            'stripe_classes' => ['strip1', 'strip2', 'strip3'],
-            'individual_filtering' => true,
-            'individual_filtering_position' => 'head',
-            'order' => [[0, 'asc']],
-            'order_cells_top' => true,
-            'search_in_non_visible_columns' => true,
-            'dom' => 'lBftrip'
-        ]);
+		$this->options->set([
+			'classes' => Style::BOOTSTRAP_4_STYLE,
+			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
+			'individual_filtering' => true,
+			'individual_filtering_position' => 'head',
+			'order' => [[0, 'asc']],
+			'order_cells_top' => true,
+			'search_in_non_visible_columns' => true,
+			'dom' => 'lBftrip'
+		]);
 
 		$this->events->set([
 			'xhr' => ['template' => 'fin.js.twig'],
@@ -53,93 +53,104 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 
 		]);
 
-        $this->features->set([
-            'auto_width' => false,
-            'ordering' => true,
-            'length_change' => true,
-            'state_save' => true
-        ]);
-        $Indicadores = $this->em->getRepository("AppBundle:Indicador")->findAll();
+		$this->features->set([
+			'auto_width' => false,
+			'ordering' => true,
+			'length_change' => true,
+			'state_save' => true
+		]);
+		$Indicadores = $this->em->getRepository("AppBundle:Indicador")->findAll();
 
-        $this->columnBuilder
-            ->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
-            ->add('certificadoServicios.id', Column::class, ['title' => 'Indicador',
-                'width' => '400px',
-                'searchable' => false,
-                'visible' => false])
-            ->add('indicador.codigo', Column::class,
-                ['title' => 'Indicador',
-                    'width' => '70px',
-                    'searchable' => true,
-                    'filter' => [SelectFilter::class, [
-                        'multiple' => false,
-                        'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Indicadores, 'codigo', 'codigo'),
-                        'search_type' => 'eq']]])
-            ->add('encargo.numero', Column::class, ['title' => 'Número', 'width' => '60px', 'searchable' => true])
-            ->add('encargo.nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '60px', 'searchable' => true])
-            ->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '1200px', 'searchable' => true])
-            ->add('eliminada', Column::class,
-                ['title' => 'Eliminada',
-                    'width' => '40px',
-                    'searchable' => true,
-                    'filter' => [SelectFilter::class, ['search_type' => 'eq',
-                        'multiple' => false,
-                        'select_options' => [
-                            '' => 'Todo',
-                            true => 'Si'],
-                        'cancel_button' => false],
-                    ]])
-            ->add(null, ActionColumn::class, [
-                'title' => 'Acciones',
-                'actions' => [
-                    ['route' => 'quitarPenalizacion',
-                        'route_parameters' => [
-                            'id' => 'id'],
-                        'label' => 'Quitar Penalización',
-                        'icon' => 'glyphicon glyphicon-trash',
-                        'render_if' => function ($row) {
-                            if ($row['eliminada'] == '')
-                                return true;
-                        },
-                        'attributes' => [
-                            'rel' => 'tooltip',
-                            'title' => 'Eliminar Penalización',
-                            'class' => 'btn btn-danger btn-xs',
-                            'role' => 'button'],
-                    ],
-                    ['route' => 'activarPenalizacion',
-                        'route_parameters' => [
-                            'id' => 'id'],
-                        'label' => 'Activar Penalización',
-                        'icon' => 'glyphicon glyphicon-edit',
-                        'render_if' => function ($row) {
-                            if ($row['eliminada'] == true)
-                                return true;
-                        },
-                        'attributes' => [
-                            'rel' => 'tooltip',
-                            'title' => 'Activar Penalización',
-                            'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button'],
+		$this->columnBuilder
+			->add('id', Column::class, ['title' => 'Id', 'width' => '20px', 'searchable' => false])
+			->add('certificadoServicios.id', Column::class, ['title' => 'Indicador',
+				'width' => '400px',
+				'searchable' => false,
+				'visible' => false])
+			->add('indicador.codigo', Column::class,
+				['title' => 'Indicador',
+					'width' => '70px',
+					'searchable' => true,
+					'filter' => [SelectFilter::class, [
+						'multiple' => false,
+						'select_options' => ['' => 'Todo'] + $this->getOptionsArrayFromEntities($Indicadores, 'codigo', 'codigo'),
+						'search_type' => 'eq']]])
+			->add('encargo.numero', Column::class, ['title' => 'Número', 'width' => '60px', 'searchable' => true])
+			->add('encargo.nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '60px', 'searchable' => true])
+			->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '1200px', 'searchable' => true])
+			->add('eliminada', Column::class,
+				['title' => 'Eliminada',
+					'width' => '40px',
+					'searchable' => true,
+					'filter' => [SelectFilter::class, ['search_type' => 'eq',
+						'multiple' => false,
+						'select_options' => [
+							'' => 'Todo',
+							true => 'Si'],
+						'cancel_button' => false],
+					]])
+			->add(null, ActionColumn::class, [
+				'title' => 'Acciones',
+				'actions' => [
+					['route' => 'editPenalizacion',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => 'Editar Penalización',
+						'icon' => 'glyphicon glyphicon-edit',
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Editar Penalización',
+							'class' => 'btn btn-success btn-xs',
+							'role' => 'button'],
+					],
+					['route' => 'quitarPenalizacion',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => 'Quitar Penalización',
+						'icon' => 'glyphicon glyphicon-trash',
+						'render_if' => function ($row) {
+							if ($row['eliminada'] == '')
+								return true;
+						},
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Eliminar Penalización',
+							'class' => 'btn btn-danger btn-xs',
+							'role' => 'button'],
+					],
+					['route' => 'activarPenalizacion',
+						'route_parameters' => [
+							'id' => 'id'],
+						'label' => 'Activar Penalización',
+						'icon' => 'glyphicon glyphicon-edit',
+						'render_if' => function ($row) {
+							if ($row['eliminada'] == true)
+								return true;
+						},
+						'attributes' => [
+							'rel' => 'tooltip',
+							'title' => 'Activar Penalización',
+							'class' => 'btn btn-primary btn-xs',
+							'role' => 'button'],
 
-                    ]]]);
+					]]]);
 
-    }
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getEntity()
-    {
-        return 'AppBundle\Entity\EncargoPenalizado';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getEntity()
+	{
+		return 'AppBundle\Entity\EncargoPenalizado';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'encargoPenalizado_datatable';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function getName()
+	{
+		return 'encargoPenalizado_datatable';
+	}
 
 }

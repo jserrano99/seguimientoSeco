@@ -22,6 +22,7 @@ use AppBundle\Entity\PosicionEconomica;
 use AppBundle\Entity\TipoCuota;
 use AppBundle\Form\AddEncargoType;
 use AppBundle\Form\CertificadoServiciosType;
+use AppBundle\Form\EncargoPenalizadoType;
 use AppBundle\Form\ImportarType;
 use AppBundle\Servicios\EscribeLog;
 use DateInterval;
@@ -1953,6 +1954,36 @@ class CertificadoServiciosController extends Controller
 		$params = ["form" => $ImportarForm->createView()];
 		return $this->render("cargaFichero/carga.html.twig", $params);
 
+	}
+
+	/**
+	 * @param Request $request
+	 * @param $id
+	 * @return Response
+	 *
+	 */
+	public function editPenalizacionAction(Request $request, $id)
+	{
+		$EntityManager = $this->getDoctrine()->getManager();
+		$EncargoPenalizado = $EntityManager->getRepository("AppBundle:EncargoPenalizado")->find($id);
+		$Encargo = $EncargoPenalizado->getEncargo();
+		$CertificadoServicios = $EncargoPenalizado->getCertificadoServicios();
+
+		$form = $this->createForm(EncargoPenalizadoType::class, $EncargoPenalizado);
+		$form->handleRequest($request);
+		if ($form->isSubmitted()) {
+			$EntityManager->persist($EncargoPenalizado);
+			$EntityManager->flush();
+			$status = "PENAIZACIÓN REVISADA CORRECTAMENTE";
+			$this->sesion->getFlashBag()->add("status", $status);
+			$params = ["id" => $CertificadoServicios->getId()];
+			return $this->redirectToRoute("editCertificadoServicios", $params);
+		}
+		return $this->render("certificadoServicios/editPenalizacion.html.twig", [
+			"form" => $form->createView(),
+			"accion" => "EDITAR",
+			'certificadoServicios' => $CertificadoServicios,
+			'encargo' => $Encargo]);
 	}
 
 	/**

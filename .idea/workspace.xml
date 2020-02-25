@@ -2,30 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/editCentro.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/form.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/formCentro.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/queryUsuarios.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/UsuarioRemedyDatatable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/CentroType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/UsuarioRemedyType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45/storage_v2/_src_/schema/seguimientoseco.J80lXQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/26229212-466b-40d5-892a-67f4c1c4cc45/storage_v2/_src_/schema/seguimientoseco.J80lXQ.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/editPenalizacion.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/usuariosRemedy/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/edit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/RemedyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/RemedyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Centro.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Centro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Indicador.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Indicador.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -178,19 +162,19 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Resources/views/usuariosRemedy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Resources/views/certificadoServicios" />
     <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
-      <recent name="C:\wamp64\www\seguimientoSeco\src\AppBundle\Form" />
-      <recent name="C:\wamp64\www\seguimientoSeco\src\AppBundle\Datatables" />
-      <recent name="C:\wamp64\www\seguimientoSeco" />
-      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\encargo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\certificadoServicios" />
+      <recent name="C:\wamp64\www\seguimientoSeco\src\AppBundle\Form" />
+      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
+      <recent name="C:\wamp64\www\seguimientoSeco\src\AppBundle\Datatables" />
+      <recent name="C:\wamp64\www\seguimientoSeco" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -265,7 +249,9 @@
       <workItem from="1581593058377" duration="5481000" />
       <workItem from="1581666710568" duration="805000" />
       <workItem from="1581667688742" duration="5420000" />
-      <workItem from="1581685201857" duration="294000" />
+      <workItem from="1581685201857" duration="951000" />
+      <workItem from="1581930145419" duration="7940000" />
+      <workItem from="1582036537513" duration="785000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -288,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1581503224885</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Incluir la gestión de centros y usuarios de remedy">
+      <created>1581685540411</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1581685540411</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -325,7 +318,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="cambio Importes" />
     <MESSAGE value="cambio carga NPL" />
-    <option name="LAST_COMMIT_MESSAGE" value="cambio carga NPL" />
+    <MESSAGE value="Incluir la gestión de centros y usuarios de remedy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Incluir la gestión de centros y usuarios de remedy" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
@@ -353,10 +347,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581668498400" />
-    <state x="536" y="115" key="CommitChangelistDialog2" timestamp="1581503220352">
+    <state x="536" y="115" key="CommitChangelistDialog2" timestamp="1581685536108">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581503220352" />
+    <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581685536108" />
     <state width="1293" height="274" key="GridCell.Tab.0.bottom" timestamp="1581502431183">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -386,10 +380,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="200" height="441" key="SqlResolveConfigurable/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061256" />
-    <state width="956" height="693" key="SwitcherDM" timestamp="1581674330225">
+    <state width="956" height="693" key="SwitcherDM" timestamp="1581949652763">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581674330225" />
+    <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581949652763" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581503284336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

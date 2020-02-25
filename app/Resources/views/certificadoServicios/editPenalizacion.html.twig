@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+{% block titulo %} ENCARGO PENALIZADO **{{ accion }}**<br/><br/>
+    <span>{{ certificadoServicios.descripcion }}</span><br/>
+    <span>{{ encargo.numero }} : {{ encargo.titulo }} </span>
+    <a href="{{ path("editCertificadoServicios",{"id":certificadoServicios.id}) }}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+    {% for message in app.session.flashbag().get('status') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        <hr/>
+    {% endfor %}
+    <div class="container">
+        {% include 'certificadoServicios/formEncargoPenalizado.html.twig' %}
+    </div>
+{% endblock %}

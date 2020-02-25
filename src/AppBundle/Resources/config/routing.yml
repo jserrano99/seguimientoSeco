@@ -172,6 +172,12 @@ cargaRevisionPenalizaciones:
   defaults: { _controller: AppBundle:CertificadoServicios:cargaRevisionPenalizaciones}
   options:
     expose: true
+editPenalizacion:
+  path: /certificadoServicios/editpenalizacion/{id}
+  defaults: { _controller: AppBundle:CertificadoServicios:editPenalizacion}
+  options:
+    expose: true
+
 quitarPenalizacion:
   path: /certificadoServicios/quitarPenalizacion/{id}
   defaults: { _controller: AppBundle:CertificadoServicios:quitarPenalizacion}

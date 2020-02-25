@@ -1,7 +1,13 @@
 {% extends "base.html.twig" %}
-{% block titulo %} ENCARGOS **{{accion}}**
-    <a href="{{path("queryEncargo")}}" class="btn btn-success"> Consulta Encargos </a>
+{% block titulo %} ENCARGOS **{{ accion }}**
+    <a href="{{ path("queryEncargo") }}" class="btn btn-success"> Consulta Encargos </a>
 {% endblock %}
 {% block contenido %}
+    {% for message in app.session.flashbag().get('status') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        <hr/>
+    {% endfor %}
     {% include 'encargo/form.html.twig' %}
 {% endblock %}
