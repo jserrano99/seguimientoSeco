@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="seguimientoImportes" pageWidth="595" pageHeight="842" columnWidth="591" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EquipoLocal"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<queryString language="SQL">
+		<![CDATA[select now() as fecha, vca.* from view_contrato_anualidades as vca]]>
+	</queryString>
+	<field name="fecha" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+	</field>
+	<field name="contratoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaInicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaInicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaFin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaFin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoExpediente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoExpediente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="importeContrato" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importeContrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="importeAdjudicacion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importeAdjudicacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="anualidadId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="anualidadId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anyos"/>
+	</field>
+	<field name="anualidadDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anualidadDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anyos"/>
+	</field>
+	<sortField name="anualidadId"/>
+	<group name="GrAnualidad" isStartNewPage="true" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{anualidadId}]]></groupExpression>
+		<groupHeader>
+			<band height="31">
+				<textField>
+					<reportElement x="100" y="2" width="100" height="29" uuid="83c819e8-9261-476b-954f-94f1c04e6546"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{anualidadDs}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="2" width="80" height="29" uuid="2a8143ad-9d7b-435c-ac66-1fb9f22f4494"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Anualidad: ]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="81">
+			<image>
+				<reportElement x="20" y="10" width="120" height="39" uuid="4f754af3-eaba-483e-9bad-b6bcf51a0e95"/>
+				<imageExpression><![CDATA["imagenes/textoMagma.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="150" y="10" width="422" height="39" uuid="c36d4165-0d2c-4c36-b648-31e41f66eaae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contratoDs}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="54" width="593" height="27" uuid="c3f5dd04-8ea2-4da2-9958-295029c0228c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SEGUIMIENTO ECONOMICO DEL CONTRATO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="50">
+			<staticText>
+				<reportElement x="0" y="0" width="310" height="20" uuid="2be59de1-6bde-4c2f-b6c6-5dd10b18d7e1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[   Seguimiento Importes]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="20" width="572" height="30" uuid="e302535e-ae0f-4f57-8673-bd8e12f39d12"/>
+				<subreportParameter name="anualidadId">
+					<subreportParameterExpression><![CDATA[$F{anualidadId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["seguimientoAnualidades.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="62">
+			<subreport>
+				<reportElement x="0" y="20" width="200" height="42" uuid="286153bd-52f7-430e-a18f-9b5b397432aa"/>
+				<subreportParameter name="anualidadId">
+					<subreportParameterExpression><![CDATA[$F{anualidadId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["horasComprometidas.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="400" height="20" uuid="3f476966-e69d-4621-94b8-fe3a31ea0b38"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[   Horas Comprometidas en Evoluciones de Amplio Alcance (Cuota Variable)]]></text>
+			</staticText>
+		</band>
+		<band height="90">
+			<subreport>
+				<reportElement x="0" y="20" width="260" height="70" uuid="cf3afc1c-df35-4929-a703-a4ed1ab8a964"/>
+				<subreportParameter name="anualidadId">
+					<subreportParameterExpression><![CDATA[$F{anualidadId}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["compromisoTasados.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="310" height="20" uuid="47660142-445e-420d-abfb-bfc4d69deb27"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[   Importes Comprometidas en Implantaciones (Cuota Tasada)]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25">
+			<textField pattern="MMM d, yyyy h:mm:ss a">
+				<reportElement x="440" y="2" width="143" height="20" uuid="76270f4a-e962-40f8-ba76-e039c7b7441f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="40"/>
+	</summary>
+</jasperReport>

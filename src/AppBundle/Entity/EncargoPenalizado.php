@@ -98,6 +98,15 @@ class EncargoPenalizado
 
 	private $diasPrevistosEjecucion;
 
+
+	/**
+	 * @var text
+	 *
+	 * @ORM\Column(name="justificacion_eliminacion", type="text", nullable=true)*
+	 */
+
+	private $justificacionEliminacion;
+
 	/**
      * Get id.
      *
@@ -259,6 +268,23 @@ class EncargoPenalizado
 	{
 		$this->diasPrevistosEjecucion = $diasPrevistosEjecucion;
 	}
+
+	/**
+	 * @return text
+	 */
+	public function getJustificacionEliminacion()
+	{
+		return $this->justificacionEliminacion;
+	}
+
+	/**
+	 * @param text $justificacionEliminacion
+	 */
+	public function setJustificacionEliminacion($justificacionEliminacion)
+	{
+		$this->justificacionEliminacion = $justificacionEliminacion;
+	}
+
 
 
 }

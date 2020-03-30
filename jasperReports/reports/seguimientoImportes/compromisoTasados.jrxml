@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="compromisoTasados" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EquipoLocal"/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<parameter name="anualidadId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Identificador de Anualidad]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * 
+from view_horas_comprometidas
+where anualidadId = $P{anualidadId} and tipoAgrupacion = 3]]>
+	</queryString>
+	<field name="fecha" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="encargoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="encargoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="encargoNumero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="encargoNumero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="encargoTitulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="encargoTitulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="estadoEncargoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="estadoEncargoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="estadoEncargoCd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estadoEncargoCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="estadoEncargoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="estadoEncargoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="objetoEncargoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="objetoEncargoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="objetoEncargoCd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="objetoEncargoCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="objetoEncargoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="objetoEncargoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="anualidadId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="anualidadId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="anualidadDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anualidadDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="periodoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="periodoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="periodoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="fechaInicioPeriodo" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fechaInicioPeriodo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="fechaCompromiso" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fechaCompromiso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="agrupacionId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="agrupacionId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="agrupacionCd" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="agrupacionCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="agrupacionDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="agrupacionDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="encargoCoste" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="encargoCoste"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="horasComprometidas" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="horasComprometidas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="tipoAgrupacion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="tipoAgrupacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="fechaComienzoEjecucion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fechaComienzoEjecucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="posicionEconomicaId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="posicionEconomicaId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<field name="posicionEconomicaDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="posicionEconomicaDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_horas_comprometidas"/>
+	</field>
+	<sortField name="periodoId"/>
+	<sortField name="posicionEconomicaId"/>
+	<variable name="encargoCoste1" class="java.lang.Double" resetType="Group" resetGroup="posicionEconomica" calculation="Sum">
+		<variableExpression><![CDATA[$F{encargoCoste}]]></variableExpression>
+	</variable>
+	<variable name="encargoCoste2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{encargoCoste}]]></variableExpression>
+	</variable>
+	<variable name="encargoCoste3" class="java.lang.Double" resetType="Group" resetGroup="periodo" calculation="Sum">
+		<variableExpression><![CDATA[$F{encargoCoste}]]></variableExpression>
+	</variable>
+	<group name="posicionEconomica">
+		<groupExpression><![CDATA[$F{posicionEconomicaId}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="10" y="0" width="390" height="20" uuid="b48a0e46-7618-42b8-848c-da9e43477221"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{posicionEconomicaDs}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00 €">
+					<reportElement x="420" y="0" width="100" height="20" uuid="2a127f05-98e8-41fa-a12f-4bc5036ad655"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{encargoCoste1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="periodo">
+		<groupExpression><![CDATA[$F{periodoDs}]]></groupExpression>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="270" y="0" width="130" height="20" uuid="938888fc-411e-4e12-a2e7-2fe1504e6051"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{periodoDs}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00 €">
+					<reportElement x="420" y="0" width="100" height="20" uuid="a2bb03d3-07c8-4832-a3b9-23c490c21d60"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{encargoCoste3}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="43">
+			<staticText>
+				<reportElement x="10" y="5" width="390" height="33" uuid="17d856f0-e53a-4850-9735-b15a6282bd50"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posición Economica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="5" width="100" height="33" uuid="e9075119-f859-4eef-b59c-7168d522606a"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Comprometido]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20">
+			<textField>
+				<reportElement x="10" y="0" width="60" height="20" uuid="18ad5c06-b210-468f-a3d3-9dd160366d38"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{encargoNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="330" height="20" uuid="88441c15-e34c-42d8-a6f4-071c4de9eb27"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{encargoTitulo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="420" y="0" width="100" height="20" uuid="4f3e2943-33cf-4496-a4a4-563e459bf802"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{encargoCoste}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="21">
+			<textField pattern="#,##0.00 €">
+				<reportElement x="420" y="0" width="100" height="21" uuid="6e1c2f6e-3962-4806-85fe-3c2d18b8f290"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{encargoCoste2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

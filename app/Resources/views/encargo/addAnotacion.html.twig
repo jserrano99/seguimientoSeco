@@ -1,7 +1,0 @@
-{% extends "base.html.twig" %}
-{% block titulo %} ANOTACIÓN ENCARGO ** {{ encargo.numero }}{{encargo.titulo}}**
-    <a href="{{path("editEncargo",{"id":encargo.id})}}" class="btn btn-success"> Volver  </a>
-{% endblock %}
-{% block contenido %}
-    {% include 'encargo/formAnotacion.html.twig' %}
-{% endblock %}

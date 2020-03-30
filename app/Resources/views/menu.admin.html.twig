@@ -4,15 +4,18 @@
         Administración <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        <li><a href="{{path("queryUsuario")}}">Gestión Usuarios</a></li>
-        <li><a href="{{path("queryCentros")}}">Centros Remedy</a></li>
-        <li><a href="{{path("queryUsuarioRemedy")}}">Consulta Usuarios Remedy</a></li>
+        <li><a href="{{path("queryUsuario")}}" target="_blank">Gestión Usuarios</a></li>
+        <li><a href="{{path("queryCentros")}}" target="_blank"> Centros Remedy</a></li>
+        <li><a href="{{path("queryUsuarioRemedy")}}" target="_blank">Consulta Usuarios Remedy</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="{{ path("queryFichero") }}">Consulta Carga Ficheros</a></li>
-        <li><a href="{{ path("cargaFichero") }}">Carga Fichero Encargos</a></li>
-        <li><a href="{{ path("cargaFicheroRemedy") }}">Carga Fichero Remedy</a></li>
+        <li><a href="{{ path("generarFicheroSeco") }}" target="_blank">Fichero Seco</a></li>
+        <li><a href="{{ path("queryFichero") }}" target="_blank">Consulta Carga Ficheros</a></li>
+        <li><a href="{{ path("cargaFichero") }}" target="_blank">Carga Fichero Encargos</a></li>
+        <li><a href="{{ path("cargaFicheroRemedy") }}" target="_blank">Carga Fichero Remedy</a></li>
 {#        <li><a href="{{ path("cargaSeguimiento") }}">Carga Fichero Seguimiento </a></li>#}
-        <li><a href="{{ path("cargaAgrupacion") }}">Actualizar Agrupación  </a></li>
-        <li><a href="{{ path("cargaLineaSeguimiento") }}">Actualizar Linea Seguimiento </a></li>
+        <li><a href="{{ path("cargaAgrupacion") }}" target="_blank">Actualizar Agrupación  </a></li>
+        <li><a href="{{ path("cargaLineaSeguimiento") }}" target="_blank">Actualizar Linea Seguimiento </a></li>
+        <li><a href="{{ path("actualizarPeriodo") }}" target="_blank">Cambiar Periodo Actual </a></li>
+
     </ul>
 </div>

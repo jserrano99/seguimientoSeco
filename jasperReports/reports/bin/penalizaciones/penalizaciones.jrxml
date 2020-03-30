@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="penalizaciones" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1df6858-e117-43f9-8717-d70b8d48191f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EquipoLocal"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/seguimientoANS"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/seguimientoANS_files/main_jrxml"/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="mm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="mm"/>
+	<parameter name="certificadoServiciosId" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select t1.descripcion as contratoDs,
+t2.descripcion as certificadoServiciosDs,
+concat (t3.descripcion,' ,', t4.descripcion) as periodo
+ from contrato as t1 
+inner join  certificado_servicios as t2 on t2.contrato_id =  t1.id 
+inner join meses as t3 on t3.id = t2.meses_id  
+inner join anyos as t4 on t4.id = t3.anyo_id
+where t2.id = $P{certificadoServiciosId}]]>
+	</queryString>
+	<field name="contratoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="certificadoServiciosDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+	</field>
+	<group name="indicadorIRS01">
+		<groupHeader>
+			<band height="40"/>
+		</groupHeader>
+	</group>
+	<group name="indicadorIRS02">
+		<groupHeader>
+			<band height="50"/>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<textField>
+				<reportElement x="140" y="0" width="400" height="70" uuid="7d846936-1019-441e-85d5-565d09460c53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contratoDs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="96" width="100" height="30" uuid="126a5966-c185-4944-ad76-1e22b5784c0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PERIODO: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="61" y="72" width="433" height="22" uuid="c0efc8a6-842d-4525-b3c0-c4317497c3d3"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[INFORME DE PENALIZACIONES]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="5" width="140" height="61" uuid="94143056-e173-418e-84fe-da1ca9409332"/>
+				<imageExpression><![CDATA["imagenes/textoMagma.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="180" y="96" width="100" height="30" uuid="4f577a1e-eb23-4b1f-9302-f14c7eae6476"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="16" splitType="Stretch"/>
+	</detail>
+</jasperReport>

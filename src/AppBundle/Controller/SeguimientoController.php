@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Datatables\SeguimientoDatatable;
 use AppBundle\Entity\Seguimiento;
+use AppBundle\Form\InformeSeguimientoType;
 use DateTime;
 use Exception;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -204,4 +205,35 @@ class SeguimientoController extends Controller
 
 		return $response;
 	}
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     *
+     */
+
+	public function informeSeguimientoAction(Request $request, $id) {
+	    $EntityManager = $this->getDoctrine()->getManager();
+
+	    $Seguimiento = $EntityManager->getRepository("AppBundle:Seguimiento")->find($id);
+
+        $form = $this->createForm(InformeSeguimientoType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $idMes = $_POST["formInformeSeguimiento"]["mes"];
+            $Mes = $EntityManager->getRepository("AppBundle:Mes")->find($idMes);
+
+            $params = ["seguimiento_id" => $Seguimiento->getId(),
+                    "periodo_id" => $Mes->getId()];
+            return  $this->redirectToRoute("imprimirInformeSeguimiento",$params);
+
+        }
+
+        $params = ["seguimiento" => $Seguimiento,
+            "form" => $form->createView()];
+        return $this->render("seguimiento/edit2.html.twig", $params);
+    }
+
 }

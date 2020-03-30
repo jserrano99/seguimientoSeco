@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
-{% block titulo %} 
-    <div id='dtitulo' class="container"> 
+{% block title %} CONSULTA CARGAS FICHERO {% endblock %}
+
+{% block titulo %}
+    <div id='dtitulo' class="container">
         CARGA DE FICHEROS PLANOS **CONSULTA**
     </div>
 {% endblock %} 
@@ -9,10 +11,12 @@
     <div class="container">
         {% for message in app.session.flashbag().get('status') %}
             <div class="alert alert-success">
-                {{message}}
+                {{ message }}
             </div>
             <hr/>
         {% endfor %}
-        {{ sg_datatables_render(datatable) }}
+        {% if datatable %}
+            {{ sg_datatables_render(datatable) }}
+        {% endif %}
     </div>
 {% endblock %}

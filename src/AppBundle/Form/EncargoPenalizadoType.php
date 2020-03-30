@@ -62,6 +62,11 @@ class EncargoPenalizadoType extends AbstractType
 				'attr' => ["class" => "form-control "]])
 			->add('Guardar', SubmitType::class, [
 				"attr" => ["class" => "btn btn-t btn-success"]])
+			->add('justificacionEliminacion', TextareaType::class, [
+				'label' => 'Justificación Eliminación',
+				'disabled' => false,
+				'required' => false,
+				'attr' => ["class" => "form-control "]])
 		;
 	}
 

@@ -33,7 +33,7 @@ class AnotacionEncargoType extends AbstractType
 		$builder->add('fecha', DateType::class, [
 			"label" => 'Fecha',
 			"required" => false,
-			"disabled" => true,
+			"disabled" => false,
 			'widget' => 'single_text',
 			'attr' => [
 				'class' => 'form-control corto',

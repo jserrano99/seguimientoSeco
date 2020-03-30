@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block titulo %} LINEAS DE SEGUIMIENTO **{{accion}}**
+    <a href="{{path("querySeguimiento")}}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <div class="container">
+        <span> <h2>Linea de Seguimiento: {{ lineaSeguimiento.descripcion }}</h2></span>
+
+    {% include 'seguimiento/formInforme.html.twig' %}
+    </div>
+{% endblock %}

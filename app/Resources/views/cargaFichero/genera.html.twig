@@ -1,0 +1,78 @@
+{% extends "base.html.twig" %}
+{% block title %}FICHERO SECO {% endblock %}
+
+{% block titulo %} CARGA FICHERO PLANO DE ENCARGOS {% endblock %}
+
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+
+            $("#formFicheroSeco_anyo").change(function () {
+
+                idAnyo = $("#formFicheroSeco_anyo").val();
+                let recurso;
+                recurso = Routing.generate("ajaxPeriodo", {"idAnyo": idAnyo}, true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $("#procesando").hide();
+                        $("#formFicheroSeco_mes").html(data);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#formFicheroSeco_mes").html('error');
+                    }
+                });
+            });
+
+            $("#formFicheroSeco_mes").click(function () {
+                let recurso;
+                recurso = Routing.generate("generaSeco", true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        alert(data);
+                        $('.modal-backdrop').remove();
+                        $('#procesando').hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('#procesando').hide();
+                        alert(xhr.status);
+                    }
+                });
+            });
+
+            // $("#formFicheroSeco_generarFichero").click(function () {
+            //     $("#procesando").modal('show');
+            //     let recurso;
+            //     recurso = Routing.generate("", true);
+            //     $.ajax({
+            //         type: "POST",
+            //         url: recurso,
+            //         success: function (data, status, xhr) {
+            //             $('.modal-backdrop').remove();
+            //             $('#procesando').hide();
+            //         },
+            //         error: function (xhr, ajaxOptions, thrownError) {
+            //             $('#procesando').hide();
+            //             alert(xhr.status);
+            //         }
+            //     });
+            // });
+        });
+    </script> 
+
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            {{ app.request.pathInfo }}
+        {% endfor %}
+        <br/>
+        {{form_start (form,{'action':'','method':'POST'})}}
+        {{form_end (form)}}
+        <br/>
+    </div>
+{% endblock %}

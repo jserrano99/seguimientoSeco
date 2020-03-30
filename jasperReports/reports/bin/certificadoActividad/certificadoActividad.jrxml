@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoActividad" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d6cd7990-3279-40a7-9d30-7608ae7fc496">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.url" value="http://10.127.240.149:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/certificadoActividad"/>
+	<parameter name="certificadoServiciosId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Identificador de Periodo]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select contrato.id as contratoId,
+contrato.codigo as contratoCodigo,
+contrato.descripcion as contratoDescripcion,
+contrato.fc_inicio as contratoFechaInicio,
+contrato.fc_fin as contratoFechaFin,
+contrato.centro_coste_cd as contratoCentroCosteCd,
+contrato.centro_coste_ds as contratoCentroCosteDs,
+contrato.expediente as contratoExpediente,
+contrato.adjudicatario as contratoAdjudicatario,
+contrato.importe_contrato as contratoImporteContrato,
+contrato.importe_adjudicacion as contratoImporteAdjudicacion,
+contrato.porcentaje_baja as contratoPorcentajeBaja,
+contrato.numero_pedido as contratoNumeroPedido,
+certificado_servicios.id as certificadoServiciosId,
+certificado_servicios.contrato_id as certificadoServiciosContratoId,
+certificado_servicios.descripcion as certificadoSserviciosDescripcion,
+importes_contrato.fc_inicio as importesContratoFechaInicio,
+importes_contrato.fc_fin as importesContratoGechaFin,
+importes_contrato.cuota_fija as importesContratoCuotaFija,
+importes_contrato.cuota_tasada as importesContratoCuotaTasada,
+importes_contrato.tarifa_hora as importesContratoTarifaHora,
+importes_contrato.cuota_fija_mensual as importesContratoCuotaFijaMensual,
+meses.descripcion as mesesDescripcion, 
+anyos.descripcion as anyosDescripcion,
+concat(meses.descripcion,', ',anyos.descripcion) as periodo,
+certificado_servicios.total_factura  as totalFactura,
+certificado_servicios.total_penalizaciones as totalPenalizaciones,
+certificado_servicios.maximo_penalizaciones as maximoPenalizaciones,
+certificado_servicios.cuota_iva as cuotaIva,
+certificado_servicios.total_factura_con_iva as totalFacturaConIva,
+certificado_servicios.penalizacion_aplicable as penalizacionAplicable
+from certificado_servicios 
+inner join contrato on contrato.id = certificado_servicios.contrato_id 
+inner join importes_contrato on importes_contrato.contrato_id = contrato.id
+inner join meses on meses.id = certificado_servicios.meses_id
+inner join anyos on anyos.id = meses.anyo_id
+where  certificado_servicios.id = $P{certificadoServiciosId}]]>
+	</queryString>
+	<field name="contratoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCodigo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCodigo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaInicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaInicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoFechaFin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="contratoFechaFin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCentroCosteCd" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCentroCosteCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoCentroCosteDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoCentroCosteDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoExpediente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoExpediente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoAdjudicatario" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoAdjudicatario"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoImporteContrato" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoImporteContrato"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoImporteAdjudicacion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoImporteAdjudicacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoPorcentajeBaja" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="contratoPorcentajeBaja"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="contratoNumeroPedido" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="contratoNumeroPedido"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="contrato"/>
+	</field>
+	<field name="certificadoServiciosId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="certificadoServiciosContratoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosContratoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="certificadoSserviciosDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoSserviciosDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="importesContratoFechaInicio" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoFechaInicio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoGechaFin" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoGechaFin"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaFija" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaFija"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaTasada" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaTasada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoTarifaHora" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoTarifaHora"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="importesContratoCuotaFijaMensual" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importesContratoCuotaFijaMensual"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="importes_contrato"/>
+	</field>
+	<field name="mesesDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="mesesDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="meses"/>
+	</field>
+	<field name="anyosDescripcion" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anyosDescripcion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="anyos"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+	</field>
+	<field name="totalFactura" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalFactura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="totalPenalizaciones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalPenalizaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="maximoPenalizaciones" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="maximoPenalizaciones"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="cuotaIva" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="cuotaIva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="totalFacturaConIva" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="totalFacturaConIva"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<field name="penalizacionAplicable" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="penalizacionAplicable"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="certificado_servicios"/>
+	</field>
+	<variable name="base" class="java.lang.String"/>
+	<group name="ActividadNPL">
+		<groupHeader>
+			<band height="80">
+				<subreport>
+					<reportElement x="0" y="17" width="550" height="63" uuid="d84b258f-a17c-436c-a8bc-e48091e2698b"/>
+					<subreportParameter name="certificadoId">
+						<subreportParameterExpression><![CDATA[$P{certificadoServiciosId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["certificadoActividadNPL.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActividadADM">
+		<groupHeader>
+			<band height="60">
+				<subreport>
+					<reportElement x="0" y="0" width="550" height="60" uuid="3df80a04-fb6d-45ef-9345-3497cf7e08a5"/>
+					<subreportParameter name="certificadoId">
+						<subreportParameterExpression><![CDATA[$P{certificadoServiciosId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["certificadoActividadADM.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActividadEJE">
+		<groupHeader>
+			<band height="50">
+				<subreport>
+					<reportElement x="0" y="0" width="550" height="50" uuid="55673e58-3036-4e1a-bfa3-2f4baa987251"/>
+					<subreportParameter name="certificadoServiciosId">
+						<subreportParameterExpression><![CDATA[$P{certificadoServiciosId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["certificadoActividadEJE.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActividadPLA">
+		<groupHeader>
+			<band height="50">
+				<subreport>
+					<reportElement x="0" y="0" width="550" height="50" uuid="b160b02a-8af4-4eb9-b690-1218689ac715"/>
+					<subreportParameter name="certificadoId">
+						<subreportParameterExpression><![CDATA[$P{certificadoServiciosId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["certificadoActividadPLA.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="ActividadTAS">
+		<groupHeader>
+			<band height="70">
+				<subreport>
+					<reportElement x="0" y="0" width="545" height="70" uuid="e94cfda2-3771-4fdb-8cbb-55b2b5c38b4f"/>
+					<subreportParameter name="certificadoId">
+						<subreportParameterExpression><![CDATA[$P{certificadoServiciosId}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<subreportExpression><![CDATA["certificadoActividadTAS.jasper"]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="conforme">
+		<groupHeader>
+			<band height="157">
+				<frame>
+					<reportElement x="10" y="0" width="550" height="150" uuid="c18db380-3ebe-4f6f-b2db-c579ca99e0a9"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<frame>
+						<reportElement x="9" y="11" width="190" height="128" uuid="6b3f1e5b-1199-4b47-93fc-2406c47a9787"/>
+						<box>
+							<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<staticText>
+							<reportElement x="1" y="1" width="50" height="18" uuid="c1c23474-ecc9-4d09-80b6-3f15009f9cf2"/>
+							<textElement>
+								<font size="8"/>
+							</textElement>
+							<text><![CDATA[Conforme]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="2" y="11" width="188" height="59" uuid="1112bc39-9773-4de4-a7e9-f491e569c33b"/>
+							<textElement>
+								<font size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[INDRA SOLUCIONES TECNOLÓGICAS DE LA INFORMACIÓN , S.L.U]]></text>
+						</staticText>
+					</frame>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="10" width="290" height="30" uuid="84a1a035-b5fe-4e36-9c68-5127e61c2399"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CERTIFICACIÓN DE ACTIVIDAD]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="140" height="40" uuid="17f4da9e-5786-48ae-ab0a-d0d974b1a516"/>
+				<imageExpression><![CDATA["imagenes/logo_horizontal.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="70" height="30" uuid="88bf5bea-647c-410f-8eca-dce66df3a8d0"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONTRATO :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="70" height="30" uuid="be626f5f-c7de-427b-9f0f-5c6ba51a2c7d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PERIODO: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="0" width="480" height="30" uuid="b3c75114-e12e-44f4-b89e-f50a3350f30b"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contratoDescripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="30" width="50" height="30" uuid="bcfcbb65-0503-4d13-93df-47c7cbc3e30f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

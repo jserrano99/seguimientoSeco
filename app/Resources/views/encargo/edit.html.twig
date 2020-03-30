@@ -1,4 +1,11 @@
 {% extends "base.html.twig" %}
+{% block title %} ENCARGO:
+    {% if accion == "MODIFICACIÓN" %}
+        {{ encargo.numero }}
+    {% else %}
+        NUEVO
+    {% endif %}
+{% endblock %}
 {% block titulo %} ENCARGOS **{{ accion }}**
     <a href="{{ path("queryEncargo") }}" class="btn btn-success"> Consulta Encargos </a>
 {% endblock %}

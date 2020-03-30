@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+{% block title %} ERROR CARGA FICHERO {% endblock %}
+{% block contenido %}
+    <div id="fin" class="container" text-align="center" >
+        <span><h3>ERROR EN CARGA DE FICHERO</h3></span>
+        <hr/>
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+            <hr/>
+        {% endfor %}
+
+    </div>
+{% endblock %}

@@ -289,14 +289,17 @@ class ReportController extends Controller
         return $this->get('yoh.jasper.report')->generate($reportUnit, [], $format);
     }
 
-	/**
-	 * @return Response
-	 */
-	public function informeSeguimientoAction($seguimiento_id)
+    /**
+     * @param int $seguimiento_id
+     * @param int $periodo_id
+     * @return Response
+     */
+	public function informeSeguimientoAction($seguimiento_id,$periodo_id)
 	{
 		$format = "pdf";
 		$reportUnit = "/reports/informeSeguimiento";
-		$params = ["seguimientoId" => $seguimiento_id];
+		$params = ["seguimientoId" => $seguimiento_id,
+                    "perioodoId" => $periodo_id];
 		return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
 	}
 

@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block titulo %}
+    <div id='dtitulo' class="container"> ENCARGOS NO INCLUIDOS EN CERTIFICACIÓN **CONSULTA** <br/>
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+
+    <div class="container">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        {{ sg_datatables_render(datatable) }}
+    </div>
+{% endblock %}

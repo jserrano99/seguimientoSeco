@@ -5,6 +5,14 @@ app_homepage:
     path:     /
     defaults: { _controller: AppBundle:Login:login }
 #
+# COMUNES
+#
+actualizarPeriodo:
+  path: /periodo/actualizar
+  defaults: { _controller: AppBundle:Comun:actualizarPeriodo}
+  options:
+    expose: true
+#
 # REMEDY
 #
 queryRemedy:
@@ -379,7 +387,16 @@ addAnotacionEncargo:
   defaults: { _controller: AppBundle:Encargo:addAnotacion}
   options:
     expose: true
-
+editAnotacionEncargo:
+  path: /encargo/anotacion/edit/{id}
+  defaults: { _controller: AppBundle:Encargo:editAnotacion}
+  options:
+    expose: true
+deleteAnotacionEncargo:
+  path: /encargo/anotacion/delete/{id}
+  defaults: { _controller: AppBundle:Encargo:deleteAnotacion}
+  options:
+    expose: true
 
 #
 # REPORTS
@@ -427,9 +444,14 @@ esfuerzoComprometidoEquipoBase:
   options:
     expose: true
 
-informeSeguimiento:
-  path: /report/informeSeguimiento/{seguimiento_id}
+imprimirInformeSeguimiento:
+  path: /report/informeSeguimiento/{seguimiento_id}/{periodo_id}
   defaults: { _controller: AppBundle:Report:informeSeguimiento}
+  options:
+    expose: true
+informeSeguimiento:
+  path: /seguimiento/informe/{id}
+  defaults: { _controller: AppBundle:Seguimiento:informeSeguimiento}
   options:
     expose: true
 planificacionLB:
@@ -502,4 +524,8 @@ deleteUsuario:
     defaults: { _controller: AppBundle:Usuario:delete}
     options:
         expose: true
-
+generarFicheroSeco:
+  path:   /fichero/seco/generar
+  defaults: {_controller: AppBundle:CargaFichero:generarFicheroSeco}
+  options:
+    expose: true

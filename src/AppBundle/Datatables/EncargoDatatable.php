@@ -37,7 +37,7 @@ class EncargoDatatable extends AbstractDatatable
 			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
 			'individual_filtering' => true,
 			'individual_filtering_position' => 'head',
-			'order' => [[0, 'asc']],
+			'order' => [[2, 'asc']],
 			'order_cells_top' => true,
 			'search_in_non_visible_columns' => true,
 			'dom' => 'lfBtrip'

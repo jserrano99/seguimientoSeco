@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    ANOTACIÓN ENCARGO: {{ encargo.numero }}
+{% endblock %}
+{% block titulo %}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            ANOTACIÓN ENCARGO ** {{ accion }}
+            {{ encargo.numero }} {{ encargo.titulo }}
+            <a href="{{ path("editEncargo",{"id":encargo.id}) }}" class="btn btn-success"> Volver </a>
+        </div>
+    </div>
+{% endblock %}
+
+    {% block contenido %}
+        <div class="panel-body">
+            {% include 'encargo/formAnotacion.html.twig' %}
+        </div>
+    {% endblock %}

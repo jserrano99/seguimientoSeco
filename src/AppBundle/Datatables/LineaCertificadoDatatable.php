@@ -64,6 +64,7 @@ class LineaCertificadoDatatable extends AbstractDatatable
 			->add('encargo.titulo', Column::class, ['title' => 'Titulo', 'width' => '850px', 'searchable' => true])
 			->add('encargo.objetoEncargo.tipoObjeto.codigo', Column::class, ['title' => 'Tipo', 'width' => '50px', 'searchable' => true])
 			->add('encargo.objetoEncargo.codigo', Column::class, ['title' => 'Objeto', 'width' => '50px', 'searchable' => true])
+			->add('encargo.criticidad2.descripcion', Column::class, ['title' => 'Criticidad', 'width' => '50px', 'searchable' => true])
 			->add(null, ActionColumn::class, [
 				'title' => 'Acciones',
 				'actions' => [

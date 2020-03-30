@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdbcDataAdapter class="net.sf.jasperreports.data.jdbc.JdbcDataAdapterImpl"><name>EquipoLocal</name><driver>com.mysql.jdbc.Driver</driver><username>root</username><password></password><savePassword>true</savePassword><url>jdbc:mysql://10.127.240.149:3306/seguimientoSeco</url><database></database><serverAddress></serverAddress><classpath>/Users/jose/OneDrive - Madrid Digital/mysql-connector-java-5.1.44/mysql-connector-java-5.1.44-bin.jar</classpath></jdbcDataAdapter>

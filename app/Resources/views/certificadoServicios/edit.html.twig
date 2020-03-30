@@ -1,4 +1,6 @@
 {% extends "base.html.twig" %}
+{% block title %} {{ certificadoServicios.descripcion | upper }} {% endblock %}
+
 {% block titulo %} CERTIFICACIONES DE SERVICIO  **{{ accion }}**
     {% if (accion == 'EDITAR') %}
         <br/><br/> {{ certificadoServicios.descripcion }}

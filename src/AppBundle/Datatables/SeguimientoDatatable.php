@@ -106,7 +106,7 @@ class SeguimientoDatatable extends AbstractDatatable
 							'role' => 'button'
 						]],
 					['route' => 'informeSeguimiento',
-						'route_parameters' => ['seguimiento_id' => 'id'],
+						'route_parameters' => ['id' => 'id'],
 						'label' => '',
 						'icon' => 'glyphicon glyphicon-print',
 						'attributes' => [

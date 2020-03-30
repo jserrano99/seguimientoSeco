@@ -1,4 +1,6 @@
 {% extends "base.html.twig" %}
+{% block title %} CONSULTA ENCARGOS {% endblock %}
+
 {% block titulo %}
     <div id='dtitulo' class="container"> ENCARGOS **CONSULTA** <br/>
         {% if (agrupacion) %}
@@ -15,15 +17,15 @@
             $("#accordion").accordion();
             $(".check").checkboxradio();
 
-            $("#aplicarFiltro").click(function(){
-                alert ("aplicar filtro");
+            $("#aplicarFiltro").click(function () {
+                alert("aplicar filtro");
             });
 
-            $("#quitarSeleccion").click(function(){
-                alert ("quitar selecction");
+            $("#quitarSeleccion").click(function () {
+                alert("quitar selecction");
             });
-            $("#seleccionarTodo").click(function(){
-                alert (" selecction");
+            $("#seleccionarTodo").click(function () {
+                alert(" selecction");
             });
 
 

@@ -48,7 +48,12 @@ class EstadoEncargo
 	 */
 	private $tipoEstado;
 
+	/**
+	 * @var boolean
+	 * @ORM\Column(name="it_estado_dg", type="boolean", nullable=true)
+	 */
 
+	private $itEstadoDg;
 
 	/**
      * Get id.
@@ -125,6 +130,22 @@ class EstadoEncargo
 	public function setTipoEstado($tippoEstado)
 	{
 		$this->tippoEstado = $tippoEstado;
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function isItEstadoDg()
+	{
+		return $this->itEstadoDg;
+	}
+
+	/**
+	 * @param bool $itEstadoDg
+	 */
+	public function setItEstadoDg($itEstadoDg)
+	{
+		$this->itEstadoDg = $itEstadoDg;
 	}
 
 

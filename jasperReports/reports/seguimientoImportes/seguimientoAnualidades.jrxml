@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="seguimientoAnualidades" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="34454ece-9905-4223-9db5-da6e0b4a74ff">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EquipoLocal"/>
+	<property name="com.jaspersoft.studio.unit." value="mm"/>
+	<parameter name="anualidadId" class="java.lang.Integer">
+		<parameterDescription><![CDATA[Identificador de Anualidad]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * from view_seguimiento_importes where anualidadId = $P{anualidadId}]]>
+	</queryString>
+	<field name="anualidadId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="anualidadId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_seguimiento_importes"/>
+	</field>
+	<field name="anualidad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="anualidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_seguimiento_importes"/>
+	</field>
+	<field name="posicionEconomicaDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="posicionEconomicaDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_seguimiento_importes"/>
+	</field>
+	<field name="importeAnualidad" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importeAnualidad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_seguimiento_importes"/>
+	</field>
+	<field name="importe" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importe"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_seguimiento_importes"/>
+	</field>
+	<variable name="importeAnualidad1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{importeAnualidad}]]></variableExpression>
+	</variable>
+	<variable name="importe1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="resto" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{importeAnualidad}-$F{importe}]]></variableExpression>
+	</variable>
+	<variable name="totalResto" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$V{resto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="35">
+			<staticText>
+				<reportElement x="20" y="10" width="310" height="20" uuid="d3840294-5083-4d86-93aa-583d1e054f3d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8be93934-e0a1-468f-bbd9-d9506f263a8a"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Posición Económica]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="0" width="80" height="30" uuid="3b4b3832-368f-4e0d-859a-ef87441c8672">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="655f8fa1-3991-4579-a616-1c351c5e5158"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Importe Presupuestado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="80" height="30" uuid="597bfd4f-4fda-4170-be06-0a7517bf287b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c888aeff-53b6-4769-a34f-3ed20baf7679"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Importe Certificado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="504" y="0" width="80" height="30" uuid="7d000a43-cfe0-43e7-a009-81daf0e5a3d3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c888aeff-53b6-4769-a34f-3ed20baf7679"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<printWhenExpression><![CDATA[$F{importeAnualidad}>0]]></printWhenExpression>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="20" y="0" width="310" height="20" uuid="9995e4da-6812-4496-be8e-cdddd7c9e779">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8be93934-e0a1-468f-bbd9-d9506f263a8a"/>
+					<printWhenExpression><![CDATA[$F{importeAnualidad}>0]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{posicionEconomicaDs}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="336" y="0" width="80" height="20" uuid="5600479c-2c66-4238-89e6-0dd71ba1f59a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="655f8fa1-3991-4579-a616-1c351c5e5158"/>
+					<printWhenExpression><![CDATA[$F{importeAnualidad}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{importeAnualidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="420" y="0" width="80" height="20" uuid="74181405-6bd0-4dda-af36-fe7c91b04f46">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c888aeff-53b6-4769-a34f-3ed20baf7679"/>
+					<printWhenExpression><![CDATA[$F{importeAnualidad}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="504" y="0" width="80" height="20" uuid="d778a0e8-3881-40ea-a29b-6398fde60b75">
+					<printWhenExpression><![CDATA[$F{importeAnualidad}>0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{resto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="23">
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="336" y="3" width="80" height="20" uuid="a9b6d0fb-fd85-4c8e-98a4-32f783c68bee"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{importeAnualidad1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="421" y="3" width="80" height="20" uuid="9ffe0d29-88d1-4640-b91a-780020244797"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{importe1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="504" y="3" width="80" height="20" uuid="35628fc5-ac27-4387-b569-d97f41db3eca"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{totalResto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

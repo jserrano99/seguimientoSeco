@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+{% block title %}INFORME SEGUIMIENTO{% endblock %}
+
+{% block titulo %} INFORME DE SEGUIMIENTO {{ seguimiento.descripcion }}
+
+    <a href="{{ path("querySeguimiento") }}" class="btn btn-success">Volver</a>
+{% endblock %}
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+            $("#formInformeSeguimiento_anyo").change(function () {
+                idAnyo = $("#formInformeSeguimiento_anyo").val();
+                let recurso;
+                recurso = Routing.generate("ajaxPeriodo", {"idAnyo": idAnyo}, true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $("#formInformeSeguimiento_mes").html(data);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#formInformeSeguimiento_mes").html('error');
+                    }
+                });
+            });
+        });
+    </script>
+
+    {% for message in app.session.flashbag().get('status') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        <hr/>
+    {% endfor %}
+    <div class="container">
+        {% include 'seguimiento/formInforme.html.twig' %}
+    </div>
+{% endblock %}
