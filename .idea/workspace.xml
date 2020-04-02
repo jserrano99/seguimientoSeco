@@ -2,194 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/errorProceso.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/genera.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/comun/cambiaPeriodo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/contrato/query.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/encargo/queryNoEnCertificado.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/formInforme.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/informe.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/.project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/DataAdapter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/NoPlanificable/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/.project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/AnalisisIncidentes/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/AnalisisIncidentes/incidentesPorCentro.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/esfuerzoENP.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/esfuerzoEnPLA.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/esfuerzoEnPLADetalle.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/esfuerzoMedioNPL.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/esfuerzoMedioNPL2.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/planificacionEsfuerzoEB.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/seguimientoNPL.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/tiempoMedRes.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/tiempoMedRes2.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/tiempoResolucionFueraANS.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/NoPlanificable/tiempoResolucionFueraANS2.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividad.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividad.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadADM.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadEJE.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadEJE.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadNPL.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadPLA.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoActividad/certificadoActividadTAS.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoServicios/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoServicios/certServiciosCuotaFija.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoServicios/certServiciosCuotaTasada.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoServicios/certServiciosCuotaVariable.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/certificadoServicios/certificadoServicios.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/irs01.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/logoMagma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/logo_centrado.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/logo_horizontal.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/logo_horizontal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/imagenes/textoMagma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/penalizaciones/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/penalizaciones/penalizaciones.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/penalizaciones/penalizacionesIRS01.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/penalizaciones/penalizacionesIRS02.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/penalizaciones/penalizacionesIRS02.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/esfuerzoPLAExtDetalle.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/planificacionEB.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/seguimientoLB.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/seguimientoPLA.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/planificables/seguimientoPLACompromiso.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/bin/plantilla.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividad.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividad.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadCRR.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadCRR.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadEJE.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadEJE.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadTasada.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadTasada.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadVariable.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadVariable.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/imagenes/irs01.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/imagenes/logoMagma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/imagenes/textoMagma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/esfuerzoPLAExtDetalle.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/planificacionLineaBase.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/planificacionLineaBase.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/seguimientoLB.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/seguimientoPLA.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/planificables/seguimientoPLACompromiso.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/plantilla.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/compromisoTasados.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/compromisoTasados.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/horasComprometidas.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/horasComprometidas.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/seguimientoAnualidades.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/seguimientoAnualidades.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/seguimientoImportes.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoImportes/seguimientoImportes.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/certificadoActividadNPL.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/encargosAgrupacion.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/esfuerzoComprometidoEquipoBase.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/numeroEncargos.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ComunController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/PeriodoActual.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/FicheroSecoType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/PeriodoActualType.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Repository/PerioidoActualRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/seguimientoSeco.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/informeActividadSCF.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/serviciosCuotaFija.jasper" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/serviciosCuotaFija.jrxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/agrupacion/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/agrupacion/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/agrupacion/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/agrupacion/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/cargaFichero/carga.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/carga.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/cargaFichero/finProceso.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/finProceso.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/cargaFichero/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/query.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/cargaFichero/genera.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/genera.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/addAnotacion.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/editAnotacion.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/query2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/queryByAgrupacion.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/login/acceso.html.twig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/.project" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/AnalisisIncidentes/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/AnalisisIncidentes/incidentesPorCentro.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/esfuerzoENP.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/esfuerzoEnPLA.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/esfuerzoEnPLADetalle.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/esfuerzoMedioNPL.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/esfuerzoMedioNPL2.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/planificacionEsfuerzoEB.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/seguimientoNPL.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/tiempoMedRes.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/tiempoMedRes2.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/tiempoResolucionFueraANS.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/NoPlanificable/tiempoResolucionFueraANS2.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/certificadoActividadADM.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/certificadoActividadNPL.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/certificadoActividadNPL2.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/certificadoActividadPLA.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoActividad/certificadoActividadTAS.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoServicios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoServicios/certServiciosCuotaFija.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoServicios/certServiciosCuotaTasada.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoServicios/certServiciosCuotaVariable.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/certificadoServicios/certificadoServicios.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/irs01.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/logoMagma.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/logo_centrado.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/logo_horizontal.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/logo_horizontal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/imagenes/textoMagma.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/penalizaciones/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/penalizaciones/penalizaciones.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/penalizaciones/penalizacionesIRS01.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/esfuerzoPLAExtDetalle.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/planificacionEB.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/seguimientoLB.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/seguimientoPLA.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/planificables/seguimientoPLACompromiso.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/plantilla.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/seguimientoSeco/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jrxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CargaFicheroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CargaFicheroController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/LineaCertificadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/LineaCertificadoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/EncargoPenalizado.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/EncargoPenalizado.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/EstadoEncargo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/EstadoEncargo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/AnotacionEncargoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/AnotacionEncargoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EventListener/CertificadoServiciosEventSuscribe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EventListener/CertificadoServiciosEventSuscribe.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/FicheroSecoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/FicheroSecoType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -467,7 +293,11 @@
       <workItem from="1585295699997" duration="6657000" />
       <workItem from="1585549138653" duration="600000" />
       <workItem from="1585559799267" duration="2206000" />
-      <workItem from="1585562460650" duration="11000" />
+      <workItem from="1585562460650" duration="2721000" />
+      <workItem from="1585634688688" duration="534000" />
+      <workItem from="1585720953495" duration="5089000" />
+      <workItem from="1585743788906" duration="7000" />
+      <workItem from="1585808162670" duration="528000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -504,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582639690886</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Modificaciones Marzo">
+      <created>1585562527952</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1585562527952</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -543,7 +380,8 @@
     <MESSAGE value="cambio carga NPL" />
     <MESSAGE value="Incluir la gestión de centros y usuarios de remedy" />
     <MESSAGE value="antes de incluir seguimiento DG" />
-    <option name="LAST_COMMIT_MESSAGE" value="antes de incluir seguimiento DG" />
+    <MESSAGE value="Modificaciones Marzo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modificaciones Marzo" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
@@ -578,10 +416,15 @@
     </state>
     <state x="491" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1583498985758" />
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581668498400" />
-    <state x="536" y="115" key="CommitChangelistDialog2" timestamp="1582639684219">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#" timestamp="1585563161946">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585563161946" />
+    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1585562527247">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1582639684219" />
+    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562527247" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1584719670605">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -617,10 +460,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="200" height="441" key="SqlResolveConfigurable/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061256" />
-    <state width="956" height="693" key="SwitcherDM" timestamp="1583144241699">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="837" height="685" key="SwitcherDM" timestamp="1585808970626">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583144241699" />
+    <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585808970626" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581503284336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -640,10 +484,14 @@
     </state>
     <state x="746" y="437" key="publish.login/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1584719640632" />
     <state x="746" y="437" key="publish.login/1680.23.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1584203312543" />
-    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup" timestamp="1585561686631">
+    <state x="489" y="259" width="700" height="530" key="recent.locations.popup" timestamp="1585562587821">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="489" y="259" width="700" height="530" key="recent.locations.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562587821" />
+    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup" timestamp="1585562598341">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1580907389061" />
-    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585561686631" />
+    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562598341" />
   </component>
 </project>

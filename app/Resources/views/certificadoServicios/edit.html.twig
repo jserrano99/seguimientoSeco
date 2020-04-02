@@ -1,6 +1,12 @@
 {% extends "base.html.twig" %}
-{% block title %} {{ certificadoServicios.descripcion | upper }} {% endblock %}
 
+{% block title %}
+    {% if (accion == 'EDITAR') %}
+        {{ certificadoServicios.descripcion | upper }}
+    {% else %}
+        GENERAR CERTIFICADO
+    {% endif %}
+{% endblock %}
 {% block titulo %} CERTIFICACIONES DE SERVICIO  **{{ accion }}**
     {% if (accion == 'EDITAR') %}
         <br/><br/> {{ certificadoServicios.descripcion }}
@@ -161,6 +167,15 @@
                 recurso = Routing.generate("cerrarCertificado", {"id": id}, true);
                 window.location = recurso;
             });
+
+            $("#formCertificadoServicios_imprimirActividadSCF").click(function () {
+                let recurso;
+                let id;
+                id = $("#formCertificadoServicios_id").val();
+                recurso = Routing.generate("imprimirActividadSCF", {"id": id}, true);
+                window.location = recurso;
+            });
+
 
             $("#formCertificadoServicios_abrirCertificado").click(function () {
                 bootbox.confirm({

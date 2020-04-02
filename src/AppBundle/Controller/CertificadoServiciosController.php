@@ -806,7 +806,7 @@ class CertificadoServiciosController extends Controller
 		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
 			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
-			$factor = $diasRetraso / $diasPrevistosEjecucion;
+			$diasPrevistosEjecucion == 0 ? $factor = $diasRetraso : $factor = $diasRetraso / $diasPrevistosEjecucion;
 			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0) {
 				$factor = $factor / 2;
 			}
@@ -867,7 +867,7 @@ class CertificadoServiciosController extends Controller
 		foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
 			$diasRetraso = $EncargoPenalizado->getDiasRetrasoEntrega();
 			$diasPrevistosEjecucion = $EncargoPenalizado->getDiasPrevistosEjecucion();
-			$factor = $diasRetraso / $diasPrevistosEjecucion;
+			$diasPrevistosEjecucion == 0 ? $factor = $diasRetraso : $factor = $diasRetraso / $diasPrevistosEjecucion;
 			if ($EncargoPenalizado->getEncargo()->getCriticidad() == 0) {
 				$factor = $factor / 2;
 			}

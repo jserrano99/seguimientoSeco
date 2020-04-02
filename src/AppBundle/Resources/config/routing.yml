@@ -229,6 +229,11 @@ incluirEncargo:
     defaults: { _controller: AppBundle:CertificadoServicios:incluirEncargo}
     options:
         expose: true
+imprimirActividadSCF:
+  path: /report/actividadSCF/{id}
+  defaults: { _controller: AppBundle:Report:actividadSCF}
+  options:
+    expose: true
 #
 # CONTRATO
 #

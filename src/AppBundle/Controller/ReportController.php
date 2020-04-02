@@ -202,6 +202,20 @@ class ReportController extends Controller
         $reportUnit = "/reports/penalizacionesDetalle";
         return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
     }
+    /**
+     * @param integer $id
+     * @return mixed
+     */
+    public function actividadSCFAction($id)
+    {
+        $CertificadoServicios = $this->getDoctrine()->getManager()->getRepository("AppBundle:CertificadoServicios")->find($id);
+
+        $format = "pdf";
+        $parametros = ["certificadoServiciosId" => $CertificadoServicios->getId()];
+        $reportUnit = "/reports/informeActividadSCF";
+        return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
+    }
+
 
     /**
      * @param $id

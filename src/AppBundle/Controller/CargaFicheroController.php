@@ -26,6 +26,7 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use ReflectionObject;
+use ReflectionProperty;
 use ReflectionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -296,42 +297,32 @@ class CargaFicheroController extends Controller
                 }
 
                 $EncargoANT = clone $Encargo;
-
                 $EncargoNew = $this->actualizaEncargo($Encargo, $Fichero, $ServicioLog, $ficheroLog);
-//                if ($EncargoANT === $EncargoNew) {
-//                    null;
-//                } else {
-//                    $diff = [];
-//                    if (get_class($Encargo) == get_class($EncargoNew)) {
-//
-//                        $o1Properties = (new ReflectionObject($EncargoANT))->getProperties();
-//                        $o2Reflected = new ReflectionObject($EncargoNew);
-//                        dump($o1Properties);
-//                        dump($o2Reflected);
-//
-//                        $ServicioLog->setMensaje(" **** Encargo= " . $Encargo->getNumero() . " MODIFICACIONES: ");
-//                        $ServicioLog->escribeLog($ficheroLog);
-//                        foreach ($o1Properties as $o1Property) {
-//                            $o2Property = $o2Reflected->getProperty($o1Property->getName());
-//                            // Mark private properties as accessible only for reflected class
-//                            $o1Property->setAccessible(true);
-//                            $o2Property->setAccessible(true);
-//                            if (($oldValue = $o1Property->getValue($EncargoANT)) != ($newValue = $o2Property->getValue($EncargoNew))) {
-//                                $diff[$o1Property->getName()] = [
-//                                    'OLD_VALUE' => $oldValue,
-//                                    'NEW_VALUE' => $newValue
-//                                ];
-//                                $ServicioLog->setMensaje('Propiedad ->'.
-//                                    $o1Property->getName().
-//                                    ' Valor Anterior:['.
-//                                    $oldValue.'] '.
-//                                    ' Valor Nuevo: ['.
-//                                    $newValue.']');
-//                                $ServicioLog->escribeLog($ficheroLog);
-//                            }
-//                        }
-//                    }
-  //              }
+                if ($EncargoANT === $EncargoNew) {
+                    null;
+                } else {
+                    $diff = [];
+                    if (get_class($Encargo) == get_class($EncargoNew)) {
+                        $o1Properties = (new ReflectionObject($EncargoANT))->getProperties();
+                        $o2Reflected = new ReflectionObject($EncargoNew);
+                        $ServicioLog->setMensaje(" **** Encargo= " . $Encargo->getNumero() . " MODIFICACIONES: ");
+                        $ServicioLog->escribeLog($ficheroLog);
+                        foreach ($o1Properties as $o1Property) {
+                            $o2Property = $o2Reflected->getProperty($o1Property->getName());
+                            // Mark private properties as accessible only for reflected class
+                            $o1Property->setAccessible(true);
+                            $o2Property->setAccessible(true);
+                            $oldValue = $o1Property->getValue($EncargoANT);
+                            $newValue = $o2Property->getValue($EncargoNew);
+                            if ($oldValue != $newValue) {
+                                $diff[$o1Property->getName()] = [
+                                    'OLD_VALUE' => $oldValue,
+                                    'NEW_VALUE' => $newValue];
+                                $this->imprimeLog($o1Property, $oldValue, $newValue, $ServicioLog, $ficheroLog);
+                            }
+                        }
+                    }
+                }
             }
             $ct++;
         }
@@ -344,6 +335,39 @@ class CargaFicheroController extends Controller
     }
 
     /**
+     * @param ReflectionProperty $o1Property
+     * @param ReflectionProperty $oldValue
+     * @param ReflectionProperty $newValue
+     * @param EscribeLog $ServicioLog
+     * @param string $ficheroLog
+     * @return bool
+     */
+    public function imprimeLog($o1Property, $oldValue, $newValue, $ServicioLog, $ficheroLog)
+    {
+        try {
+            $mensaje = ' Propiedad ->' . $o1Property->getName();
+            $msj1 = " Valor Anterior : ";
+            $msj2 = " Valor Nuevo : ";
+            if (is_a($oldValue, "DateTime")) {
+                is_null($oldValue) ? $valorAnterior = "" : $valorAnterior = $oldValue->format('d-m-Y');
+                is_null($newValue) ? $valorNuevo = "" : $valorNuevo = $newValue->format('d-m-Y');
+            } else {
+                $valorAnterior = $oldValue;
+                $valorNuevo = $newValue;
+            }
+
+            $mensaje = $mensaje . $msj1 . " [" . $oldValue . "]" . $msj2 . "[" . $valorNuevo . "]";
+            $ServicioLog->setMensaje($mensaje);
+            $ServicioLog->escribeLog($ficheroLog);
+            return true;
+        } catch (Exception $e) {
+            $ServicioLog->setMensaje("error al escribir ". $mensaje);
+            $ServicioLog->escribeLog($ficheroLog);
+            return false;
+        }
+    }
+
+    /**
      * @param Encargo $Encargo
      * @param Fichero $Fichero
      * @param EscribeLog $ServicioLog
@@ -353,9 +377,9 @@ class CargaFicheroController extends Controller
      */
     public function actualizaEncargo($Encargo, $Fichero, $ServicioLog, $ficheroLog)
     {
-        /** @var string  $cod1 */
+        /** @var string $cod1 */
         $cod1 = $Encargo->getEstadoActual()->getCodigo();
-        /** @var string  $cod2 */
+        /** @var string $cod2 */
         $cod2 = $Fichero->getEstadoActual();
         $EntityManager = $this->getDoctrine()->getManager();
         if ($cod1 == $cod2) {
@@ -430,8 +454,6 @@ class CargaFicheroController extends Controller
         $EntityManager->persist($Encargo);
         $EntityManager->flush();
 
-        $ServicioLog->setMensaje(" >>>> Encargo= " . $Encargo->getNumero() . " Actualizado  <<<< ");
-        $ServicioLog->escribeLog($ficheroLog);
         return $Encargo;
     }
 
@@ -1146,6 +1168,7 @@ class CargaFicheroController extends Controller
     /**
      * @param string $fechaInico
      * @param string $fechaFin
+     * @param integer $tipoObjeto
      * @return RedirectResponse
      */
     public function llamadaSeco($fechaInico, $fechaFin, $tipoObjeto)
@@ -1196,6 +1219,12 @@ class CargaFicheroController extends Controller
         if ($tipoObjeto == 1) {
             $url = $url .
                 "&cdCmmaTObjetoEncargo1=PLA";
+        }
+        if ($tipoObjeto == 4) {
+            $url = $url .
+                "&cdCmmaTObjetoEncargo1=NPL" .
+                "&cdCmmaObjetoEncargo1=ENP";
+
         }
         return $this->redirect($url);
 

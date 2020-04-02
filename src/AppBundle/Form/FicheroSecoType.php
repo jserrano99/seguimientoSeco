@@ -36,6 +36,7 @@ class FicheroSecoType extends AbstractType
                 'choices' => [
                     'Planificable'  => 1,
                     'No Planificable' => 2,
+                    'Adaptaciones Menores' => 4,
                     'Todo' =>3],
                 'attr' => ["class" => "form-control "]])
 

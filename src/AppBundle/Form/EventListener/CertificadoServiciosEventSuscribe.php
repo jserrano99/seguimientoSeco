@@ -140,7 +140,10 @@ class CertificadoServiciosEventSuscribe implements EventSubscriberInterface
 					->add('imprimirCertificado', ButtonType::class, [
 						'label' => 'Imprimir Certificado Servicios',
 						"attr" => ["class" => "btn btn-t btn-primary"]])
-					->add('imprimirCertificadoActividad', ButtonType::class, [
+                    ->add('imprimirActividadSCF', ButtonType::class, [
+                        'label' => 'Imprimir Actividas Servicios Cuota Fija',
+                        "attr" => ["class" => "btn btn-t btn-primary"]])
+                    ->add('imprimirCertificadoActividad', ButtonType::class, [
 						'label' => 'Imprimir Certificado Actividad',
 						"attr" => ["class" => "btn btn-t btn-primary"]])
 					->add('exportarReaperturas', ButtonType::class, [
