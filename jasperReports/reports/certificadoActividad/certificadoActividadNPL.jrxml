@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoActividadNPL" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="36d79102-3de1-4892-9814-ea1276871a7b">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EquipoLocal"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
 	<parameter name="certificadoId" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[select 
@@ -13,6 +13,7 @@ inner join encargo as t2 on t2.id = t1.encargo_id
 inner join objetos_encargo as t3 on t3.id = t2.objeto_encargo_id 
 where t1.certificado_servicios_id = $P{certificadoId}
 and t3.tipo_cuota_id = 1 
+and t2.estado_actual_id = 2
 order by t3.descripcion, t2.numero]]>
 	</queryString>
 	<field name="descripcion" class="java.lang.String">

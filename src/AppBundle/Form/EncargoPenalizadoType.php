@@ -51,14 +51,20 @@ class EncargoPenalizadoType extends AbstractType
 				'label' => 'Días Ejecución',
 				'disabled' => false,
 				'required' => false,
+
 				'attr' => ["class" => "form-control corto"]])
-			->add('eliminada', ChoiceType::class, [
+            ->add('eliminada', ChoiceType::class, [
+                'label' => 'Eliminada Penalización',
+                'disabled' => false,
+                'required' => false,
+                'choices' => [
+                    'Penalización Eliminada' => true,
+                    '' => null],
+                'attr' => ["class" => "form-control "]])
+            ->add('importePenalizacion', MoneyType::class, [
 				'label' => 'Eliminada Penalización',
 				'disabled' => false,
 				'required' => false,
-				'choices' => [
-					'Penalización Eliminada' => true,
-					'' => null],
 				'attr' => ["class" => "form-control "]])
 			->add('Guardar', SubmitType::class, [
 				"attr" => ["class" => "btn btn-t btn-success"]])

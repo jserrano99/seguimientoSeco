@@ -77,7 +77,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 						'search_type' => 'eq']]])
 			->add('encargo.numero', Column::class, ['title' => 'Número', 'width' => '60px', 'searchable' => true])
 			->add('encargo.nmRemedy', Column::class, ['title' => 'Remedy', 'width' => '60px', 'searchable' => true])
-			->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '1200px', 'searchable' => true])
+			->add('encargo.titulo', Column::class, ['title' => 'Mes', 'width' => '900px', 'searchable' => true])
 			->add('eliminada', Column::class,
 				['title' => 'Eliminada',
 					'width' => '40px',
@@ -95,7 +95,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 					['route' => 'editPenalizacion',
 						'route_parameters' => [
 							'id' => 'id'],
-						'label' => 'Editar Penalización',
+						'label' => 'Editar',
 						'icon' => 'glyphicon glyphicon-edit',
 						'attributes' => [
 							'rel' => 'tooltip',
@@ -106,7 +106,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 					['route' => 'quitarPenalizacion',
 						'route_parameters' => [
 							'id' => 'id'],
-						'label' => 'Quitar Penalización',
+						'label' => 'Quitar ',
 						'icon' => 'glyphicon glyphicon-trash',
 						'render_if' => function ($row) {
 							if ($row['eliminada'] == '')
@@ -121,7 +121,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 					['route' => 'activarPenalizacion',
 						'route_parameters' => [
 							'id' => 'id'],
-						'label' => 'Activar Penalización',
+						'label' => 'Activar',
 						'icon' => 'glyphicon glyphicon-edit',
 						'render_if' => function ($row) {
 							if ($row['eliminada'] == true)

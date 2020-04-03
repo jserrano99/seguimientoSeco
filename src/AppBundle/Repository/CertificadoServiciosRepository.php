@@ -25,8 +25,7 @@ class CertificadoServiciosRepository extends \Doctrine\orm\EntityRepository
 			->getQuery()->getResult();
 
 		if ($CertificadoServiciosAll) {
-			$CertificadoServicios = $CertificadoServiciosAll[0];
-			return $CertificadoServicios;
+			return $CertificadoServiciosAll[0];
 		} else {
 			return null;
 		}

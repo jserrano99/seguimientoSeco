@@ -19,13 +19,13 @@ class InformeSeguimientoType extends AbstractType
 			->add('anyo', EntityType::class, [
 				'label' => 'Año',
 				'class' => 'AppBundle:Anyo',
-				'required' => "required",
+				'required' => false,
 				'placeholder' => 'Seleccione Año ....',
 				'attr' => ["class" => "form-control"]])
 			->add('mes', EntityType::class, [
 				'label' => 'Mes',
 				'class' => 'AppBundle:Mes',
-				'required' => "required",
+				'required' => false,
 				'placeholder' => 'Seleccione mes ....',
 				'attr' => ["class" => "form-control"]])
 

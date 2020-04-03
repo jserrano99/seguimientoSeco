@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -30,14 +31,14 @@ class AnotacionEncargoType extends AbstractType
 			'class' => 'AppBundle:Usuario',
 			'disabled' => true,
 			'attr' => ["class" => "form-control "]]);
-		$builder->add('fecha', DateType::class, [
+		$builder->add('fecha', DateTimeType::class, [
 			"label" => 'Fecha',
 			"required" => false,
 			"disabled" => false,
 			'widget' => 'single_text',
 			'attr' => [
-				'class' => 'form-control corto',
-				'data-date-format' => 'dd-mm-yyyy',
+				'class' => 'form-control',
+				'data-date-format' => 'dd-mm-yyyy hh:mm:ss',
 				'data-class' => 'string']]);
 		$builder->add('anotacion', TextareaType::class, [
 			'label' => 'Anotación',

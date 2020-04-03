@@ -8,6 +8,7 @@ use AppBundle\Entity\Aplicacion;
 use AppBundle\Entity\CargaFichero;
 use AppBundle\Entity\Centro;
 use AppBundle\Entity\EncargoRemedy;
+use AppBundle\Entity\EstadoEncargo;
 use AppBundle\Entity\FicheroLog;
 use AppBundle\Entity\Encargo;
 use AppBundle\Entity\Fichero;
@@ -385,7 +386,9 @@ class CargaFicheroController extends Controller
         if ($cod1 == $cod2) {
             null;
         } else {
-            $anotacion = "Se Cambia estado de  : " . $Encargo->getEstadoActual()->getCodigo() . ' a ' . $Fichero->getEstadoActual();
+            /** @var EstadoEncargo $nuevoEstado */
+            $NuevoEstado = $EntityManager->getRepository("AppBundle:EstadoEncargo")->findByCodigo($Fichero->getEstadoActual());
+            $anotacion = "Se Cambia a estado : " . $NuevoEstado->getDescripcion();
             $AnotacionEncargo = new AnotacionEncargo();
             $fecha = new DateTime();
             $AnotacionEncargo->setEncargo($Encargo);

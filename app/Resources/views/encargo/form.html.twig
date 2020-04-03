@@ -12,6 +12,12 @@
         recurso = Routing.generate("addAnotacionEncargo", {"encargo_id": id}, true);
         window.location = recurso;
     }
+    function consultaSeco() {
+        let recurso;
+        let id = $("#formEncargo_id").val();
+        recurso = Routing.generate("viewEncargoSeco", {"id": id}, true);
+        window.location = recurso;
+    }
 
 </script>
 
@@ -81,11 +87,11 @@
             <table id="anotacionesTable" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Fecha</th>
-                    <th>Usuario</th>
+                    <th width="40px">id</th>
+                    <th width="130px">Fecha</th>
+                    <th width="80px">Usuario</th>
                     <th>Anotación</th>
-                    <th>Acciones</th>
+                    <th width="90px">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -96,8 +102,10 @@
                         <td>{{ anotacionEncargo.usuario.codigo }}</td>
                         <td>{{ anotacionEncargo.anotacion }}</td>
                         <td>
-                            <a href="{{ path("editAnotacionEncargo",{"id":anotacionEncargo.id}) }}" class="btn btn-success">Editar</a>
-                            <a href="{{ path("deleteAnotacionEncargo",{"id":anotacionEncargo.id}) }}" class="btn btn-danger">Borrar</a>
+                            <a href="{{ path("editAnotacionEncargo",{"id":anotacionEncargo.id}) }}"
+                               class="glyphicon glyphicon-edit btn btn-success"></a>
+                            <a href="{{ path("deleteAnotacionEncargo",{"id":anotacionEncargo.id}) }}"
+                               class="glyphicon glyphicon-remove btn btn-danger"></a>
                         </td>
                     </tr>
                 {% endfor %}

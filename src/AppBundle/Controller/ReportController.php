@@ -185,7 +185,7 @@ class ReportController extends Controller
 
         $format = "pdf";
         $parametros = ["certificadoServiciosId" => $CertificadoServicios->getId()];
-        $reportUnit = "/reports/penalizaciones";
+        $reportUnit = "/reports/informeIndicadores";
         return $this->get('yoh.jasper.report')->generate($reportUnit, $parametros, $format);
     }
 
@@ -313,7 +313,7 @@ class ReportController extends Controller
 		$format = "pdf";
 		$reportUnit = "/reports/informeSeguimiento";
 		$params = ["seguimientoId" => $seguimiento_id,
-                    "perioodoId" => $periodo_id];
+                    "periodoId" => $periodo_id];
 		return $this->get('yoh.jasper.report')->generate($reportUnit, $params, $format);
 	}
 

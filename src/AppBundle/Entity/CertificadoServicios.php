@@ -205,6 +205,14 @@ class CertificadoServicios
 
     private $penalizadosNOR;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_reaperturas", type="integer", nullable=true)
+     */
+
+    private $penalizadosReaperturas;
+
 
     /**
      * @var integer
@@ -214,6 +222,45 @@ class CertificadoServicios
 
     private $penalizadosADM;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_enc01", type="integer", nullable=true)
+     */
+
+    private $penalizadosENC01;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_enc02", type="integer", nullable=true)
+     */
+
+    private $penalizadosENC02;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_ent01", type="integer", nullable=true)
+     */
+
+    private $penalizadosENT01;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="penalizados_ent02", type="integer", nullable=true)
+     */
+
+    private $penalizadosENT02;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="contador_ADM_sin_can", type="integer", nullable=true)
+     */
+
+    private $contadorADMSinCan;
 
     /**
 	 * @var boolean
@@ -646,11 +693,11 @@ class CertificadoServicios
     /**
      * Set contrato.
      *
-     * @param \AppBundle\Entity\Contrato|null $contrato
+     * @param Contrato|null $contrato
      *
      * @return CertificadoServicios
      */
-    public function setContrato(\AppBundle\Entity\Contrato $contrato = null)
+    public function setContrato(Contrato $contrato = null)
     {
         $this->contrato = $contrato;
 
@@ -660,7 +707,7 @@ class CertificadoServicios
     /**
      * Get contrato.
      *
-     * @return \AppBundle\Entity\Contrato|null
+     * @return Contrato|null
      */
     public function getContrato()
     {
@@ -670,11 +717,11 @@ class CertificadoServicios
     /**
      * Set estadoCertificado.
      *
-     * @param \AppBundle\Entity\EstadoCertificado|null $estadoCertificado
+     * @param EstadoCertificado|null $estadoCertificado
      *
      * @return CertificadoServicios
      */
-    public function setEstadoCertificado(\AppBundle\Entity\EstadoCertificado $estadoCertificado = null)
+    public function setEstadoCertificado(EstadoCertificado $estadoCertificado = null)
     {
         $this->estadoCertificado = $estadoCertificado;
 
@@ -684,7 +731,7 @@ class CertificadoServicios
     /**
      * Get estadoCertificado.
      *
-     * @return \AppBundle\Entity\EstadoCertificado|null
+     * @return EstadoCertificado|null
      */
     public function getEstadoCertificado()
     {
@@ -694,11 +741,11 @@ class CertificadoServicios
     /**
      * Set mes.
      *
-     * @param \AppBundle\Entity\Mes|null $mes
+     * @param Mes|null $mes
      *
      * @return CertificadoServicios
      */
-    public function setMes(\AppBundle\Entity\Mes $mes = null)
+    public function setMes(Mes $mes = null)
     {
         $this->mes = $mes;
 
@@ -708,7 +755,7 @@ class CertificadoServicios
     /**
      * Get mes.
      *
-     * @return \AppBundle\Entity\Mes|null
+     * @return Mes|null
      */
     public function getMes()
     {
@@ -718,11 +765,11 @@ class CertificadoServicios
     /**
      * Set ficheroLog.
      *
-     * @param \AppBundle\Entity\FicheroLog|null $ficheroLog
+     * @param FicheroLog|null $ficheroLog
      *
      * @return CertificadoServicios
      */
-    public function setFicheroLog(\AppBundle\Entity\FicheroLog $ficheroLog = null)
+    public function setFicheroLog(FicheroLog $ficheroLog = null)
     {
         $this->ficheroLog = $ficheroLog;
 
@@ -732,7 +779,7 @@ class CertificadoServicios
     /**
      * Get ficheroLog.
      *
-     * @return \AppBundle\Entity\FicheroLog|null
+     * @return FicheroLog|null
      */
     public function getFicheroLog()
     {
@@ -792,6 +839,103 @@ class CertificadoServicios
 	{
 		$this->fechaCertificado = $fechaCertificado;
 	}
+
+    /**
+     * @return int
+     */
+    public function getPenalizadosReaperturas()
+    {
+        return $this->penalizadosReaperturas;
+    }
+
+    /**
+     * @param int $penalizadosReaperturas
+     */
+    public function setPenalizadosReaperturas($penalizadosReaperturas)
+    {
+        $this->penalizadosReaperturas = $penalizadosReaperturas;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPenalizadosENC01()
+    {
+        return $this->penalizadosENC01;
+    }
+
+    /**
+     * @param int $penalizadosENC01
+     */
+    public function setPenalizadosENC01($penalizadosENC01)
+    {
+        $this->penalizadosENC01 = $penalizadosENC01;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPenalizadosENC02()
+    {
+        return $this->penalizadosENC02;
+    }
+
+    /**
+     * @param int $penalizadosENC02
+     */
+    public function setPenalizadosENC02($penalizadosENC02)
+    {
+        $this->penalizadosENC02 = $penalizadosENC02;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPenalizadosENT01()
+    {
+        return $this->penalizadosENT01;
+    }
+
+    /**
+     * @param int $penalizadosENT01
+     */
+    public function setPenalizadosENT01($penalizadosENT01)
+    {
+        $this->penalizadosENT01 = $penalizadosENT01;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPenalizadosENT02()
+    {
+        return $this->penalizadosENT02;
+    }
+
+    /**
+     * @param int $penalizadosENT02
+     */
+    public function setPenalizadosENT02($penalizadosENT02)
+    {
+        $this->penalizadosENT02 = $penalizadosENT02;
+    }
+
+    /**
+     * @return int
+     */
+    public function getContadorADMSinCan()
+    {
+        return $this->contadorADMSinCan;
+    }
+
+    /**
+     * @param int $contadorADMSinCan
+     */
+    public function setContadorADMSinCan($contadorADMSinCan)
+    {
+        $this->contadorADMSinCan = $contadorADMSinCan;
+    }
+
 
 
 }

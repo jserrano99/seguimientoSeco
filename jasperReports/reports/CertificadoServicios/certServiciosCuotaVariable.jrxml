@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certServiciosCuotaVariable" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="d2550e07-1e77-4b1e-8674-bdb41b0d4be2">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SeguimientoSeco"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
 	<parameter name="certificadoServiciosId" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[select t1.* from importes_certificado_servicios as t1 
@@ -66,10 +66,10 @@ and t1.tipo_cuota_id = 2]]>
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[CUOTA VARIABLE:]]></text>
+					<text><![CDATA[(2) CUOTA VARIABLE:]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="328" y="53" width="69" height="17" uuid="9276aade-a3c6-43d5-a7d6-304af6cd56c5"/>
+					<reportElement x="479" y="53" width="69" height="17" uuid="9276aade-a3c6-43d5-a7d6-304af6cd56c5"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -78,55 +78,25 @@ and t1.tipo_cuota_id = 2]]>
 					</textElement>
 					<text><![CDATA[Importe]]></text>
 				</staticText>
-				<staticText>
-					<reportElement x="401" y="53" width="69" height="17" uuid="36edcbb9-2b54-48c0-a79c-9d50cb3a0589"/>
-					<box>
-						<bottomPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[Penalización]]></text>
-				</staticText>
-				<staticText>
-					<reportElement x="485" y="53" width="69" height="17" uuid="43691d66-b0b2-4a0a-8c54-1602df65bbf8"/>
-					<box>
-						<bottomPen lineWidth="1.0"/>
-					</box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<text><![CDATA[Total]]></text>
-				</staticText>
 				<textField>
-					<reportElement x="11" y="45" width="189" height="46" uuid="872307da-420d-4383-a8fa-7c3622b32c10"/>
+					<reportElement x="11" y="45" width="339" height="46" uuid="872307da-420d-4383-a8fa-7c3622b32c10"/>
 					<textElement verticalAlignment="Bottom">
-						<font size="8"/>
+						<font size="10"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 				</textField>
 				<textField pattern="#,##0.00 €">
-					<reportElement x="328" y="75" width="69" height="19" uuid="eda9b9ad-5777-4a85-8c2a-e6ab47ebe27d"/>
+					<reportElement x="479" y="75" width="69" height="19" uuid="eda9b9ad-5777-4a85-8c2a-e6ab47ebe27d"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{importe}]]></textFieldExpression>
 				</textField>
-				<textField pattern="#,##0.00 €">
-					<reportElement x="401" y="75" width="69" height="19" uuid="f973873b-1fa2-4f4d-9c4b-93afdf231233"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{penalizacion}]]></textFieldExpression>
-				</textField>
-				<textField pattern="#,##0.00 €">
-					<reportElement x="485" y="75" width="69" height="19" uuid="045444a6-05d2-4d45-b2b2-760664d1b521"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="210" y="75" width="59" height="19" uuid="00564715-a386-4757-95a4-65ffb51f2a02"/>
+				<textField pattern="#,##0.0">
+					<reportElement x="361" y="75" width="59" height="19" uuid="00564715-a386-4757-95a4-65ffb51f2a02"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{horas_certificadas}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="209" y="36" width="60" height="34" uuid="9fe78570-b006-4d44-be5d-73bfe38f12de"/>
+					<reportElement x="360" y="36" width="60" height="34" uuid="9fe78570-b006-4d44-be5d-73bfe38f12de"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -136,12 +106,12 @@ and t1.tipo_cuota_id = 2]]>
 					<text><![CDATA[Horas Certificadas]]></text>
 				</staticText>
 				<textField pattern="#,##0.00 €">
-					<reportElement x="276" y="75" width="49" height="19" uuid="1a4ba656-ef6e-4ea2-9068-082327e7f93b"/>
+					<reportElement x="427" y="75" width="49" height="19" uuid="1a4ba656-ef6e-4ea2-9068-082327e7f93b"/>
 					<textElement textAlignment="Right" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{tarifa}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="275" y="53" width="50" height="17" uuid="b783dcbc-5943-4f0b-9baf-7fc4e9697c37"/>
+					<reportElement x="426" y="53" width="50" height="17" uuid="b783dcbc-5943-4f0b-9baf-7fc4e9697c37"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>

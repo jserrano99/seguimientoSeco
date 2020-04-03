@@ -7,6 +7,7 @@
  */
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
@@ -15,48 +16,47 @@ use DateTime;
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EncargoPenalizadoRepository")
  *
  */
-
 class EncargoPenalizado
 {
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="id", type="integer", nullable=false)
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="IDENTITY")
-	 */
-	private $id;
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
 
 
-	/**
-	 * @var Indicador\null
-	 *
-	 * @ORM\ManyToOne(targetEntity="Indicador")
-	 * * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="indicador_id", referencedColumnName="id")
-	 * })
-	 */
-	private $indicador;
+    /**
+     * @var Indicador\null
+     *
+     * @ORM\ManyToOne(targetEntity="Indicador")
+     * * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="indicador_id", referencedColumnName="id")
+     * })
+     */
+    private $indicador;
 
-	/**
-	 * @var CertificadoServicios\null
-	 *
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CertificadoServicios")
-	 * * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="certificado_servicios_id", referencedColumnName="id")
-	 * })
-	 */
-	private $certificadoServicios;
+    /**
+     * @var CertificadoServicios\null
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\CertificadoServicios")
+     * * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="certificado_servicios_id", referencedColumnName="id")
+     * })
+     */
+    private $certificadoServicios;
 
-	/**
-	 * @var Encargo\null
-	 *
-	 * @ORM\ManyToOne(targetEntity="Encargo")
-	 * * @ORM\JoinColumns({
-	 *   @ORM\JoinColumn(name="encargo_id", referencedColumnName="id")
-	 * })
-	 */
-	private $encargo;
+    /**
+     * @var Encargo\null
+     *
+     * @ORM\ManyToOne(targetEntity="Encargo")
+     * * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="encargo_id", referencedColumnName="id")
+     * })
+     */
+    private $encargo;
 
     /**
      * @var boolean
@@ -82,32 +82,40 @@ class EncargoPenalizado
 
     private $diasRetrasoEntrega;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="dias_ejecucion", type="integer", nullable=true)*
-	 */
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_ejecucion", type="integer", nullable=true)*
+     */
 
-	private $diasEjecucion;
+    private $diasEjecucion;
 
-	/**
-	 * @var integer
-	 *
-	 * @ORM\Column(name="dias_previstos_ejecucion", type="integer", nullable=true)*
-	 */
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="dias_previstos_ejecucion", type="integer", nullable=true)*
+     */
 
-	private $diasPrevistosEjecucion;
+    private $diasPrevistosEjecucion;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="importe_penalizacion", type="float", nullable=true)*
+     */
+
+    private $importePenalizacion;
 
 
-	/**
-	 * @var text
-	 *
-	 * @ORM\Column(name="justificacion_eliminacion", type="text", nullable=true)*
-	 */
+    /**
+     * @var text
+     *
+     * @ORM\Column(name="justificacion_eliminacion", type="text", nullable=true)*
+     */
 
-	private $justificacionEliminacion;
+    private $justificacionEliminacion;
 
-	/**
+    /**
      * Get id.
      *
      * @return int
@@ -237,54 +245,69 @@ class EncargoPenalizado
         $this->diasRetrasoEntrega = $diasRetrasoEntrega;
     }
 
-	/**
-	 * @return int
-	 */
-	public function getDiasEjecucion()
-	{
-		return $this->diasEjecucion;
-	}
+    /**
+     * @return int
+     */
+    public function getDiasEjecucion()
+    {
+        return $this->diasEjecucion;
+    }
 
-	/**
-	 * @param int $diasEjecucion
-	 */
-	public function setDiasEjecucion($diasEjecucion)
-	{
-		$this->diasEjecucion = $diasEjecucion;
-	}
+    /**
+     * @param int $diasEjecucion
+     */
+    public function setDiasEjecucion($diasEjecucion)
+    {
+        $this->diasEjecucion = $diasEjecucion;
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getDiasPrevistosEjecucion()
-	{
-		return $this->diasPrevistosEjecucion;
-	}
+    /**
+     * @return int
+     */
+    public function getDiasPrevistosEjecucion()
+    {
+        return $this->diasPrevistosEjecucion;
+    }
 
-	/**
-	 * @param int $diasPrevistosEjecucion
-	 */
-	public function setDiasPrevistosEjecucion($diasPrevistosEjecucion)
-	{
-		$this->diasPrevistosEjecucion = $diasPrevistosEjecucion;
-	}
+    /**
+     * @param int $diasPrevistosEjecucion
+     */
+    public function setDiasPrevistosEjecucion($diasPrevistosEjecucion)
+    {
+        $this->diasPrevistosEjecucion = $diasPrevistosEjecucion;
+    }
 
-	/**
-	 * @return text
-	 */
-	public function getJustificacionEliminacion()
-	{
-		return $this->justificacionEliminacion;
-	}
+    /**
+     * @return text
+     */
+    public function getJustificacionEliminacion()
+    {
+        return $this->justificacionEliminacion;
+    }
 
-	/**
-	 * @param text $justificacionEliminacion
-	 */
-	public function setJustificacionEliminacion($justificacionEliminacion)
-	{
-		$this->justificacionEliminacion = $justificacionEliminacion;
-	}
+    /**
+     * @param text $justificacionEliminacion
+     */
+    public function setJustificacionEliminacion($justificacionEliminacion)
+    {
+        $this->justificacionEliminacion = $justificacionEliminacion;
+    }
 
+    /**
+     * @return float
+     */
+    public function getImportePenalizacion()
+    {
+        return $this->importePenalizacion;
+    }
+
+    /**
+     * @param float $importePenalizacion
+     */
+    public function setImportePenalizacion($importePenalizacion)
+    {
+        $this->importePenalizacion = $importePenalizacion;
+    }
 
 
 }

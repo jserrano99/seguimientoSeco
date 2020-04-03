@@ -14,5 +14,4 @@ namespace AppBundle\Repository;
  */
 class LineaCertificadoRepository extends \Doctrine\orm\EntityRepository {
 
-
 }

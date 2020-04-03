@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="penalizacionesDetalle" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1df6858-e117-43f9-8717-d70b8d48191f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.url" value="http://10.127.240.149:8080/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/penalizacionesDetalle"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/penalizacionesDetalle_files/main_jrxml"/>
+	<parameter name="certificadoServiciosId" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select * from view_encargos_penalizados 
+where certificadoServiciosid = $P{certificadoServiciosId} and eliminada is null]]>
+	</queryString>
+	<field name="contratoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="contratoDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="certificadoServiciosId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="certificadoServiciosId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="mesId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="mesId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="periodo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="indicadorId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="indicadorId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="indicadorCd" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="indicadorCd"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="indicadorDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="indicadorDs"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="encargoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="encargoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="encargoNumero" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="encargoNumero"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="encargoTitulo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="encargoTitulo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="numeroRemedy" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="numeroRemedy"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="encargoPenalizadoId" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="encargoPenalizadoId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="eliminada" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="eliminada"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="diasRetrasoEntrega" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="diasRetrasoEntrega"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="diasRetrasoValoracion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="diasRetrasoValoracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="diasEjecucion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="diasEjecucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="diasPrevistosEjecucion" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="diasPrevistosEjecucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="fcComienzoEjecucion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fcComienzoEjecucion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="fcEntregaValoracion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fcEntregaValoracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="fcRequeridaValoracion" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fcRequeridaValoracion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="fcCompromiso" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fcCompromiso"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="fecEntrega" class="java.sql.Timestamp">
+		<property name="com.jaspersoft.studio.field.label" value="fecEntrega"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="costeEncargo" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="costeEncargo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="horasComprometidas" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="horasComprometidas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<field name="importePenalizacion" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.label" value="importePenalizacion"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="view_encargos_penalizados"/>
+	</field>
+	<sortField name="indicadorId"/>
+	<sortField name="encargoNumero"/>
+	<variable name="encargoNumero1" class="java.lang.Integer" resetType="Group" resetGroup="indicador" calculation="Count">
+		<variableExpression><![CDATA[$F{encargoNumero}]]></variableExpression>
+	</variable>
+	<variable name="importePenalizacion1" class="java.lang.Double" resetType="Group" resetGroup="indicador" calculation="Sum">
+		<variableExpression><![CDATA[$F{importePenalizacion}]]></variableExpression>
+	</variable>
+	<group name="indicador" isReprintHeaderOnEachPage="true" keepTogether="true">
+		<groupExpression><![CDATA[$F{indicadorId}]]></groupExpression>
+		<groupHeader>
+			<band height="59">
+				<textField isStretchWithOverflow="true">
+					<reportElement x="120" y="0" width="680" height="20" uuid="ec19f93a-935f-4b9b-a0ef-cb9090f698b8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{indicadorDs}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="50" height="20" uuid="6a24eb3f-caa9-4354-9453-91ad0d746a19"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Indicador]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="70" y="0" width="50" height="20" uuid="eec5d6b6-c677-4689-9727-c94886c84ccd"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{indicadorCd}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="25" width="50" height="30" uuid="afcb2c2a-adf0-4272-bfbf-bec982cba398"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Número Encargo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="70" y="25" width="50" height="30" uuid="535f1ec9-8dd3-4df4-a416-34479544807e"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Número Remedy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="140" y="25" width="659" height="30" uuid="4046f0a0-bbed-417c-b83b-c5b7e92b8603"/>
+					<box>
+						<bottomPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Titulo]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="31">
+				<textField>
+					<reportElement x="540" y="0" width="60" height="20" uuid="9a5a51a7-0cdd-4599-b383-bf4e5e37b231"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{encargoNumero1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="10" y="0" width="500" height="20" uuid="db517225-8abf-459b-a638-a55da87d38be"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[CONCATENATE("Total ",$F{indicadorDs})]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+					<reportElement x="650" y="0" width="70" height="20" uuid="51603a4a-2ee8-451c-8b69-44ec3952ed2b"/>
+					<box>
+						<topPen lineWidth="1.0"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{importePenalizacion1}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="130" splitType="Stretch">
+			<textField>
+				<reportElement x="140" y="0" width="658" height="70" uuid="7d846936-1019-441e-85d5-565d09460c53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contratoDs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="100" width="100" height="30" uuid="126a5966-c185-4944-ad76-1e22b5784c0e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PERIODO: "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="72" width="799" height="22" uuid="c0efc8a6-842d-4525-b3c0-c4317497c3d3"/>
+				<box>
+					<bottomPen lineWidth="0.75"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DETALLE DE ENCARGOS CON PENALIZACIÓN]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="5" width="140" height="61" uuid="94143056-e173-418e-84fe-da1ca9409332"/>
+				<imageExpression><![CDATA["repo:textoMagma.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="100" y="100" width="220" height="30" uuid="4f577a1e-eb23-4b1f-9302-f14c7eae6476"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{periodo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="50" height="20" uuid="d458461b-1cea-4457-a243-9b568bcd5c9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{encargoNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="50" height="20" uuid="fdf13081-5edd-4138-a6a9-cbf5e3014151"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numeroRemedy}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="140" y="0" width="660" height="20" uuid="0e4b446f-3cac-4f0b-bbae-d5bb2409fd7e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{encargoTitulo}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="28">
+			<printWhenExpression><![CDATA[$F{indicadorCd}.equals( "ENC01" )]]></printWhenExpression>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="140" y="0" width="70" height="20" uuid="e2cad99f-dd3f-446d-bb26-75f98bd85106"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fcRequeridaValoracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="0" width="120" height="20" uuid="dfe5898a-6c75-42fc-a315-e80c586d9a45"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Requerida Valoración:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="370" y="0" width="100" height="20" uuid="2c7e63d9-4ee7-47d1-ac1b-8c6f09d5d07f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fcEntregaValoracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="214" y="0" width="110" height="20" uuid="43a61086-e5bc-4d56-bdf3-746455d10f07"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Entrega Valoración: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="530" y="0" width="40" height="20" uuid="5bb41a7d-01f6-48f5-9ec0-cbbc986b7f2d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diasRetrasoValoracion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="470" y="0" width="60" height="20" uuid="ab9b3fae-c2c8-450b-a221-4cf481d8feda"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Días Retraso: ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="670" y="0" width="50" height="20" uuid="cee25fe2-f12c-445e-b365-726167975e9e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importePenalizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="601" y="0" width="68" height="20" uuid="016c3e80-5d4f-49c0-8e74-8790074105f6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Penalizacion]]></text>
+			</staticText>
+		</band>
+		<band height="55">
+			<printWhenExpression><![CDATA[$F{indicadorCd}.equals("ENC02" )]]></printWhenExpression>
+			<staticText>
+				<reportElement x="170" y="0" width="61" height="20" uuid="29d16fef-c4ed-4020-b758-acbd526d37cd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Entrega:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="240" y="0" width="49" height="20" uuid="56240bb4-4d15-4c55-a1b5-fd6948a9c65d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecEntrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="22" width="106" height="20" uuid="94b146e8-1ef9-42fc-97b5-d05aece9172a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Compromiso Entrega:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="15" width="20" height="20" uuid="b1cf4cfd-3b8e-4907-8663-318c1bc41f94"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diasPrevistosEjecucion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="111" y="22" width="49" height="20" uuid="b033abf1-879e-4e3c-9c4d-2c078408cbf9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fcCompromiso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="15" width="60" height="20" uuid="af4ad051-2c85-4f1c-ac64-457990a023a2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Días Retraso: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="111" y="0" width="49" height="20" uuid="13b61b47-3332-4843-bf11-c1164724afe0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fcComienzoEjecucion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="0" width="108" height="20" uuid="a4506ef1-63ca-4560-a876-e92833c0a0bd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Comienzo Ejecución: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="15" width="60" height="20" uuid="085576f7-96dd-4d6f-a1de-7d254282e4e5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Días Ejecucion:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="450" y="15" width="20" height="20" uuid="73ec63b1-c3fe-4f51-9f02-6666d5cca042"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diasRetrasoEntrega}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="490" y="15" width="50" height="20" uuid="002bdac3-7aee-4553-a89a-a0be4676b489"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Coste Encargo: ]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="539" y="15" width="50" height="20" uuid="b77ce5f0-a4f6-4bd3-a4d5-428d3c8d4c47"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{costeEncargo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €" isBlankWhenNull="true">
+				<reportElement x="670" y="15" width="50" height="20" uuid="d991aa46-647b-4624-b0f6-5b96e46dd6b8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{importePenalizacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="600" y="15" width="70" height="20" uuid="4d65e9bc-0667-4516-886a-cb17401da313"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Importe Penalización]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="24">
+			<textField pattern="MMM d, yyyy HH:mm:ss ">
+				<reportElement x="660" y="5" width="130" height="16" uuid="df734a46-d472-471a-8c33-3706df6e34ca">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

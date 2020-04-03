@@ -2,21 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/informeActividadSCF.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/serviciosCuotaFija.jasper" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/serviciosCuotaFija.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaFija.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaTasada.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaVariable.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certificadoServicios.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/informeIndicadores.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/penalizacionesDetalle.jrxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/textoMagma.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/jasperReports/reports/imagenes/logo_horizontal.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/cargaFichero/genera.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/cargaFichero/genera.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/informe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/informe.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadADM.jrxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CargaFicheroController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CargaFicheroController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jrxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ReportController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ReportController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EventListener/CertificadoServiciosEventSuscribe.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EventListener/CertificadoServiciosEventSuscribe.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/FicheroSecoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/FicheroSecoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/CertificadoServicios.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/CertificadoServicios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,15 +179,15 @@
     <property name="settings.editor.selected.configurable" value="web.server" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/AppBundle/Repository" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Controller" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Form" />
       <recent name="$PROJECT_DIR$/app/Resources/views/comun" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Entity" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
     </key>
   </component>
   <component name="ServiceViewManager">
@@ -297,7 +303,14 @@
       <workItem from="1585634688688" duration="534000" />
       <workItem from="1585720953495" duration="5089000" />
       <workItem from="1585743788906" duration="7000" />
-      <workItem from="1585808162670" duration="528000" />
+      <workItem from="1585808162670" duration="16072000" />
+      <workItem from="1585897496864" duration="4794000" />
+      <workItem from="1586155294912" duration="234000" />
+      <workItem from="1586159181832" duration="2206000" />
+      <workItem from="1586243292897" duration="226000" />
+      <workItem from="1586251361469" duration="3284000" />
+      <workItem from="1586276585483" duration="71000" />
+      <workItem from="1586326804173" duration="340000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -341,7 +354,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585562527952</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Antes del Cambio del Modo de Calculo de las penalizaciones">
+      <created>1585810272846</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1585810272846</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Nuevo Tratamiento de Penalizaciones">
+      <created>1585924150292</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1585924150292</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,7 +408,9 @@
     <MESSAGE value="Incluir la gestión de centros y usuarios de remedy" />
     <MESSAGE value="antes de incluir seguimiento DG" />
     <MESSAGE value="Modificaciones Marzo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modificaciones Marzo" />
+    <MESSAGE value="Antes del Cambio del Modo de Calculo de las penalizaciones" />
+    <MESSAGE value="Nuevo Tratamiento de Penalizaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nuevo Tratamiento de Penalizaciones" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
@@ -400,11 +429,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502391139" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1585559961127">
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1586161446298">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="753" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583407766258" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585559961127" />
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586161446298" />
     <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584967944350">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -420,11 +449,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585563161946" />
-    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1585562527247">
+    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1585924149910">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1582639684219" />
-    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562527247" />
+    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585924149910" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1584719670605">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -460,11 +489,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="200" height="441" key="SqlResolveConfigurable/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061256" />
-    <state width="837" height="685" key="SwitcherDM" timestamp="1585808970626">
+    <state width="837" height="685" key="SwitcherDM" timestamp="1586251380798">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583144241699" />
-    <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585808970626" />
+    <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586251380798" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581503284336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,5 +1,12 @@
 eclipse.preferences.version=1
+encoding//CertificadoServicios/certServiciosCuotaFija.jrxml=UTF-8
+encoding//CertificadoServicios/certServiciosCuotaTasada.jrxml=UTF-8
+encoding//CertificadoServicios/certServiciosCuotaVariable.jrxml=UTF-8
+encoding//CertificadoServicios/certificadoServicios.jrxml=UTF-8
+encoding//CertificadoServicios/informeIndicadores.jrxml=UTF-8
+encoding//CertificadoServicios/penalizacionesDetalle.jrxml=UTF-8
 encoding//certificadoActividad/certificadoActividadADM.jrxml=UTF-8
+encoding//certificadoActividad/certificadoActividadNPL.jrxml=UTF-8
 encoding//certificadoActividad/informeActividadSCF.jrxml=UTF-8
 encoding//certificadoActividad/serviciosCuotaFija.jrxml=UTF-8
 encoding//seguimientoServicio/informeSeguimiento.jrxml=UTF-8

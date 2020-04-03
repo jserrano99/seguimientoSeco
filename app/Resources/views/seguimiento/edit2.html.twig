@@ -2,7 +2,7 @@
 {% block title %}INFORME SEGUIMIENTO{% endblock %}
 
 {% block titulo %} INFORME DE SEGUIMIENTO {{ seguimiento.descripcion }}
-
+    if
     <a href="{{ path("querySeguimiento") }}" class="btn btn-success">Volver</a>
 {% endblock %}
 {% block contenido %}
@@ -33,6 +33,8 @@
         <hr/>
     {% endfor %}
     <div class="container">
+        <span><h3>Periodo Actual : {{ mesActual.periodo.descripcion }}</h3></span>
+
         {% include 'seguimiento/formInforme.html.twig' %}
     </div>
 {% endblock %}

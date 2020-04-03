@@ -61,10 +61,10 @@
 	<parameter name="periodoId" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[select * from view_lineas_seguimiento  
-where seguimientoId = $P{seguimientoId} and tipoEstado!=3 
+where seguimientoId = $P{seguimientoId} and tipoEstado !=3 
 union 
 select * from view_lineas_seguimiento 
-where seguimientoId = $P{seguimientoId} and tipoEstado =3 and 
+where seguimientoId = $P{seguimientoId} and tipoEstado = 3 and 
 periodoId = $P{periodoId}]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
@@ -110,6 +110,9 @@ periodoId = $P{periodoId}]]>
 	<field name="encargoTitulo" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="encargoTitulo"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="view_lineas_seguimiento"/>
+	</field>
+	<field name="encargoDs" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="encargoDs"/>
 	</field>
 	<field name="encargoFechaEstado" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="encargoFechaEstado"/>
@@ -208,6 +211,7 @@ periodoId = $P{periodoId}]]>
 	<sortField name="agrupacionCd"/>
 	<sortField name="encargoNumero"/>
 	<sortField name="anotacionFecha"/>
+	<sortField name="agrupacionId"/>
 	<group name="Agrupacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{agrupacionCd}]]></groupExpression>
 		<groupHeader>
@@ -236,10 +240,10 @@ periodoId = $P{periodoId}]]>
 			</band>
 		</groupHeader>
 	</group>
-	<group name="Encargo" isReprintHeaderOnEachPage="true">
+	<group name="Encargo" isStartNewPage="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{encargoNumero}]]></groupExpression>
 		<groupHeader>
-			<band height="91">
+			<band height="164">
 				<textField>
 					<reportElement x="70" y="7" width="50" height="14" uuid="c39ab9d6-d543-49a8-a0e8-2b21ce9f05ec"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -257,19 +261,19 @@ periodoId = $P{periodoId}]]>
 					<textFieldExpression><![CDATA[$F{encargoTitulo}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="82" y="32" width="208" height="14" uuid="2be71056-b6da-43be-b64b-edf0702647ca"/>
+					<reportElement x="82" y="96" width="438" height="14" uuid="2be71056-b6da-43be-b64b-edf0702647ca"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{estadoEncargoDs}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="293" y="32" width="87" height="14" uuid="5cf1b4a9-b788-455e-8210-8857441d62f5"/>
+					<reportElement x="543" y="94" width="87" height="14" uuid="5cf1b4a9-b788-455e-8210-8857441d62f5"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Fecha Estado: ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="19" y="76" width="680" height="14" uuid="947914ba-179a-4ecc-8eee-97c11f46b9f0">
+					<reportElement x="19" y="140" width="680" height="14" uuid="947914ba-179a-4ecc-8eee-97c11f46b9f0">
 						<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 					</reportElement>
 					<box>
@@ -278,15 +282,15 @@ periodoId = $P{periodoId}]]>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<text><![CDATA[Anotaciones]]></text>
 				</staticText>
-				<textField pattern="ddMM/yyyy" isBlankWhenNull="true">
-					<reportElement x="40" y="60" width="100" height="14" uuid="e0769b52-2c09-4bd3-80fe-2ce0fcbe2136"/>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="40" y="124" width="100" height="14" uuid="e0769b52-2c09-4bd3-80fe-2ce0fcbe2136"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="8"/>
+						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaValoracion}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="40" y="46" width="98" height="14" uuid="1596e27e-41ad-42b2-ba74-32618a1e185a"/>
+					<reportElement x="40" y="110" width="98" height="14" uuid="1596e27e-41ad-42b2-ba74-32618a1e185a"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -295,15 +299,15 @@ periodoId = $P{periodoId}]]>
 					</textElement>
 					<text><![CDATA[Fecha Valoración]]></text>
 				</staticText>
-				<textField pattern="ddMM/yyyy" isBlankWhenNull="true">
-					<reportElement x="145" y="60" width="100" height="14" uuid="f208f47b-0177-4927-ad3c-5528d3677bc0"/>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="145" y="124" width="100" height="14" uuid="f208f47b-0177-4927-ad3c-5528d3677bc0"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaComienzoEjecucion}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="145" y="46" width="100" height="14" uuid="a5c9c7fb-63f4-4768-aeba-8db1db6685cc"/>
+					<reportElement x="145" y="110" width="100" height="14" uuid="a5c9c7fb-63f4-4768-aeba-8db1db6685cc"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -312,17 +316,8 @@ periodoId = $P{periodoId}]]>
 					</textElement>
 					<text><![CDATA[Comienzo Ejecución]]></text>
 				</staticText>
-				<textField pattern="ddMM/yyyy" isBlankWhenNull="true">
-					<reportElement x="260" y="60" width="100" height="14" uuid="b6904da6-fa95-4510-b2c2-dc39da2ad614">
-						<printWhenExpression><![CDATA[$F{objetoEncargoCd}.equals( "ENP" )]]></printWhenExpression>
-					</reportElement>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{fechaCompromiso}]]></textFieldExpression>
-				</textField>
 				<staticText>
-					<reportElement x="261" y="46" width="98" height="14" uuid="1f48a124-54a4-4a1c-912a-7c7a9f86cd60"/>
+					<reportElement x="261" y="110" width="98" height="14" uuid="1f48a124-54a4-4a1c-912a-7c7a9f86cd60"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -331,34 +326,34 @@ periodoId = $P{periodoId}]]>
 					</textElement>
 					<text><![CDATA[Fecha Compromiso]]></text>
 				</staticText>
-				<textField pattern="ddMM/yyyy" isBlankWhenNull="true">
-					<reportElement x="380" y="32" width="100" height="14" uuid="892951d6-3161-491b-8a71-20f2b6d4d05c"/>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="630" y="94" width="100" height="14" uuid="892951d6-3161-491b-8a71-20f2b6d4d05c"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{encargoFechaEstado}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="37" y="32" width="50" height="14" uuid="04a8cbe5-7f56-4e9d-bef0-af704f466129"/>
+					<reportElement x="37" y="96" width="50" height="14" uuid="04a8cbe5-7f56-4e9d-bef0-af704f466129"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Estado: ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="550" y="10" width="250" height="15" uuid="6b6c8599-01e8-4082-8bcf-e41b2a77bd8e"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="520" y="7" width="250" height="15" uuid="6b6c8599-01e8-4082-8bcf-e41b2a77bd8e"/>
 					<textElement verticalAlignment="Middle">
-						<font size="8" isBold="false"/>
+						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{objetoEncargoDs}]]></textFieldExpression>
 				</textField>
-				<textField pattern="ddMM/yyyy">
-					<reportElement x="375" y="60" width="100" height="14" uuid="06e13d53-cdc3-4d6e-84cf-f3ead215f473"/>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="375" y="124" width="100" height="14" uuid="06e13d53-cdc3-4d6e-84cf-f3ead215f473"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaEntregaRequerida}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="376" y="46" width="98" height="14" uuid="c832afd0-5775-4e79-868e-af326e64a17e"/>
+					<reportElement x="376" y="110" width="98" height="14" uuid="c832afd0-5775-4e79-868e-af326e64a17e"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -367,6 +362,24 @@ periodoId = $P{periodoId}]]>
 					</textElement>
 					<text><![CDATA[Fecha Entrega ]]></text>
 				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="90" y="30" width="690" height="59" uuid="e13507af-9294-46c3-a1ec-0b5757c7f7b5"/>
+					<textFieldExpression><![CDATA[$F{encargoDs}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="20" y="30" width="66" height="14" uuid="56ecc8fc-f691-4a03-8410-4c90a6bb1314"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descripción]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="260" y="124" width="100" height="16" uuid="45056c22-2f98-4587-8994-9785dd7c754d"/>
+					<textElement textAlignment="Center">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fechaCompromiso}]]></textFieldExpression>
+				</textField>
 			</band>
 		</groupHeader>
 	</group>
@@ -374,7 +387,7 @@ periodoId = $P{periodoId}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="60" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<staticText>
 				<reportElement x="280" y="0" width="359" height="50" uuid="6b9aaf07-b47f-475b-9a88-bbabeedf9381"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -393,17 +406,22 @@ periodoId = $P{periodoId}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{seguimientoDs}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="701" y="33" width="100" height="30" uuid="15483dca-6e8d-43c8-920b-f7a7d03a03aa"/>
+				<textFieldExpression><![CDATA[$P{periodoId}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>
 		<band height="21">
-			<textField pattern="d/MM/yyyy" isBlankWhenNull="true">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement x="19" y="3" width="80" height="18" uuid="500e0aff-4594-4b76-b567-5f70a45f4cad"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{anotacionFecha}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
 				<reportElement x="109" y="3" width="660" height="18" uuid="0b99540f-5a8f-44e0-9665-c9e499d85f4c"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{anotacionDs}]]></textFieldExpression>
 			</textField>
 		</band>

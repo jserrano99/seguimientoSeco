@@ -8,6 +8,14 @@
 {% endblock %}
 {% block titulo %} ENCARGOS **{{ accion }}**
     <a href="{{ path("queryEncargo") }}" class="btn btn-success"> Consulta Encargos </a>
+    <button type="button"
+            id="btnAddAnotacion"
+            class="btn btn-default btn-warning"
+            onclick="consultaSeco()"
+            data-toggle="tooltip"
+            data-placement="bottom"
+            title="Consulta SECO"> Consultar SECO
+    </button
 {% endblock %}
 {% block contenido %}
     {% for message in app.session.flashbag().get('status') %}
