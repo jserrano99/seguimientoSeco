@@ -140,7 +140,6 @@ class EncargoController extends Controller
             $this->getDoctrine()->getManager()->flush();
             $status = 'ENCARGO ' . $Encargo->getNumero() . ' MODIFICADO CORRECTAMENTE ';
             $this->sesion->getFlashBag()->add("status", $status);
-            return $this->redirectToRoute("queryEncargo");
         }
 
         $params = ["encargo" => $Encargo,

@@ -2,12 +2,27 @@
 {% block title %}INFORME SEGUIMIENTO{% endblock %}
 
 {% block titulo %} INFORME DE SEGUIMIENTO {{ seguimiento.descripcion }}
-    if
     <a href="{{ path("querySeguimiento") }}" class="btn btn-success">Volver</a>
 {% endblock %}
 {% block contenido %}
     <script>
         $(document).ready(function () {
+            let seguimiento_id;
+            seguimiento_id = seguimiento.id;
+            alert(seguimiento_id);
+            let recurso;
+            recurso = Routing.generate("ajaxQueryAgrupacionesByLineaSeguimiento", {"seguimiento_id": seguimiento_id}, true);
+            $.ajax({
+                type: "POST",
+                url: recurso,
+                success: function (data, status, xhr) {
+                    $("#formInformeSeguimiento_agrupacion").html(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $("#formInformeSeguimiento_agrupacion").html('error');
+                }
+            });
+
             $("#formInformeSeguimiento_anyo").change(function () {
                 idAnyo = $("#formInformeSeguimiento_anyo").val();
                 let recurso;

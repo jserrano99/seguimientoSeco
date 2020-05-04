@@ -242,4 +242,32 @@ class SeguimientoController extends Controller
         return $this->render("seguimiento/edit2.html.twig", $params);
     }
 
+    /**
+     * @param $seguimiento_id
+     * @return Response
+     */
+    public function queryByAgrupacionesAction($seguimiento_id)
+    {
+        $EntityManager = $this->getDoctrine()->getManager();
+        $Seguimiento = $EntityManager->getRepository("AppBundle:Seguimiento")->find($seguimiento_id);
+        $Agrupaciones = $EntityManager->getRepository("AppBundle:Agrupacion")->findBy(["seguimiento" => $Seguimiento]);
+
+        $html = " <select id='formInformeSeguimiento_agrupacion' " .
+            " name='formCertificadoServicios[agrupacion]' " .
+            " required='required' " .
+            " class='form-control'>" .
+            " <option value='' selected='selected'>Seleccione Agrupacion ....</option> ";
+        foreach ($Agrupaciones as $Agrupacion) {
+            $opcion = " <option value=' " . $Agrupacion->getId() . "'>" . $Agrupacion->getDescripcion() . "</option> ";
+            $html = $html . $opcion;
+        }
+        $html = $html . "</select>";
+
+
+        $reponse = new Response($html);
+
+        return $reponse;
+
+    }
+
 }

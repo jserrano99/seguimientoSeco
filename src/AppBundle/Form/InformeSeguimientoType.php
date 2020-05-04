@@ -28,6 +28,12 @@ class InformeSeguimientoType extends AbstractType
 				'required' => false,
 				'placeholder' => 'Seleccione mes ....',
 				'attr' => ["class" => "form-control"]])
+            ->add('agrupacion', EntityType::class, [
+                'label' => 'Agrupación',
+                'class' => 'AppBundle:Agrupacion',
+                'required' => false,
+                'placeholder' => 'Seleccione Agrupacion ....',
+                'attr' => ["class" => "form-control"]])
 
 			->add('Generar', SubmitType::class, [
 				"attr" => ["class" => "btn btn-t btn-success"]]);

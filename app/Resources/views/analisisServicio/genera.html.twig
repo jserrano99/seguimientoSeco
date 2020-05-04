@@ -1,0 +1,72 @@
+{% extends "base.html.twig" %}
+{% block title %}GENERAR ANALISIS DE SERVICIO{% endblock %}
+
+{% block titulo %} GENERAR ANALISIS DE SERVICIO
+{% endblock %}
+
+{% block contenido %}
+    <script>
+        $(document).ready(function () {
+
+            $("#formPeriodo_anyo").change(function () {
+
+                idAnyo = $("#formPeriodo_anyo").val();
+                let recurso;
+                recurso = Routing.generate("selectMes", {"idAnyo": idAnyo}, true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $("#procesando").hide();
+                        let codigo;
+                        codigo = "<select id='formPeriodo_mes' " +
+                            " name='formPeriodo[mes]' " +
+                            " required='required' " +
+                            " class='form-control'>" + data +
+                            "</select>";
+                        $("#formPeriodo_mes").html(codigo);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $("#formPeriodo_mes").html('error');
+                    }
+                });
+            });
+
+            $("#formPeriodo_generar").click(function () {
+                $('#procesando').show();
+                let recurso;
+                let periodo_id;
+                periodo_id = $("#formPeriodo_mes").val();
+                recurso = Routing.generate("generaAnalisisServicio",{"periodo_id": periodo_id}, true);
+                $.ajax({
+                    type: "POST",
+                    url: recurso,
+                    success: function (data, status, xhr) {
+                        $('.modal-backdrop').remove();
+                        $('#procesando').hide();
+                        recurso = Routing.generate("queryAnalisiServicio", true)
+                        window.location = recurso;
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $('#procesando').hide();
+                        alert(xhr.status);
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <div class="container">
+        <span><h3>Periodo Actual : {{ periodoActual.periodo.descripcion }}</h3></span>
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <br/>
+        {{ form_start (form,{'action':'','method':'POST'}) }}
+        {{ form_end (form) }}
+        <br/>
+    </div>
+{% endblock %}

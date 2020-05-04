@@ -191,4 +191,32 @@ class ComunController extends Controller
 		$response->setContent(file_get_contents($filename));
 		return $response;
 	}
+
+    /**
+     * @param $idAnyo
+     * @return Response
+     */
+    public
+    function selectMesAction($idAnyo)
+    {
+
+        $EntityManager = $this->getDoctrine()->getManager();
+        $Anyo = $EntityManager->getRepository("AppBundle:Anyo")->find($idAnyo);
+
+        $Periodos = $EntityManager->getRepository("AppBundle:Mes")->findBy(["anyo" => $Anyo]);
+
+        $html =
+            " <option value='' selected='selected'>Seleccione mes ....</option> ";
+        foreach ($Periodos as $Periodo) {
+            $opcion = " <option value=' " . $Periodo->getId() . "'>" . $Periodo->getDescripcion() . "</option> ";
+            $html = $html . $opcion;
+        }
+        $html = $html . "</select>";
+
+
+        $reponse = new Response($html);
+
+        return $reponse;
+
+    }
 }

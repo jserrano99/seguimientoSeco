@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+{% block title %} ANALISIS SERVICIO NO PLANIFICABLE {% endblock %}
+
+{% block titulo %} 
+    <div id='dtitulo' class="container"> ANALISIS SERVICIO NO PLANIFICACBLE
+    <a href="{{path("addAnalisisServicio")}}"
+       class="btn btn-success">
+        <span class="glyphicon glyphicon-new-window"></span> GENERAR </a>
+    <hr/>
+    </div>
+{% endblock %} 
+
+{% block contenido %}
+    <div class="container-fluid">
+        {% for message in app.session.flashbag().get('status') %}
+            <div class="alert alert-success">
+                {{message}}
+            </div>
+            <hr/>
+        {% endfor %}
+        {{ sg_datatables_render(datatable) }}
+    </div>
+{% endblock %}

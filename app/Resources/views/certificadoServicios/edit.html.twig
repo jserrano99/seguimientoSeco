@@ -17,7 +17,7 @@
     <script>
         $(document).ready(function () {
             $("#formCertificadoServicios_anyo").change(function () {
-
+                let idAnyo;
                 idAnyo = $("#formCertificadoServicios_anyo").val();
                 let recurso;
                 recurso = Routing.generate("ajaxPeriodo", {"idAnyo": idAnyo}, true);
@@ -92,7 +92,6 @@
             });
 
             $("#formCertificadoServicios_verHorasCuotaFija").click(function () {
-                $("#procesando").show();
                 let recurso;
                 let id;
                 id = $("#formCertificadoServicios_id").val();
@@ -101,37 +100,33 @@
             });
 
             $("#formCertificadoServicios_imprimirCertificado").click(function () {
-                $("#procesando").show();
                 let recurso;
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("imprimirCertificadoServicios", {"id": id}, true);
-                window.location = recurso;
+                window.open(recurso);
             });
-            $("#formCertificadoServicios_imprimirCertificadoActividad").click(function () {
-                $("#procesando").show();
+            $("#formCertificadoServicios_imprimirCertificadoActividad").click(function () {$("#procesando").show()
                 let recurso;
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("certificadoActividad", {"id": id}, true);
-                window.location = recurso;
+                window.open(recurso);
             });
             $("#formCertificadoServicios_penalizaciones").click(function () {
-                $("#procesando").show();
                 let recurso;
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("penalizaciones", {"id": id}, true);
-                window.location = recurso;
+                window.open(recurso);
             });
 
             $("#formCertificadoServicios_penalizacionesDetalle").click(function () {
-                $("#procesando").show();
                 let recurso;
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("penalizacionesDetalle", {"id": id}, true);
-                window.location = recurso;
+                window.open(recurso);
             });
             $("#formCertificadoServicios_exportarReaperturas").click(function () {
                 // $("#procesando").show();
@@ -173,7 +168,7 @@
                 let id;
                 id = $("#formCertificadoServicios_id").val();
                 recurso = Routing.generate("imprimirActividadSCF", {"id": id}, true);
-                window.location = recurso;
+                window.open(recurso);
             });
 
 

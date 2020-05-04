@@ -314,6 +314,7 @@ class CertificadoServiciosController extends Controller
         $importeENC02 = $this->importePenalizacionENC02($CertificadoServicios);
         $importeENT01 = $this->importePenalizacionENT01($CertificadoServicios);
 
+
         return $importeIRS01 +
             $importeIRS02 +
             $importeIRS03 +
@@ -322,6 +323,7 @@ class CertificadoServiciosController extends Controller
             $importeENC01 +
             $importeENC02 +
             $importeENT01;
+
     }
 
 
@@ -358,6 +360,7 @@ class CertificadoServiciosController extends Controller
         $total = round($total, 2);
         $maximoPenalizaciones = round($total * 0.20, 2);
         $importePenalizacion = round($this->importePenalizacion($CertificadoServicios), 2);
+
 
         if ($importePenalizacion > $maximoPenalizaciones) {
             $penalizacionAplicable = $maximoPenalizaciones;
@@ -528,7 +531,7 @@ class CertificadoServiciosController extends Controller
 
         $nmQuejas = count($QuejasPeriodo);
         $IndicadorIRQ01 = $EntityManager->getRepository("AppBundle:Indicador")->find(5);
-
+        $importe = 0;
         $Penalizacion = new Penalizacion();
         $Penalizacion->setIndicador($IndicadorIRQ01);
         $Penalizacion->setCertificadoServicios($CertificadoServicios);
@@ -541,7 +544,7 @@ class CertificadoServiciosController extends Controller
         $Penalizacion->setImporte(0);
         $EntityManager->persist($Penalizacion);
         $EntityManager->flush();
-        return true;
+        return $importe;
 
     }
 
@@ -623,7 +626,7 @@ class CertificadoServiciosController extends Controller
         if ($porcentaje <= 0.85) $factor = 1;
 
         $peso = $IndicadorIRS01->getPeso() * $factor;
-        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
+        $importe = round($CertificadoServicios->getImporteCuotaFijaMensual() * $peso, 2);
         $Penalizacion = new Penalizacion();
         $Penalizacion->setIndicador($IndicadorIRS01);
         $Penalizacion->setCertificadoServicios($CertificadoServicios);
@@ -668,7 +671,7 @@ class CertificadoServiciosController extends Controller
         if ($porcentaje <= 0.85) $factor = 1;
 
         $peso = $IndicadorIRS02->getPeso() * $factor;
-        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
+        $importe = round($CertificadoServicios->getImporteCuotaFijaMensual() * $peso, 2);
 
         $Penalizacion = new Penalizacion();
         $Penalizacion->setIndicador($IndicadorIRS02);
@@ -710,9 +713,8 @@ class CertificadoServiciosController extends Controller
         if ($porcentaje > 0.90 and $porcentaje <= 0.95) $factor = 0.5;
         if ($porcentaje > 0.85 and $porcentaje <= 0.90) $factor = 0.75;
         if ($porcentaje <= 0.85) $factor = 1;
-        $peso = $IndicadorIRS03->getPeso() * $factor;
-
-        $importe = $CertificadoServicios->getImporteCuotaFijaMensual() * $peso;
+        $peso = round($IndicadorIRS03->getPeso() * $factor, 2);
+        $importe = round($CertificadoServicios->getImporteCuotaFijaMensual() * $peso, 2);
         $Penalizacion = new Penalizacion();
         $Penalizacion->setIndicador($IndicadorIRS03);
         $Penalizacion->setCertificadoServicios($CertificadoServicios);
@@ -756,7 +758,7 @@ class CertificadoServiciosController extends Controller
         $Penalizacion->setPorcentaje(0);
         $Penalizacion->setFactor(0);
         $Penalizacion->setPeso(0);
-        $Penalizacion->setImporte($importe);
+        $Penalizacion->setImporte(round($importe, 2));
         $EntityManager->persist($Penalizacion);
         $EntityManager->flush();
 
@@ -780,6 +782,8 @@ class CertificadoServiciosController extends Controller
         foreach ($EncargosPenalizadosALL as $EncargoPenalizado) {
             $importe = $importe + $EncargoPenalizado->getImportePenalizacion();
         }
+
+        $importe = round($importe, 2);
         $Penalizacion = new Penalizacion();
         $Penalizacion->setIndicador($IndicadorENC02);
         $Penalizacion->setCertificadoServicios($CertificadoServicios);
@@ -789,7 +793,7 @@ class CertificadoServiciosController extends Controller
         $Penalizacion->setPorcentaje(0);
         $Penalizacion->setFactor(0);
         $Penalizacion->setPeso(0);
-        $Penalizacion->setImporte($importe);
+        $Penalizacion->setImporte($importe, 2);
         $EntityManager->persist($Penalizacion);
         $EntityManager->flush();
 
@@ -824,7 +828,7 @@ class CertificadoServiciosController extends Controller
         $Penalizacion->setPorcentaje(0);
         $Penalizacion->setFactor(0);
         $Penalizacion->setPeso(0);
-        $Penalizacion->setImporte($importe);
+        $Penalizacion->setImporte(round($importe, 2));
         $EntityManager->persist($Penalizacion);
         $EntityManager->flush();
 
@@ -1567,9 +1571,10 @@ class CertificadoServiciosController extends Controller
         /** @var Connection $conection */
         $conection = $this->getDoctrine()->getConnection();
 
-        $sentencia = "select ver.numeroRemedy, count(*)-1 as total from linea_certificado as lc "
+        $sentencia = "select ver.numeroRemedy, count(*) as total from linea_certificado as lc "
+            . " inner join encargo as e on e.id = lc.encargo_id "
             . " inner join view_encargos_remedy as ver on ver.encargoId = lc.encargo_id "
-            . " where ver.numeroRemedy= :numeroRemedy "
+            . " where ver.numeroRemedy= :numeroRemedy and ver.numeroEncargo < e.numero "
             . " group by ver.numeroRemedy ";
 
 
@@ -1620,7 +1625,7 @@ class CertificadoServiciosController extends Controller
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      */
     public
-    function cargaRevisionPenalizacionesAction(Request $request, $id )
+    function cargaRevisionPenalizacionesAction(Request $request, $id)
     {
         /** @var EntityManager $EntityManager */
         $EntityManager = $this->getDoctrine()->getManager();
@@ -1813,10 +1818,7 @@ class CertificadoServiciosController extends Controller
         }
         $html = $html . "</select>";
 
-
-        $reponse = new Response($html);
-
-        return $reponse;
+        return new Response($html);
 
     }
 
@@ -2074,7 +2076,7 @@ class CertificadoServiciosController extends Controller
                 $ImportesContrato = $this->importesContrato($CertificadoServicios);
                 $thpCs = $ImportesContrato->getTarifaHoraCs();
                 $fechaInicio = $Encargo->getFcComienzoEjecucion();
-                $fechaFin = $Encargo->getFcEntrega();
+                $fechaFin = $Encargo->getFcCompromiso();
                 $diff = $fechaInicio->diff($fechaFin);
                 $diasPrevistosEjecucion = $diff->format("%a");
                 $diasPrevistosEjecucion == 0 ? $factor = $diasRetrasoEntrega : $factor = $diasRetrasoEntrega / $diasPrevistosEjecucion;

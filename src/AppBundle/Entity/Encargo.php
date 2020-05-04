@@ -333,7 +333,30 @@ class Encargo
 	 */
 	private $penaliza;
 
-	public function __toString()
+    /**
+     * @var boolean
+     * @ORM\Column(name="incluir_en_informe", type="boolean",  nullable=true)*
+     */
+    private $incluirEnInforme;
+
+    /**
+     * @return bool
+     */
+    public function isIncluirEnInforme()
+    {
+        return $this->incluirEnInforme;
+    }
+
+    /**
+     * @param bool $incluirEnInforme
+     */
+    public function setIncluirEnInforme($incluirEnInforme)
+    {
+        $this->incluirEnInforme = $incluirEnInforme;
+    }
+
+
+    public function __toString()
 	{
 		return $this->numero . ' ' . $this->titulo;
 	}

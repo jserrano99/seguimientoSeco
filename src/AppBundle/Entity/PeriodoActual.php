@@ -13,7 +13,7 @@ use DateTime;
 
 /**
  * @ORM\Table(name="periodo_actual")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PerioidoActualRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PeriodoActualRepository")
  *
  */
 class PeriodoActual

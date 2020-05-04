@@ -65,7 +65,10 @@ where seguimientoId = $P{seguimientoId} and tipoEstado !=3
 union 
 select * from view_lineas_seguimiento 
 where seguimientoId = $P{seguimientoId} and tipoEstado = 3 and 
-periodoId = $P{periodoId}]]>
+periodoId = $P{periodoId}
+union
+select * from view_lineas_seguimiento 
+where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 	</queryString>
 	<field name="fecha" class="java.sql.Timestamp">
 		<property name="com.jaspersoft.studio.field.label" value="fecha"/>
@@ -208,10 +211,12 @@ periodoId = $P{periodoId}]]>
 		<property name="com.jaspersoft.studio.field.label" value="periodoId"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="view_lineas_seguimiento"/>
 	</field>
+	<field name="incluirEnInforme" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="incluirEnInforme"/>
+	</field>
 	<sortField name="agrupacionCd"/>
 	<sortField name="encargoNumero"/>
 	<sortField name="anotacionFecha"/>
-	<sortField name="agrupacionId"/>
 	<group name="Agrupacion" isStartNewPage="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{agrupacionCd}]]></groupExpression>
 		<groupHeader>

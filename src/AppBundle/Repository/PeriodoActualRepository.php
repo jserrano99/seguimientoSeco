@@ -11,7 +11,7 @@ namespace AppBundle\Repository;
 /**
  * @author jluis_local
  */
-class PerioidoActualRepository extends \Doctrine\orm\EntityRepository
+class PeriodoActualRepository extends \Doctrine\orm\EntityRepository
 {
 
 

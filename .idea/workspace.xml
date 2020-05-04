@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaFija.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaTasada.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certServiciosCuotaVariable.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/certificadoServicios.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/informeIndicadores.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/penalizacionesDetalle.jrxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/CertificadoServicios/textoMagma.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/jasperReports/reports/imagenes/logo_horizontal.png" afterDir="false" />
+    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="Consolidación Nuevo Tratamiento de Penalizaciones">
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/genera.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/PeriodoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/formEncargoPenalizado.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/informe.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/informe.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/.settings/org.eclipse.core.resources.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/certificadoActividad/certificadoActividadNPL.jrxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ComunController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ComunController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/CertificadoServicios.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/CertificadoServicios.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoPenalizadoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Encargo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Encargo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/PeriodoActual.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/PeriodoActual.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/PerioidoActualRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/PeriodoActualRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,49 +36,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
-  </component>
-  <component name="DatabaseView">
-    <option name="SHOW_INTERMEDIATE" value="true" />
-    <option name="GROUP_DATA_SOURCES" value="true" />
-    <option name="GROUP_SCHEMA" value="true" />
-    <option name="GROUP_CONTENTS" value="false" />
-    <option name="SORT_POSITIONED" value="false" />
-    <option name="SHOW_EMPTY_GROUPS" value="false" />
-    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
-    <option name="HIDDEN_KINDS">
-      <set />
-    </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="@10.127.240.149" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="seguimientoseco: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
-      </path>
-    </expand>
-    <select />
-  </component>
-  <component name="FavoritesManager">
-    <favorites_list name="seguimientoSeco" />
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -81,13 +44,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/AppBundle/Datatables/CertificadoServiciosDatatable.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="C:\wamp64\www\seguimientoSeco\.idea" />
-      </set>
-    </option>
   </component>
   <component name="PhpDebugGeneral" listening_started="true" />
   <component name="PhpWorkspaceProjectConfiguration">
@@ -161,12 +117,12 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -175,42 +131,22 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/AppBundle/Repository" />
-    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/AppBundle/Datatables" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.file-colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/AppBundle/Repository" />
-      <recent name="$PROJECT_DIR$/src/AppBundle/Controller" />
-      <recent name="$PROJECT_DIR$/src/AppBundle/Form" />
-      <recent name="$PROJECT_DIR$/app/Resources/views/comun" />
+      <recent name="$PROJECT_DIR$/src/AppBundle/Datatables" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Entity" />
+      <recent name="$PROJECT_DIR$/app/Resources/views/comun" />
+      <recent name="$PROJECT_DIR$/src/AppBundle/Form" />
+      <recent name="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
+      <recent name="$PROJECT_DIR$/app/Resources/views" />
       <recent name="C:\wamp64\www\seguimientoSeco\app\Resources\views\usuariosRemedy" />
     </key>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@10.127.240.149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:@10.127.240.149" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@422b38b4" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-            </expand>
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="StructureViewFactory">
     <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
@@ -310,7 +246,25 @@
       <workItem from="1586243292897" duration="226000" />
       <workItem from="1586251361469" duration="3284000" />
       <workItem from="1586276585483" duration="71000" />
-      <workItem from="1586326804173" duration="340000" />
+      <workItem from="1586326804173" duration="5356000" />
+      <workItem from="1586344775038" duration="371000" />
+      <workItem from="1586758458186" duration="2332000" />
+      <workItem from="1586768002584" duration="2150000" />
+      <workItem from="1586847174420" duration="397000" />
+      <workItem from="1586889836547" duration="31000" />
+      <workItem from="1586889896147" duration="311000" />
+      <workItem from="1586935334462" duration="141000" />
+      <workItem from="1586958636663" duration="6000" />
+      <workItem from="1587112136899" duration="1281000" />
+      <workItem from="1587121855755" duration="1091000" />
+      <workItem from="1587978602057" duration="7850000" />
+      <workItem from="1588057437833" duration="1259000" />
+      <workItem from="1588067880175" duration="2203000" />
+      <workItem from="1588572946363" duration="14000" />
+      <workItem from="1588572991813" duration="152000" />
+      <workItem from="1588575323577" duration="684000" />
+      <workItem from="1588576450603" duration="465000" />
+      <workItem from="1588590045793" duration="20000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -368,20 +322,25 @@
       <option name="project" value="LOCAL" />
       <updated>1585924150292</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Consolidación Nuevo Tratamiento de Penalizaciones">
+      <created>1586327646604</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586327646604</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -400,6 +359,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -410,7 +370,8 @@
     <MESSAGE value="Modificaciones Marzo" />
     <MESSAGE value="Antes del Cambio del Modo de Calculo de las penalizaciones" />
     <MESSAGE value="Nuevo Tratamiento de Penalizaciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nuevo Tratamiento de Penalizaciones" />
+    <MESSAGE value="Consolidación Nuevo Tratamiento de Penalizaciones" />
+    <option name="LAST_COMMIT_MESSAGE" value="Consolidación Nuevo Tratamiento de Penalizaciones" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
@@ -429,35 +390,40 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502391139" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1586161446298">
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1587984729022">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="753" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583407766258" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586161446298" />
-    <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1584967944350">
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1587984729022" />
+    <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1586889860871">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="-1280" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580712823053" />
     <state x="640" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581685033334" />
-    <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1584967944350" />
-    <state x="491" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1583498985758">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586889860871" />
+    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587981713972">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="491" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1583498985758" />
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581668498400" />
+    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1587981713972" />
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#" timestamp="1585563161946">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585563161946" />
-    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1585924149910">
+    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1586847801081">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1582639684219" />
-    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585924149910" />
+    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586847801081" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1584719670605">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1584719670605" />
+    <state x="100" y="123" width="1480" height="827" key="DirDiffDialog" timestamp="1588576057916">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="100" y="123" width="1480" height="827" key="DirDiffDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588576057916" />
     <state width="1293" height="274" key="GridCell.Tab.0.bottom" timestamp="1581502431183">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -478,22 +444,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="230" height="457" key="HiddenNamespacesPopup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502418216" />
-    <state x="403" y="184" key="SettingsEditor" timestamp="1584719623231">
+    <state x="403" y="184" key="SettingsEditor" timestamp="1588573131170">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="-1459" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580827619891" />
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581503276986" />
-    <state x="403" y="184" key="SettingsEditor/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1584719623231" />
+    <state x="403" y="184" key="SettingsEditor/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588573131170" />
     <state x="403" y="184" key="SettingsEditor/1680.23.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1584099160854" />
     <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1581433061256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="200" height="441" key="SqlResolveConfigurable/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581433061256" />
-    <state width="837" height="685" key="SwitcherDM" timestamp="1586251380798">
+    <state width="837" height="685" key="SwitcherDM" timestamp="1586768017723">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583144241699" />
-    <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586251380798" />
+    <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586768017723" />
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581503284336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
