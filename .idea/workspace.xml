@@ -1,37 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicio.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicioDetalle.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicioPeriodo.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AgrupacionDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AgrupacionDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnotacionEncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnotacionEncargoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CargaFicheroDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CargaFicheroDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CertificadoServiciosDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CertificadoServiciosDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/ContratoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/ContratoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/ImportesContratoAnualidadDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/ImportesContratoAnualidadDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/RemedyDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/RemedyDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/plantillas/PlantillaSeguimiento.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/plantillas/PlantillaSeguimiento.xlsx" afterDir="false" />
-    </list>
+    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -142,7 +112,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.file-colors" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -285,6 +255,7 @@
       <workItem from="1588836102233" duration="4079000" />
       <workItem from="1588916468648" duration="7206000" />
       <workItem from="1588935317782" duration="2999000" />
+      <workItem from="1589123479481" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -356,7 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588613078916</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Inclusión del Analisis del Servicio NPL">
+      <created>1589123518502</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1589123518502</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +376,8 @@
     <MESSAGE value="Antes del Cambio del Modo de Calculo de las penalizaciones" />
     <MESSAGE value="Nuevo Tratamiento de Penalizaciones" />
     <MESSAGE value="Consolidación Nuevo Tratamiento de Penalizaciones" />
-    <option name="LAST_COMMIT_MESSAGE" value="Consolidación Nuevo Tratamiento de Penalizaciones" />
+    <MESSAGE value="Inclusión del Analisis del Servicio NPL" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inclusión del Analisis del Servicio NPL" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="179" key="#Deployment" timestamp="1581501267504">
@@ -443,11 +422,11 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585563161946" />
-    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1588613078521">
+    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1589123518117">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1582639684219" />
-    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586847801081" />
+    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1589123518117" />
     <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1588613078521" />
     <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1588673292329">
       <screen x="0" y="23" width="1680" height="1027" />
@@ -481,12 +460,12 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="230" height="457" key="HiddenNamespacesPopup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502418216" />
-    <state x="403" y="184" key="SettingsEditor" timestamp="1588573131170">
+    <state x="403" y="184" key="SettingsEditor" timestamp="1589123568235">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="-1459" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580827619891" />
     <state x="461" y="163" key="SettingsEditor/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581503276986" />
-    <state x="403" y="184" key="SettingsEditor/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588573131170" />
+    <state x="403" y="184" key="SettingsEditor/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1589123568235" />
     <state x="403" y="184" key="SettingsEditor/1680.23.1920.1057/0.23.1680.1027@0.23.1680.1027" timestamp="1584099160854" />
     <state width="200" height="441" key="SqlResolveConfigurable" timestamp="1581433061256">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -516,9 +495,10 @@
     </state>
     <state x="657" y="252" width="736" height="606" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581674441855" />
     <state x="576" y="271" width="704" height="599" key="find.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588662685742" />
-    <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1588613091805">
+    <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1589123530686">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
+    <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1589123530686" />
     <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1588613091805" />
     <state x="746" y="437" key="publish.login" timestamp="1584719640632">
       <screen x="0" y="23" width="1680" height="1027" />
