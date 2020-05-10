@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="@10.127.240.149" uuid="273bd0b7-e05f-4286-9653-debb2c951395">
+    <data-source source="LOCAL" name="MySQL - seguimientoSeco@10.127.240.149" uuid="273bd0b7-e05f-4286-9653-debb2c951395">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://10.127.240.149:3306</jdbc-url>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://10.127.240.149:3306/seguimientoSeco</jdbc-url>
       <driver-properties>
         <property name="serverTimezone" value="Europe/Madrid" />
       </driver-properties>

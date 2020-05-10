@@ -57,7 +57,7 @@ class EncargoPenalizadoDatatable extends AbstractDatatable
 			'auto_width' => false,
 			'ordering' => true,
 			'length_change' => true,
-			'state_save' => true
+			'state_save' => false
 		]);
 		$Indicadores = $this->em->getRepository("AppBundle:Indicador")->findAll();
 

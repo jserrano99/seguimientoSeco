@@ -20,39 +20,39 @@
 	<style name="ColorLinea" hTextAlign="Right" vTextAlign="Middle" pattern="#,##0.00 ¤">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "CRR" )]]></conditionExpression>
-			<style forecolor="#050505" pattern=""/>
+			<style forecolor="#FF0800" backcolor="#FF0000" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "EJE" )]]></conditionExpression>
-			<style forecolor="#009900" pattern=""/>
+			<style forecolor="#00C800" backcolor="#00C800" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "PVA" )]]></conditionExpression>
-			<style forecolor="#3366FF" pattern=""/>
+			<style forecolor="#3366FF" backcolor="#3366FF" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "PRE")]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "PVE" )]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "PAC")]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "VEP" )]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "EEP")]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$F{estadoEncargoCd}.equals( "RPL")]]></conditionExpression>
-			<style forecolor="#FF0703" pattern=""/>
+			<style forecolor="#FFB303" backcolor="#FCB605" pattern=""/>
 		</conditionalStyle>
 	</style>
 	<parameter name="seguimientoId" class="java.lang.Integer">
@@ -248,30 +248,32 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 	<group name="Encargo" isStartNewPage="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{encargoNumero}]]></groupExpression>
 		<groupHeader>
-			<band height="164">
+			<band height="154">
 				<textField>
-					<reportElement x="70" y="7" width="50" height="14" uuid="c39ab9d6-d543-49a8-a0e8-2b21ce9f05ec"/>
+					<reportElement x="63" y="10" width="50" height="14" uuid="c39ab9d6-d543-49a8-a0e8-2b21ce9f05ec"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{encargoNumero}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="20" y="7" width="50" height="14" uuid="722133ed-cda5-490b-b7e6-ea429ec58c65"/>
+					<reportElement x="13" y="10" width="50" height="14" uuid="722133ed-cda5-490b-b7e6-ea429ec58c65"/>
 					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Encargo: ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="120" y="7" width="400" height="14" uuid="0edd50e3-2f35-4de0-babc-1d6281c7c97a"/>
+					<reportElement x="113" y="10" width="400" height="14" uuid="0edd50e3-2f35-4de0-babc-1d6281c7c97a"/>
 					<textFieldExpression><![CDATA[$F{encargoTitulo}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement x="82" y="96" width="438" height="14" uuid="2be71056-b6da-43be-b64b-edf0702647ca"/>
-					<textElement verticalAlignment="Middle"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="72" y="94" width="240" height="14" uuid="2be71056-b6da-43be-b64b-edf0702647ca"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font isItalic="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{estadoEncargoDs}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="543" y="94" width="87" height="14" uuid="5cf1b4a9-b788-455e-8210-8857441d62f5"/>
+					<reportElement x="313" y="94" width="87" height="14" uuid="5cf1b4a9-b788-455e-8210-8857441d62f5"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -288,14 +290,14 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 					<text><![CDATA[Anotaciones]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="40" y="124" width="100" height="14" uuid="e0769b52-2c09-4bd3-80fe-2ce0fcbe2136"/>
+					<reportElement x="40" y="126" width="100" height="14" uuid="e0769b52-2c09-4bd3-80fe-2ce0fcbe2136"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaValoracion}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="40" y="110" width="98" height="14" uuid="1596e27e-41ad-42b2-ba74-32618a1e185a"/>
+					<reportElement x="40" y="112" width="98" height="14" uuid="1596e27e-41ad-42b2-ba74-32618a1e185a"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -305,14 +307,14 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 					<text><![CDATA[Fecha Valoración]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="145" y="124" width="100" height="14" uuid="f208f47b-0177-4927-ad3c-5528d3677bc0"/>
+					<reportElement x="145" y="126" width="100" height="14" uuid="f208f47b-0177-4927-ad3c-5528d3677bc0"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaComienzoEjecucion}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="145" y="110" width="100" height="14" uuid="a5c9c7fb-63f4-4768-aeba-8db1db6685cc"/>
+					<reportElement x="145" y="112" width="100" height="14" uuid="a5c9c7fb-63f4-4768-aeba-8db1db6685cc"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -322,7 +324,7 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 					<text><![CDATA[Comienzo Ejecución]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="261" y="110" width="98" height="14" uuid="1f48a124-54a4-4a1c-912a-7c7a9f86cd60"/>
+					<reportElement x="261" y="112" width="98" height="14" uuid="1f48a124-54a4-4a1c-912a-7c7a9f86cd60"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -332,33 +334,33 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 					<text><![CDATA[Fecha Compromiso]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="630" y="94" width="100" height="14" uuid="892951d6-3161-491b-8a71-20f2b6d4d05c"/>
+					<reportElement x="400" y="94" width="100" height="14" uuid="892951d6-3161-491b-8a71-20f2b6d4d05c"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA[$F{encargoFechaEstado}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="37" y="96" width="50" height="14" uuid="04a8cbe5-7f56-4e9d-bef0-af704f466129"/>
+					<reportElement x="13" y="94" width="50" height="14" uuid="04a8cbe5-7f56-4e9d-bef0-af704f466129"/>
 					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Estado: ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true">
-					<reportElement x="520" y="7" width="250" height="15" uuid="6b6c8599-01e8-4082-8bcf-e41b2a77bd8e"/>
-					<textElement verticalAlignment="Middle">
+					<reportElement x="513" y="10" width="250" height="15" uuid="6b6c8599-01e8-4082-8bcf-e41b2a77bd8e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{objetoEncargoDs}]]></textFieldExpression>
 				</textField>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="375" y="124" width="100" height="14" uuid="06e13d53-cdc3-4d6e-84cf-f3ead215f473"/>
+					<reportElement x="375" y="126" width="100" height="14" uuid="06e13d53-cdc3-4d6e-84cf-f3ead215f473"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaEntregaRequerida}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="376" y="110" width="98" height="14" uuid="c832afd0-5775-4e79-868e-af326e64a17e"/>
+					<reportElement x="376" y="112" width="98" height="14" uuid="c832afd0-5775-4e79-868e-af326e64a17e"/>
 					<box>
 						<bottomPen lineWidth="1.0"/>
 					</box>
@@ -368,23 +370,29 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 					<text><![CDATA[Fecha Entrega ]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
-					<reportElement x="90" y="30" width="690" height="59" uuid="e13507af-9294-46c3-a1ec-0b5757c7f7b5"/>
+					<reportElement x="83" y="33" width="690" height="59" uuid="e13507af-9294-46c3-a1ec-0b5757c7f7b5"/>
+					<textElement>
+						<font size="10"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{encargoDs}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="20" y="30" width="66" height="14" uuid="56ecc8fc-f691-4a03-8410-4c90a6bb1314"/>
+					<reportElement x="13" y="33" width="66" height="14" uuid="56ecc8fc-f691-4a03-8410-4c90a6bb1314"/>
 					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
+						<font isBold="true" isItalic="true"/>
 					</textElement>
 					<text><![CDATA[Descripción]]></text>
 				</staticText>
 				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-					<reportElement x="260" y="124" width="100" height="16" uuid="45056c22-2f98-4587-8994-9785dd7c754d"/>
+					<reportElement x="260" y="126" width="100" height="16" uuid="45056c22-2f98-4587-8994-9785dd7c754d"/>
 					<textElement textAlignment="Center">
 						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{fechaCompromiso}]]></textFieldExpression>
 				</textField>
+				<rectangle>
+					<reportElement style="ColorLinea" x="1" y="94" width="9" height="59" uuid="c114b22b-e7b0-44bc-9e96-586c108e329b"/>
+				</rectangle>
 			</band>
 		</groupHeader>
 	</group>
@@ -418,14 +426,14 @@ where seguimientoId = $P{seguimientoId} and incluirEnInforme = true]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="21">
+		<band height="15">
 			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="19" y="3" width="80" height="18" uuid="500e0aff-4594-4b76-b567-5f70a45f4cad"/>
+				<reportElement x="19" y="0" width="80" height="15" uuid="500e0aff-4594-4b76-b567-5f70a45f4cad"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{anotacionFecha}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="109" y="3" width="660" height="18" uuid="0b99540f-5a8f-44e0-9665-c9e499d85f4c"/>
+				<reportElement x="109" y="0" width="660" height="15" uuid="0b99540f-5a8f-44e0-9665-c9e499d85f4c"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{anotacionDs}]]></textFieldExpression>
 			</textField>

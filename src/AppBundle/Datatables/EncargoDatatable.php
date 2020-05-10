@@ -37,10 +37,10 @@ class EncargoDatatable extends AbstractDatatable
 			'stripe_classes' => ['strip1', 'strip2', 'strip3'],
 			'individual_filtering' => true,
 			'individual_filtering_position' => 'head',
-			'order' => [[2, 'asc']],
+			'order' => [[1, 'DESC']],
 			'order_cells_top' => true,
 			'search_in_non_visible_columns' => true,
-			'dom' => 'lfBtrip'
+			'dom' => 'lfBtrip',
 		]);
 
 		$this->events->set([
@@ -54,7 +54,7 @@ class EncargoDatatable extends AbstractDatatable
 			'auto_width' => true,
 			'ordering' => true,
 			'length_change' => true,
-            'state_save' => true
+            'state_save' => false
 		]);
 
 		$ObjetosEncargo = $this->getEntityManager()->getRepository("AppBundle:ObjetoEncargo")

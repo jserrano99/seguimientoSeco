@@ -8,8 +8,7 @@
     <script>
         $(document).ready(function () {
             let seguimiento_id;
-            seguimiento_id = seguimiento.id;
-            alert(seguimiento_id);
+            seguimiento_id = {{ seguimiento.id }};
             let recurso;
             recurso = Routing.generate("ajaxQueryAgrupacionesByLineaSeguimiento", {"seguimiento_id": seguimiento_id}, true);
             $.ajax({

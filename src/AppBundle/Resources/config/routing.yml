@@ -542,22 +542,14 @@ queryAnalisisServicio:
   defaults: {_controller: AppBundle:AnalisisServicio:query}
   options:
     expose: true
-
-addAnalisisServicio:
-  path:   /analisisServicio/add
-  defaults: {_controller: AppBundle:AnalisisServicio:add}
+queryAnalisisServicioPeriodo:
+  path:   /analisisServicio/periodo/query/{id}
+  defaults: {_controller: AppBundle:AnalisisServicio:queryAnalisisServicioPeriodo}
   options:
     expose: true
-
-generaAnalisisServicio:
-  path:   /analisisServicio/generar/{periodo_id}
-  defaults: {_controller: AppBundle:AnalisisServicio:generaAnalisiServicio}
-  options:
-    expose: true
-
-queryDetalleAnalisisServicioPeriodo:
-  path:   /analisisServicio/detalle
-  defaults: {_controller: AppBundle:AnalisisServicio:queryDetalleAnalisisServicioPeriodo}
+queryAnalisisServicioDetalle:
+  path:   /analisisServicio/detalle/{id}
+  defaults: {_controller: AppBundle:AnalisisServicio:queryAnalisisServicioDetalle}
   options:
     expose: true
 
@@ -567,6 +559,17 @@ ajaxQueryAgrupacionesByLineaSeguimiento:
   options:
     expose: true
 
+addAnalisisServicio:
+  path:   /analisisServicio/add
+  defaults: {_controller: AppBundle:AnalisisServicio:add}
+  options:
+    expose: true
+
+generaAnalisisServicio:
+  path:   /analisisServicio/generar/{periodo_id}
+  defaults: {_controller: AppBundle:AnalisisServicio:generaAnalisisServicio}
+  options:
+    expose: true
 selectMes:
       path: /comun/selectMes/{idAnyo}
       defaults: { _controller: AppBundle:Comun:selectMes}

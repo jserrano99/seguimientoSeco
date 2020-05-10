@@ -56,7 +56,7 @@ class ContratoDatatable extends AbstractDatatable
 			'auto_width' => false,
 			'ordering' => true,
 			'length_change' => true,
-            'state_save' => true
+            'state_save' => false
 		]);
 
 		$formatter = new NumberFormatter("es_ES", NumberFormatter::CURRENCY);

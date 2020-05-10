@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="Consolidación Nuevo Tratamiento de Penalizaciones">
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/genera.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AppBundle/Form/PeriodoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+    <list default="true" id="e3b154bb-0769-46a0-8d0b-c9540cbfe18c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicio.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicioDetalle.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/queryAnalisisServicioPeriodo.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/analisisServicio/query.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/certificadoServicios/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/encargo/form.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/menu.admin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/seguimiento/edit2.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/jasperReports/reports/seguimientoServicio/informeSeguimiento.jrxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/AnalisisServicioController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/CertificadoServiciosController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/ComunController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/ComunController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/EncargoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Controller/SeguimientoController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/Encargo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/Encargo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/PeriodoActual.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/PeriodoActual.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/EncargoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Form/InformeSeguimientoType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppBundle/Repository/PerioidoActualRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Repository/PeriodoActualRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AgrupacionDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AgrupacionDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnalisisServicioPeriodoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/AnotacionEncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/AnotacionEncargoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CargaFicheroDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CargaFicheroDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CentroDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/CertificadoServiciosDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/CertificadoServiciosDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/ContratoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/ContratoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/EncargoPenalizadoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/ImportesContratoAnualidadDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/ImportesContratoAnualidadDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/RemedyDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/RemedyDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Datatables/SeguimientoDatatable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioDetalle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Entity/AnalisisServicioPeriodo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/plantillas/PlantillaSeguimiento.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/web/plantillas/PlantillaSeguimiento.xlsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +40,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -131,16 +141,16 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/AppBundle/Datatables" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
     <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.file-colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
+      <recent name="$PROJECT_DIR$/app/Resources/views" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Datatables" />
       <recent name="$PROJECT_DIR$/src/AppBundle/Entity" />
       <recent name="$PROJECT_DIR$/app/Resources/views/comun" />
-      <recent name="$PROJECT_DIR$/src/AppBundle/Form" />
-      <recent name="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/app/Resources/views/analisisServicio" />
@@ -265,6 +275,16 @@
       <workItem from="1588575323577" duration="684000" />
       <workItem from="1588576450603" duration="465000" />
       <workItem from="1588590045793" duration="20000" />
+      <workItem from="1588613030291" duration="306000" />
+      <workItem from="1588658002208" duration="192000" />
+      <workItem from="1588658336273" duration="4135000" />
+      <workItem from="1588672847148" duration="12390000" />
+      <workItem from="1588745198292" duration="777000" />
+      <workItem from="1588746843196" duration="1182000" />
+      <workItem from="1588756251029" duration="1427000" />
+      <workItem from="1588836102233" duration="4079000" />
+      <workItem from="1588916468648" duration="7206000" />
+      <workItem from="1588935317782" duration="2999000" />
     </task>
     <task id="LOCAL-00001" summary="cambio Importes">
       <created>1579522612895</created>
@@ -329,7 +349,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586327646604</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Consolidación Nuevo Tratamiento de Penalizaciones">
+      <created>1588613078916</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1588613078916</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -378,6 +405,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Deployment/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581501267504" />
+    <state x="450" y="248" width="625" height="634" key="#HTTP_Proxy" timestamp="1588673663903">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="450" y="248" width="625" height="634" key="#HTTP_Proxy/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588673663903" />
     <state x="552" y="179" width="1224" height="682" key="#SQL_Resolution_Scopes" timestamp="1581433061306">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -386,36 +417,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#Servers/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502720594" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581502391139">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="362" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588673674488">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581502391139" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1587984729022">
+    <state x="362" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588673674488" />
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser" timestamp="1588688542605">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="753" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583407766258" />
-    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1587984729022" />
+    <state x="659" y="256" key="#com.intellij.ide.util.MemberChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588688542605" />
     <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1586889860871">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="-1280" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580712823053" />
     <state x="640" y="248" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581685033334" />
     <state x="560" y="268" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586889860871" />
-    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587981713972">
+    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1588844614809">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="491" y="193" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1583498985758" />
     <state x="690" y="275" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581668498400" />
-    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1587981713972" />
+    <state x="604" y="295" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588844614809" />
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#" timestamp="1585563161946">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="515" y="392" key="#com.jetbrains.php.refactoring.move.member.instance.PhpMoveInstanceMethodDialog#/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585563161946" />
-    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1586847801081">
+    <state x="469" y="137" key="CommitChangelistDialog2" timestamp="1588613078521">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="536" y="115" key="CommitChangelistDialog2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1582639684219" />
     <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586847801081" />
+    <state x="469" y="137" key="CommitChangelistDialog2/0.23.1680.1027@0.23.1680.1027" timestamp="1588613078521" />
+    <state width="254" height="195" key="DatabaseViewActions_Filter" timestamp="1588673292329">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state width="254" height="195" key="DatabaseViewActions_Filter/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588673292329" />
     <state x="100" y="123" width="1480" height="827" key="DiffContextDialog" timestamp="1584719670605">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -460,20 +497,29 @@
     </state>
     <state width="956" height="693" key="SwitcherDM/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1583144241699" />
     <state width="837" height="685" key="SwitcherDM/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1586768017723" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1581503284336">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="483" y="273" key="Vcs.Push.Dialog.v2" timestamp="1588613133208">
+      <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581503284336" />
+    <state x="483" y="273" key="Vcs.Push.Dialog.v2/0.23.1680.1027@0.23.1680.1027" timestamp="1588613133208" />
     <state x="676" y="67" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1581501253454">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1244" y="100" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1580827660181" />
     <state x="676" y="67" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581501253454" />
-    <state x="575" y="272" width="704" height="599" key="find.popup" timestamp="1585299649196">
+    <state x="463" y="154" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1588689874133">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="463" y="154" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588689874133" />
+    <state x="576" y="271" width="704" height="599" key="find.popup" timestamp="1588662685742">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="657" y="252" width="736" height="606" key="find.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1581674441855" />
-    <state x="575" y="272" width="704" height="599" key="find.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585299649196" />
+    <state x="576" y="271" width="704" height="599" key="find.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588662685742" />
+    <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1588613091805">
+      <screen x="0" y="23" width="1680" height="1027" />
+    </state>
+    <state x="607" y="432" key="git4idea.remote.GitConfigureRemotesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1588613091805" />
     <state x="746" y="437" key="publish.login" timestamp="1584719640632">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
@@ -483,10 +529,10 @@
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="489" y="259" width="700" height="530" key="recent.locations.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562587821" />
-    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup" timestamp="1585562598341">
+    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup" timestamp="1588846744582">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1580907389061" />
-    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1585562598341" />
+    <state x="545" y="245" width="670" height="670" key="search.everywhere.popup/0.23.1680.1027/1680.23.1920.1057@0.23.1680.1027" timestamp="1588846744582" />
   </component>
 </project>

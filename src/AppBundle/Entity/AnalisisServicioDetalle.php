@@ -79,9 +79,9 @@ class AnalisisServicioDetalle
     /**
      * @var float
      *
-     * @ORM\Column(name="tiempo_resolucion", type="float",nullable=false)
+     * @ORM\Column(name="tiempo_total_resolucion", type="float",nullable=false)
      */
-    private $tiempoResolucion;
+    private $tiempoTotalResolucion;
 
     /**
      * @var float
@@ -231,17 +231,17 @@ class AnalisisServicioDetalle
     /**
      * @return float
      */
-    public function getTiempoResolucion()
+    public function getTiempoTotalResolucion()
     {
-        return $this->tiempoResolucion;
+        return $this->tiempoTotalResolucion;
     }
 
     /**
-     * @param float $tiempoResolucion
+     * @param float $tiempoTotalResolucion
      */
-    public function setTiempoResolucion($tiempoResolucion)
+    public function setTiempoTotalResolucion($tiempoTotalResolucion)
     {
-        $this->tiempoResolucion = $tiempoResolucion;
+        $this->tiempoTotalResolucion = $tiempoTotalResolucion;
     }
 
     /**

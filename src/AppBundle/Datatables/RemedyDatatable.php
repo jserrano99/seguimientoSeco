@@ -54,7 +54,7 @@ class RemedyDatatable extends AbstractDatatable
 			'auto_width' => true,
 			'ordering' => true,
 			'length_change' => true,
-            'state_save' => true
+            'state_save' => false
 		]);
 
 		$Centros = $this->getEntityManager()->getRepository("AppBundle:Centro")

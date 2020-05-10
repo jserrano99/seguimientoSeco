@@ -72,9 +72,9 @@ class AnalisisServicioPeriodo
     /**
      * @var float
      *
-     * @ORM\Column(name="tiempo_resolucion", type="float",nullable=false)
+     * @ORM\Column(name="tiempo_total_resolucion", type="float",nullable=false)
      */
-    private $tiempoResolucion;
+    private $tiempoTotalResolucion;
 
     /**
      * @var float
@@ -84,14 +84,14 @@ class AnalisisServicioPeriodo
     private $tiempoMedioResolucion;
 
     /**
-     * @var Mes \null
+     * @var AnalisisServicio \null
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mes")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AnalisisServicio")
      * * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="mes_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="analisis_servicio_id", referencedColumnName="id")
      * })
      */
-    private $mes;
+    private $analisisServicio;
 
     /**
      * @var ObjetoEncargo \null
@@ -123,213 +123,213 @@ class AnalisisServicioPeriodo
      */
     private $aplicacion;
 
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+	/**
+	 * @return int
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
 
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
+	/**
+	 * @param int $id
+	 */
+	public function setId($id)
+	{
+		$this->id = $id;
+	}
 
-    /**
-     * @return int
-     */
-    public function getTotalEntradas()
-    {
-        return $this->totalEntradas;
-    }
+	/**
+	 * @return int
+	 */
+	public function getTotalEntradas()
+	{
+		return $this->totalEntradas;
+	}
 
-    /**
-     * @param int $totalEntradas
-     */
-    public function setTotalEntradas($totalEntradas)
-    {
-        $this->totalEntradas = $totalEntradas;
-    }
+	/**
+	 * @param int $totalEntradas
+	 */
+	public function setTotalEntradas($totalEntradas)
+	{
+		$this->totalEntradas = $totalEntradas;
+	}
 
-    /**
-     * @return int
-     */
-    public function getTotalCerrados()
-    {
-        return $this->totalCerrados;
-    }
+	/**
+	 * @return int
+	 */
+	public function getTotalCerrados()
+	{
+		return $this->totalCerrados;
+	}
 
-    /**
-     * @param int $totalCerrados
-     */
-    public function setTotalCerrados($totalCerrados)
-    {
-        $this->totalCerrados = $totalCerrados;
-    }
+	/**
+	 * @param int $totalCerrados
+	 */
+	public function setTotalCerrados($totalCerrados)
+	{
+		$this->totalCerrados = $totalCerrados;
+	}
 
-    /**
-     * @return int
-     */
-    public function getTotalCancelados()
-    {
-        return $this->totalCancelados;
-    }
+	/**
+	 * @return int
+	 */
+	public function getTotalCancelados()
+	{
+		return $this->totalCancelados;
+	}
 
-    /**
-     * @param int $totalCancelados
-     */
-    public function setTotalCancelados($totalCancelados)
-    {
-        $this->totalCancelados = $totalCancelados;
-    }
+	/**
+	 * @param int $totalCancelados
+	 */
+	public function setTotalCancelados($totalCancelados)
+	{
+		$this->totalCancelados = $totalCancelados;
+	}
 
-    /**
-     * @return int
-     */
-    public function getSaldo()
-    {
-        return $this->saldo;
-    }
+	/**
+	 * @return int
+	 */
+	public function getSaldo()
+	{
+		return $this->saldo;
+	}
 
-    /**
-     * @param int $saldo
-     */
-    public function setSaldo($saldo)
-    {
-        $this->saldo = $saldo;
-    }
+	/**
+	 * @param int $saldo
+	 */
+	public function setSaldo($saldo)
+	{
+		$this->saldo = $saldo;
+	}
 
-    /**
-     * @return float
-     */
-    public function getEsfuerzoTotal()
-    {
-        return $this->esfuerzoTotal;
-    }
+	/**
+	 * @return float
+	 */
+	public function getEsfuerzoTotal()
+	{
+		return $this->esfuerzoTotal;
+	}
 
-    /**
-     * @param float $esfuerzoTotal
-     */
-    public function setEsfuerzoTotal($esfuerzoTotal)
-    {
-        $this->esfuerzoTotal = $esfuerzoTotal;
-    }
+	/**
+	 * @param float $esfuerzoTotal
+	 */
+	public function setEsfuerzoTotal($esfuerzoTotal)
+	{
+		$this->esfuerzoTotal = $esfuerzoTotal;
+	}
 
-    /**
-     * @return float
-     */
-    public function getEsfuerzoMedio()
-    {
-        return $this->esfuerzoMedio;
-    }
+	/**
+	 * @return float
+	 */
+	public function getEsfuerzoMedio()
+	{
+		return $this->esfuerzoMedio;
+	}
 
-    /**
-     * @param float $esfuerzoMedio
-     */
-    public function setEsfuerzoMedio($esfuerzoMedio)
-    {
-        $this->esfuerzoMedio = $esfuerzoMedio;
-    }
+	/**
+	 * @param float $esfuerzoMedio
+	 */
+	public function setEsfuerzoMedio($esfuerzoMedio)
+	{
+		$this->esfuerzoMedio = $esfuerzoMedio;
+	}
 
-    /**
-     * @return float
-     */
-    public function getTiempoResolucion()
-    {
-        return $this->tiempoResolucion;
-    }
+	/**
+	 * @return float
+	 */
+	public function getTiempoTotalResolucion()
+	{
+		return $this->tiempoTotalResolucion;
+	}
 
-    /**
-     * @param float $tiempoResolucion
-     */
-    public function setTiempoResolucion($tiempoResolucion)
-    {
-        $this->tiempoResolucion = $tiempoResolucion;
-    }
+	/**
+	 * @param float $tiempoTotalResolucion
+	 */
+	public function setTiempoTotalResolucion($tiempoTotalResolucion)
+	{
+		$this->tiempoTotalResolucion = $tiempoTotalResolucion;
+	}
 
-    /**
-     * @return float
-     */
-    public function getTiempoMedioResolucion()
-    {
-        return $this->tiempoMedioResolucion;
-    }
+	/**
+	 * @return float
+	 */
+	public function getTiempoMedioResolucion()
+	{
+		return $this->tiempoMedioResolucion;
+	}
 
-    /**
-     * @param float $tiempoMedioResolucion
-     */
-    public function setTiempoMedioResolucion($tiempoMedioResolucion)
-    {
-        $this->tiempoMedioResolucion = $tiempoMedioResolucion;
-    }
+	/**
+	 * @param float $tiempoMedioResolucion
+	 */
+	public function setTiempoMedioResolucion($tiempoMedioResolucion)
+	{
+		$this->tiempoMedioResolucion = $tiempoMedioResolucion;
+	}
 
-    /**
-     * @return Mes
-     */
-    public function getMes()
-    {
-        return $this->mes;
-    }
+	/**
+	 * @return AnalisisServicio
+	 */
+	public function getAnalisisServicio()
+	{
+		return $this->analisisServicio;
+	}
 
-    /**
-     * @param Mes $mes
-     */
-    public function setMes($mes)
-    {
-        $this->mes = $mes;
-    }
+	/**
+	 * @param AnalisisServicio $analisisServicio
+	 */
+	public function setAnalisisServicio($analisisServicio)
+	{
+		$this->analisisServicio = $analisisServicio;
+	}
 
-    /**
-     * @return ObjetoEncargo
-     */
-    public function getObjetoEncargo()
-    {
-        return $this->objetoEncargo;
-    }
+	/**
+	 * @return ObjetoEncargo
+	 */
+	public function getObjetoEncargo()
+	{
+		return $this->objetoEncargo;
+	}
 
-    /**
-     * @param ObjetoEncargo $objetoEncargo
-     */
-    public function setObjetoEncargo($objetoEncargo)
-    {
-        $this->objetoEncargo = $objetoEncargo;
-    }
+	/**
+	 * @param ObjetoEncargo $objetoEncargo
+	 */
+	public function setObjetoEncargo($objetoEncargo)
+	{
+		$this->objetoEncargo = $objetoEncargo;
+	}
 
-    /**
-     * @return Criticidad
-     */
-    public function getCriticidad()
-    {
-        return $this->criticidad;
-    }
+	/**
+	 * @return Criticidad
+	 */
+	public function getCriticidad()
+	{
+		return $this->criticidad;
+	}
 
-    /**
-     * @param Criticidad $criticidad
-     */
-    public function setCriticidad($criticidad)
-    {
-        $this->criticidad = $criticidad;
-    }
+	/**
+	 * @param Criticidad $criticidad
+	 */
+	public function setCriticidad($criticidad)
+	{
+		$this->criticidad = $criticidad;
+	}
 
-    /**
-     * @return Aplicacion
-     */
-    public function getAplicacion()
-    {
-        return $this->aplicacion;
-    }
+	/**
+	 * @return Aplicacion
+	 */
+	public function getAplicacion()
+	{
+		return $this->aplicacion;
+	}
 
-    /**
-     * @param Aplicacion $aplicacion
-     */
-    public function setAplicacion($aplicacion)
-    {
-        $this->aplicacion = $aplicacion;
-    }
+	/**
+	 * @param Aplicacion $aplicacion
+	 */
+	public function setAplicacion($aplicacion)
+	{
+		$this->aplicacion = $aplicacion;
+	}
 
 
 }

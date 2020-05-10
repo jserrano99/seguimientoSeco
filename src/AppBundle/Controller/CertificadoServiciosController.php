@@ -1599,21 +1599,21 @@ class CertificadoServiciosController extends Controller
      */
     public
     function getDiasHabiles($fechainicio, $fechafin)
-    {
-        // Arreglo de dias habiles, inicianlizacion
-        $diasNoHabiles = ['Sab', 'Sat', 'Dom', 'Sun'];
-        $dias = 0;
-        // Se recorre desde la fecha de inicio a la fecha fin, incrementando en 1 dia
-        /** @var DateTime $midia */
-        for ($midia = $fechainicio; $midia <= $fechafin; $midia->add(new DateInterval('P1D'))) {
-            $dia = $midia->format('D');
-            if (!in_array($dia, $diasNoHabiles)) {
-                $dias++;
-            }
-        }
+    {// Arreglo de dias habiles, inicianlizacion
+		$diasNoHabiles = ['Sab', 'Sat', 'Dom', 'Sun'];
+		$dias = 0;
+		// Se recorre desde la fecha de inicio a la fecha fin, incrementando en 1 dia
+		/** @var DateTime $midia */
+		for ($midia = $fechainicio; $midia <= $fechafin; $midia->add(new DateInterval('P1D'))) {
+			$dia = $midia->format('D');
+			if (!in_array($dia, $diasNoHabiles)) {
+				$dias++;
+			}
+		}
 
-        return $dias;
-    }
+		return $dias;
+	}
+
 
     /**
      * @param Request $request
